@@ -24,3 +24,23 @@
 - El `constructora_reliability_score` es un proxy construido con información parcial (no todas las constructoras tienen registros públicos completos de cumplimiento de plazos), por lo que su cobertura será desigual entre constructoras grandes y pequeñas.
 - El modelo de visión para `visual_quality_score` aún no tiene definida su estrategia de validación (supervisada vs. no supervisada) — a resolver en Week 6 (Model Selection).
 - El scraping captura una foto del mercado en un momento dado; los precios cambian constantemente, por lo que el dataset requiere actualización periódica.
+
+---
+
+## Hallazgos en los samples reales (`data/samples/`)
+
+### Denuncias SIDPOL
+- **Año parcial:** 2026 solo cubre enero–mayo. Cualquier agregación anual debe excluirlo; el índice se calcula sobre 2025 como último año completo.
+- **Sesgo de denuncia:** el dataset registra hechos *denunciados*, no delitos ocurridos. Distritos con mayor confianza en la PNP o más comisarías pueden aparecer con más incidencia sin serlo realmente.
+- **Sin normalizar por población:** `crime_index_zone` se calcula sobre el conteo absoluto de denuncias, por lo que distritos grandes (Lima Cercado, San Juan de Lurigancho) saturan el extremo alto del índice. **Pendiente:** dividir entre población proyectada del INEI antes de la fase de modelado.
+- **Categoría "Otros":** es la modalidad más frecuente (5 010 filas en Lima+Callao), lo que limita el detalle del análisis por tipo de delito.
+- **UBIGEO de Callao:** empieza con `07`, no con `15` como Lima. El código debe leerse como string para no perder el cero inicial.
+- La tendencia sale mayoritariamente "mejorando" (29 de 50 distritos) al comparar 2025 vs 2024, lo que puede reflejar subregistro reciente más que una mejora real — a validar antes de exponerlo al usuario.
+
+### POIs de OpenStreetMap
+- **Nombres faltantes:** 37 de 300 POIs del sample no tienen `name`. No afecta el cálculo de distancias, pero sí la explicabilidad ("a 200 m del parque X").
+- **Cobertura desigual:** confirmada la limitación anticipada — los distritos centrales están mucho mejor mapeados que los periféricos.
+- **Duplicados potenciales:** un mismo colegio puede existir como `node` y como `way`; se deduplicará por proximidad y nombre.
+
+### Límites distritales
+- El geojson trae 49 distritos para Lima + Callao, mientras que las denuncias reportan 50 nombres distintos. La diferencia se resuelve por `UBIGEO`, no por nombre: los nombres tienen variaciones de tildes y mayúsculas entre fuentes (`BREÑA` vs `Brena`).
