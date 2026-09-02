@@ -46,6 +46,7 @@ def construir(listings="data/raw/listings_urbania.csv",
 if __name__ == "__main__":
     base, limpio = construir()
     base.to_csv("data/samples/baseline_precio_m2_distrito.csv", index=False, encoding="utf-8")
+    limpio["price_per_m2"] = limpio.price_per_m2.round(1)
     limpio.sample(400, random_state=7).sort_values(["distrito", "price_pen"]).to_csv(
         "data/samples/listings_urbania_lima_sample.csv", index=False, encoding="utf-8")
     print(f"{len(base)} distritos -> data/samples/baseline_precio_m2_distrito.csv", file=sys.stderr)

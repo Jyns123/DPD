@@ -2,19 +2,43 @@
 
 Este documento describe cómo obtener el dataset completo a partir de las fuentes originales. El dataset completo **no** se sube al repositorio público por su tamaño y por restricciones de scraping; en su lugar se incluyen:
 
-- `data/sample.csv` — muestra del feature store consolidado (esquema final que consume el modelo).
-- `data/samples/` — muestras **reales** descargadas de las fuentes públicas, con los scripts que las generan en `scripts/`. Ver [`data/samples/README.md`](data/samples/README.md).
+- `data/sample.csv` — el dataset entregado: 500 avisos reales cruzados con las features de zona (ver `data_dictionary.csv`).
+- `data/samples/` — las fuentes intermedias y features derivadas que lo alimentan, versionadas como evidencia de la adquisición.
 
 El alcance de esta primera iteración es **Perú, Lima Metropolitana y Callao**.
 
+## 0. Resumen de fuentes
+
+| Archivo en `data/samples/` | Filas | Fuente | Script |
+|---|---|---|---|
+| `listings_urbania_lima_sample.csv` | 400 | Urbania.pe (scraping de terceros, MIT) | `fetch_listings_urbania.py` |
+| `denuncias_sidpol_lima_sample.csv` | 560 | MININTER / SIDPOL vía Datos Abiertos | `fetch_denuncias_sidpol.py` |
+| `pois_osm_lima_sample.csv` | 300 | OpenStreetMap (Overpass API) | `fetch_pois_osm.py` |
+| `distritos_lima_geo_sample.geojson` | 49 | Límites INEI vía `juaneladio/peru-geojson` | `fetch_distritos_geojson.py` |
+| `distritos_lima_socioec.csv` | 51 | UBIGEO aumentado del INEI | `fetch_ubigeo_distritos.py` |
+| `crime_index_distrito.csv` | 50 | derivada: seguridad por distrito | `build_crime_index.py` |
+| `baseline_precio_m2_distrito.csv` | 20 | derivada: baseline de precio por m² | `build_baseline_precio_m2.py` |
+| `zone_convenience_index.csv` | 47 | derivada: conveniencia urbana | `build_zone_index.py` |
+| `zone_index_distrito.csv` | 47 | derivada: índice compuesto de zona | `build_zone_composite.py` |
+
+**Licencias:** SIDPOL/MININTER son datos abiertos del Estado Peruano (uso libre con atribución); OpenStreetMap es ODbL (© colaboradores de OSM); los repositorios de límites y UBIGEO son MIT con datos base del INEI; el dataset intermedio de Urbania es MIT, pero el contenido original es del portal — uso académico, pendiente revisar sus ToS. Ninguna fuente incluye datos personales: las denuncias vienen agregadas por distrito, mes y modalidad.
+
 ## 1. Listados inmobiliarios (Urbania, Properati)
 
-**Método:** web scraping.
+**Estado actual:** no scrapeamos el portal directamente. Reutilizamos el dataset publicado por [`MathiuCz/lima-real-estate-price-predictor`](https://github.com/MathiuCz/lima-real-estate-price-predictor) (MIT), que contiene 3 987 avisos de venta de Urbania en 20 distritos de Lima. Implementado en `scripts/fetch_listings_urbania.py`.
 
-1. Revisar `robots.txt` de cada portal antes de scrapear (`urbania.pe/robots.txt`, `properati.com.pe/robots.txt`).
+```bash
+python scripts/fetch_listings_urbania.py
+```
+
+Variables que trae: `listing_id`, distrito, precio en soles, cuota de mantenimiento, área total, dormitorios, baños, cocheras, dirección, urbanización y cantidad de fotos.
+
+**Scraping propio (pendiente).** Es la fuente definitiva, y el dataset anterior sirve para validar el pipeline mientras tanto. El procedimiento previsto:
+
+1. Revisar `robots.txt` y Términos de Servicio de cada portal antes de scrapear (`urbania.pe/robots.txt`, `properati.com.pe/robots.txt`).
 2. Definir bounding box de búsqueda: Lima Metropolitana.
-3. Extraer, por cada listado: precio, etapa del proyecto (construido / en planos / en construcción), distrito, dirección, área, habitaciones, baños, piso, antigüedad, nombre de constructora/inmobiliaria, y URL.
-4. Geocodificar la dirección textual a latitud/longitud usando un servicio de geocodificación (ej. Nominatim, basado en OpenStreetMap).
+3. Extraer, por cada listado, además de lo anterior: **etapa del proyecto** (construido / en planos / en construcción), piso, antigüedad, nombre de la constructora, fecha de publicación y URL. Ninguna de estas está en el dataset actual y todas son necesarias para el recomendador.
+4. Geocodificar la dirección textual a latitud/longitud (ej. Nominatim, basado en OpenStreetMap).
 5. Aplicar rate limiting (ej. 1 request cada 2-3 segundos).
 6. Guardar resultados en `data/raw/listings.csv`.
 
@@ -84,10 +108,27 @@ python scripts/build_crime_index.py           # indice y tendencia por distrito
 2. Asignar distrito a cada listado geocodificado mediante *point-in-polygon* (`geopandas.sjoin`).
 3. El campo `IDDIST` (UBIGEO) es la llave de join contra el índice de criminalidad.
 
-## 7. Cálculo de distancias e índice compuesto de zona
+## 7. Índice compuesto de zona
 
-1. Para cada listado (lat/long), calcular la distancia Haversine al POI más cercano de cada categoría usando `geopy.distance` o `scipy.spatial.cKDTree`.
-2. Calcular `zone_composite_index` combinando: índice de seguridad, índice de conveniencia urbana (POIs) e índice de percepción visual, con pesos a definir/calibrar en la fase de modelado (Week 6).
+Implementado en `scripts/build_zone_index.py` y `scripts/build_zone_composite.py`.
+
+```bash
+python scripts/build_zone_index.py       # conveniencia urbana
+python scripts/build_zone_composite.py   # indice compuesto
+```
+
+1. **Conveniencia urbana:** asignar cada uno de los 16 987 POIs a su distrito por *point-in-polygon* (`shapely`), calcular la densidad por km² de cada categoría, normalizar 0-1 y ponderar: colegio 0.25, parque 0.25, transporte 0.25, mercado 0.15, salud 0.10.
+2. **Seguridad:** inverso del índice de criminalidad del paso 3.
+3. **Compuesto:** `zone_composite_index = 0.5 × safety_index + 0.5 × urban_convenience_index`. Falta el tercer componente del pitch, la percepción visual, que depende del dataset de imágenes.
+4. Todos los pesos son provisionales y se calibran en Week 6.
+
+## 8. Distancias del inmueble a POIs (pendiente)
+
+Requiere primero geocodificar las direcciones de los listados, que hoy no traen coordenadas. Una vez con lat/long: calcular la distancia Haversine al POI más cercano de cada categoría con `scipy.spatial.cKDTree` sobre los 16 987 POIs ya descargados.
+
+## 9. Construcción del dataset entregado
+
+`scripts/build_sample.py` cruza los listados limpios con las features de zona por distrito y calcula el baseline de precio (`district_median_price_m2 × area_m2`) y su score de oportunidad. Salida: `data/sample.csv`.
 
 ## Notas legales
 - No se publican datos personales de agentes individuales, solo el nombre comercial de la agencia/constructora.

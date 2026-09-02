@@ -2,6 +2,6 @@ __pycache__/
 *.pyc
 .venv/
 .env
-data/raw/
-!data/raw/.gitkeep
+**/data/raw/
+!**/data/raw/.gitkeep
 .DS_Store

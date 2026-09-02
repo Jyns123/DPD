@@ -1,0 +1,24 @@
+attribute_name,description,data_type,format_or_unit,possible_values,missing_value_code
+listing_id,Identificador único del aviso en el portal de origen,string,alfanumérico,N/A,NA
+source,Portal de origen del listado,string,categórico,Urbania,NA
+district,Distrito de Lima donde se ubica la propiedad,string,categórico,20 distritos de Lima Metropolitana,NA
+ubigeo,Código UBIGEO del distrito (INEI),string,6 dígitos,150101 a 150143,NA
+address,Dirección textual publicada en el aviso,string,texto libre,N/A,NA
+urbanization,Urbanización declarada en el aviso,string,texto libre,N/A,NA
+price_soles,Precio de venta publicado,float,soles (PEN),> 0,NA
+area_m2,Área total de la propiedad,float,metros cuadrados,> 0,NA
+price_per_m2,Precio por metro cuadrado (price_soles / area_m2),float,soles por m²,> 0,NA
+rooms,Número de dormitorios,integer,unidades,>= 0,NA
+bathrooms,Número de baños,integer,unidades,>= 0,NA
+parking,Número de cocheras,integer,unidades,>= 0,NA
+maintenance_fee,Cuota mensual de mantenimiento,float,soles (PEN),>= 0,NA
+photos_count,Cantidad de fotos publicadas en el aviso,integer,unidades,>= 0,NA
+district_median_price_m2,Precio mediano por m² del distrito (baseline del portal),float,soles por m²,> 0,NA
+baseline_price_soles,Precio esperado según el baseline (district_median_price_m2 × area_m2),float,soles (PEN),> 0,NA
+opportunity_score_baseline,Score de oportunidad del baseline: (baseline_price_soles - price_soles) / baseline_price_soles,float,proporción,-1.0 a 1.0 aprox,NA
+crime_index_zone,Índice de criminalidad del distrito (denuncias por 1000 hab normalizadas),float,escala 0-1,0.0 a 1.0,NA
+crime_trend_zone,Tendencia de criminalidad del distrito vs. año anterior,string,categórico,mejorando; estable; empeorando,NA
+urban_convenience_index,Índice de conveniencia urbana del distrito (densidad ponderada de POIs),float,escala 0-1,0.0 a 1.0,NA
+zone_composite_index,Índice compuesto de zona (seguridad + conveniencia urbana),float,escala 0-1,0.0 a 1.0,NA
+idh_2019,Índice de Desarrollo Humano del distrito,float,escala 0-1,0.0 a 1.0,NA
+pct_pobreza_total,Porcentaje de población en situación de pobreza en el distrito,float,porcentaje,0 a 100,NA
