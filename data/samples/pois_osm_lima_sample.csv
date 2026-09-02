@@ -1,0 +1,301 @@
+poi_id,categoria,nombre,latitude,longitude,osm_tag
+node/1305070536,colegio,Colegio Santa Angela,-12.080066,-76.986432,school
+node/1305792010,colegio,,-12.080735,-76.982009,school
+node/2059768589,colegio,Colegio Perpetuo Socorro,-12.080208,-77.058466,school
+node/2068560801,colegio,Colegio Brasil,-12.081129,-77.058434,school
+node/2068560802,colegio,Institución Educativa Peruano Americano Clinton Rodham,-12.081111,-77.054197,school
+node/2068560804,colegio,Institución Educativa Cooperativo San Felipe,-12.088716,-77.0562,school
+node/2068560816,colegio,Colegio Isaac Newton de Jesús María,-12.08102,-77.05818,school
+node/2068560835,colegio,Institución Educativa San Antonio De Padua,-12.0848,-77.05855,school
+node/2090582854,colegio,CEBA Ceba - Francisco de Paula Gonzales Vigil,-12.08363,-77.03354,school
+node/2090582855,colegio,CEBA Ceba - Metropolitano,-12.085333,-77.030534,school
+node/2090582874,colegio,Institución Educativa Albert Einstein,-12.081157,-77.037093,school
+node/2090582876,colegio,Institución Educativa Alborada,-12.082252,-77.034089,school
+node/2090582877,colegio,Institución Educativa Aplicacion San Marcos,-12.083057,-77.042115,school
+node/2090582879,colegio,Institución Educativa Christa Mc Auliffe,-12.08366,-77.04577,school
+node/2090582883,colegio,Institución Educativa Gotita De Cielo,-12.087569,-77.042112,school
+node/2090582884,colegio,Institución Educativa Jesualdo,-12.08363,-77.04633,school
+node/2090582885,colegio,Colegio Los Angeles,-12.08408,-77.03943,school
+node/2090582886,colegio,Institución Educativa Maria Reina De La Paz,-12.090713,-77.038207,school
+node/2090582887,colegio,Institución Educativa Mi Hogar Y Escuela,-12.084256,-77.043839,school
+node/2090582888,colegio,Institución Educativa Micaela Bastidas De Condorcanqui,-12.086407,-77.042298,school
+node/2090582889,colegio,Colegio Nuestra Virgen del Divino Corazon,-12.08495,-77.04354,school
+node/2090582890,colegio,Institución Educativa Pamer - Lince,-12.08778,-77.03328,school
+node/2090582892,colegio,Institución Educativa Saco Oliveros De Lince,-12.08139,-77.03829,school
+node/2090582893,colegio,Institución Educativa San Tarcisio,-12.084449,-77.044325,school
+node/2090582896,colegio,Institución Educativa Sor Ines,-12.081559,-77.03702,school
+node/2173006557,colegio,Institución Educativa La Cruz De Oro,-12.107522,-76.995231,school
+node/3379539100,colegio,Institución Educativa San Juan Bosco,-12.121496,-77.024756,school
+node/3379539114,colegio,Institución Educativa Alborada,-12.123152,-77.020103,school
+node/3379539117,colegio,Institución Educativa Alfredo Salazar Southwell,-12.114368,-77.027721,school
+node/3379539145,colegio,Institución Educativa Pestalozzi,-12.123504,-77.015342,school
+node/3379539146,colegio,Colegio Pestalozzi,-12.123505,-77.015142,school
+node/3379539156,colegio,Colegio Santa María de Miraflores,-12.123095,-77.005474,school
+node/3379539163,colegio,Colegio Sor Ana de los Angeles Monteagudo,-12.118317,-77.034601,school
+node/3379539165,colegio,Institución Educativa Totus Tuus,-12.1107,-77.0311,school
+node/3379539167,colegio,Colegio Trilce Benavides,-12.127444,-77.012168,school
+node/3379539168,colegio,Institución Educativa Union Miraflores,-12.112318,-77.036692,school
+node/3976168048,colegio,"Liceo Naval ""Almirante Guise""",-12.096165,-76.999279,school
+node/4150258789,colegio,Privateacher International,-12.091188,-77.056512,school
+node/4151400699,colegio,Usamedic,-12.083043,-77.036868,school
+node/4319863690,colegio,Institución Educativa Arte Angelus,-12.147686,-77.004576,school
+node/4336190417,colegio,Peruano De Sistemas Sise,-12.12534,-77.029618,school
+node/4359031393,colegio,colegio no escolarizado CEBA PB,-12.080488,-77.03524,school
+node/4405130093,colegio,ENSB Escuela Nacional Superior de Ballet,-12.115048,-77.00034,school
+node/4506524193,colegio,Colegio de Traductores del Perú,-12.12826,-77.023787,school
+node/4529306689,colegio,Institución Educativa 6039 Fernando Carbajal Segura,-12.083577,-76.982151,school
+node/4608264494,colegio,Institución Educativa Hector De Cardenas,-12.084146,-77.055662,school
+node/4937330721,colegio,Centro de idiomas de la Universidad Privada San Juan Bautista,-12.093866,-76.995403,school
+node/4941137921,colegio,Centro de idiomas UPSJB,-12.094225,-76.995267,school
+node/5397316829,colegio,Master of the Sky,-12.101846,-77.021055,school
+node/5397334824,colegio,Columbia,-12.087357,-77.025155,school
+node/5578604407,colegio,Institución Educativa Gabriela Mistral,-12.081688,-77.055991,school
+node/5578635269,colegio,Institución Educativa Trento Escardo,-12.090714,-77.057104,school
+node/5578635270,colegio,Institución Educativa Hector De Cardenas,-12.083258,-77.056701,school
+node/5578635280,colegio,Institución Educativa Illariy,-12.0855,-77.0482,school
+node/5592780859,colegio,Institución Educativa Margaret Mead,-12.095913,-77.058244,school
+node/5593040481,colegio,Seminario Teologico Evangelico Presbiteriano Del Peru,-12.080626,-77.037374,school
+node/5593077556,colegio,Chio Lecca,-12.09279,-77.044209,school
+node/5593086788,colegio,Charles Chaplin,-12.093094,-77.047294,school
+node/5593099134,colegio,Institución Educativa De Los Sagrados Corazones Belen,-12.103638,-77.046594,school
+node/5593241375,colegio,Institución Educativa Celaap Jeshua,-12.124125,-77.036797,school
+node/5838491350,parque,Plazuela Jorge Arrospide Loyola,-12.091844,-77.036633,park
+node/11347147326,parque,Parque El Maestro,-12.144959,-76.989337,park
+node/13013014007,parque,Parque Del Aire,-12.153401,-77.009176,park
+node/13019706951,parque,Parque Las Hiedras III,-12.152396,-77.008962,park
+node/13850475609,parque,Parque de las mariposas de Barranco,-12.140872,-77.026029,park
+node/13905864240,parque,Parque Mercedes Cabello de Carbonera,-12.105128,-77.028434,park
+node/13918069871,parque,Parque Húsares de Junín,-12.140066,-77.026659,park
+way/14103311,parque,Hermasia,-12.105305,-77.044807,park
+way/14103342,parque,Parque Pío XII,-12.10702,-77.04523,park
+way/14103358,parque,,-12.10849,-77.045567,park
+way/14103419,parque,Parque Ernesto Alayza Grundy,-12.10799,-77.042563,park
+way/19069811,parque,Parque Mercedes Cabello de Carbonera,-12.105109,-77.028451,park
+way/19069908,parque,Parque Franciso Miranda,-12.116567,-77.026919,park
+way/28798160,parque,Parque John F. Kennedy,-12.121791,-77.030453,park
+way/28798174,parque,Parque 7 de Junio,-12.120612,-77.029566,park
+way/33782423,parque,Parque Placencia,-12.125463,-77.011484,park
+way/33782557,parque,Parque Pablo Arguedas,-12.127201,-77.01957,park
+way/33782571,parque,Parque Reducto,-12.126437,-77.022613,park
+way/33782792,parque,Parque Leoncio Prado,-12.124705,-77.019548,park
+way/33783044,parque,Parque Ramón Castilla,-12.121877,-77.01593,park
+way/33817901,parque,Parque José Luis Bustamante y Rivero,-12.100156,-77.022606,park
+way/33847858,parque,Parque Pucllana,-12.112273,-77.033581,park
+way/33847875,parque,Parque Manuel Solari Swayne,-12.115376,-77.033512,park
+way/33901375,parque,Parque Guillermo Correa Elías,-12.114941,-77.04186,park
+way/34111123,parque,Parque de los Héroes,-12.138286,-77.024465,park
+way/34113182,parque,,-12.102532,-77.010749,park
+way/34113214,parque,Parque de la Familia,-12.099233,-77.009991,park
+way/34113228,parque,Parque de la Familia,-12.097934,-77.01007,park
+way/34113232,parque,Parque Teniente Enrique Palacios,-12.101845,-77.013204,park
+way/34861559,parque,,-12.079912,-77.023945,park
+way/35102328,parque,Parque Sergio Bernales,-12.083166,-77.023843,park
+way/35106792,parque,Parque Fernando Carbajal,-12.085539,-77.023389,park
+way/35106794,parque,Parque Robert F. Kennedy,-12.087829,-77.019675,park
+way/35106802,parque,Parque Francisco Changanaqui,-12.086085,-77.019909,park
+way/35170431,parque,Parque Euler,-12.102659,-77.008688,park
+way/35170647,parque,Parque Santo Tomas,-12.106177,-77.008291,park
+way/35173544,parque,Parque Lady Olave Baden Powell,-12.098846,-77.007955,park
+way/35173547,parque,Parque La Minería,-12.096473,-77.007387,park
+way/35565876,parque,,-12.091817,-76.992387,park
+way/35565877,parque,,-12.091077,-76.989276,park
+way/35600703,parque,Parque Veronesse,-12.094768,-76.997082,park
+way/35600994,parque,Parque Julio Ponce Antúnez de Mayolo,-12.106267,-76.993545,park
+way/35601038,parque,Parque Andrés Avelino Cáceres,-12.103892,-76.995932,park
+way/35601114,parque,Parque San Martín,-12.103996,-76.999216,park
+way/35601214,parque,Parque Alfredo Maúrtua,-12.109289,-76.994751,park
+way/35893171,parque,Parque Johann Strauss,-12.097053,-77.00105,park
+way/35893286,parque,Parque Juan Bautista Berninzoni,-12.105335,-77.013099,park
+way/35893323,parque,Parque Las Oropéndolas,-12.099728,-77.01673,park
+way/37566302,parque,Parque Central La Capullana,-12.136661,-77.000553,park
+way/37566512,parque,Parque Locuto,-12.140258,-77.002879,park
+way/37614652,parque,Parque Melitón Porras,-12.132669,-77.024532,park
+way/37614655,parque,Parque Augusto B. Leguía,-12.127272,-77.016781,park
+way/37614656,parque,Parque Eduardo Villena Rey,-12.113394,-77.042516,park
+way/37614657,parque,Parque Federico Blume,-12.112331,-77.043582,park
+way/37614658,parque,Parque Naciones Unidas,-12.111475,-77.044906,park
+way/37614659,parque,,-12.109685,-77.045504,park
+way/37614662,parque,Parque Combate de Abtao,-12.093475,-77.028558,park
+way/37614663,parque,Parque Luis Fermán Cisneros,-12.128575,-77.013947,park
+way/37614667,parque,Parque Francisco de Zela,-12.125207,-77.007662,park
+way/37614668,parque,Parque Fernando López de Castilla Cervantes,-12.122885,-77.009538,park
+node/262727879,transporte,,-12.108257,-77.053473,bus_stop
+node/289317510,transporte,,-12.145259,-76.98882,bus_stop
+node/1192896838,transporte,Centenario,-12.141124,-77.023358,bus_stop
+node/1302813072,transporte,Paradero 6,-12.080981,-76.986187,bus_stop
+node/1404166309,transporte,Hipodromo,-12.093267,-76.98087,bus_stop
+node/1404166317,transporte,Hipodromo,-12.093194,-76.980384,bus_stop
+node/1405221019,transporte,Paradero 7,-12.08341,-76.984833,bus_stop
+node/1405221032,transporte,Circunvalación,-12.085401,-76.985448,bus_stop
+node/1405221035,transporte,Evitamiento,-12.084585,-76.980343,bus_stop
+node/1405221044,transporte,Circunvalación,-12.085067,-76.985841,bus_stop
+node/1414370599,transporte,Bolichera,-12.147618,-76.986589,bus_stop
+node/1623008213,transporte,Javier Prado,-12.083768,-76.980584,bus_stop
+node/3224296304,transporte,Próceres,-12.152745,-76.983552,bus_stop
+node/3224296305,transporte,,-12.152835,-76.984037,bus_stop
+node/3225907875,transporte,,-12.14555,-76.982085,bus_stop
+node/3225907876,transporte,,-12.145644,-76.981834,bus_stop
+node/3225907916,transporte,Domingo Tristan y Moscoso,-12.151667,-76.988765,bus_stop
+node/3954501665,transporte,"Paradero ""La VIDENA""",-12.080681,-77.002879,bus_stop
+node/4015867549,transporte,Masías,-12.09104,-77.025589,bus_stop
+node/4022477632,transporte,Nicolás Arriola,-12.090234,-77.017525,bus_stop
+node/4022786085,transporte,,-12.085004,-76.983784,bus_stop
+node/4077415862,transporte,,-12.111794,-77.033318,bus_stop
+node/4077468668,transporte,Parque de la amistad,-12.130807,-76.98212,bus_stop
+node/4081348889,transporte,Paradero 351-353,-12.124575,-77.029607,bus_stop
+node/4119777774,transporte,Tinoco,-12.140806,-76.980986,bus_stop
+node/4143749863,transporte,Javier Prado,-12.094882,-77.05437,bus_stop
+node/4181095339,transporte,Pardo,-12.118518,-77.029192,bus_stop
+node/4181096023,transporte,Tomás Guido,-12.086663,-77.034273,bus_stop
+node/4181097405,transporte,Los Ángeles,-12.106474,-77.031204,bus_stop
+node/4184922591,transporte,,-12.149277,-77.020812,bus_stop
+node/4184923094,transporte,Paradero Pardo,-12.118626,-77.037115,bus_stop
+node/4201360336,transporte,Paradero Atocongo,-12.150875,-76.980151,bus_stop
+node/4213315049,transporte,,-12.138909,-77.022501,bus_stop
+node/4214306621,transporte,Javier Prado,-12.089059,-77.01741,bus_stop
+node/4214566982,transporte,Las Palmeras,-12.093204,-77.038888,bus_stop
+node/4272459189,transporte,Piura,-12.116084,-77.029331,bus_stop
+node/4318917321,transporte,,-12.118644,-77.043192,bus_stop
+node/4344690435,transporte,,-12.127919,-77.026818,bus_stop
+node/4344778420,transporte,,-12.130493,-77.01818,bus_stop
+node/4344963479,transporte,,-12.139397,-77.023226,bus_stop
+node/4345043383,transporte,,-12.154838,-77.023007,bus_stop
+node/4348882533,transporte,,-12.128697,-76.997649,bus_stop
+node/4350298620,transporte,,-12.125373,-77.023601,bus_stop
+node/4354436198,transporte,,-12.12868,-77.024024,bus_stop
+node/4354472964,transporte,Chipoco,-12.137564,-77.022612,bus_stop
+node/4354485339,transporte,,-12.140856,-77.022323,bus_stop
+node/4354485340,transporte,,-12.141151,-77.023043,bus_stop
+node/4363705513,transporte,La Cruceta,-12.156249,-76.99001,bus_stop
+node/4363803044,transporte,Plaza vea,-12.148605,-76.986375,bus_stop
+node/4363959243,transporte,Panadería,-12.140472,-76.984568,bus_stop
+node/4364076619,transporte,Bielich,-12.135823,-76.983806,bus_stop
+node/4364076646,transporte,Nazarenas,-12.133403,-76.983125,bus_stop
+node/4365404481,transporte,,-12.11147,-76.998269,bus_stop
+node/4365404482,transporte,,-12.111473,-76.998316,bus_stop
+node/4365404483,transporte,,-12.111475,-76.998358,bus_stop
+node/4365580773,transporte,,-12.11324,-77.000068,bus_stop
+node/4365596587,transporte,,-12.115945,-76.99937,bus_stop
+node/4365607383,transporte,,-12.119712,-76.998504,bus_stop
+node/4370460498,transporte,,-12.129657,-77.022406,bus_stop
+node/4372058047,transporte,Fanning,-12.129924,-77.029741,bus_stop
+node/1426626482,mercado,Wong,-12.089883,-77.005579,supermarket
+node/1800680808,mercado,Tottus Atocongo,-12.147579,-76.980746,supermarket
+node/2663483707,mercado,Tottus Express,-12.129563,-77.022302,supermarket
+node/3643448084,mercado,Emolientero de Surco,-12.138077,-77.001615,supermarket
+node/4022683740,mercado,Plaza Vea,-12.089914,-77.004267,supermarket
+node/4040883405,mercado,Tottus,-12.155535,-76.981633,supermarket
+node/4042592134,mercado,Metro,-12.110268,-77.002121,supermarket
+node/4077383012,mercado,Mercado de Productores de San Isidro,-12.108776,-77.05375,marketplace
+node/4102715294,mercado,Tottus,-12.097334,-76.99476,supermarket
+node/4143692375,mercado,Vivanda Pezet,-12.10256,-77.052177,supermarket
+node/4181097263,mercado,,-12.115835,-77.044656,marketplace
+node/4337187263,mercado,Jet Market,-12.096785,-77.023086,supermarket
+node/4342008391,mercado,Vuelve,-12.14012,-76.984437,supermarket
+node/4344769629,mercado,Metro,-12.081773,-77.035703,supermarket
+node/4346194277,mercado,Flora & Fauna,-12.110923,-77.047834,supermarket
+node/4346447001,mercado,Kaita,-12.089882,-77.035031,supermarket
+node/4347877182,mercado,Arakaki,-12.105595,-77.047322,supermarket
+node/4351837814,mercado,Tottus,-12.159194,-76.989059,supermarket
+node/4355537689,mercado,Mass,-12.159155,-76.988569,supermarket
+node/4597434109,mercado,Bioferia de Miraflores,-12.127075,-77.02228,marketplace
+node/4615219189,mercado,,-12.132437,-77.02075,supermarket
+node/4757036316,mercado,San Martín,-12.137506,-77.020805,marketplace
+node/4864465322,mercado,Welcome Asia Market,-12.099308,-77.002182,supermarket
+node/4872622409,mercado,Metro,-12.08427,-77.013844,supermarket
+node/4964311021,mercado,,-12.103755,-77.001608,supermarket
+node/5012869110,mercado,Abarrotes Flor,-12.147513,-77.015061,marketplace
+node/5022333822,mercado,Minimarket Chama,-12.129159,-76.997973,marketplace
+node/5055058521,mercado,Flora y Fauna,-12.111145,-76.986623,supermarket
+node/5321381705,mercado,Mercado VIPSE,-12.133472,-76.992061,marketplace
+node/5577522631,mercado,Tottus,-12.112183,-77.011278,supermarket
+node/5630647431,mercado,Multicentro Benavides,-12.128335,-76.991139,marketplace
+node/5789888297,mercado,Flora & Fauna,-12.101293,-77.001902,supermarket
+node/6097026911,mercado,Wong,-12.131401,-77.031359,supermarket
+node/6185047390,mercado,Mara Biomarket & Cafe,-12.122473,-77.026933,supermarket
+node/6275372114,mercado,Wong,-12.122812,-77.032201,supermarket
+node/6341175485,mercado,Bodega Anónima,-12.111845,-77.019378,supermarket
+node/6386452877,mercado,Mercado Royal,-12.081371,-76.993104,marketplace
+node/6725538225,mercado,MaxiAhorro Lince,-12.082156,-77.028509,supermarket
+node/7091051785,mercado,Tottus,-12.111959,-77.037266,supermarket
+node/7668182019,mercado,Municipal Market Miraflores,-12.111092,-77.048967,marketplace
+node/9908282578,mercado,Tienda Mass,-12.136874,-77.004836,supermarket
+node/9908284943,mercado,Home Market Gourmet,-12.121149,-76.987808,supermarket
+node/10280964909,mercado,Mercado San Martin,-12.125923,-77.029794,marketplace
+node/11294367069,mercado,Freshmart,-12.130137,-77.024372,supermarket
+node/11577530369,mercado,Mass,-12.156176,-77.015109,supermarket
+node/11612180669,mercado,Dollarcity,-12.124355,-77.029818,supermarket
+node/11975484269,mercado,denisil,-12.155381,-77.021229,supermarket
+node/11975773669,mercado,negociaciones cartamagico,-12.157873,-77.02331,supermarket
+node/11975962201,mercado,Holi Supermercado,-12.139689,-77.022759,supermarket
+node/12063978910,mercado,Ecovive,-12.137621,-77.022362,supermarket
+node/12421884714,mercado,Mass,-12.12025,-77.03612,supermarket
+node/12437928601,mercado,Mass,-12.142464,-77.00915,supermarket
+node/12771168559,mercado,Tienda Mass,-12.106181,-77.022801,supermarket
+node/12810875601,mercado,Pesca Terminal,-12.118404,-77.025067,marketplace
+node/12852199489,mercado,Tambo+,-12.116493,-77.036685,supermarket
+node/12856685508,mercado,Mass,-12.12474,-77.031818,supermarket
+node/13088028409,mercado,Holi Supermercado,-12.117171,-77.006326,supermarket
+node/13088028410,mercado,Holi Supermercado,-12.112873,-77.045938,supermarket
+node/13088028411,mercado,Holi Supermercado,-12.08267,-77.050419,supermarket
+node/13320404729,mercado,Tu Bazar Tienda Cuartel General,-12.099417,-76.985487,supermarket
+node/565876567,salud,Clinica Santa Teresa,-12.104425,-77.020729,clinic
+node/2838647365,salud,Clínica de Otorrino,-12.082536,-77.023318,clinic
+node/3063665204,salud,Asmat,-12.087006,-76.986984,clinic
+node/3810263474,salud,Clínica Internacional - Medicentro San Isidro,-12.093078,-77.023959,clinic
+node/4077392666,salud,Centro de Salud San Isidro,-12.106858,-77.055105,clinic
+node/4103896369,salud,CheckSalud,-12.088867,-77.021261,clinic
+node/4109575491,salud,Clinica San Felipe,-12.086036,-77.054338,clinic
+node/4170786720,salud,Exilaser,-12.112068,-76.9891,clinic
+node/4216263790,salud,Clinica Inmater,-12.096213,-77.010802,clinic
+node/4240018095,salud,Instituto Peruano de Neurociencias,-12.081249,-77.035385,clinic
+node/4245054595,salud,Clínica Maison de Santé del este,-12.130369,-76.981071,clinic
+node/4249561589,salud,Crucero,-12.112603,-77.048895,clinic
+node/4319865889,salud,Cerema,-12.087549,-76.997849,clinic
+node/4326822809,salud,Oncosalud,-12.127709,-77.007664,clinic
+node/4344633308,salud,Clínica de Reumatismo,-12.124566,-77.030002,clinic
+node/4345045203,salud,Terapia Física y Rehabilitación,-12.145857,-77.01959,clinic
+node/4347902805,salud,Ortopedica,-12.120002,-77.018073,clinic
+node/4361735090,salud,Medlab,-12.111397,-76.990635,clinic
+node/4363595605,salud,Phymed,-12.12648,-76.987921,clinic
+node/4363959279,salud,Salud Ocupacional,-12.143971,-76.985098,clinic
+node/4365228314,salud,Clínica Dental Villarán,-12.120566,-77.001047,clinic
+node/4367125589,salud,Instituto de Neurocirugia,-12.092463,-77.008146,clinic
+node/4654354690,salud,Laboratorios Clinicos Integrados SA,-12.095712,-77.042933,clinic
+node/4757144542,salud,Salus Laboris,-12.128624,-76.985284,clinic
+node/4799850221,salud,Clínica Vista Alegre,-12.145317,-76.987939,clinic
+node/4868532921,salud,,-12.119414,-77.030164,clinic
+node/4876669222,salud,Reconectate Peru - Centro Quiropractico,-12.139227,-76.988024,clinic
+node/4888683521,salud,Policlínico Peruano-Japonés,-12.087825,-77.055069,clinic
+node/5008524121,salud,Policlínico Peruano Japonés,-12.087713,-77.0547,hospital
+node/5052248321,salud,Clínica MEDAVAN,-12.085326,-77.053356,clinic
+node/5071886312,salud,Policlínico del Colegio de Abogados,-12.080626,-77.05683,clinic
+node/5072576723,salud,Clínica NovoClinic,-12.094159,-77.053615,clinic
+node/5076423512,salud,Instituo Oftalmológico Centro Visión,-12.094549,-76.995256,clinic
+node/5076423515,salud,Clínica hogar de Maria,-12.085472,-77.050469,clinic
+node/5253237421,salud,Quiromasajes Santa Cruz,-12.117384,-77.034924,clinic
+node/5436573621,salud,Sanna,-12.115951,-77.014149,clinic
+node/5481482098,salud,Detecta,-12.112189,-77.002005,clinic
+node/5485493582,salud,SISOL Salud Centro Quirúrgico,-12.100457,-77.007959,clinic
+node/5577497869,salud,Mácula D&T,-12.089631,-77.008005,clinic
+node/5605942363,salud,Clínica Odontomédica Galla,-12.100627,-77.007118,clinic
+node/5612802334,salud,Andromed,-12.099805,-77.009006,clinic
+node/5612802339,salud,Inmuno Vax,-12.099888,-77.008923,clinic
+node/5612802358,salud,IBN Sina,-12.101533,-77.004738,clinic
+node/5623313508,salud,Clínica Los Libertadores,-12.102643,-77.03747,clinic
+node/5677867622,salud,Mepso,-12.111771,-76.996731,clinic
+node/5741876922,salud,Clinica Internacional Oncología Rimac,-12.10864,-77.03263,clinic
+node/6564060586,salud,Natclar,-12.083843,-77.011268,clinic
+node/6571278172,salud,Clínica Santa María,-12.103427,-77.026207,clinic
+node/6577890321,salud,Instituto de Oncología & Radioterapia,-12.090757,-77.018862,clinic
+node/6833287285,salud,Clínica Oftalmológica Ñahui,-12.113608,-77.024069,clinic
+node/7070517817,salud,Omnia Medica S.A.C.,-12.08767,-76.998229,clinic
+node/7080291989,salud,Centro de Salud Santiago de Surco,-12.147323,-77.006202,clinic
+node/7080291991,salud,Policlinico El Palmar S.A.,-12.150544,-77.007675,clinic
+node/7082518484,salud,Policlinico Pnp Walter Rosales,-12.115735,-77.019023,clinic
+node/7129698885,salud,Medi Clinic,-12.119823,-77.034818,clinic
+node/7380307785,salud,Clínica Aliada,-12.106168,-77.010859,clinic
+node/7552520836,salud,Holomedic Servicios Integrales S.A.C,-12.119691,-77.002106,clinic
+node/8625869406,salud,Inspira Sonrisas,-12.119782,-77.033514,clinic
+node/11023041254,salud,Medi Esthetic,-12.128207,-76.990427,clinic
+node/12790697516,salud,Luxuris Dental,-12.113103,-76.993259,clinic
