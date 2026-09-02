@@ -41,8 +41,10 @@ Un asistente que identifica inmuebles subvalorados y los prioriza según el perf
 | 2 | OpenStreetMap (Overpass API) | POIs geolocalizados: colegios, parques, transporte, mercados, salud | ✅ 16 987 POIs de Lima |
 | 3 | MININTER / SIDPOL (Datos Abiertos) | Denuncias policiales por distrito, mes y modalidad (2018–2026) | ✅ 29 833 filas de Lima y Callao |
 | 4 | INEI — límites distritales y UBIGEO aumentado | Polígonos, superficie, población, IDH, pobreza | ✅ 49 polígonos, 51 distritos |
-| 5 | Dataset propio de imágenes de entorno | Percepción visual de la zona (modelo de visión) | ⬜ pendiente |
-| 6 | Registros públicos + dataset propio de constructoras | Score de confiabilidad de la constructora | ⬜ sin fuente todavía |
+| 5 | BCRP — serie oficial de precios de departamentos | Precio mediano por m² por distrito, trimestral desde 1998 | ✅ 528 observaciones, 12 distritos |
+| 6 | Municipalidad de Lima — licencias y conformidades de obra | Zonificación, altura, valorización, solicitante | 🟡 254 filas, solo Cercado |
+| 7 | Mapillary / dataset propio de imágenes | Percepción visual de la zona (modelo de visión) | ⬜ requiere token de API |
+| 8 | CIPIEC (MVCS) / INDECOPI | Score de confiabilidad de la constructora | ⬜ requiere autenticación |
 
 El detalle de cada fuente, su método de obtención y su licencia está en [`acquisition.md`](acquisition.md).
 
@@ -93,4 +95,6 @@ python scripts/build_sample.py
 - Definir la frecuencia de actualización de cada fuente (precios cambian rápido; criminalidad y proyectos, no tanto).
 - Definir cómo se valida el modelo de visión de calidad de entorno (¿labels disponibles o enfoque no supervisado?).
 - Revisar los aspectos éticos y legales del scraping (Términos de Servicio de Urbania y Properati) antes de escalar la recolección propia.
-- Encontrar una fuente para el score de confiabilidad de constructoras, que hoy no tiene ninguna.
+- Conseguir acceso al **CIPIEC** del Ministerio de Vivienda (`tramites.vivienda.gob.pe/centralinformacion`), que cruza SUNAT, INDECOPI y SUNAFIL por empresa constructora — es la fuente correcta para el score de confiabilidad, pero pide credenciales.
+- Conseguir un **ground truth de transacciones reales**. Tanto nuestros listados como la serie del BCRP miden precios de oferta, no de venta cerrada; sin transacciones no se puede evaluar bien el motor de valoración.
+- Obtener un token de **Mapillary** para las imágenes de calle del modelo de visión.
