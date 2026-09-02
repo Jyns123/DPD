@@ -37,12 +37,18 @@ Un asistente que identifica inmuebles subvalorados y los prioriza según el perf
 - **Fuentes:** Urbania.pe, Properati.com.pe
 - **Variables:** precio, distrito, dirección, área (m²), habitaciones, baños, piso, antigüedad, nombre de constructora/inmobiliaria, tipo de proyecto (construido / en planos), URL del listado.
 
-### 2. Puntos de interés (POIs)
-- **Fuente:** OpenStreetMap vía **Overpass API** — colegios, parques, transporte, comercio geolocalizados. Pública, gratuita, sin credentialing.
+### 2. Puntos de interés (POIs) ✅ sample disponible
+- **Fuente:** OpenStreetMap vía **Overpass API** — colegios, parques, transporte, mercados y salud geolocalizados. Pública, gratuita, sin credentialing.
+- **Sample:** `data/samples/pois_osm_lima_sample.csv` (300 POIs).
 
-### 3. Criminalidad por zona
-- **Fuente:** dataset propio del equipo (a complementar con fuentes públicas como INEI/PNP — Sistema de Estadística de Accidentes y Criminalidad).
-- **Variables:** incidencia y tendencia de seguridad por distrito/zona.
+### 3. Criminalidad por zona ✅ sample disponible
+- **Fuente:** denuncias policiales del **SIDPOL (MININTER)**, enero 2018 – mayo 2026, vía la [Plataforma Nacional de Datos Abiertos](https://www.datosabiertos.gob.pe/dataset/denuncias-policiales-1). Filtrado a Lima y Callao.
+- **Variables:** incidencia por distrito, mes y modalidad del hecho; de ahí se derivan el índice y la tendencia de seguridad.
+- **Samples:** `data/samples/denuncias_sidpol_lima_sample.csv` y `data/samples/crime_index_distrito.csv` (50 distritos).
+
+### 3b. Límites distritales ✅ sample disponible
+- **Fuente:** polígonos distritales del INEI (vía `juaneladio/peru-geojson`, MIT). Permiten asignar distrito a cada listado geocodificado y cruzarlo con el índice de criminalidad por UBIGEO.
+- **Sample:** `data/samples/distritos_lima_geo_sample.geojson` (49 distritos de Lima y Callao).
 
 ### 4. Imágenes de entorno
 - **Fuente:** dataset propio del equipo (imágenes de la zona) + modelo de visión por computadora.
@@ -52,17 +58,45 @@ Un asistente que identifica inmuebles subvalorados y los prioriza según el perf
 - **Fuente:** registros públicos disponibles + dataset propio de seguimiento de proyectos.
 - **Variables:** historial de cumplimiento de plazos, proyectos entregados vs. en curso, incidencias/reclamos reportados, antigüedad en el mercado.
 
-## Repository structure (Week 4)
+## Alcance de esta iteración
+**Perú — Lima Metropolitana y Callao.** Es donde se concentra la mayor parte del mercado inmobiliario del país y donde las tres fuentes públicas (denuncias policiales, OSM y límites distritales) tienen mejor cobertura. La expansión a otras ciudades queda para una fase posterior.
+
+## Estructura del repositorio
 
 ```
-deliveries/week04/
+.
 ├── README.md
+├── acquisition.md              # como obtener el dataset completo
+├── data_dictionary.csv         # diccionario del feature store consolidado
+├── data_quality_note.md        # limitaciones y hallazgos de calidad
+├── requirements.txt
 ├── data/
-│   ├── sample.csv
-├── data_dictionary.csv
-├── acquisition.md
-└── data_quality_note.md
+│   ├── sample.csv              # muestra del feature store (esquema final)
+│   └── samples/                # muestras reales de las fuentes publicas
+│       ├── README.md           # fuente, licencia y columnas de cada sample
+│       ├── denuncias_sidpol_lima_sample.csv
+│       ├── crime_index_distrito.csv
+│       ├── pois_osm_lima_sample.csv
+│       └── distritos_lima_geo_sample.geojson
+└── scripts/
+    ├── fetch_pois_osm.py
+    ├── fetch_denuncias_sidpol.py
+    ├── fetch_distritos_geojson.py
+    └── build_crime_index.py
 ```
+
+## Reproducir los samples
+
+```bash
+pip install -r requirements.txt
+
+python scripts/fetch_pois_osm.py data/samples/pois_osm_lima_sample.csv "-12.16,-77.06,-12.08,-76.98" 60
+python scripts/fetch_denuncias_sidpol.py
+python scripts/build_crime_index.py
+python scripts/fetch_distritos_geojson.py
+```
+
+Los datos completos se descargan a `data/raw/`, que no se versiona.
 
 ## Consideraciones abiertas a resolver (próxima iteración)
 - Definir la métrica de éxito del modelo de valoración (MAE del precio predicho vs. % de aciertos en "buena oferta").
