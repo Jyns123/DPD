@@ -24,7 +24,7 @@ Comprar vivienda propia es una de las decisiones financieras más grandes que un
 Los portales inmobiliarios actuales (Urbania, Properati) solo permiten filtrar por precio, distrito y número de habitaciones — no ofrecen ninguna de estas tres capas de información, que son justamente las que más influyen en la decisión de compra.
 
 ## Dominio objetivo
-Bienes raíces / proptech, con un componente fuerte de datos geoespaciales, visión por computadora y modelado predictivo de precios. **Piloto: Perú — Lima Metropolitana y Callao**, donde se concentra la mayor parte del mercado del país y donde las fuentes públicas tienen mejor cobertura.
+Bienes raíces / Proptech, con un componente fuerte de datos geoespaciales, visión por computadora y modelado predictivo de precios. **Piloto: Perú — Lima Metropolitana y Callao**, donde se concentra la mayor parte del mercado del país y donde las fuentes públicas tienen mejor cobertura.
 
 ## Usuarios objetivo (target audience)
 - **General:** personas naturales buscando comprar su vivienda propia (no inversionistas). Priorizan cercanía a colegios/trabajo, seguridad del barrio, y capacidad real de financiamiento — no rentabilidad de alquiler.
