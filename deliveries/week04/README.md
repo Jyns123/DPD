@@ -15,13 +15,13 @@
 **InmoScore**
 
 ## Problema u oportunidad inicial
-Comprar vivienda propia es una de las decisiones financieras más grandes que una persona toma en su vida, y hoy se toma con información incompleta. Los compradores de vivienda propia (no inversionistas) no tienen forma fácil de saber:
+**Comprar** vivienda propia es una de las decisiones financieras más grandes que una persona toma en su vida, y hoy se toma con información incompleta. Los compradores de vivienda propia (no inversionistas) no tienen forma fácil de saber:
 
 1. **Si un inmueble está bien valorado** respecto al mercado real de su zona (solo ven el precio publicado, sin referencia objetiva).
-2. **Cómo es realmente el entorno** del inmueble — seguridad, calidad urbana, áreas verdes — más allá de lo que muestran las fotos del anuncio.
+2. **Cómo es realmente el entorno del inmueble** — seguridad, calidad urbana, áreas verdes — más allá de lo que muestran las fotos del anuncio.
 3. **Qué tan confiable es la constructora**, en el caso de proyectos en planos o en construcción (historial de cumplimiento de plazos, incidencias, antigüedad).
 
-Los portales inmobiliarios actuales (Urbania, Properati) solo permiten filtrar por precio, distrito y número de habitaciones — no ofrecen ninguna de estas tres capas de información, que son justamente las que más influyen en la decisión de compra.
+Los portales inmobiliarios actuales (Urbania, Properati) solo permiten filtrar por precio, distrito y número de habitaciones — **no ofrecen ninguna de estas tres capas de información**, que son justamente las que más influyen en la decisión de compra.
 
 ## Dominio objetivo
 Bienes raíces / Proptech, con un componente fuerte de datos geoespaciales, visión por computadora y modelado predictivo de precios. **Piloto: Perú — Lima Metropolitana y Callao**, donde se concentra la mayor parte del mercado del país y donde las fuentes públicas tienen mejor cobertura.
