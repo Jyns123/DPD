@@ -5,7 +5,8 @@ Notas sobre `data/sample.csv` y las fuentes que lo alimentan. Lo que sigue no so
 ## Valores faltantes esperados
 - `data/sample.csv` no tiene nulos, pero es porque **se construyó solo con las columnas que las fuentes actuales sí pueden llenar**. Varias variables del pitch quedaron fuera por falta de fuente: `latitude` / `longitude`, `project_stage` (construido / en planos), `floor`, `building_age_years`, `constructora_*`, `visual_quality_score`, `dist_nearest_*` y `listing_date`.
 - `maintenance_fee` tiene mediana 0 y máximo S/ 1 365 000: el campo mezcla "no informado" con 0 real, así que hoy no es usable como está.
-- `bcrp_price_m2_usd` es nulo en 155 de las 500 filas: el BCRP solo publica precios para 12 de los 20 distritos con listados. Es el único campo del sample con faltantes, y son estructurales, no errores.
+- `bcrp_price_m2_usd` y `bcrp_price_rent_ratio` son nulos en 155 de las 500 filas: el BCRP solo publica series para 12 de los 20 distritos con listados. Son los únicos campos del sample con faltantes, y son estructurales, no errores.
+- `proyectos_nuevos_distrito` y `unidades_nuevas_distrito` se rellenan con 0 cuando el distrito no tiene proyectos registrados ante el Fondo MIVIVIENDA. **Ese 0 significa "no registrado en ese programa", no "no hay obra nueva"** — los proyectos fuera de Nuevo Crédito MiVivienda y Techo Propio no aparecen. En el sample actual los 20 distritos tienen al menos un proyecto, así que no hay ceros, pero al ampliar la cobertura los habrá.
 - `constructora_reliability_score` y `visual_quality_score` no existen todavía en ninguna fuente identificada.
 
 ## Duplicados

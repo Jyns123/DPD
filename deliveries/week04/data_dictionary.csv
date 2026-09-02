@@ -17,6 +17,9 @@ district_median_price_m2,Precio mediano por m² del distrito (baseline del porta
 baseline_price_soles,Precio esperado según el baseline (district_median_price_m2 × area_m2),float,soles (PEN),> 0,NA
 opportunity_score_baseline,Score de oportunidad del baseline: (baseline_price_soles - price_soles) / baseline_price_soles,float,proporción,-1.0 a 1.0 aprox,NA
 bcrp_price_m2_usd,Precio mediano por m² del distrito según el BCRP (último trimestre); solo cubre 12 distritos,float,dólares por m²,> 0,NA
+bcrp_price_rent_ratio,Años de alquiler equivalentes al precio de compra en el distrito según el BCRP; solo cubre 12 distritos,float,años,> 0,NA
+proyectos_nuevos_distrito,Proyectos de vivienda nueva registrados en el distrito ante el Fondo MIVIVIENDA,integer,unidades,>= 0,NA
+unidades_nuevas_distrito,Unidades disponibles en esos proyectos de vivienda nueva,integer,unidades,>= 0,NA
 crime_index_zone,Índice de criminalidad del distrito (denuncias por 1000 hab normalizadas),float,escala 0-1,0.0 a 1.0,NA
 crime_trend_zone,Tendencia de criminalidad del distrito vs. año anterior,string,categórico,mejorando; estable; empeorando,NA
 urban_convenience_index,Índice de conveniencia urbana del distrito (densidad ponderada de POIs),float,escala 0-1,0.0 a 1.0,NA
