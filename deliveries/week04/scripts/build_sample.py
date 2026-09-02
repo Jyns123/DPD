@@ -34,8 +34,8 @@ def construir(listings="data/raw/listings_urbania.csv",
     # referencia oficial del bcrp, solo cubre 12 de los 20 distritos
     b2 = pd.read_csv(bcrp)
     b2 = b2[(b2.tipo == "distrito") & (b2.trimestre == b2.trimestre.max())]
-    d = d.merge(b2[["serie", "precio_m2"]].rename(
-        columns={"serie": "distrito", "precio_m2": "bcrp_price_m2_usd"}),
+    d = d.merge(b2[["serie", "valor"]].rename(
+        columns={"serie": "distrito", "valor": "bcrp_price_m2_usd"}),
         on="distrito", how="left")
 
     # baseline del pitch: precio justo = mediana por m2 del distrito x area
