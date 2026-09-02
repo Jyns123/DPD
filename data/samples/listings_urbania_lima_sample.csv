@@ -1,401 +1,401 @@
 listing_id,district,price_pen,maintenance_fee,area_total,bedrooms,bathrooms,parking_spaces,address,urbanization,photos_count,distrito,price_per_m2
-147879979,barranco,287000.0,172.0,45.0,1,1,1,AV. REPUBLICA DE PANAMA 348,Barranco,1,BARRANCO,6377.777777777777
-149324096,barranco,291550.0,70.0,62.0,2,1,0,Calle Doña Delmira  al 400,Barranco,1,BARRANCO,4702.419354838709
-149610106,barranco,420000.0,350.0,33.0,1,1,1,Jr. Martinez de Pinillos- A 1 Cuadra del Malecón Dpto Amoblado con Cochera y Depósito,Barranco,1,BARRANCO,12727.272727272728
-143173660,barranco,425780.0,0.0,56.0,1,1,1,"Av EL SOL N° 5xx, Dpto. 102,103",Barranco,1,BARRANCO,7603.214285714285
-147239693,barranco,434868.0,170.0,39.0,1,1,0,EL SOL,Barranco,1,BARRANCO,11150.461538461539
-149449649,barranco,446275.0,250.0,38.0,1,1,1,Grau al 1430,Barranco,1,BARRANCO,11744.078947368422
-149849874,barranco,469990.0,217.0,44.0,1,1,1,Avenida San Martín 765,Barranco,1,BARRANCO,10681.59090909091
-148724891,barranco,499000.0,0.0,51.0,2,1,1,Jirón Pedro Martinto,Barranco,1,BARRANCO,9784.313725490196
-149791240,barranco,503176.0,0.0,47.0,1,1,0,PY Barranco 6,Barranco,1,BARRANCO,10705.872340425532
-149864586,barranco,513000.0,320.0,73.0,2,2,1,Jirón Enrique Delucchi al 200,Barranco,1,BARRANCO,7027.397260273972
-4637609,barranco,520819.0,0.0,48.0,1,1,1,El Sol Oeste,Barranco,1,BARRANCO,10850.395833333334
-146768808,barranco,536500.0,1.0,38.0,1,1,1,"Av Pedro De Osma, Barranco",Barranco,1,BARRANCO,14118.421052631578
-149794715,barranco,550000.0,0.0,78.0,3,2,1,Jirón Jaén Cuadra 2,Barranco,10,BARRANCO,7051.282051282052
-149538000,barranco,563000.0,330.0,56.0,2,2,1,Jirón Fedelli 101,Barranco,1,BARRANCO,10053.57142857143
-148960984,barranco,651300.0,0.0,116.0,3,2,1,Jiron Buenaventura Aguirre 206  Barranco  al 200,Barranco,1,BARRANCO,5614.6551724137935
-148729318,barranco,653000.0,600.0,94.0,1,1,1,Pedro Martinto Cerca al Malecón Paul Harris,Barranco,1,BARRANCO,6946.808510638298
-149866499,barranco,700000.0,0.0,87.0,1,1,1,Jirón Centenario 129,Barranco,1,BARRANCO,8045.977011494253
-146018330,barranco,716219.0,0.0,111.0,2,2,0,"Jirón 2 DE Mayo N° 1xx, Dpto. 103",Barranco,1,BARRANCO,6452.423423423424
-147229530,barranco,810300.0,490.0,83.0,3,3,1,TEODOSIO PARREÑO,Barranco,1,BARRANCO,9762.650602409638
+147879979,barranco,287000.0,172.0,45.0,1,1,1,AV. REPUBLICA DE PANAMA 348,Barranco,1,BARRANCO,6377.8
+149324096,barranco,291550.0,70.0,62.0,2,1,0,Calle Doña Delmira  al 400,Barranco,1,BARRANCO,4702.4
+149610106,barranco,420000.0,350.0,33.0,1,1,1,Jr. Martinez de Pinillos- A 1 Cuadra del Malecón Dpto Amoblado con Cochera y Depósito,Barranco,1,BARRANCO,12727.3
+143173660,barranco,425780.0,0.0,56.0,1,1,1,"Av EL SOL N° 5xx, Dpto. 102,103",Barranco,1,BARRANCO,7603.2
+147239693,barranco,434868.0,170.0,39.0,1,1,0,EL SOL,Barranco,1,BARRANCO,11150.5
+149449649,barranco,446275.0,250.0,38.0,1,1,1,Grau al 1430,Barranco,1,BARRANCO,11744.1
+149849874,barranco,469990.0,217.0,44.0,1,1,1,Avenida San Martín 765,Barranco,1,BARRANCO,10681.6
+148724891,barranco,499000.0,0.0,51.0,2,1,1,Jirón Pedro Martinto,Barranco,1,BARRANCO,9784.3
+149791240,barranco,503176.0,0.0,47.0,1,1,0,PY Barranco 6,Barranco,1,BARRANCO,10705.9
+149864586,barranco,513000.0,320.0,73.0,2,2,1,Jirón Enrique Delucchi al 200,Barranco,1,BARRANCO,7027.4
+4637609,barranco,520819.0,0.0,48.0,1,1,1,El Sol Oeste,Barranco,1,BARRANCO,10850.4
+146768808,barranco,536500.0,1.0,38.0,1,1,1,"Av Pedro De Osma, Barranco",Barranco,1,BARRANCO,14118.4
+149794715,barranco,550000.0,0.0,78.0,3,2,1,Jirón Jaén Cuadra 2,Barranco,10,BARRANCO,7051.3
+149538000,barranco,563000.0,330.0,56.0,2,2,1,Jirón Fedelli 101,Barranco,1,BARRANCO,10053.6
+148960984,barranco,651300.0,0.0,116.0,3,2,1,Jiron Buenaventura Aguirre 206  Barranco  al 200,Barranco,1,BARRANCO,5614.7
+148729318,barranco,653000.0,600.0,94.0,1,1,1,Pedro Martinto Cerca al Malecón Paul Harris,Barranco,1,BARRANCO,6946.8
+149866499,barranco,700000.0,0.0,87.0,1,1,1,Jirón Centenario 129,Barranco,1,BARRANCO,8046.0
+146018330,barranco,716219.0,0.0,111.0,2,2,0,"Jirón 2 DE Mayo N° 1xx, Dpto. 103",Barranco,1,BARRANCO,6452.4
+147229530,barranco,810300.0,490.0,83.0,3,3,1,TEODOSIO PARREÑO,Barranco,1,BARRANCO,9762.7
 146184980,barranco,860200.0,0.0,100.0,2,2,1,Dirección no informada,Barranco,1,BARRANCO,8602.0
-147944789,barranco,861211.0,430.0,90.0,2,2,2,las Mimosas al 100,Barranco,1,BARRANCO,9569.011111111111
-149416522,barranco,897000.0,580.0,93.0,2,2,1,Jirón Tacna,Barranco,1,BARRANCO,9645.161290322581
-149309081,barranco,1164500.0,400.0,130.0,3,2,1,Jirón Las Mimosas 287,Barranco,1,BARRANCO,8957.692307692309
-149522767,barranco,4250000.0,2500.0,503.0,3,3,2,Jirón 28 de Julio,Barranco,1,BARRANCO,8449.304174950299
-149814482,barranco,4488000.0,0.0,405.0,4,4,3,"Malecón Castilla N 1xx, Piso 4, Barranco.",Barranco,1,BARRANCO,11081.481481481482
-147111416,brena,288640.0,0.0,54.0,2,2,1,Breña,Breña,1,BREÑA,5345.185185185185
-149079233,brena,305997.0,0.0,87.0,3,2,0,Av. España 711,Breña,1,BREÑA,3517.206896551724
-149581184,brena,348560.0,0.0,55.0,2,2,0,"Jirón Loreto N° 16xx, Dpto. 201 AL 501",Breña,1,BREÑA,6337.454545454545
-148988771,brena,368500.0,0.0,78.0,4,2,0,Condominio vista verde  Jr Pucallpa 251 Breña,Breña,1,BREÑA,4724.358974358975
-148925621,brena,374000.0,0.0,79.0,3,2,0,"JR Rebeca Oquendo 307 URB Graden City, Breña",Breña,1,BREÑA,4734.177215189873
-148942333,brena,380000.0,0.0,58.0,2,2,0,"Av Juan Pablo Fernandini N° 9xx, Dpto. 303 AL 1703",Breña,10,BREÑA,6551.724137931034
-147532951,brena,429000.0,0.0,149.0,4,2,0,JR NAPO 238 BREÑA  149M2  4 HAB,Breña,10,BREÑA,2879.1946308724832
-148834741,brena,482795.0,290.0,71.0,3,2,0,AV. JUAN PABLO FERNANDINI,Breña,1,BREÑA,6799.929577464789
-144814078,brena,687111.0,0.0,132.0,3,2,0,"Av. General Felipe Varela N°19xx, Dpto.1604 , 1606 A",Breña,1,BREÑA,5205.386363636364
-144814072,brena,742800.0,0.0,142.0,3,2,0,"Av. General Felipe Varela N°19xx, Dpto.1602 B",Breña,1,BREÑA,5230.985915492958
-145717534,chorrillos,210000.0,0.0,33.0,1,1,1,AV. LAS Gaviotas 1XX Dpto 207 T1,Chorrillos,1,CHORRILLOS,6363.636363636364
-145081219,chorrillos,244000.0,0.0,38.0,1,2,0,Av. Los Faisanes 485,Chorrillos,1,CHORRILLOS,6421.0526315789475
-149889961,chorrillos,250000.0,0.0,65.0,2,1,0,Jiron Julio Victor Aguirre 281,Chorrillos,1,CHORRILLOS,3846.153846153846
-148715530,chorrillos,275000.0,0.0,63.0,3,2,0,Victor Humareda  al 100,Chorrillos,1,CHORRILLOS,4365.079365079365
+147944789,barranco,861211.0,430.0,90.0,2,2,2,las Mimosas al 100,Barranco,1,BARRANCO,9569.0
+149416522,barranco,897000.0,580.0,93.0,2,2,1,Jirón Tacna,Barranco,1,BARRANCO,9645.2
+149309081,barranco,1164500.0,400.0,130.0,3,2,1,Jirón Las Mimosas 287,Barranco,1,BARRANCO,8957.7
+149522767,barranco,4250000.0,2500.0,503.0,3,3,2,Jirón 28 de Julio,Barranco,1,BARRANCO,8449.3
+149814482,barranco,4488000.0,0.0,405.0,4,4,3,"Malecón Castilla N 1xx, Piso 4, Barranco.",Barranco,1,BARRANCO,11081.5
+147111416,brena,288640.0,0.0,54.0,2,2,1,Breña,Breña,1,BREÑA,5345.2
+149079233,brena,305997.0,0.0,87.0,3,2,0,Av. España 711,Breña,1,BREÑA,3517.2
+149581184,brena,348560.0,0.0,55.0,2,2,0,"Jirón Loreto N° 16xx, Dpto. 201 AL 501",Breña,1,BREÑA,6337.5
+148988771,brena,368500.0,0.0,78.0,4,2,0,Condominio vista verde  Jr Pucallpa 251 Breña,Breña,1,BREÑA,4724.4
+148925621,brena,374000.0,0.0,79.0,3,2,0,"JR Rebeca Oquendo 307 URB Graden City, Breña",Breña,1,BREÑA,4734.2
+148942333,brena,380000.0,0.0,58.0,2,2,0,"Av Juan Pablo Fernandini N° 9xx, Dpto. 303 AL 1703",Breña,10,BREÑA,6551.7
+147532951,brena,429000.0,0.0,149.0,4,2,0,JR NAPO 238 BREÑA  149M2  4 HAB,Breña,10,BREÑA,2879.2
+148834741,brena,482795.0,290.0,71.0,3,2,0,AV. JUAN PABLO FERNANDINI,Breña,1,BREÑA,6799.9
+144814078,brena,687111.0,0.0,132.0,3,2,0,"Av. General Felipe Varela N°19xx, Dpto.1604 , 1606 A",Breña,1,BREÑA,5205.4
+144814072,brena,742800.0,0.0,142.0,3,2,0,"Av. General Felipe Varela N°19xx, Dpto.1602 B",Breña,1,BREÑA,5231.0
+145717534,chorrillos,210000.0,0.0,33.0,1,1,1,AV. LAS Gaviotas 1XX Dpto 207 T1,Chorrillos,1,CHORRILLOS,6363.6
+145081219,chorrillos,244000.0,0.0,38.0,1,2,0,Av. Los Faisanes 485,Chorrillos,1,CHORRILLOS,6421.1
+149889961,chorrillos,250000.0,0.0,65.0,2,1,0,Jiron Julio Victor Aguirre 281,Chorrillos,1,CHORRILLOS,3846.2
+148715530,chorrillos,275000.0,0.0,63.0,3,2,0,Victor Humareda  al 100,Chorrillos,1,CHORRILLOS,4365.1
 90584028,chorrillos,282240.0,28.0,70.0,2,2,0,AV. EL SOL 120,Nuevo Chorrillos,1,CHORRILLOS,4032.0
-149244632,chorrillos,291500.0,0.0,65.0,2,2,1,Jirón Tambo Real,Chorrillos,1,CHORRILLOS,4484.615384615385
+149244632,chorrillos,291500.0,0.0,65.0,2,2,1,Jirón Tambo Real,Chorrillos,1,CHORRILLOS,4484.6
 147910082,chorrillos,297000.0,0.0,60.0,2,1,1,Jr. Perseo Chorrillos,La Campiña,1,CHORRILLOS,4950.0
-149228484,chorrillos,300150.0,180.0,76.0,3,1,0,Calle Santa Teresa,Chorrillos,1,CHORRILLOS,3949.342105263158
+149228484,chorrillos,300150.0,180.0,76.0,3,1,0,Calle Santa Teresa,Chorrillos,1,CHORRILLOS,3949.3
 148699190,chorrillos,302600.0,150.0,68.0,3,2,0,Calle Perseo 100 Piso 3,La Campiña,1,CHORRILLOS,4450.0
-147401840,chorrillos,308899.0,0.0,41.0,1,1,0,"Jirón Independencia N° 3xx, Dpto. 111 AL 1211 B",Chorrillos,1,CHORRILLOS,7534.121951219512
-149317111,chorrillos,310610.0,0.0,71.0,3,2,0,Av. Defensores del Morro,Chorrillos,1,CHORRILLOS,4374.788732394366
-149700410,chorrillos,330000.0,0.0,72.0,3,2,0,Los Gorriones 235,Chorrillos,1,CHORRILLOS,4583.333333333333
-149637466,chorrillos,350000.0,0.0,65.0,3,2,0,Jiron Juno  al 100,La Campiña,1,CHORRILLOS,5384.615384615385
-147668321,chorrillos,358100.0,0.0,58.0,2,2,0,Av. Alipio Ponce Vásquez 32,Chorrillos,1,CHORRILLOS,6174.137931034483
-149686191,chorrillos,362582.0,0.0,56.0,2,2,0,José Olaya,Chorrillos,1,CHORRILLOS,6474.678571428572
-145860043,chorrillos,364000.0,0.0,67.0,3,2,3,Gaviotas,Chorrillos,10,CHORRILLOS,5432.835820895522
-145860835,chorrillos,366000.0,0.0,66.0,3,2,1,Gaviotas,Chorrillos,1,CHORRILLOS,5545.454545454545
-149726762,chorrillos,370600.0,99.0,76.0,3,2,1,Calle Tobago,Los Cedros De Villa,1,CHORRILLOS,4876.315789473684
-149479135,chorrillos,377000.0,250.0,70.0,3,2,1,Los Gorriones 273,La Campiña,1,CHORRILLOS,5385.714285714285
-149738786,chorrillos,379000.0,250.0,86.0,3,2,0,Amplia Terraza | Cocina Americana | 3 Dormitorios | No Incluye Cochera,La Campiña,10,CHORRILLOS,4406.976744186047
-149620601,chorrillos,387000.0,0.0,58.0,2,2,0,Av. Las Gaviotas al 400,Chorrillos,1,CHORRILLOS,6672.413793103448
-146944703,chorrillos,399600.0,1.0,92.0,2,2,1,"JIRON SANTA TERESA, CHORRILLOS",Chorrillos,10,CHORRILLOS,4343.478260869565
-149031027,chorrillos,400800.0,0.0,202.0,3,6,0,URB Cedros DE Villa,Chorrillos,1,CHORRILLOS,1984.1584158415842
-149514842,chorrillos,425000.0,200.0,127.0,3,3,1,Calle Menorca 100,Chorrillos,1,CHORRILLOS,3346.4566929133857
-149463274,chorrillos,425900.0,0.0,64.0,3,2,0,Avenida Faisanes al 300,Chorrillos,10,CHORRILLOS,6654.6875
-149282647,chorrillos,435500.0,50.0,105.0,3,3,0,Calle Isla Jamaica Mz.B9 - Lt.18,Los Cedros De Villa,1,CHORRILLOS,4147.619047619048
-148449843,chorrillos,438100.0,1.0,267.0,6,3,0,"DEMETRIO RUIZ 171 ,CHORRILLOS A0 267M2 AC 153M2 6 HAB 3 BAÑOS",Chorrillos,1,CHORRILLOS,1640.8239700374531
-149307459,chorrillos,446059.0,0.0,67.0,3,2,0,Amplio Depa con Balcón y 3dorm en Chorrillos,Chorrillos,1,CHORRILLOS,6657.5970149253735
+147401840,chorrillos,308899.0,0.0,41.0,1,1,0,"Jirón Independencia N° 3xx, Dpto. 111 AL 1211 B",Chorrillos,1,CHORRILLOS,7534.1
+149317111,chorrillos,310610.0,0.0,71.0,3,2,0,Av. Defensores del Morro,Chorrillos,1,CHORRILLOS,4374.8
+149700410,chorrillos,330000.0,0.0,72.0,3,2,0,Los Gorriones 235,Chorrillos,1,CHORRILLOS,4583.3
+149637466,chorrillos,350000.0,0.0,65.0,3,2,0,Jiron Juno  al 100,La Campiña,1,CHORRILLOS,5384.6
+147668321,chorrillos,358100.0,0.0,58.0,2,2,0,Av. Alipio Ponce Vásquez 32,Chorrillos,1,CHORRILLOS,6174.1
+149686191,chorrillos,362582.0,0.0,56.0,2,2,0,José Olaya,Chorrillos,1,CHORRILLOS,6474.7
+145860043,chorrillos,364000.0,0.0,67.0,3,2,3,Gaviotas,Chorrillos,10,CHORRILLOS,5432.8
+145860835,chorrillos,366000.0,0.0,66.0,3,2,1,Gaviotas,Chorrillos,1,CHORRILLOS,5545.5
+149726762,chorrillos,370600.0,99.0,76.0,3,2,1,Calle Tobago,Los Cedros De Villa,1,CHORRILLOS,4876.3
+149479135,chorrillos,377000.0,250.0,70.0,3,2,1,Los Gorriones 273,La Campiña,1,CHORRILLOS,5385.7
+149738786,chorrillos,379000.0,250.0,86.0,3,2,0,Amplia Terraza | Cocina Americana | 3 Dormitorios | No Incluye Cochera,La Campiña,10,CHORRILLOS,4407.0
+149620601,chorrillos,387000.0,0.0,58.0,2,2,0,Av. Las Gaviotas al 400,Chorrillos,1,CHORRILLOS,6672.4
+146944703,chorrillos,399600.0,1.0,92.0,2,2,1,"JIRON SANTA TERESA, CHORRILLOS",Chorrillos,10,CHORRILLOS,4343.5
+149031027,chorrillos,400800.0,0.0,202.0,3,6,0,URB Cedros DE Villa,Chorrillos,1,CHORRILLOS,1984.2
+149514842,chorrillos,425000.0,200.0,127.0,3,3,1,Calle Menorca 100,Chorrillos,1,CHORRILLOS,3346.5
+149463274,chorrillos,425900.0,0.0,64.0,3,2,0,Avenida Faisanes al 300,Chorrillos,10,CHORRILLOS,6654.7
+149282647,chorrillos,435500.0,50.0,105.0,3,3,0,Calle Isla Jamaica Mz.B9 - Lt.18,Los Cedros De Villa,1,CHORRILLOS,4147.6
+148449843,chorrillos,438100.0,1.0,267.0,6,3,0,"DEMETRIO RUIZ 171 ,CHORRILLOS A0 267M2 AC 153M2 6 HAB 3 BAÑOS",Chorrillos,1,CHORRILLOS,1640.8
+149307459,chorrillos,446059.0,0.0,67.0,3,2,0,Amplio Depa con Balcón y 3dorm en Chorrillos,Chorrillos,1,CHORRILLOS,6657.6
 148383850,chorrillos,487200.0,150.0,100.0,3,2,1,guardia civil sur 108,Chorrillos,1,CHORRILLOS,4872.0
-148347627,chorrillos,511000.0,0.0,59.0,2,2,0,"Jirón Daniel Urrea N° 2xx, Dpto. 202 AL 702",Chorrillos,1,CHORRILLOS,8661.016949152543
-145338635,chorrillos,570400.0,150.0,135.0,4,3,0,Jr costa azul 183,Chorrillos,1,CHORRILLOS,4225.185185185185
-148809014,chorrillos,645000.0,0.0,218.0,4,5,0,Santa Maria de Villa Chorrillos Calle B 116,Santa Maria De Villa,1,CHORRILLOS,2958.7155963302753
-149888037,chorrillos,748000.0,560.0,135.0,3,2,1,Malecon Grau Chorrillos,Chorrillos,1,CHORRILLOS,5540.740740740741
-147846633,chorrillos,897000.0,0.0,132.0,3,2,2,Dario Torres,Chorrillos,1,CHORRILLOS,6795.454545454545
-4592982,chorrillos,993600.0,450.0,140.0,3,2,2,Darío Torres,Chorrillos,1,CHORRILLOS,7097.142857142857
+148347627,chorrillos,511000.0,0.0,59.0,2,2,0,"Jirón Daniel Urrea N° 2xx, Dpto. 202 AL 702",Chorrillos,1,CHORRILLOS,8661.0
+145338635,chorrillos,570400.0,150.0,135.0,4,3,0,Jr costa azul 183,Chorrillos,1,CHORRILLOS,4225.2
+148809014,chorrillos,645000.0,0.0,218.0,4,5,0,Santa Maria de Villa Chorrillos Calle B 116,Santa Maria De Villa,1,CHORRILLOS,2958.7
+149888037,chorrillos,748000.0,560.0,135.0,3,2,1,Malecon Grau Chorrillos,Chorrillos,1,CHORRILLOS,5540.7
+147846633,chorrillos,897000.0,0.0,132.0,3,2,2,Dario Torres,Chorrillos,1,CHORRILLOS,6795.5
+4592982,chorrillos,993600.0,450.0,140.0,3,2,2,Darío Torres,Chorrillos,1,CHORRILLOS,7097.1
 149815235,chorrillos,1013200.0,0.0,160.0,2,2,1,Pasaje Mirabel  125,Chorrillos,10,CHORRILLOS,6332.5
-148976988,chorrillos,2512500.0,0.0,330.0,4,2,4,"Calle Malecón Grau N 2, Piso 1, Chorrillos",Chorrillos,10,CHORRILLOS,7613.636363636364
-147179347,chorrillos,2654225.0,0.0,390.0,3,3,3,Malecón Grau,Chorrillos,1,CHORRILLOS,6805.705128205128
-66161053,chorrillos,4342000.0,2500.0,770.0,3,4,3,MALECÓN GRAU 260,Chorrillos,1,CHORRILLOS,5638.961038961039
-149760604,comas,123600.0,0.0,102.0,4,1,0,Jr. San Martín 350,Comas,1,COMAS,1211.764705882353
-149268996,comas,129906.0,0.0,50.0,3,1,0,Jr. Las Américas,Comas,1,COMAS,2598.12
+148976988,chorrillos,2512500.0,0.0,330.0,4,2,4,"Calle Malecón Grau N 2, Piso 1, Chorrillos",Chorrillos,10,CHORRILLOS,7613.6
+147179347,chorrillos,2654225.0,0.0,390.0,3,3,3,Malecón Grau,Chorrillos,1,CHORRILLOS,6805.7
+66161053,chorrillos,4342000.0,2500.0,770.0,3,4,3,MALECÓN GRAU 260,Chorrillos,1,CHORRILLOS,5639.0
+149760604,comas,123600.0,0.0,102.0,4,1,0,Jr. San Martín 350,Comas,1,COMAS,1211.8
+149268996,comas,129906.0,0.0,50.0,3,1,0,Jr. Las Américas,Comas,1,COMAS,2598.1
 149703403,comas,135000.0,90.0,50.0,3,1,0,condominio Los Girasoles,Comas,1,COMAS,2700.0
-149028820,comas,140000.0,0.0,54.0,2,1,0,Ca. 21 287-239,Comas,1,COMAS,2592.5925925925926
+149028820,comas,140000.0,0.0,54.0,2,1,0,Ca. 21 287-239,Comas,1,COMAS,2592.6
 149548219,comas,155000.0,100.0,50.0,2,1,0,Avenida Manuel Gonzalez Prada 1201,Comas,1,COMAS,3100.0
 143672582,comas,170000.0,150.0,50.0,3,1,0,LOS GIRASOLES TERCERA ETAPA,Comas,1,COMAS,3400.0
-146741092,comas,174200.0,0.0,73.0,2,2,0,jr Bosques de Huayllay Comas,Comas,10,COMAS,2386.301369863014
+146741092,comas,174200.0,0.0,73.0,2,2,0,jr Bosques de Huayllay Comas,Comas,10,COMAS,2386.3
 149815444,comas,190000.0,0.0,50.0,3,1,1,Manuel Gonzales Prada 123,Comas,1,COMAS,3800.0
-149898648,comas,220000.0,138.0,70.0,3,2,0,Torres Del Campo,Comas,1,COMAS,3142.8571428571427
-147846630,comas,227500.0,0.0,106.0,3,1,0,Ca. Mama Ocllo,Comas,1,COMAS,2146.2264150943397
-148083166,comas,235000.0,0.0,86.0,2,2,0,"Mariano Necochea 461, Comas",Comas,1,COMAS,2732.5581395348836
-149061879,comas,235000.0,115.0,59.0,3,2,0,República de Israel Puerta Nª 5,Comas,1,COMAS,3983.0508474576272
-147780004,comas,235000.0,110.0,83.0,3,2,1,Torres del campo,Santa Luzmila,1,COMAS,2831.3253012048194
+149898648,comas,220000.0,138.0,70.0,3,2,0,Torres Del Campo,Comas,1,COMAS,3142.9
+147846630,comas,227500.0,0.0,106.0,3,1,0,Ca. Mama Ocllo,Comas,1,COMAS,2146.2
+148083166,comas,235000.0,0.0,86.0,2,2,0,"Mariano Necochea 461, Comas",Comas,1,COMAS,2732.6
+149061879,comas,235000.0,115.0,59.0,3,2,0,República de Israel Puerta Nª 5,Comas,1,COMAS,3983.1
+147780004,comas,235000.0,110.0,83.0,3,2,1,Torres del campo,Santa Luzmila,1,COMAS,2831.3
 146680126,comas,235200.0,30.0,80.0,3,2,0,Calle Jose Baquijano Y Carrillo 107,Santa Luzmila,1,COMAS,2940.0
-148654156,comas,247900.0,0.0,101.0,3,2,0,Arguedas 159,Comas,1,COMAS,2454.4554455445545
+148654156,comas,247900.0,0.0,101.0,3,2,0,Arguedas 159,Comas,1,COMAS,2454.5
 149273466,comas,285000.0,0.0,100.0,3,1,0,Av. Republica del Peru 1091,Huaquillay Et.1,1,COMAS,2850.0
-148984283,comas,287000.0,0.0,101.0,4,2,0,"San Jorge 130, Comas",Comas,1,COMAS,2841.5841584158416
-149121128,comas,299040.0,0.0,124.0,3,2,0,Jose Olaya,Comas,1,COMAS,2411.6129032258063
-149439998,comas,349999.0,229.0,89.0,3,2,0,Las Palmas,Comas,1,COMAS,3932.5730337078653
-149087169,jesus-maria,250000.0,0.0,34.0,1,1,0,Jr. Huáscar al 1400,Jesús María,1,JESUS MARIA,7352.941176470588
-149447237,jesus-maria,311000.0,200.0,42.0,1,1,0,Av. Brasil,Jesús María,1,JESUS MARIA,7404.761904761905
-149615943,jesus-maria,350000.0,0.0,91.0,3,1,0,Pasaje Santiago 2380,Jesús María,1,JESUS MARIA,3846.153846153846
-148084358,jesus-maria,353513.0,120.0,76.0,3,2,1,Pasaje Ideal al 100,Jesús María,1,JESUS MARIA,4651.486842105263
+148984283,comas,287000.0,0.0,101.0,4,2,0,"San Jorge 130, Comas",Comas,1,COMAS,2841.6
+149121128,comas,299040.0,0.0,124.0,3,2,0,Jose Olaya,Comas,1,COMAS,2411.6
+149439998,comas,349999.0,229.0,89.0,3,2,0,Las Palmas,Comas,1,COMAS,3932.6
+149087169,jesus-maria,250000.0,0.0,34.0,1,1,0,Jr. Huáscar al 1400,Jesús María,1,JESUS MARIA,7352.9
+149447237,jesus-maria,311000.0,200.0,42.0,1,1,0,Av. Brasil,Jesús María,1,JESUS MARIA,7404.8
+149615943,jesus-maria,350000.0,0.0,91.0,3,1,0,Pasaje Santiago 2380,Jesús María,1,JESUS MARIA,3846.2
+148084358,jesus-maria,353513.0,120.0,76.0,3,2,1,Pasaje Ideal al 100,Jesús María,1,JESUS MARIA,4651.5
 147856825,jesus-maria,390000.0,0.0,40.0,1,1,0,"Av. Salaverry 571, Jesús María",Jesús María,1,JESUS MARIA,9750.0
-4648089,jesus-maria,445804.0,0.0,60.0,2,2,1,Brasil,Jesús María,1,JESUS MARIA,7430.066666666667
-149522012,jesus-maria,475000.0,30.0,112.0,2,2,0,Av. Brasil,Jesús María,1,JESUS MARIA,4241.071428571428
-149907619,jesus-maria,499000.0,0.0,75.0,3,2,1,Av. Brasil,Jesús María,1,JESUS MARIA,6653.333333333333
-149826033,jesus-maria,513858.0,0.0,83.0,3,2,1,Av. Cuba al 1000,Jesús María,1,JESUS MARIA,6191.060240963855
-149591778,jesus-maria,540000.0,250.0,79.0,3,2,1,Av. 28 de Julio Cdra. 3,Jesús María,1,JESUS MARIA,6835.443037974684
-149790266,jesus-maria,541000.0,0.0,81.0,3,2,1,jr Huascar  al 1900,Jesús María,1,JESUS MARIA,6679.0123456790125
-149701643,jesus-maria,550000.0,0.0,77.0,3,2,0,Av Eugenio Garzon al 800,Portada De Jesus Maria,1,JESUS MARIA,7142.857142857143
-147856778,jesus-maria,581000.0,0.0,57.0,2,2,0,"Av. Salaverry 571, Jesús María",Jesús María,1,JESUS MARIA,10192.982456140351
-149497430,jesus-maria,589900.0,350.0,99.0,2,2,0,Jr. Huiracocha 2300,Jesús María,1,JESUS MARIA,5958.585858585859
-149242013,jesus-maria,632880.0,100.0,137.0,3,2,0,Residencial San Felipe,Residencial San Felipe,1,JESUS MARIA,4619.56204379562
-149665580,jesus-maria,650000.0,0.0,102.0,3,2,1,Parque Pedro la Rosa 119,Jesús María,1,JESUS MARIA,6372.549019607844
-148909728,jesus-maria,653250.0,0.0,142.0,2,2,0,Jirón Caracas al 2400,Jesús María,1,JESUS MARIA,4600.352112676056
-149037867,jesus-maria,700000.0,0.0,83.0,3,2,1,"Av Cuba N° 11xx, Dpto. 2206",Jesús María,1,JESUS MARIA,8433.734939759037
-148884410,jesus-maria,728000.0,0.0,75.0,3,2,1,Av. Salaverry,Jesús María,1,JESUS MARIA,9706.666666666666
-149210391,jesus-maria,765000.0,0.0,97.0,3,2,1,Av. Gregorio Escobedo 560,Los Patricios,10,JESUS MARIA,7886.59793814433
+4648089,jesus-maria,445804.0,0.0,60.0,2,2,1,Brasil,Jesús María,1,JESUS MARIA,7430.1
+149522012,jesus-maria,475000.0,30.0,112.0,2,2,0,Av. Brasil,Jesús María,1,JESUS MARIA,4241.1
+149907619,jesus-maria,499000.0,0.0,75.0,3,2,1,Av. Brasil,Jesús María,1,JESUS MARIA,6653.3
+149826033,jesus-maria,513858.0,0.0,83.0,3,2,1,Av. Cuba al 1000,Jesús María,1,JESUS MARIA,6191.1
+149591778,jesus-maria,540000.0,250.0,79.0,3,2,1,Av. 28 de Julio Cdra. 3,Jesús María,1,JESUS MARIA,6835.4
+149790266,jesus-maria,541000.0,0.0,81.0,3,2,1,jr Huascar  al 1900,Jesús María,1,JESUS MARIA,6679.0
+149701643,jesus-maria,550000.0,0.0,77.0,3,2,0,Av Eugenio Garzon al 800,Portada De Jesus Maria,1,JESUS MARIA,7142.9
+147856778,jesus-maria,581000.0,0.0,57.0,2,2,0,"Av. Salaverry 571, Jesús María",Jesús María,1,JESUS MARIA,10193.0
+149497430,jesus-maria,589900.0,350.0,99.0,2,2,0,Jr. Huiracocha 2300,Jesús María,1,JESUS MARIA,5958.6
+149242013,jesus-maria,632880.0,100.0,137.0,3,2,0,Residencial San Felipe,Residencial San Felipe,1,JESUS MARIA,4619.6
+149665580,jesus-maria,650000.0,0.0,102.0,3,2,1,Parque Pedro la Rosa 119,Jesús María,1,JESUS MARIA,6372.5
+148909728,jesus-maria,653250.0,0.0,142.0,2,2,0,Jirón Caracas al 2400,Jesús María,1,JESUS MARIA,4600.4
+149037867,jesus-maria,700000.0,0.0,83.0,3,2,1,"Av Cuba N° 11xx, Dpto. 2206",Jesús María,1,JESUS MARIA,8433.7
+148884410,jesus-maria,728000.0,0.0,75.0,3,2,1,Av. Salaverry,Jesús María,1,JESUS MARIA,9706.7
+149210391,jesus-maria,765000.0,0.0,97.0,3,2,1,Av. Gregorio Escobedo 560,Los Patricios,10,JESUS MARIA,7886.6
 149687491,jesus-maria,819000.0,280.0,168.0,3,2,1,Avenida General Felipe Salaverry al 500,Jesús María,1,JESUS MARIA,4875.0
-149541815,jesus-maria,1751000.0,0.0,300.0,4,7,1,Av. San Felipe 1079,Jesús María,1,JESUS MARIA,5836.666666666667
+149541815,jesus-maria,1751000.0,0.0,300.0,4,7,1,Av. San Felipe 1079,Jesús María,1,JESUS MARIA,5836.7
 149880119,la-molina,360000.0,0.0,100.0,3,2,1,Armatambo 180,La Molina,1,LA MOLINA,3600.0
-149703524,la-molina,420000.0,100.0,116.0,3,2,1,Calle Paseo de los Condes 180,Las Lomas De La Molina Vieja,1,LA MOLINA,3620.689655172414
-149772802,la-molina,485110.0,0.0,89.0,3,3,0,Jirón Nevado Alpamayo 157,La Molina,1,LA MOLINA,5450.6741573033705
-149257055,la-molina,493000.0,175.0,90.0,3,3,1,Av. Alameda Del Corregidor al 1500,Sirius,1,LA MOLINA,5477.777777777777
-148091915,la-molina,499150.0,0.0,91.0,3,3,1,Avenida Alameda del Corregidor 1575	 al 1500,Sirius,10,LA MOLINA,5485.1648351648355
-148207383,la-molina,537600.0,0.0,145.0,3,2,0,"Jr. Cusco 199, La Molina 15024",La Molina,1,LA MOLINA,3707.5862068965516
-149297132,la-molina,577473.0,0.0,118.0,3,3,1,Avenida Flora Tristán 215,La Molina,1,LA MOLINA,4893.838983050848
-148623345,la-molina,586500.0,0.0,135.0,5,4,0,Calle Andalucia,La Molina,1,LA MOLINA,4344.444444444444
-146767672,la-molina,592000.0,130.0,96.0,3,3,1,"Jose Antonio 270, Parque Monterrico La Molina",La Molina,1,LA MOLINA,6166.666666666667
+149703524,la-molina,420000.0,100.0,116.0,3,2,1,Calle Paseo de los Condes 180,Las Lomas De La Molina Vieja,1,LA MOLINA,3620.7
+149772802,la-molina,485110.0,0.0,89.0,3,3,0,Jirón Nevado Alpamayo 157,La Molina,1,LA MOLINA,5450.7
+149257055,la-molina,493000.0,175.0,90.0,3,3,1,Av. Alameda Del Corregidor al 1500,Sirius,1,LA MOLINA,5477.8
+148091915,la-molina,499150.0,0.0,91.0,3,3,1,Avenida Alameda del Corregidor 1575	 al 1500,Sirius,10,LA MOLINA,5485.2
+148207383,la-molina,537600.0,0.0,145.0,3,2,0,"Jr. Cusco 199, La Molina 15024",La Molina,1,LA MOLINA,3707.6
+149297132,la-molina,577473.0,0.0,118.0,3,3,1,Avenida Flora Tristán 215,La Molina,1,LA MOLINA,4893.8
+148623345,la-molina,586500.0,0.0,135.0,5,4,0,Calle Andalucia,La Molina,1,LA MOLINA,4344.4
+146767672,la-molina,592000.0,130.0,96.0,3,3,1,"Jose Antonio 270, Parque Monterrico La Molina",La Molina,1,LA MOLINA,6166.7
 149737557,la-molina,619500.0,0.0,100.0,2,2,2,Av. la Molina,La Molina,1,LA MOLINA,6195.0
-149727262,la-molina,677400.0,200.0,91.0,3,1,1,Secoyas  al 100,La Molina,1,LA MOLINA,7443.956043956044
-149315166,la-molina,682570.0,0.0,121.0,3,3,2,Avenida los Fresnos,El Remanso,1,LA MOLINA,5641.074380165289
-147429303,la-molina,684000.0,350.0,108.0,3,3,1,COLEGIO ALTAIR,La Molina,1,LA MOLINA,6333.333333333333
-63610809,la-molina,703000.0,80.0,130.0,3,3,1,Dirección no informada,La Capilla,1,LA MOLINA,5407.692307692308
+149727262,la-molina,677400.0,200.0,91.0,3,1,1,Secoyas  al 100,La Molina,1,LA MOLINA,7444.0
+149315166,la-molina,682570.0,0.0,121.0,3,3,2,Avenida los Fresnos,El Remanso,1,LA MOLINA,5641.1
+147429303,la-molina,684000.0,350.0,108.0,3,3,1,COLEGIO ALTAIR,La Molina,1,LA MOLINA,6333.3
+63610809,la-molina,703000.0,80.0,130.0,3,3,1,Dirección no informada,La Capilla,1,LA MOLINA,5407.7
 148053244,la-molina,735000.0,0.0,280.0,3,1,1,CALLE BADAJOS,La Capilla,1,LA MOLINA,2625.0
-148192097,la-molina,770000.0,0.0,121.0,3,2,1,C. Palma Real 134,La Molina,1,LA MOLINA,6363.636363636364
-149575828,la-molina,782040.0,350.0,117.0,3,2,2,Calle toulon 135,La Riviera De Monterrico,1,LA MOLINA,6684.102564102564
-148607654,la-molina,882555.0,500.0,187.0,2,3,2,Manuel Prado Ugarteche 518,La Estancia,1,LA MOLINA,4719.545454545455
-148252984,la-molina,892500.0,0.0,187.0,3,3,1,Jirón de Los Conquistadores,Las Lomas De La Molina Vieja,1,LA MOLINA,4772.727272727273
-146411737,la-molina,918000.0,190.0,214.0,3,2,2,"LOS TULIPANES , La Molina",La Molina,1,LA MOLINA,4289.719626168225
-147556819,la-molina,971250.0,0.0,230.0,5,5,1,Altura DE  Cdra.24 DEL Corregidor - Urb. LA Capilla,La Molina,1,LA MOLINA,4222.826086956522
-149782626,la-molina,1031550.0,0.0,130.5,7,9,0,Avenida Corregidor al 2100,Alameda De Los Corregidores,1,LA MOLINA,7904.597701149425
-149178962,la-molina,1207500.0,0.0,427.0,6,6,3,Jirón Los Diáconos 122,La Molina,1,LA MOLINA,2827.8688524590166
+148192097,la-molina,770000.0,0.0,121.0,3,2,1,C. Palma Real 134,La Molina,1,LA MOLINA,6363.6
+149575828,la-molina,782040.0,350.0,117.0,3,2,2,Calle toulon 135,La Riviera De Monterrico,1,LA MOLINA,6684.1
+148607654,la-molina,882555.0,500.0,187.0,2,3,2,Manuel Prado Ugarteche 518,La Estancia,1,LA MOLINA,4719.5
+148252984,la-molina,892500.0,0.0,187.0,3,3,1,Jirón de Los Conquistadores,Las Lomas De La Molina Vieja,1,LA MOLINA,4772.7
+146411737,la-molina,918000.0,190.0,214.0,3,2,2,"LOS TULIPANES , La Molina",La Molina,1,LA MOLINA,4289.7
+147556819,la-molina,971250.0,0.0,230.0,5,5,1,Altura DE  Cdra.24 DEL Corregidor - Urb. LA Capilla,La Molina,1,LA MOLINA,4222.8
+149782626,la-molina,1031550.0,0.0,130.5,7,9,0,Avenida Corregidor al 2100,Alameda De Los Corregidores,1,LA MOLINA,7904.6
+149178962,la-molina,1207500.0,0.0,427.0,6,6,3,Jirón Los Diáconos 122,La Molina,1,LA MOLINA,2827.9
 146767616,la-molina,1293750.0,260.0,300.0,3,2,2,"Calle Las Cedrelas 1, La Molina",La Molina,9,LA MOLINA,4312.5
-149831702,la-molina,2233000.0,2400.0,420.0,4,4,3,Cerros de Camacho,Camacho,1,LA MOLINA,5316.666666666667
-149303646,la-victoria,185085.0,0.0,58.0,3,1,0,JR ABTAO 1313,La Victoria,1,LA VICTORIA,3191.1206896551726
-148907325,la-victoria,252000.0,0.0,69.0,2,1,0,Psje. Francisco Pizarro N° 0103 Dpto. 18 Piso 04 Urb. El Porvenir,El Porvenir,1,LA VICTORIA,3652.1739130434785
-149328184,la-victoria,255000.0,80.0,64.0,2,1,0,Jr. Abtao,La Victoria,1,LA VICTORIA,3984.375
-146408258,la-victoria,286000.0,0.0,41.0,1,1,1,"Av Esteban Campodonico N° 5xx, Dpto. 601 AL 2201",Santa Catalina,1,LA VICTORIA,6975.609756097561
-149159815,la-victoria,345400.0,0.0,47.0,2,1,1,"Av Carlos Villaran N° 8xx, Dpto. 310 AL 1710",La Victoria,1,LA VICTORIA,7348.936170212766
-149255373,la-victoria,395000.0,0.0,59.0,2,2,0,Ca. los Topacios 142,La Victoria,1,LA VICTORIA,6694.9152542372885
-149261191,la-victoria,405000.0,200.0,65.0,2,2,0,Av. Canadá 1276,La Victoria,1,LA VICTORIA,6230.7692307692305
-143173061,la-victoria,417650.0,0.0,51.0,2,2,0,"Calle Alberto Barton N°2xx, DPT Tipo 8",Santa Catalina,1,LA VICTORIA,8189.21568627451
-143173645,la-victoria,424989.0,0.0,47.0,1,1,0,"Calle Alberto Barton N°2xx, DPT Tipo 9",Santa Catalina,1,LA VICTORIA,9042.31914893617
-149574478,la-victoria,462500.0,0.0,68.0,3,2,1,Avenida José de Rivadeneyra al 1089,Santa Catalina,1,LA VICTORIA,6801.470588235294
-146685166,la-victoria,526744.0,0.0,60.0,2,2,0,Av. Paseo de la republica,Santa Catalina,1,LA VICTORIA,8779.066666666668
-143173426,la-victoria,545234.0,0.0,72.0,3,2,0,"Av Javier Prado Este N° 10xx, Dpto. 904 AL 2804",Santa Catalina,1,LA VICTORIA,7572.694444444444
-145499249,la-victoria,550000.0,0.0,74.0,3,2,0,"Av Carlos Villaran N° 3xx, Dpto. 1005 AL 1505",Santa Catalina,1,LA VICTORIA,7432.4324324324325
-148771846,la-victoria,583500.0,0.0,94.0,3,2,0,Valderrama 174,Santa Catalina,1,LA VICTORIA,6207.446808510638
-149310168,la-victoria,616392.0,0.0,75.0,3,2,0,Av Javier Prado Este  al 1000,La Victoria,1,LA VICTORIA,8218.56
-149547711,lince,306000.0,60.0,58.0,2,1,0,"Altura del Parque Pedro Ruiz Gallo, Municipalidad de Lince",Lince,1,LINCE,5275.862068965517
-145812450,lince,328000.0,200.0,56.0,2,1,0,CALLE IGNACIO MERINO,Lince,10,LINCE,5857.142857142857
-149258762,lince,340000.0,0.0,92.0,2,2,0,Avenida Juan Pardo de Zela al 600,S/n,1,LINCE,3695.6521739130435
-149483258,lince,345000.0,150.0,86.0,2,1,0,Av. Arequipa 1736,Lince,1,LINCE,4011.6279069767443
-149303740,lince,357000.0,250.0,52.0,2,2,0,"Jr. Belisario Flores - Limite Jesus Maria, A UN Paso DE UPC Y Hosp. Rebagliati - Vista Panoramica",Lince,1,LINCE,6865.384615384615
-144738293,lince,369000.0,0.0,53.0,2,2,0,"Av Petit Thouars N° 17xx, Dpto. 306 AL 1506",Lince,1,LINCE,6962.264150943396
+149831702,la-molina,2233000.0,2400.0,420.0,4,4,3,Cerros de Camacho,Camacho,1,LA MOLINA,5316.7
+149303646,la-victoria,185085.0,0.0,58.0,3,1,0,JR ABTAO 1313,La Victoria,1,LA VICTORIA,3191.1
+148907325,la-victoria,252000.0,0.0,69.0,2,1,0,Psje. Francisco Pizarro N° 0103 Dpto. 18 Piso 04 Urb. El Porvenir,El Porvenir,1,LA VICTORIA,3652.2
+149328184,la-victoria,255000.0,80.0,64.0,2,1,0,Jr. Abtao,La Victoria,1,LA VICTORIA,3984.4
+146408258,la-victoria,286000.0,0.0,41.0,1,1,1,"Av Esteban Campodonico N° 5xx, Dpto. 601 AL 2201",Santa Catalina,1,LA VICTORIA,6975.6
+149159815,la-victoria,345400.0,0.0,47.0,2,1,1,"Av Carlos Villaran N° 8xx, Dpto. 310 AL 1710",La Victoria,1,LA VICTORIA,7348.9
+149255373,la-victoria,395000.0,0.0,59.0,2,2,0,Ca. los Topacios 142,La Victoria,1,LA VICTORIA,6694.9
+149261191,la-victoria,405000.0,200.0,65.0,2,2,0,Av. Canadá 1276,La Victoria,1,LA VICTORIA,6230.8
+143173061,la-victoria,417650.0,0.0,51.0,2,2,0,"Calle Alberto Barton N°2xx, DPT Tipo 8",Santa Catalina,1,LA VICTORIA,8189.2
+143173645,la-victoria,424989.0,0.0,47.0,1,1,0,"Calle Alberto Barton N°2xx, DPT Tipo 9",Santa Catalina,1,LA VICTORIA,9042.3
+149574478,la-victoria,462500.0,0.0,68.0,3,2,1,Avenida José de Rivadeneyra al 1089,Santa Catalina,1,LA VICTORIA,6801.5
+146685166,la-victoria,526744.0,0.0,60.0,2,2,0,Av. Paseo de la republica,Santa Catalina,1,LA VICTORIA,8779.1
+143173426,la-victoria,545234.0,0.0,72.0,3,2,0,"Av Javier Prado Este N° 10xx, Dpto. 904 AL 2804",Santa Catalina,1,LA VICTORIA,7572.7
+145499249,la-victoria,550000.0,0.0,74.0,3,2,0,"Av Carlos Villaran N° 3xx, Dpto. 1005 AL 1505",Santa Catalina,1,LA VICTORIA,7432.4
+148771846,la-victoria,583500.0,0.0,94.0,3,2,0,Valderrama 174,Santa Catalina,1,LA VICTORIA,6207.4
+149310168,la-victoria,616392.0,0.0,75.0,3,2,0,Av Javier Prado Este  al 1000,La Victoria,1,LA VICTORIA,8218.6
+149547711,lince,306000.0,60.0,58.0,2,1,0,"Altura del Parque Pedro Ruiz Gallo, Municipalidad de Lince",Lince,1,LINCE,5275.9
+145812450,lince,328000.0,200.0,56.0,2,1,0,CALLE IGNACIO MERINO,Lince,10,LINCE,5857.1
+149258762,lince,340000.0,0.0,92.0,2,2,0,Avenida Juan Pardo de Zela al 600,S/n,1,LINCE,3695.7
+149483258,lince,345000.0,150.0,86.0,2,1,0,Av. Arequipa 1736,Lince,1,LINCE,4011.6
+149303740,lince,357000.0,250.0,52.0,2,2,0,"Jr. Belisario Flores - Limite Jesus Maria, A UN Paso DE UPC Y Hosp. Rebagliati - Vista Panoramica",Lince,1,LINCE,6865.4
+144738293,lince,369000.0,0.0,53.0,2,2,0,"Av Petit Thouars N° 17xx, Dpto. 306 AL 1506",Lince,1,LINCE,6962.3
 149775897,lince,396000.0,200.0,44.0,1,1,0,Geranios 310  - Depa 1hab A 2 Cdras del Centro Financiero San Isidro. Limite con Lince,Lince,10,LINCE,9000.0
-147547855,lince,401000.0,250.0,74.0,3,2,1,Prolongación Iquitos al 1500,Lince,1,LINCE,5418.918918918919
-149086287,lince,417500.0,120.0,86.0,3,1,0,Pezet y Monel al 2100,Lince,10,LINCE,4854.6511627906975
-149635268,lince,430000.0,180.0,65.0,3,2,0,Jirón Bartolomé Herrera,Lince,1,LINCE,6615.384615384615
+147547855,lince,401000.0,250.0,74.0,3,2,1,Prolongación Iquitos al 1500,Lince,1,LINCE,5418.9
+149086287,lince,417500.0,120.0,86.0,3,1,0,Pezet y Monel al 2100,Lince,10,LINCE,4854.7
+149635268,lince,430000.0,180.0,65.0,3,2,0,Jirón Bartolomé Herrera,Lince,1,LINCE,6615.4
 149802441,lince,434700.0,0.0,75.0,3,2,1,AV Iquitos 1570,Lince,1,LINCE,5796.0
-148662435,lince,437500.0,150.0,83.0,3,3,0,Risso,Risso,1,LINCE,5271.084337349397
-149702226,lince,439000.0,280.0,71.0,3,2,1,Av. Arenales 1475,Lince,1,LINCE,6183.098591549296
-146718777,lince,445000.0,250.0,65.0,3,2,1,jr manuel candamo 820,Lince,1,LINCE,6846.153846153846
-149003496,lince,484029.0,0.0,80.0,3,2,0,Alberto Alexander  al 2200,Lince,1,LINCE,6050.3625
-149622849,lince,507500.0,150.0,111.0,3,1,0,Jirón General José María Córdova 2233,Lince,1,LINCE,4572.072072072072
-148896348,lince,515000.0,0.0,65.0,2,2,0,"Av César Vallejo al 1400 | 2 Dormitorios, gas Natural, Límite con San Isidro",Lince,1,LINCE,7923.076923076923
-149001608,lince,519900.0,240.0,64.0,2,2,0,Jirón Pedro Conde 178,Lince,10,LINCE,8123.4375
-149695835,lince,553000.0,300.0,64.0,2,2,1,Av. César Vallejo,Lince,1,LINCE,8640.625
-149501834,lince,569925.0,0.0,72.0,3,2,0,Jr. Coronel Domingo Casanova 568,Lince,1,LINCE,7915.625
-149871581,lince,618000.0,300.0,77.0,3,2,1,Av. Salaverry,Lince,1,LINCE,8025.974025974026
-146437238,lince,647500.0,300.0,157.0,2,2,1,Avenida César Vallejo  lince,Lobaton,1,LINCE,4124.203821656051
-148201229,lince,715000.0,0.0,85.0,2,2,1,Av. Joaquín Bernal,Lince,1,LINCE,8411.764705882353
-148449611,lince,718106.0,0.0,107.0,2,3,1,"Jirón Risso N° 6xx, Dpto. 802",Lince,1,LINCE,6711.271028037383
-4590993,lince,746250.0,300.0,130.0,3,2,1,Calle Juan Bielovucich Cavalier,Lince,1,LINCE,5740.384615384615
-149293862,lince,890000.0,350.0,231.0,3,3,1,Almirante Manuel Villavicencio,Lince,1,LINCE,3852.813852813853
-147019701,lince,962000.0,300.0,96.0,3,2,1,Parque Castilla,Lince,1,LINCE,10020.833333333334
-149760763,los-olivos,144800.0,0.0,77.0,2,2,0,Calle 48,Los Olivos,1,LOS OLIVOS,1880.5194805194806
-149820246,los-olivos,174000.0,0.0,69.0,2,1,1,Miguel Ortiz 635,Los Olivos,1,LOS OLIVOS,2521.7391304347825
-146217068,los-olivos,182500.0,0.0,59.0,1,1,0,"La Caridad 520, Los Olivos 15307",Los Olivos,1,LOS OLIVOS,3093.2203389830506
-149514498,los-olivos,204000.0,0.0,67.0,2,1,0,JR. SANTOS ATAHUALPA 870 DPTO. 4XX,Los Olivos,1,LOS OLIVOS,3044.776119402985
+148662435,lince,437500.0,150.0,83.0,3,3,0,Risso,Risso,1,LINCE,5271.1
+149702226,lince,439000.0,280.0,71.0,3,2,1,Av. Arenales 1475,Lince,1,LINCE,6183.1
+146718777,lince,445000.0,250.0,65.0,3,2,1,jr manuel candamo 820,Lince,1,LINCE,6846.2
+149003496,lince,484029.0,0.0,80.0,3,2,0,Alberto Alexander  al 2200,Lince,1,LINCE,6050.4
+149622849,lince,507500.0,150.0,111.0,3,1,0,Jirón General José María Córdova 2233,Lince,1,LINCE,4572.1
+148896348,lince,515000.0,0.0,65.0,2,2,0,"Av César Vallejo al 1400 | 2 Dormitorios, gas Natural, Límite con San Isidro",Lince,1,LINCE,7923.1
+149001608,lince,519900.0,240.0,64.0,2,2,0,Jirón Pedro Conde 178,Lince,10,LINCE,8123.4
+149695835,lince,553000.0,300.0,64.0,2,2,1,Av. César Vallejo,Lince,1,LINCE,8640.6
+149501834,lince,569925.0,0.0,72.0,3,2,0,Jr. Coronel Domingo Casanova 568,Lince,1,LINCE,7915.6
+149871581,lince,618000.0,300.0,77.0,3,2,1,Av. Salaverry,Lince,1,LINCE,8026.0
+146437238,lince,647500.0,300.0,157.0,2,2,1,Avenida César Vallejo  lince,Lobaton,1,LINCE,4124.2
+148201229,lince,715000.0,0.0,85.0,2,2,1,Av. Joaquín Bernal,Lince,1,LINCE,8411.8
+148449611,lince,718106.0,0.0,107.0,2,3,1,"Jirón Risso N° 6xx, Dpto. 802",Lince,1,LINCE,6711.3
+4590993,lince,746250.0,300.0,130.0,3,2,1,Calle Juan Bielovucich Cavalier,Lince,1,LINCE,5740.4
+149293862,lince,890000.0,350.0,231.0,3,3,1,Almirante Manuel Villavicencio,Lince,1,LINCE,3852.8
+147019701,lince,962000.0,300.0,96.0,3,2,1,Parque Castilla,Lince,1,LINCE,10020.8
+149760763,los-olivos,144800.0,0.0,77.0,2,2,0,Calle 48,Los Olivos,1,LOS OLIVOS,1880.5
+149820246,los-olivos,174000.0,0.0,69.0,2,1,1,Miguel Ortiz 635,Los Olivos,1,LOS OLIVOS,2521.7
+146217068,los-olivos,182500.0,0.0,59.0,1,1,0,"La Caridad 520, Los Olivos 15307",Los Olivos,1,LOS OLIVOS,3093.2
+149514498,los-olivos,204000.0,0.0,67.0,2,1,0,JR. SANTOS ATAHUALPA 870 DPTO. 4XX,Los Olivos,1,LOS OLIVOS,3044.8
 149628834,los-olivos,216000.0,0.0,80.0,3,2,0,Calle 4 EL Naranjal LOS Olivos,Los Olivos,10,LOS OLIVOS,2700.0
-148777768,los-olivos,221000.0,0.0,67.0,2,1,0,El Amargon 4055,Covida,1,LOS OLIVOS,3298.507462686567
+148777768,los-olivos,221000.0,0.0,67.0,2,1,0,El Amargon 4055,Covida,1,LOS OLIVOS,3298.5
 149592489,los-olivos,233100.0,0.0,75.0,3,3,0,Calle Cajay URB LOS Naranjos LOS Olivos,Los Olivos,1,LOS OLIVOS,3108.0
-149412639,los-olivos,258650.0,0.0,89.0,3,1,0,Av. Los Alisos,Previ,10,LOS OLIVOS,2906.179775280899
-148882487,los-olivos,268000.0,0.0,97.0,3,1,0,Santo Tomás,Los Olivos,1,LOS OLIVOS,2762.8865979381444
-148945703,los-olivos,284750.0,0.0,108.0,4,2,0,Jr. el Cuarzo 1,Los Olivos,1,LOS OLIVOS,2636.574074074074
-149179508,los-olivos,320850.0,0.0,96.0,3,2,0,Urbanización Villa Sol - II Etapa,Los Olivos,1,LOS OLIVOS,3342.1875
-149607908,los-olivos,324558.0,0.0,84.0,3,2,0,La Unidad,Los Olivos,1,LOS OLIVOS,3863.785714285714
-147269581,los-olivos,397000.0,0.0,90.0,3,2,1,CALLE CHACAS 999,Covida,1,LOS OLIVOS,4411.111111111111
-149261468,los-olivos,419000.0,0.0,116.0,3,2,1,"Calle Fidelidad – Urb. Pro, Los Olivos",Pro,1,LOS OLIVOS,3612.0689655172414
-91052408,los-olivos,429000.0,70.0,118.0,3,3,0,calle fidelidad,Pro,1,LOS OLIVOS,3635.593220338983
-149874524,los-olivos,443750.0,0.0,91.0,2,1,1,Manuel DE Lara 364,Villa Sol,1,LOS OLIVOS,4876.373626373626
+149412639,los-olivos,258650.0,0.0,89.0,3,1,0,Av. Los Alisos,Previ,10,LOS OLIVOS,2906.2
+148882487,los-olivos,268000.0,0.0,97.0,3,1,0,Santo Tomás,Los Olivos,1,LOS OLIVOS,2762.9
+148945703,los-olivos,284750.0,0.0,108.0,4,2,0,Jr. el Cuarzo 1,Los Olivos,1,LOS OLIVOS,2636.6
+149179508,los-olivos,320850.0,0.0,96.0,3,2,0,Urbanización Villa Sol - II Etapa,Los Olivos,1,LOS OLIVOS,3342.2
+149607908,los-olivos,324558.0,0.0,84.0,3,2,0,La Unidad,Los Olivos,1,LOS OLIVOS,3863.8
+147269581,los-olivos,397000.0,0.0,90.0,3,2,1,CALLE CHACAS 999,Covida,1,LOS OLIVOS,4411.1
+149261468,los-olivos,419000.0,0.0,116.0,3,2,1,"Calle Fidelidad – Urb. Pro, Los Olivos",Pro,1,LOS OLIVOS,3612.1
+91052408,los-olivos,429000.0,70.0,118.0,3,3,0,calle fidelidad,Pro,1,LOS OLIVOS,3635.6
+149874524,los-olivos,443750.0,0.0,91.0,2,1,1,Manuel DE Lara 364,Villa Sol,1,LOS OLIVOS,4876.4
 149640979,los-olivos,445900.0,0.0,98.0,2,1,0,Jr. Huarmey 1381,Covida,1,LOS OLIVOS,4550.0
-149671367,los-olivos,552000.0,0.0,116.0,5,3,0,Urb. Villa los Ángeles Izaguirre los Olivos,Villa Los Angeles,1,LOS OLIVOS,4758.620689655172
-149765637,los-olivos,666900.0,0.0,177.0,3,2,1,Jirón José Santos Atahualpa 563,Los Olivos,1,LOS OLIVOS,3767.7966101694915
-149777816,magdalena-del-mar,782000.0,400.0,152.0,3,2,1,Av. Juan de Aliaga  al 600,Orrantia Del Mar,1,MAGDALENA DEL MAR,5144.736842105263
-149428572,magdalena-del-mar,1313500.0,540.0,150.0,3,2,2,Malecon Bernales 195,Magdalena,1,MAGDALENA DEL MAR,8756.666666666666
-149862934,miraflores,424000.0,0.0,41.0,1,1,0,Av. Paseo de la República  a 1 Cuadra de Av. Reducto y Cerca a Parque,Miraflores,1,MIRAFLORES,10341.463414634147
-145641401,miraflores,424253.0,200.0,42.0,1,1,0,Av. Paseo de la República 5,Miraflores,1,MIRAFLORES,10101.261904761905
-149534120,miraflores,465681.0,225.0,40.0,1,1,0,Av. Paseo de la República Paralela con Av. Reducto,Miraflores,1,MIRAFLORES,11642.025
-149474239,miraflores,520000.0,300.0,66.0,1,2,0,Calle Vidal 140 - Dpto 1104,Miraflores,1,MIRAFLORES,7878.787878787879
-149341915,miraflores,545000.0,250.0,78.0,1,2,0,Calle Vidal  - Dpto Ss04,Miraflores,1,MIRAFLORES,6987.179487179487
-149276465,miraflores,574000.0,350.0,71.0,2,2,1,Av General Mendiburu,Miraflores,1,MIRAFLORES,8084.507042253521
-149608547,miraflores,614000.0,0.0,65.0,2,2,1,A Pasos del Club  Las Terrazas y Av. Larco,Miraflores,1,MIRAFLORES,9446.153846153846
+149671367,los-olivos,552000.0,0.0,116.0,5,3,0,Urb. Villa los Ángeles Izaguirre los Olivos,Villa Los Angeles,1,LOS OLIVOS,4758.6
+149765637,los-olivos,666900.0,0.0,177.0,3,2,1,Jirón José Santos Atahualpa 563,Los Olivos,1,LOS OLIVOS,3767.8
+149777816,magdalena-del-mar,782000.0,400.0,152.0,3,2,1,Av. Juan de Aliaga  al 600,Orrantia Del Mar,1,MAGDALENA DEL MAR,5144.7
+149428572,magdalena-del-mar,1313500.0,540.0,150.0,3,2,2,Malecon Bernales 195,Magdalena,1,MAGDALENA DEL MAR,8756.7
+149862934,miraflores,424000.0,0.0,41.0,1,1,0,Av. Paseo de la República  a 1 Cuadra de Av. Reducto y Cerca a Parque,Miraflores,1,MIRAFLORES,10341.5
+145641401,miraflores,424253.0,200.0,42.0,1,1,0,Av. Paseo de la República 5,Miraflores,1,MIRAFLORES,10101.3
+149534120,miraflores,465681.0,225.0,40.0,1,1,0,Av. Paseo de la República Paralela con Av. Reducto,Miraflores,1,MIRAFLORES,11642.0
+149474239,miraflores,520000.0,300.0,66.0,1,2,0,Calle Vidal 140 - Dpto 1104,Miraflores,1,MIRAFLORES,7878.8
+149341915,miraflores,545000.0,250.0,78.0,1,2,0,Calle Vidal  - Dpto Ss04,Miraflores,1,MIRAFLORES,6987.2
+149276465,miraflores,574000.0,350.0,71.0,2,2,1,Av General Mendiburu,Miraflores,1,MIRAFLORES,8084.5
+149608547,miraflores,614000.0,0.0,65.0,2,2,1,A Pasos del Club  Las Terrazas y Av. Larco,Miraflores,1,MIRAFLORES,9446.2
 149759070,miraflores,654500.0,275.0,68.0,2,2,1,Calle Grimaldo del Solar,Leuro,10,MIRAFLORES,9625.0
-147855190,miraflores,662670.0,370.0,116.0,2,3,1,Av José Pardo 674,Miraflores,1,MIRAFLORES,5712.672413793103
-149718000,miraflores,752000.0,450.0,130.0,2,2,1,Calle Enrique Palacios 600,Miraflores,1,MIRAFLORES,5784.615384615385
-145910522,miraflores,843200.0,0.0,87.0,3,2,1,La Mar 1050 Miraflores,Miraflores,1,MIRAFLORES,9691.954022988506
+147855190,miraflores,662670.0,370.0,116.0,2,3,1,Av José Pardo 674,Miraflores,1,MIRAFLORES,5712.7
+149718000,miraflores,752000.0,450.0,130.0,2,2,1,Calle Enrique Palacios 600,Miraflores,1,MIRAFLORES,5784.6
+145910522,miraflores,843200.0,0.0,87.0,3,2,1,La Mar 1050 Miraflores,Miraflores,1,MIRAFLORES,9692.0
 149794141,miraflores,923400.0,320.0,200.0,2,1,0,Avenida José Pardo 1078,Miraflores,10,MIRAFLORES,4617.0
-147674303,miraflores,989801.0,0.0,170.0,3,2,1,"Ca. José Gonzales 463, Miraflores  al 15000",Miraflores,1,MIRAFLORES,5822.358823529412
-142916567,miraflores,1032000.0,0.0,151.0,3,2,1,Calle Mariscal Sucre 321,Miraflores,1,MIRAFLORES,6834.437086092716
+147674303,miraflores,989801.0,0.0,170.0,3,2,1,"Ca. José Gonzales 463, Miraflores  al 15000",Miraflores,1,MIRAFLORES,5822.4
+142916567,miraflores,1032000.0,0.0,151.0,3,2,1,Calle Mariscal Sucre 321,Miraflores,1,MIRAFLORES,6834.4
 149904045,miraflores,1122000.0,0.0,125.0,2,2,2,Calle Jorge Vanderghen 438,Santa Cruz,1,MIRAFLORES,8976.0
-149431141,miraflores,1507500.0,0.0,175.0,3,3,2,"Avenida Jose Pardo 1, Piso 3, Miraflores",Santa Cruz,1,MIRAFLORES,8614.285714285714
-149791089,miraflores,1621500.0,1400.0,272.0,3,3,2,Calle Manco Cápac al 500,Miraflores,1,MIRAFLORES,5961.39705882353
-149085521,miraflores,1883618.0,0.0,295.0,5,5,2,Malecón 28 de Julio,Miraflores,10,MIRAFLORES,6385.145762711864
-4412841,miraflores,2170800.0,1200.0,303.0,4,4,2,Parque Villena,Santa Cruz,1,MIRAFLORES,7164.3564356435645
-148711313,miraflores,2747000.0,0.0,286.0,3,4,3,"Malecón Pedro de Osma 1, Piso 3, Barranco",Malecon Reserva,1,MIRAFLORES,9604.895104895106
-149483177,pueblo-libre,262200.0,100.0,44.0,2,1,0,Virrey Manuel M. De Guirior Cdra 10 - Dpto DE 2 Habs  Pueblo Libre,Pueblo Libre,1,PUEBLO LIBRE,5959.090909090909
-149033752,pueblo-libre,272500.0,117.0,42.0,1,1,0,Avenida Manuel Cipriano Dulanto 2047,Pueblo Libre,1,PUEBLO LIBRE,6488.0952380952385
-149251256,pueblo-libre,300000.0,220.0,49.0,2,1,0,Av. la Marina 440,Pueblo Libre,1,PUEBLO LIBRE,6122.448979591837
-148460604,pueblo-libre,313500.0,1.0,70.0,2,1,0,Calle Parque Ruiz Olivier Número 30 Interior 7,Circolo,1,PUEBLO LIBRE,4478.571428571428
-149638162,pueblo-libre,376200.0,0.0,79.0,3,1,0,Sta. Lucia 171,Pueblo Libre,1,PUEBLO LIBRE,4762.025316455696
-149830826,pueblo-libre,381200.0,0.0,57.0,2,2,0,Jr. Clovis al 600,Pueblo Libre,1,PUEBLO LIBRE,6687.7192982456145
-148538028,pueblo-libre,399000.0,0.0,68.0,2,2,0,Av. Brasil  al 2790 - Dpto1606,Pueblo Libre,1,PUEBLO LIBRE,5867.64705882353
-144714351,pueblo-libre,403400.0,0.0,64.0,1,2,0,"Av Manuel Cipriano Dulanto N° 2xx, Dpto.x02, X05, X09, X10 B",Pueblo Libre,1,PUEBLO LIBRE,6303.125
-148896038,pueblo-libre,403768.0,0.0,64.0,2,1,0,Pueblo Libre,Pueblo Libre,1,PUEBLO LIBRE,6308.875
-144382572,pueblo-libre,424736.0,0.0,66.0,2,2,1,pueblo libre,Isla Verde,1,PUEBLO LIBRE,6435.393939393939
-149582073,pueblo-libre,433500.0,250.0,79.0,3,2,0,Jirón General José Ramón Pizarro 460,San Bernardo,1,PUEBLO LIBRE,5487.341772151899
-148883863,pueblo-libre,450000.0,0.0,69.0,3,2,0,Jr. José Manuel Ugarteche,Pueblo Libre,1,PUEBLO LIBRE,6521.739130434783
-145733177,pueblo-libre,457000.0,150.0,74.0,3,2,0,Av Sucre 1301,Mariscal Antonio Jose De Sucre,1,PUEBLO LIBRE,6175.675675675676
-148450865,pueblo-libre,469024.0,0.0,70.0,3,2,0,Av Jaime Herrera Ardiles  Pueblo Libre,Pueblo Libre,1,PUEBLO LIBRE,6700.342857142857
-149721521,pueblo-libre,478800.0,380.0,85.0,3,2,1,Av. Manuel Cipriano Dulanto,Pueblo Libre,1,PUEBLO LIBRE,5632.941176470588
-149365001,pueblo-libre,479000.0,250.0,78.0,3,2,1,Av. Simón Bolívar 528,Pueblo Libre,1,PUEBLO LIBRE,6141.025641025641
-148479980,pueblo-libre,480498.0,0.0,81.0,3,3,0,Av. Sucre Pueblo Libre 13,Mariscal Antonio Jose De Sucre,1,PUEBLO LIBRE,5932.074074074074
-149289951,pueblo-libre,486310.0,0.0,82.0,3,2,0,Avenida Mariano H. Cornejo,La Esperanza,10,PUEBLO LIBRE,5930.609756097561
-149231882,pueblo-libre,516284.0,0.0,74.0,3,2,0,Pueblo Libre,Pueblo Libre,1,PUEBLO LIBRE,6976.810810810811
-147260186,pueblo-libre,520000.0,300.0,85.0,3,2,0,Parque Enrique Leon Garcia,Pueblo Libre,1,PUEBLO LIBRE,6117.64705882353
-149028400,pueblo-libre,560000.0,0.0,82.0,3,2,0,Calle Isla San Lorenzo,Pueblo Libre,1,PUEBLO LIBRE,6829.268292682927
-149264563,pueblo-libre,567000.0,0.0,93.0,3,2,0,JR. Abraham Valdelomar  735,Pueblo Libre,1,PUEBLO LIBRE,6096.774193548387
-149273566,pueblo-libre,570000.0,0.0,78.0,3,2,1,Jr. Río Huaura – Pueblo Libre,Pueblo Libre,1,PUEBLO LIBRE,7307.692307692308
-149151824,pueblo-libre,638400.0,0.0,127.0,4,2,0,Jiron Nicolas Alcazar  al 600,Pueblo Libre,1,PUEBLO LIBRE,5026.771653543307
-149430449,pueblo-libre,884940.0,0.0,184.0,4,3,0,Morelos 256,Pueblo Libre,1,PUEBLO LIBRE,4809.45652173913
+149431141,miraflores,1507500.0,0.0,175.0,3,3,2,"Avenida Jose Pardo 1, Piso 3, Miraflores",Santa Cruz,1,MIRAFLORES,8614.3
+149791089,miraflores,1621500.0,1400.0,272.0,3,3,2,Calle Manco Cápac al 500,Miraflores,1,MIRAFLORES,5961.4
+149085521,miraflores,1883618.0,0.0,295.0,5,5,2,Malecón 28 de Julio,Miraflores,10,MIRAFLORES,6385.1
+4412841,miraflores,2170800.0,1200.0,303.0,4,4,2,Parque Villena,Santa Cruz,1,MIRAFLORES,7164.4
+148711313,miraflores,2747000.0,0.0,286.0,3,4,3,"Malecón Pedro de Osma 1, Piso 3, Barranco",Malecon Reserva,1,MIRAFLORES,9604.9
+149483177,pueblo-libre,262200.0,100.0,44.0,2,1,0,Virrey Manuel M. De Guirior Cdra 10 - Dpto DE 2 Habs  Pueblo Libre,Pueblo Libre,1,PUEBLO LIBRE,5959.1
+149033752,pueblo-libre,272500.0,117.0,42.0,1,1,0,Avenida Manuel Cipriano Dulanto 2047,Pueblo Libre,1,PUEBLO LIBRE,6488.1
+149251256,pueblo-libre,300000.0,220.0,49.0,2,1,0,Av. la Marina 440,Pueblo Libre,1,PUEBLO LIBRE,6122.4
+148460604,pueblo-libre,313500.0,1.0,70.0,2,1,0,Calle Parque Ruiz Olivier Número 30 Interior 7,Circolo,1,PUEBLO LIBRE,4478.6
+149638162,pueblo-libre,376200.0,0.0,79.0,3,1,0,Sta. Lucia 171,Pueblo Libre,1,PUEBLO LIBRE,4762.0
+149830826,pueblo-libre,381200.0,0.0,57.0,2,2,0,Jr. Clovis al 600,Pueblo Libre,1,PUEBLO LIBRE,6687.7
+148538028,pueblo-libre,399000.0,0.0,68.0,2,2,0,Av. Brasil  al 2790 - Dpto1606,Pueblo Libre,1,PUEBLO LIBRE,5867.6
+144714351,pueblo-libre,403400.0,0.0,64.0,1,2,0,"Av Manuel Cipriano Dulanto N° 2xx, Dpto.x02, X05, X09, X10 B",Pueblo Libre,1,PUEBLO LIBRE,6303.1
+148896038,pueblo-libre,403768.0,0.0,64.0,2,1,0,Pueblo Libre,Pueblo Libre,1,PUEBLO LIBRE,6308.9
+144382572,pueblo-libre,424736.0,0.0,66.0,2,2,1,pueblo libre,Isla Verde,1,PUEBLO LIBRE,6435.4
+149582073,pueblo-libre,433500.0,250.0,79.0,3,2,0,Jirón General José Ramón Pizarro 460,San Bernardo,1,PUEBLO LIBRE,5487.3
+148883863,pueblo-libre,450000.0,0.0,69.0,3,2,0,Jr. José Manuel Ugarteche,Pueblo Libre,1,PUEBLO LIBRE,6521.7
+145733177,pueblo-libre,457000.0,150.0,74.0,3,2,0,Av Sucre 1301,Mariscal Antonio Jose De Sucre,1,PUEBLO LIBRE,6175.7
+148450865,pueblo-libre,469024.0,0.0,70.0,3,2,0,Av Jaime Herrera Ardiles  Pueblo Libre,Pueblo Libre,1,PUEBLO LIBRE,6700.3
+149721521,pueblo-libre,478800.0,380.0,85.0,3,2,1,Av. Manuel Cipriano Dulanto,Pueblo Libre,1,PUEBLO LIBRE,5632.9
+149365001,pueblo-libre,479000.0,250.0,78.0,3,2,1,Av. Simón Bolívar 528,Pueblo Libre,1,PUEBLO LIBRE,6141.0
+148479980,pueblo-libre,480498.0,0.0,81.0,3,3,0,Av. Sucre Pueblo Libre 13,Mariscal Antonio Jose De Sucre,1,PUEBLO LIBRE,5932.1
+149289951,pueblo-libre,486310.0,0.0,82.0,3,2,0,Avenida Mariano H. Cornejo,La Esperanza,10,PUEBLO LIBRE,5930.6
+149231882,pueblo-libre,516284.0,0.0,74.0,3,2,0,Pueblo Libre,Pueblo Libre,1,PUEBLO LIBRE,6976.8
+147260186,pueblo-libre,520000.0,300.0,85.0,3,2,0,Parque Enrique Leon Garcia,Pueblo Libre,1,PUEBLO LIBRE,6117.6
+149028400,pueblo-libre,560000.0,0.0,82.0,3,2,0,Calle Isla San Lorenzo,Pueblo Libre,1,PUEBLO LIBRE,6829.3
+149264563,pueblo-libre,567000.0,0.0,93.0,3,2,0,JR. Abraham Valdelomar  735,Pueblo Libre,1,PUEBLO LIBRE,6096.8
+149273566,pueblo-libre,570000.0,0.0,78.0,3,2,1,Jr. Río Huaura – Pueblo Libre,Pueblo Libre,1,PUEBLO LIBRE,7307.7
+149151824,pueblo-libre,638400.0,0.0,127.0,4,2,0,Jiron Nicolas Alcazar  al 600,Pueblo Libre,1,PUEBLO LIBRE,5026.8
+149430449,pueblo-libre,884940.0,0.0,184.0,4,3,0,Morelos 256,Pueblo Libre,1,PUEBLO LIBRE,4809.5
 147856770,pueblo-libre,990000.0,0.0,150.0,3,3,1,Parque Bahía 150,Pueblo Libre,1,PUEBLO LIBRE,6600.0
-149825530,san-borja,414000.0,250.0,63.0,2,1,1,Avenida Velasco Astete,Mariscal Ramon Castilla,1,SAN BORJA,6571.428571428572
-146004544,san-borja,496800.0,120.0,85.0,2,2,0,Pissarro,San Borja,1,SAN BORJA,5844.705882352941
-147569954,san-borja,560000.0,300.0,121.0,3,2,1,Jiron 10 324,San Borja,1,SAN BORJA,4628.099173553719
-66465995,san-borja,578000.0,0.0,116.0,3,3,1,Avenida Boulevard de Surco,Chacarilla,10,SAN BORJA,4982.758620689655
-149232684,san-borja,643000.0,150.0,160.0,3,3,0,Gaetano Donizetti 245,San Borja,1,SAN BORJA,4018.75
-149640070,san-borja,682500.0,275.0,93.0,4,3,1,Jirón Isaac Albeniz 373,Las Magnolias,1,SAN BORJA,7338.709677419355
-149219210,san-borja,699000.0,0.0,108.0,2,2,1,Jr. 2,Monterrico Norte,1,SAN BORJA,6472.222222222223
-148609289,san-borja,726800.0,0.0,89.0,3,3,0,"Av. Galvez Barrenechea 947, San Borja",Corpac,1,SAN BORJA,8166.29213483146
-149192265,san-borja,850000.0,450.0,144.0,3,2,2,Av. del Parque Sur 564,San Borja Sur,10,SAN BORJA,5902.777777777777
+149825530,san-borja,414000.0,250.0,63.0,2,1,1,Avenida Velasco Astete,Mariscal Ramon Castilla,1,SAN BORJA,6571.4
+146004544,san-borja,496800.0,120.0,85.0,2,2,0,Pissarro,San Borja,1,SAN BORJA,5844.7
+147569954,san-borja,560000.0,300.0,121.0,3,2,1,Jiron 10 324,San Borja,1,SAN BORJA,4628.1
+66465995,san-borja,578000.0,0.0,116.0,3,3,1,Avenida Boulevard de Surco,Chacarilla,10,SAN BORJA,4982.8
+149232684,san-borja,643000.0,150.0,160.0,3,3,0,Gaetano Donizetti 245,San Borja,1,SAN BORJA,4018.8
+149640070,san-borja,682500.0,275.0,93.0,4,3,1,Jirón Isaac Albeniz 373,Las Magnolias,1,SAN BORJA,7338.7
+149219210,san-borja,699000.0,0.0,108.0,2,2,1,Jr. 2,Monterrico Norte,1,SAN BORJA,6472.2
+148609289,san-borja,726800.0,0.0,89.0,3,3,0,"Av. Galvez Barrenechea 947, San Borja",Corpac,1,SAN BORJA,8166.3
+149192265,san-borja,850000.0,450.0,144.0,3,2,2,Av. del Parque Sur 564,San Borja Sur,10,SAN BORJA,5902.8
 149850515,san-borja,900000.0,350.0,240.0,5,4,2,LOPEZ DE AYALA 1350,San Borja,1,SAN BORJA,3750.0
-149129917,san-borja,951825.0,0.0,120.0,3,3,1,AV. Buena Vista,San Borja,1,SAN BORJA,7931.875
-65679102,san-borja,962000.0,130.0,181.0,3,3,1,Portinari 198,San Borja Norte,1,SAN BORJA,5314.917127071823
-148921819,san-borja,980000.0,600.0,126.0,2,3,2,"Calle LOS Recuerdos, Urb. Chacarilla",Chacarilla,1,SAN BORJA,7777.777777777777
+149129917,san-borja,951825.0,0.0,120.0,3,3,1,AV. Buena Vista,San Borja,1,SAN BORJA,7931.9
+65679102,san-borja,962000.0,130.0,181.0,3,3,1,Portinari 198,San Borja Norte,1,SAN BORJA,5314.9
+148921819,san-borja,980000.0,600.0,126.0,2,3,2,"Calle LOS Recuerdos, Urb. Chacarilla",Chacarilla,1,SAN BORJA,7777.8
 148324134,san-borja,986000.0,0.0,200.0,4,3,2,Jr. 24 Piso 3 San Borja - VTA,San Borja,1,SAN BORJA,4930.0
 148210427,san-borja,1038500.0,0.0,200.0,4,4,2,"Calle Mayorazgo 1, Chacarilla del Estanque, San Borja",Chacarilla Del Estanque,1,SAN BORJA,5192.5
-149193809,san-borja,1075440.0,0.0,234.0,4,3,1,Av. del Parque Sur,Corpac,1,SAN BORJA,4595.897435897436
-147623566,san-borja,1210550.0,400.0,235.0,4,4,2,av san borja sur,San Borja Sur,1,SAN BORJA,5151.276595744681
-146673360,san-borja,1246000.0,400.0,183.0,3,3,2,SAN BORJA NORTE,San Borja,10,SAN BORJA,6808.743169398907
-148479863,san-borja,1259250.0,0.0,200.0,3,3,2,calle melissa,Chacarilla,1,SAN BORJA,6296.25
-149314984,san-borja,1260000.0,50.0,223.0,3,2,2,Calle TIÉPOLO 121 - 1º PISO,San Borja,1,SAN BORJA,5650.224215246637
-149520354,san-borja,1356000.0,600.0,270.0,5,6,2,AV. DEL Parque SUR al 600,San Borja Sur,1,SAN BORJA,5022.222222222223
-144545375,san-borja,1444000.0,800.0,180.0,3,4,2,avenida boulevard,San Borja,10,SAN BORJA,8022.222222222223
-148242535,san-borja,1600000.0,550.0,182.0,3,3,2,HERMANO LOBO 200,Chacarilla Del Estanque,1,SAN BORJA,8791.208791208792
-149245992,san-borja,1739500.0,0.0,254.0,3,3,2,Vendo Departamento Primer Piso/ Estreno/ Chacarilla SAN Borja,Chacarilla Del Estanque,1,SAN BORJA,6848.425196850394
-149826887,san-borja,1893240.0,0.0,224.0,3,3,2,"Av, Del Pinar 324 Dpto, 202 Chacarilla",San Borja,1,SAN BORJA,8451.964285714286
-149168406,san-borja,2559160.0,0.0,253.0,3,5,2,Jr Galeon 195 San borja,Chacarilla Del Estanque,1,SAN BORJA,10115.256916996048
-144620217,san-borja,2656800.0,1100.0,340.0,5,6,4,Velasco Astete 700,San Borja,1,SAN BORJA,7814.117647058823
-149584772,san-isidro,360000.0,200.0,52.0,1,1,0,Av. Dos de Mayo,Country Club,1,SAN ISIDRO,6923.076923076923
-142918302,san-isidro,366047.0,0.0,40.0,1,1,1,Las Palmeras,San Isidro,1,SAN ISIDRO,9151.175
-149904402,san-isidro,647000.0,350.0,65.0,2,2,1,"AV. Salaverry, Orrantia DEL MAR SAN Isidro",San Isidro,1,SAN ISIDRO,9953.846153846154
-149887993,san-isidro,680000.0,350.0,104.0,3,2,1,Av. Alberto del Campo al 488,San Isidro,1,SAN ISIDRO,6538.461538461538
-147753121,san-isidro,700000.0,250.0,120.0,3,2,0,Manuel Gonzales la Rosa y Roque de Bergallo,San Isidro,1,SAN ISIDRO,5833.333333333333
-146199180,san-isidro,737000.0,300.0,65.0,2,2,1,"Avenida Rivera Navarrete 5, Piso 5, San Isidro",San Isidro,10,SAN ISIDRO,11338.461538461539
-148972112,san-isidro,971500.0,690.0,152.0,3,2,2,Av. Dos de Mayo,San Isidro,1,SAN ISIDRO,6391.4473684210525
-149561732,san-isidro,1050000.0,400.0,152.0,3,2,2,Av José Gálvez Barrenechea,San Isidro,1,SAN ISIDRO,6907.894736842105
-149666049,san-isidro,1134250.0,800.0,120.0,2,2,0,Urb. Orrantia al 100,Orrantia,1,SAN ISIDRO,9452.083333333334
+149193809,san-borja,1075440.0,0.0,234.0,4,3,1,Av. del Parque Sur,Corpac,1,SAN BORJA,4595.9
+147623566,san-borja,1210550.0,400.0,235.0,4,4,2,av san borja sur,San Borja Sur,1,SAN BORJA,5151.3
+146673360,san-borja,1246000.0,400.0,183.0,3,3,2,SAN BORJA NORTE,San Borja,10,SAN BORJA,6808.7
+148479863,san-borja,1259250.0,0.0,200.0,3,3,2,calle melissa,Chacarilla,1,SAN BORJA,6296.2
+149314984,san-borja,1260000.0,50.0,223.0,3,2,2,Calle TIÉPOLO 121 - 1º PISO,San Borja,1,SAN BORJA,5650.2
+149520354,san-borja,1356000.0,600.0,270.0,5,6,2,AV. DEL Parque SUR al 600,San Borja Sur,1,SAN BORJA,5022.2
+144545375,san-borja,1444000.0,800.0,180.0,3,4,2,avenida boulevard,San Borja,10,SAN BORJA,8022.2
+148242535,san-borja,1600000.0,550.0,182.0,3,3,2,HERMANO LOBO 200,Chacarilla Del Estanque,1,SAN BORJA,8791.2
+149245992,san-borja,1739500.0,0.0,254.0,3,3,2,Vendo Departamento Primer Piso/ Estreno/ Chacarilla SAN Borja,Chacarilla Del Estanque,1,SAN BORJA,6848.4
+149826887,san-borja,1893240.0,0.0,224.0,3,3,2,"Av, Del Pinar 324 Dpto, 202 Chacarilla",San Borja,1,SAN BORJA,8452.0
+149168406,san-borja,2559160.0,0.0,253.0,3,5,2,Jr Galeon 195 San borja,Chacarilla Del Estanque,1,SAN BORJA,10115.3
+144620217,san-borja,2656800.0,1100.0,340.0,5,6,4,Velasco Astete 700,San Borja,1,SAN BORJA,7814.1
+149584772,san-isidro,360000.0,200.0,52.0,1,1,0,Av. Dos de Mayo,Country Club,1,SAN ISIDRO,6923.1
+142918302,san-isidro,366047.0,0.0,40.0,1,1,1,Las Palmeras,San Isidro,1,SAN ISIDRO,9151.2
+149904402,san-isidro,647000.0,350.0,65.0,2,2,1,"AV. Salaverry, Orrantia DEL MAR SAN Isidro",San Isidro,1,SAN ISIDRO,9953.8
+149887993,san-isidro,680000.0,350.0,104.0,3,2,1,Av. Alberto del Campo al 488,San Isidro,1,SAN ISIDRO,6538.5
+147753121,san-isidro,700000.0,250.0,120.0,3,2,0,Manuel Gonzales la Rosa y Roque de Bergallo,San Isidro,1,SAN ISIDRO,5833.3
+146199180,san-isidro,737000.0,300.0,65.0,2,2,1,"Avenida Rivera Navarrete 5, Piso 5, San Isidro",San Isidro,10,SAN ISIDRO,11338.5
+148972112,san-isidro,971500.0,690.0,152.0,3,2,2,Av. Dos de Mayo,San Isidro,1,SAN ISIDRO,6391.4
+149561732,san-isidro,1050000.0,400.0,152.0,3,2,2,Av José Gálvez Barrenechea,San Isidro,1,SAN ISIDRO,6907.9
+149666049,san-isidro,1134250.0,800.0,120.0,2,2,0,Urb. Orrantia al 100,Orrantia,1,SAN ISIDRO,9452.1
 149316093,san-isidro,1166000.0,570.0,160.0,3,2,2,Av. del Parque Nte.,San Isidro,1,SAN ISIDRO,7287.5
-148840828,san-isidro,1169150.0,0.0,528.0,4,4,2,"Calle Los Ficus N 3, San Isidro",San Isidro,1,SAN ISIDRO,2214.2992424242425
-148825162,san-isidro,1331150.0,450.0,167.0,3,3,2,Dirección no informada,San Isidro,1,SAN ISIDRO,7970.958083832335
-149693558,san-isidro,1342050.0,1200.0,137.0,3,2,2,Blas Cerdeña 4,Santa Teresita,1,SAN ISIDRO,9795.985401459853
-147794697,san-isidro,1445000.0,1450.0,242.0,3,3,2,"Octavio Espinosa Cdra 1 Pisos 3, 4 y 5",San Isidro,1,SAN ISIDRO,5971.074380165289
-146262471,san-isidro,1461500.0,550.0,173.0,2,2,2,Salaverry Cdra 33 Piso 2,San Isidro,1,SAN ISIDRO,8447.976878612717
-149415351,san-isidro,1475760.0,0.0,324.0,3,3,2,Los Pinos 322,San Isidro,1,SAN ISIDRO,4554.814814814815
-146683940,san-isidro,1587750.0,1400.0,184.0,2,2,2,los nogales,San Isidro,1,SAN ISIDRO,8629.076086956522
-149461762,san-isidro,1674890.0,1000.0,286.0,2,2,3,"Av. Jorge Basadre  al 1000- Departamento en 1er Piso con  2 Terraza, a Pasos del Golf",San Isidro,1,SAN ISIDRO,5856.258741258741
-148571591,san-isidro,1713000.0,0.0,206.0,3,2,2,Avenida Dos de Mayo al 1400,Country Club,1,SAN ISIDRO,8315.533980582524
-148528566,san-isidro,1714650.0,0.0,185.0,3,3,2,Calle Teniente Alberto Chabrier,Golf,1,SAN ISIDRO,9268.378378378378
+148840828,san-isidro,1169150.0,0.0,528.0,4,4,2,"Calle Los Ficus N 3, San Isidro",San Isidro,1,SAN ISIDRO,2214.3
+148825162,san-isidro,1331150.0,450.0,167.0,3,3,2,Dirección no informada,San Isidro,1,SAN ISIDRO,7971.0
+149693558,san-isidro,1342050.0,1200.0,137.0,3,2,2,Blas Cerdeña 4,Santa Teresita,1,SAN ISIDRO,9796.0
+147794697,san-isidro,1445000.0,1450.0,242.0,3,3,2,"Octavio Espinosa Cdra 1 Pisos 3, 4 y 5",San Isidro,1,SAN ISIDRO,5971.1
+146262471,san-isidro,1461500.0,550.0,173.0,2,2,2,Salaverry Cdra 33 Piso 2,San Isidro,1,SAN ISIDRO,8448.0
+149415351,san-isidro,1475760.0,0.0,324.0,3,3,2,Los Pinos 322,San Isidro,1,SAN ISIDRO,4554.8
+146683940,san-isidro,1587750.0,1400.0,184.0,2,2,2,los nogales,San Isidro,1,SAN ISIDRO,8629.1
+149461762,san-isidro,1674890.0,1000.0,286.0,2,2,3,"Av. Jorge Basadre  al 1000- Departamento en 1er Piso con  2 Terraza, a Pasos del Golf",San Isidro,1,SAN ISIDRO,5856.3
+148571591,san-isidro,1713000.0,0.0,206.0,3,2,2,Avenida Dos de Mayo al 1400,Country Club,1,SAN ISIDRO,8315.5
+148528566,san-isidro,1714650.0,0.0,185.0,3,3,2,Calle Teniente Alberto Chabrier,Golf,1,SAN ISIDRO,9268.4
 149159229,san-isidro,1950000.0,0.0,250.0,3,5,0,Parque Norte 685 Corpac San Isidro al 600,San Isidro,1,SAN ISIDRO,7800.0
 149746162,san-isidro,2652000.0,1166.0,260.0,2,4,2,Av. Aurelio Miró Quesada,San Isidro,1,SAN ISIDRO,10200.0
-149518186,san-isidro,3194100.0,900.0,258.0,3,4,2,"Pezet CON Vista Directa AL Golf. Impecable. 3 Dormitorios, 2 Cocheras Edificio A1",San Isidro,1,SAN ISIDRO,12380.232558139534
+149518186,san-isidro,3194100.0,900.0,258.0,3,4,2,"Pezet CON Vista Directa AL Golf. Impecable. 3 Dormitorios, 2 Cocheras Edificio A1",San Isidro,1,SAN ISIDRO,12380.2
 149864734,san-isidro,4036500.0,1450.0,500.0,5,5,3,muy cerca al Golf,Golf,1,SAN ISIDRO,8073.0
-142706000,san-isidro,4300800.0,0.0,378.0,4,3,6,Angamos Oeste,San Isidro,1,SAN ISIDRO,11377.777777777777
-149590034,san-juan-de-lurigancho,201341.0,0.0,78.0,2,1,0,Av. Malecón Checa,Zarate,1,SAN JUAN DE LURIGANCHO,2581.2948717948716
-149789388,san-juan-de-lurigancho,210000.0,0.0,68.0,2,2,0,Centro de Salud Mangomarca,San Juan de Lurigancho,1,SAN JUAN DE LURIGANCHO,3088.235294117647
-148064958,san-juan-de-lurigancho,236240.0,0.0,120.0,1,1,0,Las Flores,San Juan de Lurigancho,1,SAN JUAN DE LURIGANCHO,1968.6666666666667
-149341048,san-juan-de-lurigancho,271800.0,0.0,86.0,3,2,0,Jirón el Rosario 470,Canto Grande,1,SAN JUAN DE LURIGANCHO,3160.4651162790697
-147694490,san-juan-de-lurigancho,355000.0,0.0,138.0,4,1,0,Jirón Las Calendulas 538,Las Flores,10,SAN JUAN DE LURIGANCHO,2572.463768115942
-149371779,san-juan-de-lurigancho,362730.0,0.0,128.0,3,1,0,Luis     9.9.9.6.1.7.7.8.8,Zarate,1,SAN JUAN DE LURIGANCHO,2833.828125
-149443899,san-juan-de-lurigancho,407000.0,0.0,127.0,2,2,0,Akapana 1169,Mangomarca,1,SAN JUAN DE LURIGANCHO,3204.7244094488187
+142706000,san-isidro,4300800.0,0.0,378.0,4,3,6,Angamos Oeste,San Isidro,1,SAN ISIDRO,11377.8
+149590034,san-juan-de-lurigancho,201341.0,0.0,78.0,2,1,0,Av. Malecón Checa,Zarate,1,SAN JUAN DE LURIGANCHO,2581.3
+149789388,san-juan-de-lurigancho,210000.0,0.0,68.0,2,2,0,Centro de Salud Mangomarca,San Juan de Lurigancho,1,SAN JUAN DE LURIGANCHO,3088.2
+148064958,san-juan-de-lurigancho,236240.0,0.0,120.0,1,1,0,Las Flores,San Juan de Lurigancho,1,SAN JUAN DE LURIGANCHO,1968.7
+149341048,san-juan-de-lurigancho,271800.0,0.0,86.0,3,2,0,Jirón el Rosario 470,Canto Grande,1,SAN JUAN DE LURIGANCHO,3160.5
+147694490,san-juan-de-lurigancho,355000.0,0.0,138.0,4,1,0,Jirón Las Calendulas 538,Las Flores,10,SAN JUAN DE LURIGANCHO,2572.5
+149371779,san-juan-de-lurigancho,362730.0,0.0,128.0,3,1,0,Luis     9.9.9.6.1.7.7.8.8,Zarate,1,SAN JUAN DE LURIGANCHO,2833.8
+149443899,san-juan-de-lurigancho,407000.0,0.0,127.0,2,2,0,Akapana 1169,Mangomarca,1,SAN JUAN DE LURIGANCHO,3204.7
 147476596,san-juan-de-lurigancho,424800.0,0.0,125.0,3,2,0,Puruchuco 632,Mangomarca,1,SAN JUAN DE LURIGANCHO,3398.4
-149534331,san-juan-de-lurigancho,425080.0,0.0,105.0,3,2,0,Papiros 367 Urb,San Silvestre,10,SAN JUAN DE LURIGANCHO,4048.3809523809523
+149534331,san-juan-de-lurigancho,425080.0,0.0,105.0,3,2,0,Papiros 367 Urb,San Silvestre,10,SAN JUAN DE LURIGANCHO,4048.4
 149086701,san-martin-de-porres,142147.0,0.0,41.0,2,1,0,Quiñones 503,Zarumilla,1,SAN MARTIN DE PORRES,3467.0
 147787672,san-martin-de-porres,161100.0,0.0,50.0,2,1,0,"Mateo Aguilar 264, San Martín de Porres",San Martín de Porres,10,SAN MARTIN DE PORRES,3222.0
-147503674,san-martin-de-porres,166500.0,0.0,66.0,2,2,0,AV Lima 4121,San Martín de Porres,1,SAN MARTIN DE PORRES,2522.7272727272725
-147787676,san-martin-de-porres,178500.0,0.0,73.0,3,1,0,"Jr. Moquegua Cuadra 37, San Martín de Porres",San Martín de Porres,1,SAN MARTIN DE PORRES,2445.205479452055
-147650531,san-martin-de-porres,192600.0,50.0,56.0,2,1,0,"Venta Departamento Cerca del Mercado Caquetá, 2 Dormitorios, 4 Piso sin Ascensor, no Condominio",San Martín de Porres,1,SAN MARTIN DE PORRES,3439.285714285714
-149052936,san-martin-de-porres,210000.0,0.0,81.0,3,2,0,Jiron Pedro Paulet,Ingenieria,1,SAN MARTIN DE PORRES,2592.5925925925926
-4675547,san-martin-de-porres,213000.0,0.0,101.0,4,2,0,Parque Cabo linares,Vipol De Naranjal,10,SAN MARTIN DE PORRES,2108.910891089109
-147449997,san-martin-de-porres,250000.0,0.0,82.0,3,2,0,"AV. 12 DE Octubre, SMP",San Martín de Porres,1,SAN MARTIN DE PORRES,3048.7804878048782
-149803432,san-martin-de-porres,251850.0,0.0,66.0,2,1,0,Ampliación Los Portales de Chavín – 4ta Etapa - Mz D - Lote 13,Ampliacion Los Portales De Chavin Et.4,1,SAN MARTIN DE PORRES,3815.909090909091
-147185884,san-martin-de-porres,272000.0,0.0,117.0,3,2,0,Urb. Huerto Azul Mz. C Lote 10 Ref. Calle Los Jazmines con el Sol de Naranjal 10,San Martín de Porres,1,SAN MARTIN DE PORRES,2324.7863247863247
-148906747,san-martin-de-porres,293000.0,0.0,123.0,4,2,0,Pasaje Huari,San Martín de Porres,10,SAN MARTIN DE PORRES,2382.1138211382113
-148819439,san-martin-de-porres,295000.0,0.0,94.0,3,2,0,"Av. Carlos Izaguirre 808, San Martín de Porres 15109",San Martín de Porres,1,SAN MARTIN DE PORRES,3138.2978723404253
+147503674,san-martin-de-porres,166500.0,0.0,66.0,2,2,0,AV Lima 4121,San Martín de Porres,1,SAN MARTIN DE PORRES,2522.7
+147787676,san-martin-de-porres,178500.0,0.0,73.0,3,1,0,"Jr. Moquegua Cuadra 37, San Martín de Porres",San Martín de Porres,1,SAN MARTIN DE PORRES,2445.2
+147650531,san-martin-de-porres,192600.0,50.0,56.0,2,1,0,"Venta Departamento Cerca del Mercado Caquetá, 2 Dormitorios, 4 Piso sin Ascensor, no Condominio",San Martín de Porres,1,SAN MARTIN DE PORRES,3439.3
+149052936,san-martin-de-porres,210000.0,0.0,81.0,3,2,0,Jiron Pedro Paulet,Ingenieria,1,SAN MARTIN DE PORRES,2592.6
+4675547,san-martin-de-porres,213000.0,0.0,101.0,4,2,0,Parque Cabo linares,Vipol De Naranjal,10,SAN MARTIN DE PORRES,2108.9
+147449997,san-martin-de-porres,250000.0,0.0,82.0,3,2,0,"AV. 12 DE Octubre, SMP",San Martín de Porres,1,SAN MARTIN DE PORRES,3048.8
+149803432,san-martin-de-porres,251850.0,0.0,66.0,2,1,0,Ampliación Los Portales de Chavín – 4ta Etapa - Mz D - Lote 13,Ampliacion Los Portales De Chavin Et.4,1,SAN MARTIN DE PORRES,3815.9
+147185884,san-martin-de-porres,272000.0,0.0,117.0,3,2,0,Urb. Huerto Azul Mz. C Lote 10 Ref. Calle Los Jazmines con el Sol de Naranjal 10,San Martín de Porres,1,SAN MARTIN DE PORRES,2324.8
+148906747,san-martin-de-porres,293000.0,0.0,123.0,4,2,0,Pasaje Huari,San Martín de Porres,10,SAN MARTIN DE PORRES,2382.1
+148819439,san-martin-de-porres,295000.0,0.0,94.0,3,2,0,"Av. Carlos Izaguirre 808, San Martín de Porres 15109",San Martín de Porres,1,SAN MARTIN DE PORRES,3138.3
 148440747,san-martin-de-porres,309120.0,0.0,105.0,3,2,1,Jiron Elias Aguirre,San Martín de Porres,1,SAN MARTIN DE PORRES,2944.0
 148318324,san-martin-de-porres,484300.0,0.0,200.0,3,2,1,Santa Carmela 218,Palao,1,SAN MARTIN DE PORRES,2421.5
-147022579,san-martin-de-porres,493000.0,0.0,179.0,4,2,0,AV. ALFREDO MENDIOLA 1576,Fiori,1,SAN MARTIN DE PORRES,2754.1899441340784
+147022579,san-martin-de-porres,493000.0,0.0,179.0,4,2,0,AV. ALFREDO MENDIOLA 1576,Fiori,1,SAN MARTIN DE PORRES,2754.2
 149724431,san-miguel,240000.0,100.0,40.0,1,1,0,Pacamarca,Maranga,1,SAN MIGUEL,6000.0
-147860018,san-miguel,246587.0,0.0,33.0,1,1,0,Av. Andrés Rázuri 206,San Miguel,1,SAN MIGUEL,7472.333333333333
-148190753,san-miguel,266000.0,140.0,67.0,2,2,0,Coronel Inclan 177,Miramar,1,SAN MIGUEL,3970.1492537313434
+147860018,san-miguel,246587.0,0.0,33.0,1,1,0,Av. Andrés Rázuri 206,San Miguel,1,SAN MIGUEL,7472.3
+148190753,san-miguel,266000.0,140.0,67.0,2,2,0,Coronel Inclan 177,Miramar,1,SAN MIGUEL,3970.1
 149866302,san-miguel,275760.0,0.0,36.0,3,2,0,Jirón Arica,San Miguel,1,SAN MIGUEL,7660.0
-148319485,san-miguel,304200.0,80.0,70.0,3,2,0,JR. Nicolas DE Pierola SAN Miguel,San Miguel,1,SAN MIGUEL,4345.714285714285
-145340778,san-miguel,308000.0,0.0,83.0,3,1,0,"Av. Precursores, San Miguel",San Miguel,1,SAN MIGUEL,3710.843373493976
-144211777,san-miguel,320870.0,0.0,57.0,2,2,1,"Av LA PAZ N° 8xx, Dpto. 304 AL 704 A",San Miguel,1,SAN MIGUEL,5629.298245614035
-149716348,san-miguel,332500.0,80.0,87.0,3,2,1,Conjunto Habitacional Julio C. Tello,San Miguel,1,SAN MIGUEL,3821.8390804597702
-149100547,san-miguel,340000.0,280.0,78.0,3,2,0,Avenida Costanera,San Miguel,1,SAN MIGUEL,4358.974358974359
-148883803,san-miguel,351415.0,0.0,61.0,3,2,1,Av. La Paz 2127,San Miguel,1,SAN MIGUEL,5760.901639344263
-147440411,san-miguel,358000.0,180.0,58.0,2,2,0,av la paz 1150,San Miguel,1,SAN MIGUEL,6172.413793103448
-148837861,san-miguel,362000.0,300.0,58.0,2,2,0,Calle Mercedes Gallagher al 300,San Miguel,1,SAN MIGUEL,6241.379310344828
-143259421,san-miguel,370000.0,0.0,54.0,2,2,0,"Jr. Mariscal Ramón Castilla 740, San Miguel",San Miguel,1,SAN MIGUEL,6851.851851851852
-147791669,san-miguel,380000.0,100.0,72.0,3,2,0,AV Andres Razuri 357 SAN Miguel,Maranga,1,SAN MIGUEL,5277.777777777777
+148319485,san-miguel,304200.0,80.0,70.0,3,2,0,JR. Nicolas DE Pierola SAN Miguel,San Miguel,1,SAN MIGUEL,4345.7
+145340778,san-miguel,308000.0,0.0,83.0,3,1,0,"Av. Precursores, San Miguel",San Miguel,1,SAN MIGUEL,3710.8
+144211777,san-miguel,320870.0,0.0,57.0,2,2,1,"Av LA PAZ N° 8xx, Dpto. 304 AL 704 A",San Miguel,1,SAN MIGUEL,5629.3
+149716348,san-miguel,332500.0,80.0,87.0,3,2,1,Conjunto Habitacional Julio C. Tello,San Miguel,1,SAN MIGUEL,3821.8
+149100547,san-miguel,340000.0,280.0,78.0,3,2,0,Avenida Costanera,San Miguel,1,SAN MIGUEL,4359.0
+148883803,san-miguel,351415.0,0.0,61.0,3,2,1,Av. La Paz 2127,San Miguel,1,SAN MIGUEL,5760.9
+147440411,san-miguel,358000.0,180.0,58.0,2,2,0,av la paz 1150,San Miguel,1,SAN MIGUEL,6172.4
+148837861,san-miguel,362000.0,300.0,58.0,2,2,0,Calle Mercedes Gallagher al 300,San Miguel,1,SAN MIGUEL,6241.4
+143259421,san-miguel,370000.0,0.0,54.0,2,2,0,"Jr. Mariscal Ramón Castilla 740, San Miguel",San Miguel,1,SAN MIGUEL,6851.9
+147791669,san-miguel,380000.0,100.0,72.0,3,2,0,AV Andres Razuri 357 SAN Miguel,Maranga,1,SAN MIGUEL,5277.8
 149085828,san-miguel,384300.0,190.0,61.0,3,2,1,Av. Costanera - Departamento en Venta Planos - Ideal Para Inversionistas!!,San Miguel,1,SAN MIGUEL,6300.0
-146876075,san-miguel,402000.0,240.0,74.0,2,2,0,JIRÓN SIMON BOLIVAR SAN MIGUEL,San Miguel,1,SAN MIGUEL,5432.4324324324325
-142959133,san-miguel,412500.0,0.0,78.0,3,2,1,JIRON HERMANOS CATARI 254 SAN MIGUEL,Maranga Etapa Ii,1,SAN MIGUEL,5288.461538461538
-149862592,san-miguel,415350.0,0.0,73.0,3,2,1,Jiron Hernando de Magallanes,San Miguel,1,SAN MIGUEL,5689.726027397261
-149003800,san-miguel,418250.0,0.0,95.0,3,2,0,Calle Diego Quispe Tito  al 100,San Miguel,1,SAN MIGUEL,4402.631578947368
-148786247,san-miguel,434200.0,0.0,84.0,3,2,0,Av. Bertolotto 250,San Miguel,1,SAN MIGUEL,5169.047619047619
-149791328,san-miguel,444000.0,0.0,67.0,3,2,1,De los Precursores al 800,San Miguel,1,SAN MIGUEL,6626.865671641791
-149830707,san-miguel,445000.0,200.0,63.0,2,2,0,"AV Arica 275, SAN Miguel / Dpto 405",San Miguel,1,SAN MIGUEL,7063.492063492064
-147488200,san-miguel,531129.0,0.0,82.0,3,2,0,"Mario Valdivia 140, Lima  al 15000",San Miguel,1,SAN MIGUEL,6477.182926829269
-149310439,san-miguel,541058.0,0.0,71.0,3,2,1,Av. Bertolloto,San Miguel,1,SAN MIGUEL,7620.5352112676055
-149802534,san-miguel,550000.0,0.0,128.0,2,3,0,Av. Bertolotto 980,Miramar,1,SAN MIGUEL,4296.875
-149346202,san-miguel,551000.0,280.0,114.0,3,2,0,Calle Pedrerias 135,San Miguel,1,SAN MIGUEL,4833.333333333333
+146876075,san-miguel,402000.0,240.0,74.0,2,2,0,JIRÓN SIMON BOLIVAR SAN MIGUEL,San Miguel,1,SAN MIGUEL,5432.4
+142959133,san-miguel,412500.0,0.0,78.0,3,2,1,JIRON HERMANOS CATARI 254 SAN MIGUEL,Maranga Etapa Ii,1,SAN MIGUEL,5288.5
+149862592,san-miguel,415350.0,0.0,73.0,3,2,1,Jiron Hernando de Magallanes,San Miguel,1,SAN MIGUEL,5689.7
+149003800,san-miguel,418250.0,0.0,95.0,3,2,0,Calle Diego Quispe Tito  al 100,San Miguel,1,SAN MIGUEL,4402.6
+148786247,san-miguel,434200.0,0.0,84.0,3,2,0,Av. Bertolotto 250,San Miguel,1,SAN MIGUEL,5169.0
+149791328,san-miguel,444000.0,0.0,67.0,3,2,1,De los Precursores al 800,San Miguel,1,SAN MIGUEL,6626.9
+149830707,san-miguel,445000.0,200.0,63.0,2,2,0,"AV Arica 275, SAN Miguel / Dpto 405",San Miguel,1,SAN MIGUEL,7063.5
+147488200,san-miguel,531129.0,0.0,82.0,3,2,0,"Mario Valdivia 140, Lima  al 15000",San Miguel,1,SAN MIGUEL,6477.2
+149310439,san-miguel,541058.0,0.0,71.0,3,2,1,Av. Bertolloto,San Miguel,1,SAN MIGUEL,7620.5
+149802534,san-miguel,550000.0,0.0,128.0,2,3,0,Av. Bertolotto 980,Miramar,1,SAN MIGUEL,4296.9
+149346202,san-miguel,551000.0,280.0,114.0,3,2,0,Calle Pedrerias 135,San Miguel,1,SAN MIGUEL,4833.3
 148002269,san-miguel,561000.0,0.0,102.0,3,2,0,Jr. Mariscal Ramón Castilla  al 600,Pablo Vi,1,SAN MIGUEL,5500.0
 149298549,san-miguel,572000.0,400.0,100.0,3,2,0,Avenida Bertolotto 270,San Miguel,1,SAN MIGUEL,5720.0
-149511557,san-miguel,655000.0,0.0,103.0,3,2,0,Av. Tacna,San Miguel,1,SAN MIGUEL,6359.223300970873
-4675402,san-miguel,724500.0,300.0,113.0,3,3,1,av costanera 300,Miramar,1,SAN MIGUEL,6411.504424778761
-149582374,san-miguel,800000.0,350.0,111.0,3,2,0,Jr. Mariscal Ramón Castilla 740,San Miguel,1,SAN MIGUEL,7207.207207207207
-148932745,san-miguel,1032500.0,0.0,189.0,4,3,0,Umachiri 296,San Miguel,1,SAN MIGUEL,5462.962962962963
-149042276,santiago-de-surco,359200.0,0.0,123.0,3,2,0,Se Vende Departamento en Jr. Maximiliano Velarde - Surco - Lima_bc-1006-1 / 01295,Santiago de Surco,1,SANTIAGO DE SURCO,2920.3252032520327
-149404894,santiago-de-surco,456300.0,0.0,84.0,4,2,1,"Departamento Semi Amoblado en Venta, Surco Límite con Chorrillos",Santiago de Surco,1,SANTIAGO DE SURCO,5432.142857142857
-147980872,santiago-de-surco,595000.0,0.0,107.0,4,2,1,"Avenida Monterrico Sur 1, Piso 4, Surco",Prolong. Benavides,1,SANTIAGO DE SURCO,5560.747663551402
-149106112,santiago-de-surco,678000.0,358.0,135.0,3,2,2,Calle Amancaes 297  psio 2 Casuarinas Sur Surco,Santiago de Surco,1,SANTIAGO DE SURCO,5022.222222222223
-149791096,santiago-de-surco,742500.0,600.0,133.0,2,3,1,Monte Claro al 100,Chacarilla Del Estanque,1,SANTIAGO DE SURCO,5582.706766917293
-149435023,santiago-de-surco,774500.0,0.0,133.0,2,3,1,"Monte Claro 129 con 133m2, 2 Dormitorios y 01 Cochera!",Chacarilla Del Estanque,1,SANTIAGO DE SURCO,5823.308270676692
-149182441,santiago-de-surco,798000.0,0.0,90.0,3,2,1,Surco,Santiago de Surco,1,SANTIAGO DE SURCO,8866.666666666666
-148995907,santiago-de-surco,822500.0,350.0,189.0,3,2,1,Castilla la Vieja 7,Santiago de Surco,1,SANTIAGO DE SURCO,4351.851851851852
-149356332,santiago-de-surco,870000.0,0.0,205.0,3,2,2,JR LAS Cantutas  al 200,Casuarinas Sur,1,SANTIAGO DE SURCO,4243.90243902439
-148912675,santiago-de-surco,943880.0,600.0,134.0,3,3,2,Av. de los Precursores 575,Valle Hermoso Oeste,1,SANTIAGO DE SURCO,7043.880597014925
-149206828,santiago-de-surco,962500.0,600.0,164.0,3,3,1,Calle las Campanillas  Casuarinas Surco,Las Casuarinas Alta,1,SANTIAGO DE SURCO,5868.90243902439
-148281562,santiago-de-surco,1079534.0,585.0,236.0,4,2,2,Ca. Batallon Tarma 315,Santiago de Surco,1,SANTIAGO DE SURCO,4574.296610169492
-146683328,santiago-de-surco,1176500.0,300.0,150.0,2,2,2,las laderas,Santiago de Surco,1,SANTIAGO DE SURCO,7843.333333333333
-148654543,santiago-de-surco,1303680.0,550.0,306.0,3,2,2,"Valle Hermoso, Surco, Duplex 3 Dormitorios, Vista Externa, No Paga Alcabala",Valle Hermoso,1,SANTIAGO DE SURCO,4260.392156862745
-148569624,santiago-de-surco,1390250.0,950.0,283.0,4,3,2,Pasaje Estepa Rusa 181,Santiago de Surco,1,SANTIAGO DE SURCO,4912.544169611308
+149511557,san-miguel,655000.0,0.0,103.0,3,2,0,Av. Tacna,San Miguel,1,SAN MIGUEL,6359.2
+4675402,san-miguel,724500.0,300.0,113.0,3,3,1,av costanera 300,Miramar,1,SAN MIGUEL,6411.5
+149582374,san-miguel,800000.0,350.0,111.0,3,2,0,Jr. Mariscal Ramón Castilla 740,San Miguel,1,SAN MIGUEL,7207.2
+148932745,san-miguel,1032500.0,0.0,189.0,4,3,0,Umachiri 296,San Miguel,1,SAN MIGUEL,5463.0
+149042276,santiago-de-surco,359200.0,0.0,123.0,3,2,0,Se Vende Departamento en Jr. Maximiliano Velarde - Surco - Lima_bc-1006-1 / 01295,Santiago de Surco,1,SANTIAGO DE SURCO,2920.3
+149404894,santiago-de-surco,456300.0,0.0,84.0,4,2,1,"Departamento Semi Amoblado en Venta, Surco Límite con Chorrillos",Santiago de Surco,1,SANTIAGO DE SURCO,5432.1
+147980872,santiago-de-surco,595000.0,0.0,107.0,4,2,1,"Avenida Monterrico Sur 1, Piso 4, Surco",Prolong. Benavides,1,SANTIAGO DE SURCO,5560.7
+149106112,santiago-de-surco,678000.0,358.0,135.0,3,2,2,Calle Amancaes 297  psio 2 Casuarinas Sur Surco,Santiago de Surco,1,SANTIAGO DE SURCO,5022.2
+149791096,santiago-de-surco,742500.0,600.0,133.0,2,3,1,Monte Claro al 100,Chacarilla Del Estanque,1,SANTIAGO DE SURCO,5582.7
+149435023,santiago-de-surco,774500.0,0.0,133.0,2,3,1,"Monte Claro 129 con 133m2, 2 Dormitorios y 01 Cochera!",Chacarilla Del Estanque,1,SANTIAGO DE SURCO,5823.3
+149182441,santiago-de-surco,798000.0,0.0,90.0,3,2,1,Surco,Santiago de Surco,1,SANTIAGO DE SURCO,8866.7
+148995907,santiago-de-surco,822500.0,350.0,189.0,3,2,1,Castilla la Vieja 7,Santiago de Surco,1,SANTIAGO DE SURCO,4351.9
+149356332,santiago-de-surco,870000.0,0.0,205.0,3,2,2,JR LAS Cantutas  al 200,Casuarinas Sur,1,SANTIAGO DE SURCO,4243.9
+148912675,santiago-de-surco,943880.0,600.0,134.0,3,3,2,Av. de los Precursores 575,Valle Hermoso Oeste,1,SANTIAGO DE SURCO,7043.9
+149206828,santiago-de-surco,962500.0,600.0,164.0,3,3,1,Calle las Campanillas  Casuarinas Surco,Las Casuarinas Alta,1,SANTIAGO DE SURCO,5868.9
+148281562,santiago-de-surco,1079534.0,585.0,236.0,4,2,2,Ca. Batallon Tarma 315,Santiago de Surco,1,SANTIAGO DE SURCO,4574.3
+146683328,santiago-de-surco,1176500.0,300.0,150.0,2,2,2,las laderas,Santiago de Surco,1,SANTIAGO DE SURCO,7843.3
+148654543,santiago-de-surco,1303680.0,550.0,306.0,3,2,2,"Valle Hermoso, Surco, Duplex 3 Dormitorios, Vista Externa, No Paga Alcabala",Valle Hermoso,1,SANTIAGO DE SURCO,4260.4
+148569624,santiago-de-surco,1390250.0,950.0,283.0,4,3,2,Pasaje Estepa Rusa 181,Santiago de Surco,1,SANTIAGO DE SURCO,4912.5
 148545155,santiago-de-surco,1747200.0,600.0,400.0,4,4,2,"Calle Via Lactea, Cerca a la Universidad de Lima, Surco",Santiago de Surco,10,SANTIAGO DE SURCO,4368.0
-149126210,surquillo,220000.0,160.0,35.0,1,1,0,Andrés Luna,La Calera,1,SURQUILLO,6285.714285714285
+149126210,surquillo,220000.0,160.0,35.0,1,1,0,Andrés Luna,La Calera,1,SURQUILLO,6285.7
 149038118,surquillo,274700.0,0.0,40.0,1,1,0,Laurel Rosa,Los Sauces,1,SURQUILLO,6867.5
-4325305,surquillo,282000.0,150.0,44.0,2,1,1,"CALLE ARTURO DURAY, SEGUNDA CUADRA",Surquillo,1,SURQUILLO,6409.090909090909
-149112909,surquillo,286450.0,0.0,56.0,3,2,0,Narciso DE LA Colina  10,Surquillo,1,SURQUILLO,5115.178571428572
-148280459,surquillo,340000.0,0.0,41.0,1,1,0,Av. Tomás Marsano con Av. Guardia Civil,Surquillo,1,SURQUILLO,8292.682926829268
-4559358,surquillo,350000.0,0.0,49.0,2,2,1,CALLE EL CEREZO N° 274,La Calera,1,SURQUILLO,7142.857142857143
-146436708,surquillo,390000.0,220.0,45.0,1,1,1,Av. Tomas marsano 2175,Los Sauces,1,SURQUILLO,8666.666666666666
-149814857,surquillo,410000.0,270.0,53.0,2,2,1,Avenida Tomas Marsano al 2200,Surquillo,1,SURQUILLO,7735.8490566037735
-149364541,surquillo,428750.0,200.0,90.0,3,2,1,Calle Los Faisanes 139,Surquillo,1,SURQUILLO,4763.888888888889
-149448230,surquillo,455000.0,0.0,57.0,2,2,0,Av. República de Panamá 4071,Surquillo,1,SURQUILLO,7982.456140350877
-149603588,surquillo,455847.0,200.0,75.0,2,1,1,Calle Montesquieu 300,La Calera De La Merced,1,SURQUILLO,6077.96
-149053752,surquillo,465750.0,200.0,70.0,3,2,1,Av. República de Panamá  4075,Limatambo,1,SURQUILLO,6653.571428571428
-149790971,surquillo,467100.0,0.0,74.0,3,1,0,Av. Domingo Orué 456,Surquillo,1,SURQUILLO,6312.1621621621625
-149506681,surquillo,473000.0,0.0,71.0,3,2,0,Av. Tomás Marsano 2273,Surquillo,1,SURQUILLO,6661.971830985915
-149760982,surquillo,490000.0,380.0,85.0,3,2,1,Av. Principal N° 925 Departamento 801,Surquillo,1,SURQUILLO,5764.705882352941
-147791666,surquillo,528500.0,220.0,78.0,3,2,1,Calle Alfa Aguila 124,Surquillo,1,SURQUILLO,6775.641025641025
-149817785,surquillo,532650.0,80.0,109.0,4,2,0,San Carlos 384,Surquillo,1,SURQUILLO,4886.697247706422
-149725040,surquillo,537275.0,0.0,68.0,2,2,0,"Juan Fuentes con Octavio Paz, Los Sauces, Surquillo",Surquillo,1,SURQUILLO,7901.10294117647
-149262722,surquillo,562200.0,0.0,88.0,3,2,0,La Calera de la Merced,La Calera De La Merced,1,SURQUILLO,6388.636363636364
-148353141,surquillo,595084.0,0.0,75.0,3,2,0,"Av. Tomas Marsano, Surquillo",Surquillo,1,SURQUILLO,7934.453333333333
-149339732,surquillo,622800.0,0.0,89.0,3,3,2,Avenida Principal,Surquillo,1,SURQUILLO,6997.752808988764
-149173758,surquillo,745000.0,0.0,76.0,3,2,1,Av. Andrés Aramburú,Surquillo,1,SURQUILLO,9802.631578947368
-149871247,surquillo,759000.0,0.0,128.0,3,2,1,Calle Ortega y Gasset 200,La Calera De La Merced,1,SURQUILLO,5929.6875
-149561147,surquillo,774077.0,460.0,150.0,3,2,1,Lola Pardo Vargas 045,Aurora Este,1,SURQUILLO,5160.513333333333
-148690274,surquillo,804000.0,400.0,108.0,3,2,0,Av. Valles del Sur,Capebco,1,SURQUILLO,7444.444444444444
-4609765,surquillo,957600.0,420.0,165.0,3,3,2,Av. Sergio Bernales,Surquillo,1,SURQUILLO,5803.636363636364
-149270766,surquillo,1005606.0,350.0,186.0,4,5,2,Diderot 311,La Calera De La Merced,1,SURQUILLO,5406.4838709677415
+4325305,surquillo,282000.0,150.0,44.0,2,1,1,"CALLE ARTURO DURAY, SEGUNDA CUADRA",Surquillo,1,SURQUILLO,6409.1
+149112909,surquillo,286450.0,0.0,56.0,3,2,0,Narciso DE LA Colina  10,Surquillo,1,SURQUILLO,5115.2
+148280459,surquillo,340000.0,0.0,41.0,1,1,0,Av. Tomás Marsano con Av. Guardia Civil,Surquillo,1,SURQUILLO,8292.7
+4559358,surquillo,350000.0,0.0,49.0,2,2,1,CALLE EL CEREZO N° 274,La Calera,1,SURQUILLO,7142.9
+146436708,surquillo,390000.0,220.0,45.0,1,1,1,Av. Tomas marsano 2175,Los Sauces,1,SURQUILLO,8666.7
+149814857,surquillo,410000.0,270.0,53.0,2,2,1,Avenida Tomas Marsano al 2200,Surquillo,1,SURQUILLO,7735.8
+149364541,surquillo,428750.0,200.0,90.0,3,2,1,Calle Los Faisanes 139,Surquillo,1,SURQUILLO,4763.9
+149448230,surquillo,455000.0,0.0,57.0,2,2,0,Av. República de Panamá 4071,Surquillo,1,SURQUILLO,7982.5
+149603588,surquillo,455847.0,200.0,75.0,2,1,1,Calle Montesquieu 300,La Calera De La Merced,1,SURQUILLO,6078.0
+149053752,surquillo,465750.0,200.0,70.0,3,2,1,Av. República de Panamá  4075,Limatambo,1,SURQUILLO,6653.6
+149790971,surquillo,467100.0,0.0,74.0,3,1,0,Av. Domingo Orué 456,Surquillo,1,SURQUILLO,6312.2
+149506681,surquillo,473000.0,0.0,71.0,3,2,0,Av. Tomás Marsano 2273,Surquillo,1,SURQUILLO,6662.0
+149760982,surquillo,490000.0,380.0,85.0,3,2,1,Av. Principal N° 925 Departamento 801,Surquillo,1,SURQUILLO,5764.7
+147791666,surquillo,528500.0,220.0,78.0,3,2,1,Calle Alfa Aguila 124,Surquillo,1,SURQUILLO,6775.6
+149817785,surquillo,532650.0,80.0,109.0,4,2,0,San Carlos 384,Surquillo,1,SURQUILLO,4886.7
+149725040,surquillo,537275.0,0.0,68.0,2,2,0,"Juan Fuentes con Octavio Paz, Los Sauces, Surquillo",Surquillo,1,SURQUILLO,7901.1
+149262722,surquillo,562200.0,0.0,88.0,3,2,0,La Calera de la Merced,La Calera De La Merced,1,SURQUILLO,6388.6
+148353141,surquillo,595084.0,0.0,75.0,3,2,0,"Av. Tomas Marsano, Surquillo",Surquillo,1,SURQUILLO,7934.5
+149339732,surquillo,622800.0,0.0,89.0,3,3,2,Avenida Principal,Surquillo,1,SURQUILLO,6997.8
+149173758,surquillo,745000.0,0.0,76.0,3,2,1,Av. Andrés Aramburú,Surquillo,1,SURQUILLO,9802.6
+149871247,surquillo,759000.0,0.0,128.0,3,2,1,Calle Ortega y Gasset 200,La Calera De La Merced,1,SURQUILLO,5929.7
+149561147,surquillo,774077.0,460.0,150.0,3,2,1,Lola Pardo Vargas 045,Aurora Este,1,SURQUILLO,5160.5
+148690274,surquillo,804000.0,400.0,108.0,3,2,0,Av. Valles del Sur,Capebco,1,SURQUILLO,7444.4
+4609765,surquillo,957600.0,420.0,165.0,3,3,2,Av. Sergio Bernales,Surquillo,1,SURQUILLO,5803.6
+149270766,surquillo,1005606.0,350.0,186.0,4,5,2,Diderot 311,La Calera De La Merced,1,SURQUILLO,5406.5

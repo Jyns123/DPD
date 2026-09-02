@@ -6,8 +6,9 @@ import pandas as pd
 ANIO_ACTUAL = 2025  # ultimo anio completo del dataset (2026 esta parcial)
 
 
-def construir(origen="data/raw/denuncias_lima.csv"):
-    d = pd.read_csv(origen)
+def construir(origen="data/raw/denuncias_lima.csv",
+              distritos="data/samples/distritos_lima_socioec.csv"):
+    d = pd.read_csv(origen, dtype={"UBIGEO_HECHO": str})
     d = d[d.ANIO.between(ANIO_ACTUAL - 1, ANIO_ACTUAL)]
 
     # total de denuncias por distrito y anio
@@ -15,6 +16,7 @@ def construir(origen="data/raw/denuncias_lima.csv"):
                          values="cantidad", aggfunc="sum", fill_value=0)
              .reset_index())
     piv.columns = ["distrito", "ubigeo", "denuncias_prev", "denuncias_ult"]
+    piv["ubigeo"] = piv.ubigeo.str.zfill(6)
 
     # mix de modalidades del ultimo anio
     mix = (d[d.ANIO == ANIO_ACTUAL]
@@ -26,9 +28,14 @@ def construir(origen="data/raw/denuncias_lima.csv"):
             piv[f"pct_{col.lower()}"] = (
                 piv.distrito.map(mix[col] / total).round(3))
 
-    # indice 0-1: min-max sobre denuncias del ultimo anio
-    lo, hi = piv.denuncias_ult.min(), piv.denuncias_ult.max()
-    piv["crime_index_zone"] = ((piv.denuncias_ult - lo) / (hi - lo)).round(3)
+    # poblacion para normalizar: el conteo absoluto premia a los distritos chicos
+    pob = pd.read_csv(distritos, dtype={"ubigeo": str})[["ubigeo", "poblacion_2020"]]
+    piv = piv.merge(pob, on="ubigeo", how="left")
+    piv["denuncias_x1000hab"] = (piv.denuncias_ult / piv.poblacion_2020 * 1000).round(2)
+
+    # indice 0-1: min-max sobre la tasa por habitante
+    tasa = piv.denuncias_x1000hab
+    piv["crime_index_zone"] = ((tasa - tasa.min()) / (tasa.max() - tasa.min())).round(3)
 
     # tendencia: variacion vs anio anterior, umbral +-10%
     var = (piv.denuncias_ult - piv.denuncias_prev) / piv.denuncias_prev.replace(0, pd.NA)
