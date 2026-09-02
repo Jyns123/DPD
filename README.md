@@ -33,9 +33,11 @@ Un asistente que identifica inmuebles subvalorados y los prioriza según el perf
 
 ## Fuentes de datos (dataset source)
 
-### 1. Listados inmobiliarios (scraping)
+### 1. Listados inmobiliarios ✅ sample disponible
 - **Fuentes:** Urbania.pe, Properati.com.pe
-- **Variables:** precio, distrito, dirección, área (m²), habitaciones, baños, piso, antigüedad, nombre de constructora/inmobiliaria, tipo de proyecto (construido / en planos), URL del listado.
+- **Variables:** precio, distrito, dirección, área (m²), habitaciones, baños, cocheras, urbanización.
+- **Sample:** `data/samples/listings_urbania_lima_sample.csv` (400 de 3 987 avisos reales, 20 distritos). Proviene de un scraping de Urbania publicado por terceros bajo MIT; es una fuente de arranque mientras se revisan los ToS del portal.
+- **Baseline del pitch:** `data/samples/baseline_precio_m2_distrito.csv` — precio por m² por distrito, calculado sobre esos avisos.
 
 ### 2. Puntos de interés (POIs) ✅ sample disponible
 - **Fuente:** OpenStreetMap vía **Overpass API** — colegios, parques, transporte, mercados y salud geolocalizados. Pública, gratuita, sin credentialing.
@@ -46,9 +48,10 @@ Un asistente que identifica inmuebles subvalorados y los prioriza según el perf
 - **Variables:** incidencia por distrito, mes y modalidad del hecho; de ahí se derivan el índice y la tendencia de seguridad.
 - **Samples:** `data/samples/denuncias_sidpol_lima_sample.csv` y `data/samples/crime_index_distrito.csv` (50 distritos).
 
-### 3b. Límites distritales ✅ sample disponible
-- **Fuente:** polígonos distritales del INEI (vía `juaneladio/peru-geojson`, MIT). Permiten asignar distrito a cada listado geocodificado y cruzarlo con el índice de criminalidad por UBIGEO.
-- **Sample:** `data/samples/distritos_lima_geo_sample.geojson` (49 distritos de Lima y Callao).
+### 3b. Límites distritales y datos socioeconómicos ✅ sample disponible
+- **Fuentes:** polígonos distritales del INEI (vía `juaneladio/peru-geojson`, MIT) y UBIGEO aumentado del INEI (vía `jmcastagnetto/ubigeo-peru-aumentado`, MIT).
+- **Uso:** asignar distrito a cada punto por *point-in-polygon*, normalizar la criminalidad por población, y aportar IDH y pobreza como variables del modelo de valoración.
+- **Samples:** `data/samples/distritos_lima_geo_sample.geojson` (49 distritos) y `data/samples/distritos_lima_socioec.csv` (51 distritos).
 
 ### 4. Imágenes de entorno
 - **Fuente:** dataset propio del equipo (imágenes de la zona) + modelo de visión por computadora.
@@ -74,15 +77,25 @@ Un asistente que identifica inmuebles subvalorados y los prioriza según el perf
 │   ├── sample.csv              # muestra del feature store (esquema final)
 │   └── samples/                # muestras reales de las fuentes publicas
 │       ├── README.md           # fuente, licencia y columnas de cada sample
+│       ├── listings_urbania_lima_sample.csv
 │       ├── denuncias_sidpol_lima_sample.csv
-│       ├── crime_index_distrito.csv
 │       ├── pois_osm_lima_sample.csv
-│       └── distritos_lima_geo_sample.geojson
+│       ├── distritos_lima_geo_sample.geojson
+│       ├── distritos_lima_socioec.csv
+│       ├── baseline_precio_m2_distrito.csv   # baseline del pitch
+│       ├── crime_index_distrito.csv          # indice de seguridad
+│       ├── zone_convenience_index.csv        # indice de conveniencia urbana
+│       └── zone_index_distrito.csv           # indice compuesto de zona
 └── scripts/
-    ├── fetch_pois_osm.py
+    ├── fetch_listings_urbania.py
     ├── fetch_denuncias_sidpol.py
+    ├── fetch_pois_osm.py
     ├── fetch_distritos_geojson.py
-    └── build_crime_index.py
+    ├── fetch_ubigeo_distritos.py
+    ├── build_crime_index.py
+    ├── build_baseline_precio_m2.py
+    ├── build_zone_index.py
+    └── build_zone_composite.py
 ```
 
 ## Reproducir los samples
@@ -90,13 +103,39 @@ Un asistente que identifica inmuebles subvalorados y los prioriza según el perf
 ```bash
 pip install -r requirements.txt
 
-python scripts/fetch_pois_osm.py data/samples/pois_osm_lima_sample.csv "-12.16,-77.06,-12.08,-76.98" 60
+# fuentes
+python scripts/fetch_listings_urbania.py
 python scripts/fetch_denuncias_sidpol.py
-python scripts/build_crime_index.py
 python scripts/fetch_distritos_geojson.py
+python scripts/fetch_ubigeo_distritos.py
+python scripts/fetch_pois_osm.py data/raw/pois_lima.csv          # lima completa (~17k pois)
+
+# features derivadas, en este orden
+python scripts/build_crime_index.py
+python scripts/build_baseline_precio_m2.py
+python scripts/build_zone_index.py
+python scripts/build_zone_composite.py
 ```
 
-Los datos completos se descargan a `data/raw/`, que no se versiona.
+Los datos completos se descargan a `data/raw/`, que no se versiona. Para regenerar el sample reducido de POIs:
+
+```bash
+python scripts/fetch_pois_osm.py data/samples/pois_osm_lima_sample.csv "-12.16,-77.06,-12.08,-76.98" 60
+```
+
+## Qué hay hasta ahora
+
+| Pieza del pitch | Estado |
+|---|---|
+| Listados normalizados | ✅ 3 987 avisos reales, 20 distritos |
+| Baseline de precio por m² | ✅ calculado por distrito |
+| Índice de seguridad | ✅ denuncias por 1 000 hab, con tendencia anual |
+| Índice de conveniencia urbana | ✅ 16 987 POIs asignados a 47 distritos |
+| Índice compuesto de zona | 🟡 2 de 3 componentes (falta el visual) |
+| Distancias del inmueble a POIs | ⬜ requiere geocodificar las direcciones |
+| Modelo de valoración | ⬜ Week 6 |
+| Score de constructora | ⬜ sin fuente todavía |
+| Modelo de visión de entorno | ⬜ dataset de imágenes pendiente |
 
 ## Consideraciones abiertas a resolver (próxima iteración)
 - Definir la métrica de éxito del modelo de valoración (MAE del precio predicho vs. % de aciertos en "buena oferta").
