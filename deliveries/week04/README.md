@@ -37,14 +37,16 @@ Un asistente que identifica inmuebles subvalorados y los prioriza según el perf
 
 | # | Fuente | Aporta | Estado |
 |---|---|---|---|
-| 1 | Urbania.pe | Inventario de listados: precio, área, dormitorios, baños, cocheras, dirección | ✅ 3 987 avisos reales, 20 distritos |
+| 1 | Urbania.pe | Inventario de listados: precio, área, dormitorios, baños, cocheras, dirección | ✅ 3 987 avisos + 200 fichas scrapeadas por nosotros |
 | 2 | OpenStreetMap (Overpass API) | POIs geolocalizados: colegios, parques, transporte, mercados, salud | ✅ 16 987 POIs de Lima |
 | 3 | MININTER / SIDPOL (Datos Abiertos) | Denuncias policiales por distrito, mes y modalidad (2018–2026) | ✅ 29 833 filas de Lima y Callao |
 | 4 | INEI — límites distritales y UBIGEO aumentado | Polígonos, superficie, población, IDH, pobreza | ✅ 49 polígonos, 51 distritos |
-| 5 | BCRP — serie oficial de precios de departamentos | Precio mediano por m² por distrito, trimestral desde 1998 | ✅ 528 observaciones, 12 distritos |
-| 6 | Municipalidad de Lima — licencias y conformidades de obra | Zonificación, altura, valorización, solicitante | 🟡 254 filas, solo Cercado |
-| 7 | Mapillary / dataset propio de imágenes | Percepción visual de la zona (modelo de visión) | ⬜ requiere token de API |
-| 8 | CIPIEC (MVCS) / INDECOPI | Score de confiabilidad de la constructora | ⬜ requiere autenticación |
+| 5 | BCRP — serie oficial de precios y ratio precio/alquiler | Precio mediano por m² y años de alquiler por distrito, trimestral desde 1998 | ✅ 957 observaciones |
+| 6 | Fondo MIVIVIENDA — buscador de proyectos (API) | Proyecto, **promotor**, distrito, precio, unidades disponibles | ✅ 747 proyectos, 460 promotores |
+| 7 | INEI — planos estratificados por manzana | Estrato de ingreso, hogares y población por manzana | ✅ 9 206 manzanas (6 distritos) |
+| 8 | Municipalidad de Lima — licencias y conformidades de obra | Zonificación, altura, valorización, solicitante | 🟡 254 filas, solo Cercado |
+| 9 | Mapillary / dataset propio de imágenes | Percepción visual de la zona (modelo de visión) | ⬜ requiere token de API |
+| 10 | CIPIEC (MVCS) / INDECOPI | Historial de sanciones por constructora | ⬜ requiere autenticación |
 
 El detalle de cada fuente, su método de obtención y su licencia está en [`acquisition.md`](acquisition.md).
 
@@ -80,6 +82,12 @@ python scripts/fetch_denuncias_sidpol.py
 python scripts/fetch_distritos_geojson.py
 python scripts/fetch_ubigeo_distritos.py
 python scripts/fetch_pois_osm.py data/raw/pois_lima.csv
+python scripts/fetch_bcrp_precios.py
+python scripts/fetch_proyectos_mivivienda.py
+python scripts/fetch_entidades_tecnicas.py
+python scripts/fetch_licencias_edificacion.py
+python scripts/fetch_estratos_ingreso.py data/samples/estratos_ingreso_manzana_sample.csv 6
+python scripts/scrape_urbania.py data/samples/urbania_fichas_sample.csv 200
 
 # features derivadas, en este orden
 python scripts/build_crime_index.py

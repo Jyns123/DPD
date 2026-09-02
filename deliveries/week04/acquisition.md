@@ -18,6 +18,11 @@ El alcance de esta primera iteración es **Perú, Lima Metropolitana y Callao**.
 | `distritos_lima_socioec.csv` | 51 | UBIGEO aumentado del INEI | `fetch_ubigeo_distritos.py` |
 | `bcrp_precio_m2_distrito.csv` | 528 | BCRP, serie oficial de precios (API) | `fetch_bcrp_precios.py` |
 | `obras_cercado_lima_sample.csv` | 254 | Municipalidad de Lima vía Datos Abiertos | `fetch_licencias_edificacion.py` |
+| `urbania_fichas_sample.csv` | 200 | Urbania.pe (scraping propio vía sitemap) | `scrape_urbania.py` |
+| `proyectos_mivivienda.csv` | 747 | Fondo MIVIVIENDA (API del buscador) | `fetch_proyectos_mivivienda.py` |
+| `entidades_tecnicas_ranking.csv` | 10 | Fondo MIVIVIENDA (ranking de ET) | `fetch_entidades_tecnicas.py` |
+| `estratos_ingreso_manzana_sample.csv` | 9 206 | INEI, planos estratificados 2020 | `fetch_estratos_ingreso.py` |
+| `estratos_ingreso_links.csv` | 50 | índice de descarga por distrito | `fetch_estratos_ingreso.py` |
 | `crime_index_distrito.csv` | 50 | derivada: seguridad por distrito | `build_crime_index.py` |
 | `baseline_precio_m2_distrito.csv` | 20 | derivada: baseline de precio por m² | `build_baseline_precio_m2.py` |
 | `zone_convenience_index.csv` | 47 | derivada: conveniencia urbana | `build_zone_index.py` |
@@ -35,7 +40,20 @@ python scripts/fetch_listings_urbania.py
 
 Variables que trae: `listing_id`, distrito, precio en soles, cuota de mantenimiento, área total, dormitorios, baños, cocheras, dirección, urbanización y cantidad de fotos.
 
-**Scraping propio (pendiente).** Es la fuente definitiva, y el dataset anterior sirve para validar el pipeline mientras tanto. El procedimiento previsto:
+**Scraping propio (implementado).** `scripts/scrape_urbania.py` recorre el sitemap público de propiedades de Urbania y parsea las fichas de detalle.
+
+```bash
+python scripts/scrape_urbania.py data/samples/urbania_fichas_sample.csv 200
+```
+
+1. Descargar `https://urbania.pe/sitemap_prop_https_1.xml.gz` (3 867 avisos de venta al 2 de setiembre de 2026).
+2. Muestrear N avisos y pedir cada ficha con pausa de 2 s y `User-Agent` propio.
+3. Cachear cada HTML en `data/raw/urbania_html/` para no volver a pedir lo mismo.
+4. Extraer del JSON-LD (`schema.org/Apartment` y `House`): dormitorios, baños, área, dirección y distrito; y del `<h1 class="title-property">`: operación, tipo y precio.
+
+**Cumplimiento de `robots.txt`.** El `robots.txt` de Urbania prohíbe a todos los agentes `/avisos-api/`, `/users-api/`, `/leads-api/` y `/tracking/`, además de la paginación más allá de la página 5 y los parámetros de orden. El scraper **no toca ninguna de esas rutas**: solo pide páginas de detalle listadas en el sitemap que el propio portal publica para ser rastreado. Las coordenadas del inmueble no vienen en el HTML — las carga el mapa desde `/avisos-api/`, que está prohibida — así que la geocodificación se resuelve con Nominatim, como estaba previsto.
+
+**Lo que aún falta capturar:** el procedimiento previsto para completar la ficha:
 
 1. Revisar `robots.txt` y Términos de Servicio de cada portal antes de scrapear (`urbania.pe/robots.txt`, `properati.com.pe/robots.txt`).
 2. Definir bounding box de búsqueda: Lima Metropolitana.
@@ -113,7 +131,19 @@ python scripts/fetch_bcrp_precios.py
 
 ## 5. Constructoras y proyectos inmobiliarios
 
-**Lo que sí conseguimos:** licencias de edificación y conformidades de obra de la Municipalidad Metropolitana de Lima, vía Datos Abiertos. Implementado en `scripts/fetch_licencias_edificacion.py`.
+**Lo que sí conseguimos (1): proyectos y promotores del Fondo MIVIVIENDA.** El buscador de `fondomivivienda.pe` expone una API pública sin autenticación. Implementado en `scripts/fetch_proyectos_mivivienda.py`.
+
+```bash
+python scripts/fetch_proyectos_mivivienda.py
+```
+
+Se hace `POST` a `https://fondomivivienda.pe/api/servicios/proxy` con `{"service": "cmv"|"tp", "path": "api/ofertainmobiliariajwt", "method": "POST", "body": {...}}`, donde el body lleva `opcion` en `"CMV"` (Nuevo Crédito MiVivienda) o `"TP"` (Techo Propio). Devuelve **747 proyectos y 460 promotores**, 197 de ellos en Lima repartidos en 46 distritos, con: nombre del proyecto, promotor, dirección, distrito, rango de precio, rango de área, unidades disponibles y bono verde.
+
+Es la mejor fuente que tenemos hoy para el eje constructoras y para distinguir **comprar en planos vs. construido**.
+
+**Lo que sí conseguimos (2): ranking de entidades técnicas.** `GET https://fondomivivienda.pe/api/ranking-et/list` devuelve las 10 constructoras con más viviendas ejecutadas, con RUC. El RUC es la llave para cruzar después contra SUNAT o INDECOPI. Implementado en `scripts/fetch_entidades_tecnicas.py`.
+
+**Lo que sí conseguimos (3):** licencias de edificación y conformidades de obra de la Municipalidad Metropolitana de Lima, vía Datos Abiertos. Implementado en `scripts/fetch_licencias_edificacion.py`.
 
 ```bash
 python scripts/fetch_licencias_edificacion.py
@@ -124,11 +154,25 @@ Aporta `zonificacion`, `altura`, `valorizacion`, fechas de inicio de trámite y 
 **Por qué no alcanza (ver `data_quality_note.md`):** la MML solo emite licencias para el Cercado de Lima; los otros 42 distritos tienen su propia municipalidad y publican por separado o no publican. Son 254 filas en total y el `solicitante` es mayormente persona natural, no constructora.
 
 **Fuentes evaluadas y descartadas por ahora:**
-- **CIPIEC** (Central de Información de Promotores Inmobiliarios y Empresas Constructoras, `tramites.vivienda.gob.pe/centralinformacion`) — es exactamente el registro que necesitamos, cruza SUNAT, INDECOPI y SUNAFIL, pero requiere autenticación.
-- **INDECOPI "Mira a quién le compras"** (`miraaquienlecompras.gob.pe`) — publica sanciones firmes por empresa; consulta caso por caso, sin descarga masiva.
-- **Fondo MIVIVIENDA**, buscador de proyectos (`fondomivivienda.pe/buscador-proyectos`) — tiene promotor, distrito y precio por proyecto, pero es una SPA sin API pública documentada.
+- **CIPIEC** (Central de Información de Promotores Inmobiliarios y Empresas Constructoras, `tramites.vivienda.gob.pe/centralinformacion`) — es exactamente el registro que necesitamos, cruza SUNAT, INDECOPI y SUNAFIL, pero **requiere autenticación**. No se intenta eludir: se solicitará acceso institucional.
+- **INDECOPI "Mira a quién le compras"** (`miraaquienlecompras.gob.pe`) — publica sanciones firmes por empresa; consulta caso por caso, sin descarga masiva. Con los RUC de MIVIVIENDA ya hay una lista de entrada para consultarla.
 
-**Plan:** consultar las municipalidades distritales con mayor volumen de obra nueva, y evaluar el acceso institucional al CIPIEC. Hasta entonces, `constructora_reliability_score` no entra al feature store.
+**Plan:** cruzar los 460 promotores de MIVIVIENDA contra INDECOPI por RUC, sumar municipalidades distritales con volumen de obra nueva, y gestionar el acceso al CIPIEC. Hasta entonces, `constructora_reliability_score` no entra al feature store.
+
+## 5b. Estratos de ingreso por manzana (INEI)
+
+**Fuente:** Planos Estratificados de Lima Metropolitana a Nivel de Manzana 2020, del INEI, construidos con el Censo 2017 y la ENAHO 2017-2018. Clasifican cada manzana en 5 estratos de ingreso per cápita del hogar. Implementado en `scripts/fetch_estratos_ingreso.py`.
+
+```bash
+python scripts/fetch_estratos_ingreso.py data/samples/estratos_ingreso_manzana_sample.csv 6
+```
+
+1. Leer el índice de descargas que el visor de GEO GPS PERÚ publica como GeoJSON en GitHub Pages: un shapefile por distrito, 50 en total (`estratos_ingreso_links.csv`).
+2. Descargar y descomprimir el shapefile del distrito.
+3. Leer los atributos del `.dbf` con un lector propio de 20 líneas, para no depender de `geopandas`.
+4. Quedarse con `IDMANZANA`, `UBIGEO`, `ESTRATO` (1 bajo … 5 alto), `n_hogar` y `n_pob`.
+
+Es mucho más fino que el IDH distrital: 9 206 manzanas solo en los 6 distritos del sample. **Para el cruce espacial con los inmuebles hace falta la geometría del `.shp`**, que este lector no parsea — requiere `pyshp` o `geopandas`, pendiente de instalar.
 
 ## 6. Límites distritales (asignación de zona)
 

@@ -57,6 +57,28 @@ Notas sobre `data/sample.csv` y las fuentes que lo alimentan. Lo que sigue no so
 - **Las dos etapas no se pueden emparejar:** el archivo de conformidades no incluye `solicitante`, así que no se puede medir cuánto tardó cada empresa entre licencia y entrega, que era justamente el indicador buscado.
 - `valorizacion` llega en 0 en las conformidades y `uso` trae valores como `--`, `SIN ESPECIFICAR` y `SIN USO`.
 
+### Proyectos del Fondo MIVIVIENDA
+- **Cobertura nacional, no solo Lima:** 747 proyectos en todo el país, 197 en Lima. Hay que filtrar antes de usarlos.
+- `precio_min` llega en 0 en parte de los registros, y varios campos de promedio (`strprecioprom`, `strareatechadaprom`) vienen nulos en la respuesta de la API.
+- **Sesgo de programa:** son proyectos que califican a Nuevo Crédito MiVivienda o Techo Propio, es decir vivienda social y de precio acotado. No representan el mercado completo, pero sí exactamente al usuario objetivo del producto.
+- **Sin coordenadas:** trae dirección textual, igual que los listados.
+- El nombre del promotor no está normalizado: aparecen razón social y nombre comercial, con y sin `S.A.C.`. Habrá que unificar antes de agregar por empresa.
+
+### Ranking de entidades técnicas
+- Son solo las **10 primeras**, no un padrón completo. Sirve como semilla de RUCs, no como base para un score.
+- `cantidad` es viviendas ejecutadas acumuladas, sin ventana temporal ni tasa de cumplimiento de plazos, que es lo que realmente mide confiabilidad.
+
+### Fichas scrapeadas de Urbania
+- **Sin coordenadas.** El HTML no las trae; el mapa las pide a `/avisos-api/`, ruta prohibida por su `robots.txt`. Hay que geocodificar con Nominatim.
+- Completitud del sample de 200: precio 98 %, atributos estructurados (área, dormitorios, baños) 72 %, mantenimiento 38 %. Los avisos sin JSON-LD son tipos distintos de inmueble (terreno, local comercial).
+- **No solo Lima:** el sitemap incluye provincias (Asia, Sarapampa). Hay que filtrar por distrito.
+- El sitemap trae 3 867 avisos de venta, muy por debajo del inventario real del portal: es una muestra que Urbania publica para rastreo, no el catálogo completo.
+
+### Estratos de ingreso por manzana
+- **Falta la geometría.** El lector de `.dbf` saca los atributos pero no los polígonos, así que todavía no se puede asignar un estrato a cada inmueble. Requiere `pyshp` o `geopandas`.
+- **Son de 2020**, construidos sobre el Censo 2017. En distritos con crecimiento reciente estarán desactualizados.
+- El sample cubre 6 de 50 distritos (los del Callao, por orden de UBIGEO). Ampliarlo es solo cuestión de subir el parámetro `n`.
+
 ### Índices de zona
 - El `zone_composite_index` va con **dos de los tres componentes** del pitch: seguridad y conveniencia, a 50/50. Falta el de percepción visual.
 - Un distrito del geojson viene sin geometría y se salta; por eso el índice cubre 47 distritos y no 49.
