@@ -16,12 +16,14 @@ El alcance de esta primera iteración es **Perú, Lima Metropolitana y Callao**.
 | `pois_osm_lima_sample.csv` | 300 | OpenStreetMap (Overpass API) | `fetch_pois_osm.py` |
 | `distritos_lima_geo_sample.geojson` | 49 | Límites INEI vía `juaneladio/peru-geojson` | `fetch_distritos_geojson.py` |
 | `distritos_lima_socioec.csv` | 51 | UBIGEO aumentado del INEI | `fetch_ubigeo_distritos.py` |
+| `bcrp_precio_m2_distrito.csv` | 528 | BCRP, serie oficial de precios (API) | `fetch_bcrp_precios.py` |
+| `obras_cercado_lima_sample.csv` | 254 | Municipalidad de Lima vía Datos Abiertos | `fetch_licencias_edificacion.py` |
 | `crime_index_distrito.csv` | 50 | derivada: seguridad por distrito | `build_crime_index.py` |
 | `baseline_precio_m2_distrito.csv` | 20 | derivada: baseline de precio por m² | `build_baseline_precio_m2.py` |
 | `zone_convenience_index.csv` | 47 | derivada: conveniencia urbana | `build_zone_index.py` |
 | `zone_index_distrito.csv` | 47 | derivada: índice compuesto de zona | `build_zone_composite.py` |
 
-**Licencias:** SIDPOL/MININTER son datos abiertos del Estado Peruano (uso libre con atribución); OpenStreetMap es ODbL (© colaboradores de OSM); los repositorios de límites y UBIGEO son MIT con datos base del INEI; el dataset intermedio de Urbania es MIT, pero el contenido original es del portal — uso académico, pendiente revisar sus ToS. Ninguna fuente incluye datos personales: las denuncias vienen agregadas por distrito, mes y modalidad.
+**Licencias:** BCRP, SIDPOL/MININTER y Municipalidad de Lima son datos abiertos del Estado Peruano (uso libre con atribución); OpenStreetMap es ODbL (© colaboradores de OSM); los repositorios de límites y UBIGEO son MIT con datos base del INEI; el dataset intermedio de Urbania es MIT, pero el contenido original es del portal — uso académico, pendiente revisar sus ToS. Ninguna fuente incluye datos personales: las denuncias vienen agregadas por distrito, mes y modalidad.
 
 ## 1. Listados inmobiliarios (Urbania, Properati)
 
@@ -84,6 +86,23 @@ python scripts/build_crime_index.py           # indice y tendencia por distrito
 
 **Nota:** el portal de datos abiertos bloquea descargas automatizadas (responde 418), por lo que el script apunta a un mirror público del mismo archivo. La descarga desde la fuente oficial se hace manualmente cuando se requiere verificar la versión.
 
+## 3b. Precios oficiales del BCRP (ground truth)
+
+**Fuente:** Banco Central de Reserva del Perú. Desde 1998 el BCRP publica el precio mediano de venta de departamentos por m² para 12 distritos de Lima, con frecuencia trimestral. Es la referencia oficial contra la cual validar el motor de valoración.
+
+**Método:** API pública de BCRPData, implementado en `scripts/fetch_bcrp_precios.py`.
+
+```bash
+python scripts/fetch_bcrp_precios.py
+```
+
+1. Consultar `https://estadisticas.bcrp.gob.pe/estadisticas/series/api/{codigo}/json/{desde}/{hasta}/esp` por cada serie.
+2. Series por distrito (dólares corrientes por m²): Barranco `PD37957PQ`, La Molina `PD17459PQ`, Miraflores `PD17460PQ`, San Borja `PD17461PQ`, San Isidro `PD17462PQ`, Surco `PD17463PQ`, Jesús María `PD17464PQ`, Lince `PD17465PQ`, Magdalena `PD17466PQ`, Pueblo Libre `PD17467PQ`, San Miguel `PD17468PQ`, Surquillo `PD37958PQ`.
+3. Agregados de referencia: 12 distritos en US$ `PD37944PQ` y en S/ `PD37946PQ`, sector alto `PD37941PQ`, sector medio `PD38028PQ`.
+4. Convertir el período `T1.26` al formato `2026-T1` y consolidar en formato largo.
+
+**Nota metodológica:** el BCRP construye la serie a partir de precios **de oferta** de Urbania, no de transacciones cerradas. Comparte por tanto el sesgo de nuestra fuente de listados: ambos miden lo que se pide, no lo que se paga. Sirve como referencia externa e independiente, no como precio de transacción real. La descarga directa de sus archivos Excel está bloqueada por protección anti-bot; la API pública sí responde.
+
 ## 4. Imágenes de entorno + modelo de visión
 
 **Método:**
@@ -94,11 +113,22 @@ python scripts/build_crime_index.py           # indice y tendencia por distrito
 
 ## 5. Constructoras y proyectos inmobiliarios
 
-**Método:**
-1. Identificar constructoras mencionadas en los listados scrapeados (paso 1).
-2. Buscar registros públicos de proyectos entregados/en curso (ej. portales municipales de licencias de construcción, cuando estén disponibles).
-3. Complementar con dataset propio de seguimiento de proyectos (historial de plazos, incidencias reportadas en medios o redes).
-4. Calcular `constructora_reliability_score` normalizado (0-1) combinando estas variables.
+**Lo que sí conseguimos:** licencias de edificación y conformidades de obra de la Municipalidad Metropolitana de Lima, vía Datos Abiertos. Implementado en `scripts/fetch_licencias_edificacion.py`.
+
+```bash
+python scripts/fetch_licencias_edificacion.py
+```
+
+Aporta `zonificacion`, `altura`, `valorizacion`, fechas de inicio de trámite y de emisión, y `solicitante`. El par licencia → conformidad es, conceptualmente, la medida de cumplimiento que busca el score de constructora.
+
+**Por qué no alcanza (ver `data_quality_note.md`):** la MML solo emite licencias para el Cercado de Lima; los otros 42 distritos tienen su propia municipalidad y publican por separado o no publican. Son 254 filas en total y el `solicitante` es mayormente persona natural, no constructora.
+
+**Fuentes evaluadas y descartadas por ahora:**
+- **CIPIEC** (Central de Información de Promotores Inmobiliarios y Empresas Constructoras, `tramites.vivienda.gob.pe/centralinformacion`) — es exactamente el registro que necesitamos, cruza SUNAT, INDECOPI y SUNAFIL, pero requiere autenticación.
+- **INDECOPI "Mira a quién le compras"** (`miraaquienlecompras.gob.pe`) — publica sanciones firmes por empresa; consulta caso por caso, sin descarga masiva.
+- **Fondo MIVIVIENDA**, buscador de proyectos (`fondomivivienda.pe/buscador-proyectos`) — tiene promotor, distrito y precio por proyecto, pero es una SPA sin API pública documentada.
+
+**Plan:** consultar las municipalidades distritales con mayor volumen de obra nueva, y evaluar el acceso institucional al CIPIEC. Hasta entonces, `constructora_reliability_score` no entra al feature store.
 
 ## 6. Límites distritales (asignación de zona)
 

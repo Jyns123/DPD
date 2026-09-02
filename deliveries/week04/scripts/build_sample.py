@@ -9,6 +9,7 @@ SLUG_FIX = {"brena": "BREÑA"}
 def construir(listings="data/raw/listings_urbania.csv",
               zona="data/samples/zone_index_distrito.csv",
               baseline="data/samples/baseline_precio_m2_distrito.csv",
+              bcrp="data/samples/bcrp_precio_m2_distrito.csv",
               n=500, semilla=7):
     d = pd.read_csv(listings, encoding="utf-8-sig")
     d["district"] = d.district.map(lambda s: SLUG_FIX.get(s, s.replace("-", " ").upper()))
@@ -30,6 +31,13 @@ def construir(listings="data/raw/listings_urbania.csv",
                      "urban_convenience_index", "zone_composite_index",
                      "idh_2019", "pct_pobreza_total"]], on="distrito", how="left"))
 
+    # referencia oficial del bcrp, solo cubre 12 de los 20 distritos
+    b2 = pd.read_csv(bcrp)
+    b2 = b2[(b2.tipo == "distrito") & (b2.trimestre == b2.trimestre.max())]
+    d = d.merge(b2[["serie", "precio_m2"]].rename(
+        columns={"serie": "distrito", "precio_m2": "bcrp_price_m2_usd"}),
+        on="distrito", how="left")
+
     # baseline del pitch: precio justo = mediana por m2 del distrito x area
     d["baseline_price_soles"] = (d.precio_m2_mediana * d.area_total).round(0)
     d["opportunity_score_baseline"] = (
@@ -46,7 +54,8 @@ def construir(listings="data/raw/listings_urbania.csv",
     cols = ["listing_id", "source", "district", "ubigeo", "address", "urbanization",
             "price_soles", "area_m2", "price_per_m2", "rooms", "bathrooms", "parking",
             "maintenance_fee", "photos_count", "district_median_price_m2",
-            "baseline_price_soles", "opportunity_score_baseline", "crime_index_zone",
+            "baseline_price_soles", "opportunity_score_baseline", "bcrp_price_m2_usd",
+            "crime_index_zone",
             "crime_trend_zone", "urban_convenience_index", "zone_composite_index",
             "idh_2019", "pct_pobreza_total"]
     return d[cols].sample(min(n, len(d)), random_state=semilla).sort_values(

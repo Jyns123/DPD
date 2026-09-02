@@ -5,6 +5,7 @@ Notas sobre `data/sample.csv` y las fuentes que lo alimentan. Lo que sigue no so
 ## Valores faltantes esperados
 - `data/sample.csv` no tiene nulos, pero es porque **se construyó solo con las columnas que las fuentes actuales sí pueden llenar**. Varias variables del pitch quedaron fuera por falta de fuente: `latitude` / `longitude`, `project_stage` (construido / en planos), `floor`, `building_age_years`, `constructora_*`, `visual_quality_score`, `dist_nearest_*` y `listing_date`.
 - `maintenance_fee` tiene mediana 0 y máximo S/ 1 365 000: el campo mezcla "no informado" con 0 real, así que hoy no es usable como está.
+- `bcrp_price_m2_usd` es nulo en 155 de las 500 filas: el BCRP solo publica precios para 12 de los 20 distritos con listados. Es el único campo del sample con faltantes, y son estructurales, no errores.
 - `constructora_reliability_score` y `visual_quality_score` no existen todavía en ninguna fuente identificada.
 
 ## Duplicados
@@ -42,6 +43,19 @@ Notas sobre `data/sample.csv` y las fuentes que lo alimentan. Lo que sigue no so
 - **El sesgo de mapeo se confirma en los números:** San Martín de Porres aparece con 610 colegios y 599 parques, más que cualquier distrito céntrico, y eso lo empuja al segundo lugar del índice compuesto. Refleja intensidad de mapeo comunitario tanto como equipamiento real. Pendiente contrastar contra el padrón de instituciones educativas del MINEDU.
 - 37 de 300 POIs del sample no tienen `name`. No afecta las distancias, pero sí la explicabilidad ("a 200 m del parque X").
 - Los pesos de las categorías (colegio 0.25, parque 0.25, transporte 0.25, mercado 0.15, salud 0.10) son provisionales y arbitrarios. La idea del producto es que los pondere el perfil del usuario.
+
+### Precios del BCRP
+- **No son precios de transacción.** El BCRP construye la serie con precios *de oferta* tomados de Urbania, la misma fuente de nuestros listados. Comparten el sesgo: miden lo que se pide, no lo que se paga. Sirve como referencia externa independiente de nuestro procesamiento, pero **no resuelve la falta de un ground truth de transacciones reales**, que sigue siendo el vacío más serio para evaluar el motor de valoración.
+- **Cobertura de 12 distritos** de ingresos alto y medio (Barranco, La Molina, Miraflores, San Borja, San Isidro, Surco, Jesús María, Lince, Magdalena, Pueblo Libre, San Miguel, Surquillo). No hay serie oficial para los distritos populares, que son justamente los de mayor demanda de vivienda propia.
+- **Está en dólares** por m², mientras nuestros listados están en soles. La conversión requiere fijar un tipo de cambio por período; queda pendiente decidir cuál.
+- Contrastando el último trimestre: Miraflores da US$ 2 464/m² en el BCRP contra S/ 7 748/m² (≈ US$ 2 070) en nuestra mediana de Urbania. La brecha es esperable por diferencias de muestra y método, pero hay que explicarla antes de usar el BCRP como referencia de calibración.
+
+### Licencias y conformidades de obra
+- **Cobertura mínima:** 254 filas en total, **todas de Cercado de Lima**. La Municipalidad Metropolitana solo emite licencias para ese distrito; los otros 42 dependen de sus propias municipalidades. Como base para un score de constructoras, es insuficiente.
+- **El `solicitante` casi nunca es una constructora:** de las 159 licencias, la mayoría son personas naturales o instituciones (universidades, asociaciones). No se puede construir un historial por empresa con esto.
+- **Tildes corruptas en origen:** el archivo trae el carácter de reemplazo dentro de los datos (`ASOCIACI?N CULTURAL`), no es un problema de lectura nuestro. Los encabezados además traen saltos de línea.
+- **Las dos etapas no se pueden emparejar:** el archivo de conformidades no incluye `solicitante`, así que no se puede medir cuánto tardó cada empresa entre licencia y entrega, que era justamente el indicador buscado.
+- `valorizacion` llega en 0 en las conformidades y `uso` trae valores como `--`, `SIN ESPECIFICAR` y `SIN USO`.
 
 ### Índices de zona
 - El `zone_composite_index` va con **dos de los tres componentes** del pitch: seguridad y conveniencia, a 50/50. Falta el de percepción visual.
