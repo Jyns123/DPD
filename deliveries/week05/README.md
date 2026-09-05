@@ -16,7 +16,7 @@
 
 InmoScore es un asistente de búsqueda inmobiliaria para compradores de vivienda propia en Lima Metropolitana. Integra un motor de valoración de precios, un modelo de visión por computadora para evaluar el entorno, y un motor de recomendación personalizado, para identificar inmuebles subvalorados y priorizarlos según el perfil financiero y de estilo de vida de cada usuario — con cada recomendación acompañada de una explicación en lenguaje natural.
 
-Ver el detalle completo en [`deliveries/week05/ProjectProposal.pdf`](deliveries/week05/ProjectProposal.pdf) y en el [`Data Product Canvas`](deliveries/week05/DataProductCanvas.pdf).
+Ver el detalle completo en [`deliveries/week05/ProjectProposal.pdf`](ProjectProposal.pdf) y en el [`Data Product Canvas`](DataProductCanvas.pdf).
 
 ## Estructura del repositorio
 
@@ -43,9 +43,8 @@ Ver el detalle completo en [`deliveries/week05/ProjectProposal.pdf`](deliveries/
 
 ## Enlaces relevantes
 
-- Presentación Week 5: [`deliveries/week05/PresentationWeek05.pptx`](deliveries/week05/PresentationWeek05.pptx)
-- Requisitos completos: [`deliveries/week05/Requirements.md`](deliveries/week05/Requirements.md)
-- Dataset de muestra (Week 4): [`deliveries/week04/data/sample.csv`](deliveries/week04/data/sample.csv)
+- Presentación Week 5: [`deliveries/week05/PresentationWeek05.pptx`](PresentationWeek05.pptx)
+- Requisitos completos: [`deliveries/week05/Requirements.md`](Requirements.md)
 
 ## Próximos pasos (Week 6)
 
