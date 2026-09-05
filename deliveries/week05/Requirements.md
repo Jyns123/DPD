@@ -1,0 +1,73 @@
+# Requirements — InmoScore
+
+## 1. Stakeholders
+
+| Stakeholder | Rol / interés en el producto |
+|---|---|
+| Compradores de vivienda propia (usuario final) | Necesitan tomar una decisión de compra informada, comparando precio, entorno y confiabilidad del proyecto. |
+| Constructoras e inmobiliarias confiables | Beneficiarias indirectas: podrían diferenciarse de la oferta informal mediante un score de confiabilidad transparente (expansión futura, B2B). |
+| Equipo del proyecto | Denzel (Cloud & DevOps Engineer), Jyns (Machine Learning Engineer), Mafer (Data Analyst), Lisseth (Full-Stack Developer & UX/UI Designer). |
+| Docente / curso DS3022 | Sponsor académico; evalúa el cumplimiento de los hitos y la calidad del producto de datos. |
+
+## 2. User Needs
+
+- Como comprador, necesito saber si el precio publicado de un inmueble está por encima o por debajo de su valor real de mercado.
+- Como comprador, necesito conocer información objetiva sobre el entorno (seguridad, áreas verdes, densidad urbana) sin depender solo de las fotos del anuncio.
+- Como comprador que evalúa un proyecto en planos, necesito saber qué tan confiable es la constructora antes de comprometer mi dinero.
+- Como comprador, necesito que la plataforma priorice las propiedades según mi situación financiera y mis preferencias de estilo de vida, no solo mostrar un listado genérico.
+- Como comprador, necesito entender el "por qué" de cada recomendación para poder confiar en ella.
+
+## 3. Functional Requirements
+
+| ID | Requerimiento |
+|---|---|
+| RF-01 | El sistema debe recolectar y normalizar listados inmobiliarios (precio, área, distrito, habitaciones, piso, antigüedad, constructora, etapa del proyecto) desde portales públicos. |
+| RF-02 | El sistema debe calcular la distancia entre cada inmueble y los puntos de interés cercanos (colegios, parques, transporte, comercio). |
+| RF-03 | El sistema debe generar un precio de referencia estimado (`predicted_price_soles`) para cada inmueble mediante un modelo de valoración. |
+| RF-04 | El sistema debe calcular un score de oportunidad (`opportunity_score`), comparando el precio publicado con el precio estimado. |
+| RF-05 | El sistema debe generar un score de calidad visual del entorno (`visual_quality_score`) a partir de imágenes de la zona, mediante un modelo de visión por computadora. |
+| RF-06 | El sistema debe calcular un índice compuesto de zona (`zone_composite_index`), combinando seguridad, conveniencia urbana y `visual_quality_score`. |
+| RF-07 | El sistema debe calcular un score de confiabilidad (`constructora_reliability_score`) para cada constructora identificada en los listados. |
+| RF-08 | El sistema debe permitir al usuario ingresar su perfil financiero (ingreso, capacidad de endeudamiento, ahorro para inicial). |
+| RF-09 | El sistema debe permitir al usuario declarar preferencias de estilo de vida (tolerancia al ruido, cercanía a trabajo/familia, importancia relativa de seguridad vs. precio vs. ubicación). |
+| RF-10 | El sistema debe generar un ranking personalizado de propiedades combinando el score de oportunidad, el índice de zona, el score de constructora y el perfil del usuario. |
+| RF-11 | El sistema debe presentar, junto a cada recomendación, una explicación en lenguaje natural del porqué de esa recomendación. |
+| RF-12 | El sistema debe permitir visualizar las propiedades recomendadas en un mapa interactivo. |
+
+## 4. Non-Functional Requirements
+
+| ID | Requerimiento |
+|---|---|
+| RNF-01 | **Rendimiento:** el ranking de propiedades debe generarse en menos de 5 segundos tras un cambio en las preferencias del usuario, para una base de hasta ~5,000 propiedades activas. |
+| RNF-02 | **Escalabilidad:** la arquitectura de datos debe soportar la incorporación de nuevos distritos de Lima Metropolitana sin rediseño estructural. |
+| RNF-03 | **Actualidad de datos:** los listados inmobiliarios deben actualizarse al menos semanalmente; los datos de criminalidad y proyectos, con una frecuencia menor (mensual/trimestral), dado que cambian más lento. |
+| RNF-04 | **Usabilidad:** la interfaz debe permitir a un usuario sin conocimientos técnicos configurar sus preferencias y obtener un resultado en menos de 3 pasos. |
+| RNF-05 | **Transparencia/explicabilidad:** ninguna recomendación debe mostrarse sin su explicación asociada. |
+| RNF-06 | **Privacidad:** los datos de perfil financiero del usuario no deben almacenarse ni compartirse fuera del entorno de la aplicación sin consentimiento explícito. |
+| RNF-07 | **Legalidad del scraping:** la recolección de datos de portales inmobiliarios debe respetar los Términos de Servicio y `robots.txt` de cada fuente. |
+| RNF-08 | **Reproducibilidad:** todo el pipeline de datos y modelos debe ser ejecutable siguiendo la documentación del repositorio, sin dependencias no documentadas. |
+
+## 5. Assumptions
+
+- Se asume que los portales inmobiliarios (Urbania, Properati) mantienen una estructura HTML relativamente estable durante el desarrollo del proyecto, permitiendo el scraping planificado.
+- Se asume que el dataset propio de criminalidad e imágenes de entorno, mencionado como punto de partida del equipo, será formalmente documentado y validado antes de Week 6.
+- Se asume que existe un volumen suficiente de transacciones históricas (o proxies razonables) para entrenar y validar el modelo de valoración con un error aceptable.
+- Se asume que el usuario objetivo tiene acceso a internet y un dispositivo con navegador web moderno.
+
+## 6. Constraints
+
+- El proyecto debe desarrollarse y entregarse dentro del cronograma del curso DS3022 (Week 4 a Week 15).
+- El equipo cuenta con 4 integrantes con roles definidos (Cloud/DevOps, ML, Data Analyst, Full-Stack/UX-UI), lo que limita la profundidad simultánea posible en cada componente.
+- No se cuenta con acceso a APIs oficiales restringidas (ej. registros completos de transacciones inmobiliarias reales de SUNARP), por lo que el modelo de valoración se entrena con datos de listados públicos, no con transacciones cerradas verificadas.
+- El scraping de portales inmobiliarios está sujeto a cambios en su estructura o restricciones de acceso fuera del control del equipo.
+- El score de confiabilidad de constructoras tendrá cobertura desigual, dado que no todas las constructoras cuentan con registros públicos completos.
+
+## 7. Acceptance Criteria
+
+- [ ] El sistema recolecta y normaliza al menos 500 listados inmobiliarios reales de Lima Metropolitana con menos de 10% de valores faltantes en los campos críticos (precio, distrito, área).
+- [ ] El modelo de valoración predice el precio con un error absoluto medio (MAE) documentado y comparado contra el baseline (precio promedio por m² y distrito).
+- [ ] El modelo de visión clasifica correctamente al menos el 70% de una muestra de validación etiquetada manualmente para calidad visual del entorno.
+- [ ] El motor de recomendación genera un ranking distinto para al menos dos perfiles de usuario claramente diferenciados, demostrando personalización real.
+- [ ] Cada propiedad recomendada en la interfaz incluye una explicación textual generada automáticamente.
+- [ ] El prototipo funcional está desplegado y accesible mediante una URL pública o demo reproducible localmente siguiendo el README.
+- [ ] El repositorio contiene toda la documentación, datos de muestra y scripts necesarios para reproducir el pipeline, conforme a los lineamientos del curso.
