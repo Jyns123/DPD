@@ -34,17 +34,18 @@ Ver el detalle completo en [`deliveries/week05/ProjectProposal.pdf`](ProjectProp
     │   ├── data_quality_note.md
     │   └── requirements.txt
     └── week05/
+        ├── README.md
         ├── ProjectProposal.pdf
         ├── ProjectProposal.docx
         ├── DataProductCanvas.pdf
         ├── Requirements.md
-        └── PresentationWeek05.pptx (falta)
+        └── PresentationWeek05.pptx (falta revisar y subir)
 ```
 
 ## Enlaces relevantes
 
-- Presentación Week 5: [`deliveries/week05/PresentationWeek05.pptx`](PresentationWeek05.pptx)
 - Requisitos completos: [`deliveries/week05/Requirements.md`](Requirements.md)
+- Presentación completa: casos de uso, wireframes, storyboards, user stories y tareas analíticas: [`deliveries/week05/PresentationWeek05.pptx`](deliveries/week05/PresentationWeek05.pptx)
 
 ## Próximos pasos (Week 6)
 

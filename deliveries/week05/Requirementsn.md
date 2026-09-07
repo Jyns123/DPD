@@ -37,13 +37,15 @@ Esta sección documenta en profundidad los dos requerimientos centrales del prod
 | **Criterios de aceptación** | El equipo de QA no debe poder encontrar ninguna propiedad en el ranking final sin su explicación asociada. |
 | **Dependencias** | REQ-01 |
 
-## 1. Stakeholders
+---
+
+
 
 | Stakeholder | Rol / interés en el producto |
 |---|---|
 | Compradores de vivienda propia (usuario final) | Necesitan tomar una decisión de compra informada, comparando precio, entorno y confiabilidad del proyecto. |
 | Constructoras e inmobiliarias confiables | Beneficiarias indirectas: podrían diferenciarse de la oferta informal mediante un score de confiabilidad transparente (expansión futura, B2B). |
-| Equipo del proyecto | Denzel (Cloud & DevOps Engineer), Jyns (Machine Learning Engineer), Lisseth (Data Analyst), Mafer (Full-Stack Developer & UX/UI Designer). |
+| Equipo del proyecto | Denzel (Cloud & DevOps Engineer), Jyns (Machine Learning Engineer), Mafer (Data Analyst), Lisseth (Full-Stack Developer & UX/UI Designer). |
 | Docente / curso DS3022 | Sponsor académico; evalúa el cumplimiento de los hitos y la calidad del producto de datos. |
 
 ## 2. User Needs
