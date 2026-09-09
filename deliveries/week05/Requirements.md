@@ -41,10 +41,15 @@ Esta sección documenta en profundidad los dos requerimientos centrales del prod
 
 | Stakeholder | Rol / interés en el producto |
 |---|---|
-| Compradores de vivienda propia (usuario final) | Necesitan tomar una decisión de compra informada, reduciendo la asimetría de información y el riesgo patrimonial mediante la evaluación comparativa de precio justo, entorno urbano y confiabilidad del proyecto. |
-| Constructoras e inmobiliarias confiables | Beneficiarias indirectas: interesadas en validar su oferta formal y diferenciarse de la oferta riesgosa o informal a través de un score de transparencia auditable (potencial de expansión B2B). |
-| Equipo del proyecto (InmoScore) | Responsables del ciclo de vida del producto: ingesta y curaduría de datos, desarrollo del motor de recomendación, arquitectura cloud/DevOps e interfaz web. Integrantes: Denzel (Cloud & DevOps), Jyns (Machine Learning), Lisseth (Data Analyst), Mafer (Full-Stack & UX/UI). |
-| Docente / Evaluador (Curso DS3022) | Sponsor académico: evalúa la viabilidad técnica, el rigor metodológico en la ingeniería de características y el cumplimiento de los hitos del producto de datos. |
+| Compradores de vivienda propia (usuario final) | Buscan tomar una decisión de compra informada evaluando precio justo, entorno urbano y confiabilidad del proyecto. |
+| Constructoras e inmobiliarias confiables | Beneficiarias indirectas: interesadas en validar su oferta formal y diferenciarse frente al mercado informal mediante un score transparente. |
+| Equipo del proyecto (InmoScore) | Responsables del ciclo de vida del producto: ingesta de datos, entrenamiento del modelo, arquitectura cloud y desarrollo de la interfaz. |
+| Docente / Evaluador (Curso DS3022) | Sponsor académico: evalúa la viabilidad técnica, el rigor metodológico y el cumplimiento de los hitos del producto de datos. |
+| Entidades financieras y bancos | Interesados en evaluar la viabilidad de créditos hipotecarios y la capacidad de pago del comprador según el valor real del inmueble. |
+| Municipalidades distritales | Proveedores de datos sobre zonificación, licencias de construcción y fuentes de equipamiento urbano (parques, obras y servicios). |
+| Policía Nacional del Perú (PNP) | Fuente de información oficial sobre índices delictivos, denuncias y mapas de calor de seguridad por sector. |
+| Indecopi | Entidad fiscalizadora del historial de quejas, sanciones y cumplimiento contractual de las promotoras inmobiliarias. |
+| Juntas vecinales y comunidad local | Actores del entorno directo: aportan la percepción real sobre convivencia, niveles de ruido y dinámica barrial. |
 
 
 ## 2. User Needs
