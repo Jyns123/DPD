@@ -14,7 +14,7 @@
 
 ## Resumen del producto
 
-InmoScore es un asistente de búsqueda inmobiliaria para compradores de vivienda propia en Lima Metropolitana. Integra un motor de valoración de precios, un modelo de visión por computadora para evaluar el entorno, y un motor de recomendación personalizado, para identificar inmuebles subvalorados y priorizarlos según el perfil financiero y de estilo de vida de cada usuario — con cada recomendación acompañada de una explicación en lenguaje natural.
+InmoScore es un asistente de búsqueda inmobiliaria para compradores de vivienda propia en Lima Metropolitana. Integra un motor de valoración de precios, un modelo de visión por computadora para evaluar el entorno, y un motor de recomendación personalizado, para identificar inmuebles subvalorados y priorizarlos según el perfil financiero y de estilo de vida de cada usuario. Cada recomendación se acompaña de una explicación en lenguaje natural.
 
 Ver el detalle completo en [`deliveries/week05/ProjectProposal.pdf`](ProjectProposal.pdf) y en el [`Data Product Canvas`](DataProductCanvas.pdf).
 
@@ -39,16 +39,35 @@ Ver el detalle completo en [`deliveries/week05/ProjectProposal.pdf`](ProjectProp
         ├── ProjectProposal.docx
         ├── DataProductCanvas.pdf
         ├── Requirements.md
-        └── PresentationWeek05.pptx (falta revisar y subir)
+        └── PresentationWeek05.pptx
 ```
 
 ## Enlaces relevantes
 
-- Requisitos completos: [`deliveries/week05/Requirements.md`](Requirements.md)
-- Presentación completa: casos de uso, wireframes, storyboards, user stories y tareas analíticas: [`deliveries/week05/PresentationWeek05.pptx`](deliveries/week05/PresentationWeek05.pptx)
+- Propuesta de proyecto: [`ProjectProposal.pdf`](ProjectProposal.pdf) y su fuente editable [`ProjectProposal.docx`](ProjectProposal.docx)
+- Data Product Canvas: [`DataProductCanvas.pdf`](DataProductCanvas.pdf)
+- Requerimientos completos: [`Requirements.md`](Requirements.md)
+- Presentación (21 diapositivas) con user stories, casos de uso, wireframes, storyboards y tareas analíticas: [`PresentationWeek05.pptx`](PresentationWeek05.pptx)
+- Entrega anterior: [`deliveries/week04/`](../week04/)
+
+## Mapa de la presentación
+
+| Diapositivas | Contenido | Criterio de rúbrica |
+|---|---|---|
+| 2–5 | Project Proposal: abstract, background, problema, usuarios, valor y alcance | — |
+| 6 | Data Product Canvas | — |
+| 7–10 | Stakeholders, user needs, RF, RNF y los dos requerimientos documentados | Producto y requerimientos |
+| 11–12 | **User stories** US-01 y US-02, con criterios Given/When/Then y diagrama de flujo | User stories – Diagramas |
+| 13–14 | **Wireframes** de perfil de usuario y tarjeta de propiedad | Wireframes |
+| 15–16 | **Storyboards** de María (ranking) y Carlos (explicabilidad) | Storyboards |
+| 17–18 | **Casos de uso** UC-01 y UC-02, con actor, precondición, flujos y postcondición | Casos de uso |
+| 19 | **Tareas analíticas** con responsable, requerimiento asociado y justificación | Tareas analíticas |
+| 20 | Assumptions, constraints y acceptance criteria | — |
+
+Cada artefacto está trazado a REQ-01 (motor de recomendación personalizado) o REQ-02 (explicabilidad).
 
 ## Próximos pasos (Week 6)
 
 - Análisis exploratorio de datos (EDA) sobre los listados recolectados.
 - Selección formal del método de modelado para cada componente (valoración, visión, recomendación) y definición de baseline.
-- Validación del estado real de los datasets propios de criminalidad e imágenes de entorno.
+- Geocodificación de las direcciones de los avisos, requisito para calcular distancias a puntos de interés.

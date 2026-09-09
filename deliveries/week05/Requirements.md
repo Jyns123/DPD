@@ -93,8 +93,8 @@ Esta sección documenta en profundidad los dos requerimientos centrales del prod
 ## 5. Assumptions
 
 - Se asume que los portales inmobiliarios (Urbania, Properati) mantienen una estructura HTML relativamente estable durante el desarrollo del proyecto, permitiendo el scraping planificado.
-- Se asume que el dataset propio de criminalidad e imágenes de entorno, mencionado como punto de partida del equipo, será formalmente documentado y validado antes de Week 6.
-- Se asume que existe un volumen suficiente de transacciones históricas (o proxies razonables) para entrenar y validar el modelo de valoración con un error aceptable.
+- ~~Se asume que el dataset propio de criminalidad e imágenes de entorno será documentado y validado antes de Week 6.~~ **Resuelto parcialmente en Week 4:** criminalidad ya no es un supuesto — se reemplazó por una fuente pública oficial (SIDPOL/MININTER, 29 833 registros de Lima y Callao). El dataset de imágenes de entorno **sigue sin existir** y es hoy el principal riesgo abierto de RF-05.
+- **Supuesto confirmado, con matiz.** Se asumía que existían transacciones históricas para validar el motor de valoración. Se confirmó que **sí existen**: el SAT de Lima publica las determinaciones del **Impuesto de Alcabala**, que se paga sobre el valor real de transferencia de cada predio. Son 24 148 compraventas al 100% de propiedad en 44 distritos solo en el primer semestre de 2026. El matiz es que el dataset **no trae área ni tipo de predio**, por lo que no permite calcular precio por m² directamente (ver §9).
 - Se asume que el usuario objetivo tiene acceso a internet y un dispositivo con navegador web moderno.
 
 ## 6. Constraints
@@ -107,10 +107,42 @@ Esta sección documenta en profundidad los dos requerimientos centrales del prod
 
 ## 7. Acceptance Criteria
 
-- [ ] El sistema recolecta y normaliza al menos 500 listados inmobiliarios reales de Lima Metropolitana con menos de 10% de valores faltantes en los campos críticos (precio, distrito, área).
-- [ ] El modelo de valoración predice el precio con un error absoluto medio (MAE) documentado y comparado contra el baseline (precio promedio por m² y distrito).
+- [x] El sistema recolecta y normaliza al menos 500 listados inmobiliarios reales de Lima Metropolitana con menos de 10% de valores faltantes en los campos críticos (precio, distrito, área). **Cumplido en Week 4: 3 987 avisos en 20 distritos, sin nulos en precio, distrito ni área tras el filtro de outliers.**
+- [ ] El modelo de valoración predice el precio con un error absoluto medio (MAE) documentado y comparado contra el baseline (precio mediano por m² y distrito, ya calculado en Week 4). **El MAE se mide contra precio de oferta, no de transacción** — ver la corrección en §5.
 - [ ] El modelo de visión clasifica correctamente al menos el 70% de una muestra de validación etiquetada manualmente para calidad visual del entorno.
 - [ ] El motor de recomendación genera un ranking distinto para al menos dos perfiles de usuario claramente diferenciados, demostrando personalización real.
 - [ ] Cada propiedad recomendada en la interfaz incluye una explicación textual generada automáticamente.
 - [ ] El prototipo funcional está desplegado y accesible mediante una URL pública o demo reproducible localmente siguiendo el README.
 - [ ] El repositorio contiene toda la documentación, datos de muestra y scripts necesarios para reproducir el pipeline, conforme a los lineamientos del curso.
+
+## 8. Estado de los datos al cierre de Week 5
+
+Trazabilidad entre cada requerimiento funcional y la fuente real que lo respalda hoy. Todas las fuentes son públicas y reproducibles con los scripts de `deliveries/week04/scripts/`.
+
+| RF | Fuente disponible | Volumen | Estado |
+|---|---|---|---|
+| RF-01 | Urbania.pe (dataset MIT + scraping propio vía sitemap) | 3 987 avisos + 200 fichas | ✅ |
+| RF-02 | OpenStreetMap, Overpass API | 16 987 POIs de Lima | 🟡 faltan coordenadas del inmueble |
+| RF-03 / RF-04 | Baseline propio + serie oficial del BCRP + **transacciones reales de Alcabala** | 20 distritos + 957 obs. + 24 148 transacciones | 🟡 falta entrenar el modelo |
+| RF-05 | — | 0 | ❌ sin fuente de imágenes |
+| RF-06 | SIDPOL + POIs + polígonos INEI | índice en 47 distritos | 🟡 2 de 3 componentes |
+| RF-07 | Fondo MIVIVIENDA (API pública) | 747 proyectos, 460 promotores | 🟡 falta historial de plazos |
+| RF-08 a RF-12 | — | — | ⬜ dependen del prototipo (Week 10) |
+
+**Fuentes incorporadas en Week 4 que no estaban previstas en el Canvas original:**
+
+- **BCRP** — serie oficial de precio por m² por distrito y ratio precio/alquiler, trimestral desde 1998. Sirve como referencia externa e independiente del baseline propio.
+- **INEI, estratos de ingreso por manzana** — clasificación de cada manzana en 5 niveles de ingreso per cápita. Mucho más fino que el IDH distrital.
+- **Municipalidad de Lima** — licencias y conformidades de obra, con zonificación, altura y valorización.
+- **SAT de Lima, Impuesto de Alcabala** — el hallazgo más relevante: **transacciones cerradas reales**, con fecha de transferencia, distrito, valor de transferencia en soles y dólares, y marca de primera venta (obra nueva) vs. reventa. Es el ground truth que faltaba para evaluar el motor de valoración.
+
+## 9. Riesgos abiertos
+
+| Riesgo | Impacto | Estado / mitigación |
+|---|---|---|
+| **Las transacciones de Alcabala no traen área ni tipo de predio.** No se puede calcular precio por m² por operación. | Medio — se resolvió el ground truth, pero no es directamente comparable con los listados. | Comparar a nivel de distrito por percentiles, no por operación. Ver el hallazgo de bimodalidad abajo. |
+| **La distribución de Alcabala es bimodal.** Cocheras y depósitos se registran como predios independientes y hunden la mediana: en San Isidro el 64% de las compraventas están bajo S/ 80 000. | Medio — usar la mediana cruda llevaría a conclusiones falsas. | El percentil correcto depende de cuánta cochera tenga el distrito: donde >45% de operaciones son chicas, el **p90** coincide con la mediana de listados (San Isidro −0%, Surco +1%, San Borja +1%); donde <30%, el **p75** ajusta mejor. Se define el criterio en Week 6. |
+| **No hay dataset de imágenes de entorno.** RF-05 no tiene fuente. | Alto — bloquea el tercer componente del `zone_composite_index`. | Evaluar Mapillary (imágenes abiertas, requiere token de API) o levantar un set propio acotado. |
+| **Los listados no traen coordenadas.** El mapa de Urbania las carga desde una ruta prohibida por su `robots.txt`. | Medio — bloquea RF-02 y las distancias a POIs. | Geocodificar las direcciones con Nominatim (OpenStreetMap). |
+| **El historial de cumplimiento de plazos no es público.** El CIPIEC del MVCS lo tiene, pero exige autenticación. | Medio — limita RF-07 a volumen de obra, sin plazos. | Solicitar acceso institucional al CIPIEC; mientras tanto, cruzar los 460 RUC de MIVIVIENDA contra sanciones de INDECOPI. |
+| **Sesgo de mapeo en OpenStreetMap.** Distritos con más mapeo comunitario aparecen mejor equipados de lo que están. | Medio — sesga el `zone_composite_index`. | Contrastar contra el padrón de instituciones educativas del MINEDU antes de exponer el ranking al usuario. |
