@@ -21,7 +21,7 @@ Esta sección documenta en profundidad los dos requerimientos centrales del prod
 | **Criterios de aceptación** | Dos usuarios con perfiles distintos, evaluando el mismo inventario, deben recibir rankings diferentes y explicables. |
 | **Dependencias** | REQ-02 (explicabilidad), RF-03 a RF-07 (scores individuales) |
 
-### REQ-02 — Explicabilidad de cada recomendación
+### REQ-02 — Explicación contextual de propiedades sugeridas
 
 | Campo | Detalle |
 |---|---|
@@ -41,10 +41,11 @@ Esta sección documenta en profundidad los dos requerimientos centrales del prod
 
 | Stakeholder | Rol / interés en el producto |
 |---|---|
-| Compradores de vivienda propia (usuario final) | Necesitan tomar una decisión de compra informada, comparando precio, entorno y confiabilidad del proyecto. |
-| Constructoras e inmobiliarias confiables | Beneficiarias indirectas: podrían diferenciarse de la oferta informal mediante un score de confiabilidad transparente (expansión futura, B2B). |
-| Equipo del proyecto | Denzel (Cloud & DevOps Engineer), Jyns (Machine Learning Engineer), Lisseth (Data Analyst), Mafer (Full-Stack Developer & UX/UI Designer). |
-| Docente / curso DS3022 | Sponsor académico; evalúa el cumplimiento de los hitos y la calidad del producto de datos. |
+| Compradores de vivienda propia (usuario final) | Necesitan tomar una decisión de compra informada, reduciendo la asimetría de información y el riesgo patrimonial mediante la evaluación comparativa de precio justo, entorno urbano y confiabilidad del proyecto. |
+| Constructoras e inmobiliarias confiables | Beneficiarias indirectas: interesadas en validar su oferta formal y diferenciarse de la oferta riesgosa o informal a través de un score de transparencia auditable (potencial de expansión B2B). |
+| Equipo del proyecto (InmoScore) | Responsables del ciclo de vida del producto: ingesta y curaduría de datos, desarrollo del motor de recomendación, arquitectura cloud/DevOps e interfaz web. Integrantes: Denzel (Cloud & DevOps), Jyns (Machine Learning), Lisseth (Data Analyst), Mafer (Full-Stack & UX/UI). |
+| Docente / Evaluador (Curso DS3022) | Sponsor académico: evalúa la viabilidad técnica, el rigor metodológico en la ingeniería de características y el cumplimiento de los hitos del producto de datos. |
+
 
 ## 2. User Needs
 
