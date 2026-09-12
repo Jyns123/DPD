@@ -1,0 +1,17 @@
+file,rows,columns,missing_cells,duplicate_rows
+bcrp_precios.csv,957,5,0,0
+denuncias_lima.csv,29833,8,0,0
+denuncias_policiales.csv,361792,8,0,0
+distritos_lima_socioec.csv,51,12,9,0
+entidades_tecnicas_ranking.csv,10,5,0,0
+estratos_ingreso_links.csv,50,3,0,0
+estratos_ingreso_manzana.csv,102409,9,0,3
+listings_geocoded.csv,10,6,18,0
+listings_poi_distances.csv,4,11,0,0
+listings_urbania.csv,3987,11,0,0
+obras_conformidades_cercado.csv,95,25,3,0
+obras_licencias_cercado.csv,159,25,12,0
+pois_lima.csv,16989,6,6314,0
+proyectos_mivivienda.csv,747,19,783,0
+urbania_fichas.csv,200,14,538,0
+urbania_fichas_lima.csv,99,15,213,0

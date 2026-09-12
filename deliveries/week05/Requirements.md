@@ -64,7 +64,7 @@ Los ocho requerimientos centrales del producto, detallados para que sean claros 
 | **Fuente** | Comprador de vivienda propia |
 | **Entradas** | Área, distrito, dormitorios, baños, cocheras y variables de entorno |
 | **Salidas** | `predicted_price_soles` y `opportunity_score` por inmueble |
-| **Reglas de negocio** | El error se mide contra las transacciones cerradas del Impuesto de Alcabala, comparando por percentil de distrito y no por mediana cruda, porque cocheras y depósitos se inscriben como predios independientes. |
+| **Reglas de negocio** | Cuando exista un extracto reproducible de Alcabala, el error se medirá contra transacciones cerradas por percentil de distrito y no por mediana cruda. En el estado actual de Week 6 la evaluación usa precio de oferta, porque el extracto no está versionado en el repositorio. |
 | **Criterios de aceptación** | El MAE está documentado y supera al baseline de precio mediano por m² y distrito. |
 | **Dependencias** | REQ-03, REQ-07 |
 
@@ -227,7 +227,7 @@ Total: 26 requerimientos funcionales.
 
 - Se asume que los portales inmobiliarios (Urbania, Properati) mantienen una estructura HTML relativamente estable durante el desarrollo del proyecto, permitiendo el scraping planificado.
 - ~~Se asume que el dataset propio de criminalidad e imágenes de entorno será documentado y validado antes de Week 6.~~ **Resuelto parcialmente en Week 4:** criminalidad ya no es un supuesto — se reemplazó por una fuente pública oficial (SIDPOL/MININTER, 29 833 registros de Lima y Callao). El dataset de imágenes de entorno **sigue sin existir** y es hoy el principal riesgo abierto de RF-05.
-- **Supuesto confirmado, con matiz.** Se asumía que existían transacciones históricas para validar el motor de valoración. Se confirmó que **sí existen**: el SAT de Lima publica las determinaciones del **Impuesto de Alcabala**, que se paga sobre el valor real de transferencia de cada predio. Son 24 148 compraventas al 100% de propiedad en 44 distritos solo en el primer semestre de 2026. El matiz es que el dataset **no trae área ni tipo de predio**, por lo que no permite calcular precio por m² directamente (ver §9).
+- **Fuente pendiente de incorporación.** El SAT de Lima publica determinaciones del Impuesto de Alcabala, pero el extracto mencionado en versiones anteriores no está actualmente versionado ni reproduciblemente descargable desde este repositorio. Por ello no se presenta como fuente disponible en Week 6 ni se usa para calcular MAE.
 - Se asume que el usuario objetivo tiene acceso a internet y un dispositivo con navegador web moderno.
 
 ## 6. Constraints
@@ -255,23 +255,23 @@ Trazabilidad entre cada requerimiento funcional y la fuente real que lo respalda
 | RF | Fuente disponible | Volumen | Estado |
 |---|---|---|---|
 | RF-01 | Urbania.pe (dataset MIT + scraping propio vía sitemap) | 3 987 avisos + 200 fichas | ✅ |
-| RF-02 | SAT de Lima, Impuesto de Alcabala | 24 148 transacciones, 44 distritos | ✅ |
+| RF-02 | SAT de Lima, Impuesto de Alcabala | Pendiente de incorporar y versionar | ❌ |
 | RF-03 | BCRP, precio por m² y ratio precio/alquiler | 957 observaciones | ✅ |
 | RF-04 | OpenStreetMap, Overpass API | 16 987 POIs de Lima | ✅ |
 | RF-05 | MININTER, denuncias SIDPOL | 29 833 registros de Lima y Callao | ✅ |
 | RF-06 | Fondo MIVIVIENDA, API del buscador | 747 proyectos, 460 promotores | ✅ |
-| RF-07 | INEI, límites, población, IDH y estratos | 49 polígonos, 9 206 manzanas | ✅ |
+| RF-07 | INEI, límites, población, IDH y estratos | 49 polígonos, 51 distritos, 102 409 manzanas | 🟡 estratos adquiridos; falta unirlos espacialmente a listings |
 | RF-08, RF-09 | Criterio de deduplicación y fecha de extracción | — | 🟡 definido, sin automatizar |
-| RF-10 a RF-12 | Nominatim, pendiente de ejecutar | 0 avisos geocodificados | ❌ bloqueo del pipeline |
-| RF-13, RF-14 | Baseline por m² y ground truth de Alcabala | 20 distritos | 🟡 falta entrenar el modelo |
+| RF-10 a RF-12 | Nominatim + límites distritales | 10 avisos probados; 4 coordenadas válidas | 🟡 falta corrida completa y manzana |
+| RF-13, RF-14 | Baseline por m² y precio de oferta Urbania | 20 distritos | 🟡 falta entrenar y evaluar el modelo |
 | RF-15 | — | 0 | ❌ sin fuente de imágenes |
 | RF-16 | SIDPOL + POIs + polígonos INEI | índice en 47 distritos | 🟡 2 de 3 componentes |
-| RF-17, RF-18 | Fondo MIVIVIENDA y licencias municipales | 460 promotores | 🟡 falta historial de plazos |
+| RF-17, RF-18 | Fondo MIVIVIENDA + licencias Cercado | 460 promotores; 2 archivos municipales adquiridos | 🟡 cobertura municipal insuficiente para score metropolitano |
 | RF-19 a RF-26 | — | — | ⬜ dependen del prototipo (Week 10) |
 
 **Fuentes incorporadas en Week 4 que no estaban previstas en el Canvas original:**
 
-- **SAT de Lima, Impuesto de Alcabala** — transacciones cerradas reales, con fecha, distrito, valor de transferencia y marca de primera venta. Es el ground truth que faltaba para evaluar el motor de valoración.
+- **SAT de Lima, Impuesto de Alcabala** — fuente futura identificada, pendiente de archivo, licencia/procedencia y script reproducible antes de usarla como ground truth.
 - **BCRP** — serie oficial de precio por m² por distrito y ratio precio/alquiler, trimestral desde 1998.
 - **INEI, estratos de ingreso por manzana** — clasificación de cada manzana en 5 niveles de ingreso per cápita, más fino que el IDH distrital.
 - **Municipalidad de Lima** — licencias y conformidades de obra, con zonificación, altura y valorización.
@@ -280,8 +280,7 @@ Trazabilidad entre cada requerimiento funcional y la fuente real que lo respalda
 
 | Riesgo | Impacto | Estado / mitigación |
 |---|---|---|
-| **Las transacciones de Alcabala no traen área ni tipo de predio.** No se puede calcular precio por m² por operación. | Medio — se resolvió el ground truth, pero no es directamente comparable con los listados. | Comparar a nivel de distrito por percentiles, no por operación. Ver el hallazgo de bimodalidad abajo. |
-| **La distribución de Alcabala es bimodal.** Cocheras y depósitos se registran como predios independientes y hunden la mediana: en San Isidro el 64% de las compraventas están bajo S/ 80 000. | Medio — usar la mediana cruda llevaría a conclusiones falsas. | El percentil correcto depende de cuánta cochera tenga el distrito: donde >45% de operaciones son chicas, el **p90** coincide con la mediana de listados (San Isidro −0%, Surco +1%, San Borja +1%); donde <30%, el **p75** ajusta mejor. Se define el criterio en Week 6. |
+| **No existe todavía un extracto reproducible de Alcabala en el repositorio.** | Alto — impide una evaluación de transacciones. | Evaluar Week 6 contra precio de oferta y reabrir la comparación cuando se incorpore el archivo con procedencia verificable. |
 | **No hay dataset de imágenes de entorno.** RF-15 no tiene fuente. | Alto — bloquea el tercer componente del `zone_composite_index`. | Evaluar Mapillary (imágenes abiertas, requiere token de API) o levantar un set propio acotado. |
 | **Los listados no traen coordenadas.** El mapa de Urbania las carga desde una ruta prohibida por su `robots.txt`. | Alto — bloquea RF-10 a RF-12 y con ellas el índice de conveniencia por inmueble. | Geocodificar las direcciones con Nominatim (OpenStreetMap). |
 | **El historial de cumplimiento de plazos no es público.** El CIPIEC del MVCS lo tiene, pero exige autenticación. | Medio — limita RF-17 a volumen de obra, sin plazos. | Solicitar acceso institucional al CIPIEC; mientras tanto, cruzar los 460 RUC de MIVIVIENDA contra sanciones de INDECOPI. |

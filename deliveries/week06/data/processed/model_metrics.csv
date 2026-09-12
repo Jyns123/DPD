@@ -1,0 +1,2 @@
+model,n_train,n_test,mae_soles,mae_soles_per_m2,mdape,r2_log_price
+ridge_log_price,3110,786,155396.37,1165.01,0.1412,0.8512

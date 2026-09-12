@@ -1,0 +1,4 @@
+dataset,rows,exact_duplicate_rows,business_key_columns,business_key_duplicate_rows
+listings_urbania,3987,0,listing_id,0
+listings_urbania_address_price_area,3987,0,address_key|price_key|area_key,62
+pois_lima,16989,0,poi_id,0
