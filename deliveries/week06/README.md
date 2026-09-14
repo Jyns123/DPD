@@ -111,13 +111,13 @@ hasta que esté disponible una fuente reproducible de transacciones.
 
 | Componente | Estado | Cobertura | Limitaciones |
 |------------|--------|-----------|--------------|
-| **Motor de valoración** | ✅ Implementado | 3,896 anuncios, 20 distritos | Evalúa frente al precio de oferta, no transacciones reales |
-| **Índice de zona (seguridad + conveniencia)** | ✅ Implementado | 47 distritos | Falta el componente visual (sin conjunto de datos de imágenes) |
-| **Geocodificación** | 🔧 Prototipo | 10 anuncios (4 válidos) | No escalada al inventario completo de 3,896 anuncios |
-| **Puntaje de constructoras** | 🔧 Parcial | 460 promotores MIVIVIENDA | Sin historial de plazos (CIPIEC) ni licencias municipales completas |
-| **Recomendación personalizada** | 📋 Diseñada | - | Requiere prototipo de interfaz (planificado para Week 10) |
-| **Transacciones reales (Alcabala)** | ❌ No incorporadas | - | Sin fuente reproducible en el repositorio actual |
-| **Modelo visual (calidad visual)** | ❌ No implementado | - | Sin conjunto de datos de imágenes ni etiquetas manuales |
+| **Motor de valoración** | Implementado | 3,896 anuncios, 20 distritos | Evalúa frente al precio de oferta, no transacciones reales |
+| **Índice de zona (seguridad + conveniencia)** |  Implementado | 47 distritos | Falta el componente visual (sin conjunto de datos de imágenes) |
+| **Geocodificación** | Prototipo | 10 anuncios (4 válidos) | No escalada al inventario completo de 3,896 anuncios |
+| **Puntaje de constructoras** | Parcial | 460 promotores MIVIVIENDA | Sin historial de plazos (CIPIEC) ni licencias municipales completas |
+| **Recomendación personalizada** |  Diseñada | - | Requiere prototipo de interfaz (planificado para Week 10) |
+| **Transacciones reales (Alcabala)** |  No incorporadas | - | Sin fuente reproducible en el repositorio actual |
+| **Modelo visual (calidad visual)** |  No implementado | - | Sin conjunto de datos de imágenes ni etiquetas manuales |
 
 ### Hoja de ruta para Week 7-15
 
