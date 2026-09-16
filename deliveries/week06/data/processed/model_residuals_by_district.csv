@@ -1,0 +1,61 @@
+model,district,n_test,mae_soles,mdape,bias_soles
+district_median_price_m2,ATE,5,104148.0949,0.2016,-35726.0387
+district_median_price_m2,BARRANCO,58,209720.817,0.1357,77292.9511
+district_median_price_m2,BREÑA,8,83467.875,0.1978,-4676.1806
+district_median_price_m2,CHORRILLOS,50,127623.8714,0.1853,-31373.58
+district_median_price_m2,COMAS,12,61528.0,0.1759,26149.6667
+district_median_price_m2,JESUS MARIA,60,84946.737,0.1175,379.3269
+district_median_price_m2,LA MOLINA,46,155612.035,0.1946,-12375.3886
+district_median_price_m2,LA VICTORIA,25,127153.6308,0.1155,90829.9569
+district_median_price_m2,LINCE,63,144735.8162,0.1543,38335.2414
+district_median_price_m2,LOS OLIVOS,22,61775.601,0.1809,3846.8828
+district_median_price_m2,MAGDALENA DEL MAR,3,92563.1027,0.0946,-46845.7023
+district_median_price_m2,MIRAFLORES,47,330404.4222,0.1947,-15117.5198
+district_median_price_m2,PUEBLO LIBRE,51,76576.3344,0.1175,36933.0472
+district_median_price_m2,SAN BORJA,70,195810.4268,0.1593,-343.2309
+district_median_price_m2,SAN ISIDRO,57,435306.4337,0.2213,128965.7049
+district_median_price_m2,SAN JUAN DE LURIGANCHO,18,60094.4589,0.2128,-54440.8357
+district_median_price_m2,SAN MARTIN DE PORRES,24,45682.0556,0.1575,-242.8333
+district_median_price_m2,SAN MIGUEL,72,63950.6806,0.0952,17549.3843
+district_median_price_m2,SANTIAGO DE SURCO,43,169097.3127,0.1225,58893.7984
+district_median_price_m2,SURQUILLO,46,90608.6385,0.1499,-1813.7026
+log_linear_area_district,ATE,5,104314.8963,0.1923,-32505.0577
+log_linear_area_district,BARRANCO,58,252682.543,0.1134,-79574.8329
+log_linear_area_district,BREÑA,8,86101.8089,0.2098,-32939.8346
+log_linear_area_district,CHORRILLOS,50,125789.0946,0.1742,-48481.7534
+log_linear_area_district,COMAS,12,47446.2417,0.1776,5373.4573
+log_linear_area_district,JESUS MARIA,60,79417.0197,0.116,-21615.2573
+log_linear_area_district,LA MOLINA,46,188814.222,0.1717,-80708.4048
+log_linear_area_district,LA VICTORIA,25,108179.3156,0.1747,31359.8565
+log_linear_area_district,LINCE,63,133473.8837,0.1755,-17326.2148
+log_linear_area_district,LOS OLIVOS,22,56687.3724,0.1611,-5308.6144
+log_linear_area_district,MAGDALENA DEL MAR,3,129585.834,0.0236,-119523.2346
+log_linear_area_district,MIRAFLORES,47,318721.8663,0.1787,-144928.9607
+log_linear_area_district,PUEBLO LIBRE,51,57998.9305,0.1105,8344.7398
+log_linear_area_district,SAN BORJA,70,190998.3189,0.1486,-46038.4228
+log_linear_area_district,SAN ISIDRO,57,366306.5096,0.1928,21145.8969
+log_linear_area_district,SAN JUAN DE LURIGANCHO,18,55392.2804,0.1991,-52830.5783
+log_linear_area_district,SAN MARTIN DE PORRES,24,43250.8031,0.168,-6744.3245
+log_linear_area_district,SAN MIGUEL,72,60950.5414,0.1079,-5728.3048
+log_linear_area_district,SANTIAGO DE SURCO,43,189723.5198,0.1672,-30770.8901
+log_linear_area_district,SURQUILLO,46,72336.5017,0.1157,-369.9232
+ridge_contextual_log_price,ATE,5,115556.2761,0.2185,-85686.7169
+ridge_contextual_log_price,BARRANCO,58,225046.3177,0.1148,-63513.2366
+ridge_contextual_log_price,BREÑA,8,84255.2974,0.1857,-32143.7716
+ridge_contextual_log_price,CHORRILLOS,50,129113.1915,0.1572,-58422.6701
+ridge_contextual_log_price,COMAS,12,47524.8068,0.186,12066.5211
+ridge_contextual_log_price,JESUS MARIA,60,75753.8488,0.1087,-17816.97
+ridge_contextual_log_price,LA MOLINA,46,134564.1506,0.1475,-59900.6951
+ridge_contextual_log_price,LA VICTORIA,25,100848.6726,0.1846,20078.1697
+ridge_contextual_log_price,LINCE,63,117327.4834,0.1582,-23500.7383
+ridge_contextual_log_price,LOS OLIVOS,22,53742.4163,0.1487,-1973.3784
+ridge_contextual_log_price,MAGDALENA DEL MAR,3,157282.7912,0.0758,-157282.7912
+ridge_contextual_log_price,MIRAFLORES,47,308701.0893,0.2034,-138331.3274
+ridge_contextual_log_price,PUEBLO LIBRE,51,56914.1512,0.119,5809.994
+ridge_contextual_log_price,SAN BORJA,70,182827.9476,0.1424,-58128.3407
+ridge_contextual_log_price,SAN ISIDRO,57,351093.6539,0.1594,44824.6407
+ridge_contextual_log_price,SAN JUAN DE LURIGANCHO,18,47600.198,0.1501,-41287.2929
+ridge_contextual_log_price,SAN MARTIN DE PORRES,24,44684.8664,0.1711,411.6511
+ridge_contextual_log_price,SAN MIGUEL,72,54785.3717,0.1061,-3117.0913
+ridge_contextual_log_price,SANTIAGO DE SURCO,43,163003.9905,0.1331,37983.6952
+ridge_contextual_log_price,SURQUILLO,46,76803.2163,0.1413,4744.64

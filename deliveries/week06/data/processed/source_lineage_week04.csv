@@ -1,0 +1,6 @@
+check,numerator,denominator,result
+week04_initial_listing_sample_ids_in_week06_raw,400,400,PASS
+week04_analytical_sample_ids_in_week06_raw,500,500,PASS
+week04_analytical_sample_ids_in_week06_feature_store,500,500,PASS
+shared_prices_identical,500,500,PASS
+shared_areas_identical,500,500,PASS

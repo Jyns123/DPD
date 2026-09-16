@@ -1,0 +1,4 @@
+stage,rows,rows_removed,rule
+raw_urbania,3987,0,Acquired listing inventory
+valid_price_area,3987,0,Require positive price and area
+district_iqr_price_per_m2,3896,91,"Keep price/m2 within [Q1 - 1.5 IQR, Q3 + 1.5 IQR] inside each district"

@@ -1,61 +1,60 @@
-# Procedencia de datos - Week 6
+# Procedencia de datos — Week 6
 
-Las capas de datos de Week 6 utilizan tres clases de procedencia. Un archivo
-no se considera "scrapeado" solo por ser un CSV: algunos archivos son filtros
-o cálculos realizados a partir de fuentes adquiridas.
+## Fuente inicial confirmada en Week 04
 
-## `data/raw/`
+`deliveries/week04/acquisition.md` documenta que los anuncios provienen del
+repositorio público `MathiuCz/lima-real-estate-price-predictor`, originalmente
+recopilado de Urbania. Week 04 versionó muestras; Week 06 conserva el inventario
+completo en `data/raw/listings_urbania.csv`.
 
-| Archivo | Clase | Origen o transformación |
-|---|---|---|
-| `listings_urbania.csv` | adquisición original | Conjunto público de anuncios descargado de la fuente documentada de GitHub; originalmente recopilado de Urbania por su publicador |
-| `urbania_fichas.csv` | adquisición original | 200 páginas de detalle de Urbania solicitadas desde el mapa del sitio público por el scraper de Week 6 |
-| `urbania_fichas_lima.csv` | fuente filtrada | Páginas de detalle recopiladas directamente y conservadas por el filtro de alcance Lima/Callao |
-| `listings_geocoded.csv` | fuente enriquecida | Resultados de Nominatim para el subconjunto controlado configurado; las coordenadas inválidas se conservan como estado y no se imputan |
-| `listings_poi_distances.csv` | fuente enriquecida | Distancias Haversine al POI más cercano, únicamente para anuncios geocodificados |
-| `denuncias_policiales.csv` | adquisición original | Espejo público del conjunto de datos MININTER/SIDPOL |
-| `denuncias_lima.csv` | fuente filtrada | `denuncias_policiales.csv` restringido a las provincias de Lima y Callao |
-| `bcrp_precios.csv` | adquisición original | Respuestas de la API pública del BCRP consolidadas en formato largo |
-| `pois_lima.csv` | adquisición original | Respuestas de la API Overpass de OpenStreetMap para el cuadro delimitador configurado |
-| `distritos_lima_socioec.csv` | adquisición original | Conjunto de datos UBIGEO derivado del INEI y filtrado a Lima y Callao |
-| `distritos_lima_geo.geojson` | adquisición original | GeoJSON público de límites distritales filtrado a Lima y Callao |
-| `proyectos_mivivienda.csv` | adquisición original | API pública de búsqueda del Fondo MIVIVIENDA |
-| `entidades_tecnicas_ranking.csv` | adquisición original | Endpoint público del ranking del Fondo MIVIVIENDA |
-| `estratos_ingreso_links.csv` | adquisición original | Índice público de descargas de estratos de ingreso del INEI 2020 |
-| `estratos_ingreso_manzana.csv` | adquisición original | Atributos a nivel de manzana del INEI 2020 descargados desde el índice público |
-| `obras_licencias_cercado.csv` | adquisición original | Exportación de datos abiertos de la Municipalidad Metropolitana de Lima; cobertura únicamente del Cercado |
-| `obras_conformidades_cercado.csv` | adquisición original | Exportación de datos abiertos de la Municipalidad Metropolitana de Lima; cobertura únicamente del Cercado |
+La continuidad se valida con `code/validate_source_lineage.py`. No se asumió el
+linaje solo por similitud de nombres: se compararon identificadores, precio y
+área.
 
-## `data/processed/`
+## Fuentes adquiridas
 
-Estos archivos son transformaciones reproducibles de la capa original y no se
-recopilan directamente:
+| Archivo | Fuente | Uso | Cobertura/advertencia |
+|---|---|---|---|
+| `listings_urbania.csv` | Dataset público de Urbania en GitHub | Objetivo y atributos del inmueble | 3,987 anuncios, 20 distritos; precios de oferta |
+| `bcrp_precios.csv` | API pública BCRP | Referencia de precio por m² y ratio precio/alquiler | 12 distritos; también usa precios de oferta |
+| `denuncias_policiales.csv` | MININTER/SIDPOL, espejo público | Contexto de seguridad | Denuncias, no totalidad de delitos |
+| `denuncias_lima.csv` | Filtro Lima/Callao del archivo nacional | Índice distrital | 29,833 agregados |
+| `pois_lima.csv` | OpenStreetMap/Overpass | Conveniencia urbana | Sesgo por intensidad de mapeo; nombres pueden faltar |
+| `distritos_lima_socioec.csv` | Dataset UBIGEO derivado de INEI | Población, IDH y pobreza | Contexto distrital |
+| `distritos_lima_geo.geojson` | Límites distritales públicos | Asignación espacial de POIs | Geometría simplificada |
+| `proyectos_mivivienda.csv` | API pública Fondo MIVIVIENDA | Oferta registrada de proyectos | No cubre toda la construcción privada |
+| `entidades_tecnicas_ranking.csv` | Fondo MIVIVIENDA | Contexto de entidades técnicas | Ranking parcial |
+| `estratos_ingreso_manzana.csv` | Publicación INEI/GeoGPSPerú | Exploración socioeconómica | No se usa como predictor del modelo Week 6 |
+| `obras_licencias_cercado.csv` | Datos Abiertos, Municipalidad de Lima | Exploración de obras | Solo Cercado de Lima |
+| `obras_conformidades_cercado.csv` | Datos Abiertos, Municipalidad de Lima | Exploración de obras | Solo Cercado de Lima |
 
-- `crime_index_distrito.csv`: SIDPOL agrupado, normalizado y con una tendencia asignada.
-- `baseline_precio_m2_distrito.csv`: distribución limpia del precio por m² de los anuncios de Urbania, agrupada por distrito.
-- `zone_convenience_index.csv`: POIs de OSM asignados a polígonos distritales y ponderados por densidad de categoría.
-- `zone_index_distrito.csv`: índice compuesto de seguridad y conveniencia.
-- `listings_feature_store.csv`: anuncios limpios unidos con todas las variables distritales disponibles, incluyendo la línea base y el puntaje de oportunidad derivados.
-- `listings_eda.csv`: tabla del almacén de variables con transformaciones logarítmicas y la marca diagnóstica `data_partial`.
-- `district_summary.csv`, `missingness_summary.csv` y `source_inventory.csv`: resúmenes analíticos generados a partir de las capas procesada y original.
-- `duplicate_summary.csv`: diagnóstico de duplicados; los candidatos se reportan y no se eliminan silenciosamente.
+El manifiesto reproducible `data/processed/extraction_manifest.csv` registra
+SHA-256, tamaño, fecha de modificación observada, fecha de generación y URL. `source_inventory.csv` registra
+filas, columnas, celdas ausentes y duplicados exactos para CSV.
 
-## Campos que no están disponibles actualmente
+## Tablas derivadas
 
-Ningún archivo actual de Week 6 proporciona `latitude`, `longitude`,
-distancias a POIs a nivel de inmueble, `visual_quality_score`,
-`constructora_reliability_score` ni un objetivo reproducible de transacciones
-de Alcabala. Los estratos de ingreso se adquieren como atributos a nivel de
-manzana, pero no se unen a los anuncios hasta implementar la geocodificación y
-el enriquecimiento espacial punto dentro de polígono.
+- `crime_index_distrito.csv`: denuncias por 1,000 habitantes, índice normalizado y tendencia.
+- `zone_convenience_index.csv`: densidades de POIs y conveniencia ponderada.
+- `zone_index_distrito.csv`: compuesto actual de seguridad y conveniencia.
+- `baseline_precio_m2_distrito.csv`: estadísticas de precio por m² tras IQR distrital.
+- `listings_feature_store.csv`: unión limpia de anuncios y contexto.
+- `listings_eda.csv`: feature store con log-transformaciones y `data_partial`.
 
-Las obras municipales se adquieren como evidencia, pero no se unen al almacén
-de variables del MVP: la fuente cubre únicamente el Cercado de Lima y no
-proporciona un puntaje confiable de promotores o historial de finalización a
-nivel metropolitano.
+Estas tablas no son nuevas fuentes. Son resultados matemáticos del pipeline.
 
-La recopilación directa de detalles es una muestra auxiliar, no el inventario
-utilizado por el modelo de valoración. Su mapa del sitio original incluye
-inmuebles fuera de Lima; el archivo filtrado registra el subconjunto retenido
-para el alcance del proyecto y el script de filtrado informa la cantidad
-excluida.
+## Fuentes no incorporadas
+
+- **Properati/Kaggle:** existe un adaptador, pero la fuente requiere credenciales y es histórica. No se incorporó sin validar periodo, moneda y duplicados entre portales.
+- **Alcabala/SAT:** no existe un extracto reproducible con área/tipo y clave de enlace.
+- **CIPIEC/INDECOPI:** acceso y cobertura insuficientes para un score de constructoras.
+- **Imágenes de calles:** no hay un conjunto legalmente utilizable con etiquetas de calidad.
+- **Coordenadas Urbania:** no se accedió a rutas prohibidas por robots.txt; la prueba de Nominatim no se usa en el modelo principal.
+
+## Licencias y uso responsable
+
+- OpenStreetMap requiere atribución ODbL.
+- Las fuentes estatales se usan con atribución y según sus portales de datos abiertos.
+- Los repositorios de GitHub conservan sus licencias; el contenido original del portal puede tener condiciones adicionales.
+- El scraping auxiliar usa sitemap público, caché, un agente identificable y rate limiting.
+- No se incluyen datos personales ni se eluden autenticación o restricciones técnicas.

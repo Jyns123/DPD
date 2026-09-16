@@ -1,0 +1,4 @@
+model,n_train,n_test,mae_soles,rmse_soles,mae_soles_per_m2,mdape,p90_ape,r2_log_price
+ridge_contextual_log_price,3116,780,141372.376,270268.8616,1055.0511,0.1358,0.3728,0.8864
+log_linear_area_district,3116,780,152590.7885,296500.5115,1119.6994,0.1472,0.3778,0.8712
+district_median_price_m2,3116,780,157482.0845,280358.7522,1197.1758,0.1538,0.3944,0.8502

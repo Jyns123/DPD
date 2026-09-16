@@ -1,10 +1,27 @@
 """Week 6-owned transformations for district and listing features."""
 import json
+import unicodedata
 
 import pandas as pd
 from shapely.geometry import Point, shape
 from shapely.prepared import prep
 from shapely.strtree import STRtree
+
+
+DISTRICT_ALIASES = {
+    "MAGDALENA": "MAGDALENA DEL MAR",
+    "SURCO": "SANTIAGO DE SURCO",
+}
+
+
+def normalize_district(value):
+    """Return a stable join key for district labels from heterogeneous sources."""
+    if pd.isna(value):
+        return pd.NA
+    text = unicodedata.normalize("NFKD", str(value))
+    text = "".join(character for character in text if not unicodedata.combining(character))
+    text = " ".join(text.replace("-", " ").upper().split())
+    return DISTRICT_ALIASES.get(text, text)
 
 
 def crime_index(source, socioec):
@@ -28,11 +45,11 @@ def district_baseline(source, crime):
     listings = pd.read_csv(source, encoding="utf-8-sig")
     listings["distrito"] = listings.district.replace({"brena": "BREÑA"}).str.replace("-", " ").str.upper()
     listings["price_per_m2"] = listings.price_pen / listings.area_total
-    def trim(group):
-        q1, q3 = group.price_per_m2.quantile([0.25, 0.75])
-        iqr = q3 - q1
-        return group[group.price_per_m2.between(q1 - 1.5 * iqr, q3 + 1.5 * iqr)]
-    clean = listings.groupby("distrito", group_keys=False).apply(trim)
+    grouped_price = listings.groupby("distrito")["price_per_m2"]
+    q1 = grouped_price.transform(lambda values: values.quantile(0.25))
+    q3 = grouped_price.transform(lambda values: values.quantile(0.75))
+    iqr = q3 - q1
+    clean = listings[listings.price_per_m2.between(q1 - 1.5 * iqr, q3 + 1.5 * iqr)].copy()
     baseline = clean.groupby("distrito").agg(
         n_listados=("price_per_m2", "size"), precio_m2_mediana=("price_per_m2", "median"),
         precio_m2_media=("price_per_m2", "mean"), precio_m2_p25=("price_per_m2", lambda x: x.quantile(.25)),
@@ -95,21 +112,36 @@ def feature_store(listings_path, zone_path, baseline_path, bcrp_path, projects_p
     data = pd.read_csv(listings_path, encoding="utf-8-sig")
     data["district"] = data.district.replace({"brena": "BREÑA"}).str.replace("-", " ").str.upper()
     data["price_per_m2"] = data.price_pen / data.area_total
-    def trim(group):
-        q1, q3 = group.price_per_m2.quantile([.25, .75])
-        iqr = q3 - q1
-        return group[group.price_per_m2.between(q1 - 1.5 * iqr, q3 + 1.5 * iqr)]
-    data = data.groupby("district", group_keys=False).apply(trim)
+    grouped_price = data.groupby("district")["price_per_m2"]
+    q1 = grouped_price.transform(lambda values: values.quantile(0.25))
+    q3 = grouped_price.transform(lambda values: values.quantile(0.75))
+    iqr = q3 - q1
+    data = data[data.price_per_m2.between(q1 - 1.5 * iqr, q3 + 1.5 * iqr)].copy()
     zone = pd.read_csv(zone_path, dtype={"ubigeo": str})
     baseline = pd.read_csv(baseline_path)
     data = data.merge(baseline[["distrito", "precio_m2_mediana"]], left_on="district", right_on="distrito", how="left").merge(
         zone[["distrito", "ubigeo", "crime_index_zone", "crime_trend_zone", "urban_convenience_index", "zone_composite_index", "idh_2019", "pct_pobreza_total"]], on="distrito", how="left"
     )
     bcrp = pd.read_csv(bcrp_path)
-    latest = bcrp[(bcrp.tipo == "distrito") & (bcrp.trimestre == bcrp.trimestre.max())]
-    rent = bcrp[(bcrp.tipo == "precio_alquiler") & (bcrp.trimestre == bcrp.trimestre.max())]
-    data = data.merge(latest[["serie", "valor"]].rename(columns={"serie": "distrito", "valor": "bcrp_price_m2_usd"}), on="distrito", how="left")
-    data = data.merge(rent[["serie", "valor"]].rename(columns={"serie": "distrito", "valor": "bcrp_price_rent_ratio"}), on="distrito", how="left")
+    latest_quarter = bcrp.trimestre.max()
+    latest = bcrp[(bcrp.tipo == "distrito") & (bcrp.trimestre == latest_quarter)].copy()
+    rent = bcrp[(bcrp.tipo == "precio_alquiler") & (bcrp.trimestre == latest_quarter)].copy()
+    data["district_key"] = data["distrito"].map(normalize_district)
+    latest["district_key"] = latest["serie"].map(normalize_district)
+    rent["district_key"] = rent["serie"].map(normalize_district)
+    rent = rent[rent["district_key"] != "PROMEDIO"]
+    data = data.merge(
+        latest[["district_key", "valor"]].rename(columns={"valor": "bcrp_price_m2_usd"}),
+        on="district_key",
+        how="left",
+        validate="many_to_one",
+    )
+    data = data.merge(
+        rent[["district_key", "valor"]].rename(columns={"valor": "bcrp_price_rent_ratio"}),
+        on="district_key",
+        how="left",
+        validate="many_to_one",
+    ).drop(columns="district_key")
     projects = pd.read_csv(projects_path)
     offer = projects[projects.departamento == "LIMA"].groupby("distrito").agg(
         proyectos_nuevos_distrito=("proyecto", "nunique"), unidades_nuevas_distrito=("unidades_disponibles", "sum")

@@ -1,165 +1,110 @@
-# Week 6 - Análisis exploratorio de datos y selección del modelo
+# Week 6 — Exploratory Data Analysis and Model Selection
 
-Esta entrega utiliza un almacén de variables propio de Week 6, construido a
-partir de adquisiciones reales. No afirma que se hayan recopilado fuentes que
-no están disponibles.
+Entrega de InmoScore para el 16 de septiembre de 2026. El componente analítico
+de esta semana estima **precios de oferta publicados**, no precios de
+transacción.
 
-## Contenido
+## Entregables
 
-- `DataAnalysis.md`: estructura de datos, calidad, preprocesamiento, hallazgos, sesgos y limitaciones.
-- `ModelSelection.md`: modelo propuesto, líneas base, entradas, salidas y plan de evaluación.
-- `data_dictionary_week06.csv`: diccionario de todas las columnas de la tabla analítica procesada.
-- `code/acquire_real_sources.py`: descarga la fuente real de anuncios y recopila páginas de detalle.
-- `code/build_real_feature_store.py`: construye el almacén de variables a partir de esa fuente.
-- `code/run_week06_analysis.py`: crea datos procesados y tablas de resumen.
-- `code/build_extraction_manifest.py`: registra la hora de extracción, hashes, conteos y metadatos de las fuentes.
-- `code/filter_urbania_details.py`: filtra la recopilación auxiliar de detalles a Lima/Callao.
-- `code/validate_duplicates.py`: informa candidatos a duplicados exactos y por clave de negocio.
-- `code/validate_processed_data.py`: valida la tabla procesada con la librería estándar de Python y genera `data/processed/validation_report.md`.
-- `code/geocode_listings.py`: geocodifica un subconjunto controlado de anuncios con caché de Nominatim y comprobaciones de cuadro delimitador. **[PROTOTIPO]** Solo 10 listings probados (4 válidos), no escalado a inventario completo.
-- `code/calculate_poi_distances.py`: calcula distancias Haversine al POI más cercano para coordenadas válidas. **[PROTOTIPO]** Funcionalidad disponible pero no utilizada en análisis principal por limitación de geocodificación.
-- `code/acquire_geocoded_property_sources.py`: prepara una fuente complementaria geocodificada basada en Properati/Kaggle cuando existan credenciales locales de Kaggle.
-- `code/enrich_geocoded_properties_with_pois.py`: calcula distancias al POI más cercano para cualquier CSV de propiedades con latitud/longitud.
-- `code/run_eda_statistics.py`: genera estadísticas descriptivas, correlaciones y tablas de cobertura distrital.
-- `code/evaluate_baseline.py`: evalúa la línea base de precio mediano por m² distrital en una separación determinista.
-- `code/evaluate_ridge_model.py`: evalúa el candidato Ridge de precio logarítmico sin fuga del objetivo.
-- `CODE.md`: mapa de scripts, dependencias de datos y orden sugerido de ejecución.
-- `data/processed/`: resultados generados utilizados por los documentos.
-- `PresentationWeek06.md`: fuente de la presentación, diapositiva por diapositiva, para exportar como PDF o PPTX.
-- `code/generate_presentation.py`: genera `PresentationWeek06.pptx` a partir del esquema aprobado.
-- `code/generate_presentation_pdf.py`: genera la presentación PDF sin dependencias.
-- `DATA_PROVENANCE.md`: clasificación de archivos adquiridos, filtrados y derivados.
+- `DataAnalysis.md`: entendimiento, calidad, preprocesamiento, EDA, hallazgos, sesgos y limitaciones.
+- `ModelSelection.md`: entradas/salidas, dos baselines, candidato Ridge y estrategia de evaluación.
+- `code/EDA_Week06.ipynb`: notebook ejecutado, con tablas, validaciones y gráficos.
+- `data/processed/`: tablas analíticas y resultados reproducibles.
+- `data_dictionary_week06.csv`: diccionario actualizado con unidad y rol de modelado.
+- `DATA_PROVENANCE.md`: procedencia, cobertura y licencia/condiciones de las fuentes.
+- `CODE.md`: mapa de scripts y dependencias.
+- `PresentationWeek06.md`: material previo de referencia; la presentación final se prepara por separado.
 
-## Scripts de Prototipo
+## Resultado principal
 
-Los siguientes scripts son prototipos funcionales que no forman parte del análisis principal de Week 6 pero están disponibles para desarrollo futuro:
+El feature store contiene 3,896 anuncios y 20 distritos después de eliminar 91
+valores atípicos de precio por m² mediante IQR distrital. La partición de
+evaluación agrupa direcciones iguales para reducir fuga.
 
-- **`geocode_listings.py`**: Prototipo de geocodificación con Nominatim. Actualmente procesa solo 10 listings (4 válidos) como prueba de concepto. No escalado al inventario completo de 3,896 listings debido a rate limits de la API.
-- **`calculate_poi_distances.py`**: Cálculo de distancias Haversine a POIs más cercanos. Funcionalidad disponible pero no utilizada en análisis principal ya que depende de geocodificación completa.
+| Modelo | MAE | MdAPE |
+|---|---:|---:|
+| Ridge contextual | S/ 141,372 | 13.58% |
+| Log-lineal área + distrito | S/ 152,591 | 14.72% |
+| Mediana distrital por m² | S/ 157,482 | 15.38% |
 
-Estos scripts están documentados en el roadmap como componentes a escalar en Week 7-15.
+Ridge es el candidato para la siguiente iteración. La mediana distrital se
+mantiene como guardrail. Ninguno de los modelos debe presentarse como tasación
+o predicción de precio de cierre.
+
+## Trazabilidad desde Week 04
+
+`deliveries/week04/acquisition.md` identifica la fuente inicial de anuncios. La
+validación automática confirma que las muestras de Week 04 están contenidas en
+los datos completos de Week 06 y que precio/área coinciden en todos los
+registros compartidos. El detalle está en
+`data/processed/source_lineage_week04.csv`.
 
 ## Reproducción
 
 Desde la raíz del repositorio:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python3 -m pip install -r deliveries/week06/requirements.txt
-python3 deliveries/week06/code/acquire_real_sources.py --details 200
-python3 deliveries/week06/code/build_real_feature_store.py
-python3 deliveries/week06/code/run_week06_analysis.py
+python3 -m venv deliveries/week06/.venv
+deliveries/week06/.venv/bin/python -m pip install -r deliveries/week06/requirements.txt
+
+deliveries/week06/.venv/bin/python deliveries/week06/code/build_real_feature_store.py
+deliveries/week06/.venv/bin/python deliveries/week06/code/run_week06_analysis.py
+deliveries/week06/.venv/bin/python deliveries/week06/code/build_extraction_manifest.py
+deliveries/week06/.venv/bin/python deliveries/week06/code/validate_duplicates.py
+deliveries/week06/.venv/bin/python deliveries/week06/code/run_eda_statistics.py
+deliveries/week06/.venv/bin/python deliveries/week06/code/evaluate_models.py
+deliveries/week06/.venv/bin/python deliveries/week06/code/validate_processed_data.py
+deliveries/week06/.venv/bin/python deliveries/week06/code/validate_source_lineage.py
+deliveries/week06/.venv/bin/python deliveries/week06/code/generate_eda_notebook.py
+deliveries/week06/.venv/bin/python deliveries/week06/code/execute_notebook.py
 ```
 
-El script de análisis lee `deliveries/week06/data/processed/listings_feature_store.csv`.
-Falla claramente si no se han ejecutado la adquisición real y la construcción
-del almacén de variables. Escribe:
+El notebook se genera y ejecuta en `code/EDA_Week06.ipynb`. Las figuras se
+escriben en `figures/`.
 
-- `data/processed/listings_eda.csv`
-- `data/processed/district_summary.csv`
-- `data/processed/missingness_summary.csv`
-- `data/processed/source_inventory.csv`
-- `data/processed/extraction_manifest.csv`
-- `data/processed/duplicate_summary.csv`
-- `data/processed/eda_numeric_summary.csv`, `eda_correlations.csv` y `eda_district_coverage.csv`
-- `data/processed/baseline_metrics.csv`
-- `data/processed/model_metrics.csv`
-- `data/processed/validation_report.md` cuando se ejecuta `code/validate_processed_data.py`
+## Regenerar las fuentes crudas
 
-Para regenerar los diagnósticos y métricas después de construir el almacén de
-variables:
+Los archivos de `data/raw/` se ignoran en Git por tamaño. Para adquirirlos otra
+vez (puede tardar y depende de servicios externos):
 
 ```bash
-python3 deliveries/week06/code/build_extraction_manifest.py
-python3 deliveries/week06/code/validate_duplicates.py
-python3 deliveries/week06/code/run_eda_statistics.py
-python3 deliveries/week06/code/evaluate_baseline.py
-python3 deliveries/week06/code/evaluate_ridge_model.py
-python3 deliveries/week06/code/validate_processed_data.py
+deliveries/week06/.venv/bin/python deliveries/week06/code/acquire_real_sources.py --skip-details
 ```
 
-Para explorar una fuente complementaria con coordenadas explícitas, configure
-credenciales de Kaggle fuera del repositorio y ejecute:
+La recopilación de páginas de detalle de Urbania es auxiliar y no se necesita
+para reconstruir el feature store. Debe respetar robots.txt, términos del sitio,
+caché y rate limits documentados.
+
+### Properati/Kaggle opcional
+
+No forma parte de los resultados de Week 6. Si se desea evaluar la fuente
+histórica geocodificada:
 
 ```bash
-python3 deliveries/week06/code/acquire_geocoded_property_sources.py
-python3 deliveries/week06/code/enrich_geocoded_properties_with_pois.py
+deliveries/week06/.venv/bin/python -m pip install kaggle
+# Configurar ~/.kaggle/kaggle.json fuera del repositorio
+deliveries/week06/.venv/bin/python deliveries/week06/code/acquire_geocoded_property_sources.py --limit 500
 ```
 
-Estos dos scripts son exploratorios y no reemplazan el feature store principal
-de Week 6.
+Antes de mezclarla con Urbania se deben validar periodo, moneda, duplicados y
+compatibilidad de esquema.
 
-`data/raw/` contiene resultados reales de adquisición y Git lo ignora porque
-los archivos son grandes. Los CSV de `data/processed/` son resultados
-analíticos reproducibles, no campos de fuentes recopilados: el precio por m²,
-las líneas base, los índices y los puntajes de oportunidad se derivan
-matemáticamente y no pueden recopilarse directamente.
+## Salidas principales
 
-La adquisición completa solo debe ejecutarse después de revisar las
-condiciones y los límites de solicitudes de cada fuente. Las notas legales
-específicas de cada fuente están incluidas en `DATA_PROVENANCE.md` y los
-scripts documentan sus endpoints.
+- `listings_feature_store.csv`: tabla limpia con 27 campos base/derivados.
+- `listings_eda.csv`: tabla analítica de 30 campos.
+- `preprocessing_summary.csv`: retención por etapa.
+- `missingness_summary.csv` y `validation_report.md`: controles de calidad.
+- `source_lineage_week04.csv` y `extraction_manifest.csv`: linaje y hashes.
+- `model_comparison.csv`: comparación de tres modelos.
+- `model_split.csv`: asignación reproducible train/test.
+- `model_test_predictions.csv`: predicciones del holdout.
+- `model_residuals_by_district.csv`: error segmentado.
 
-## Decisión de alcance
+## Limitaciones esenciales
 
-### Fuentes incluidas en el MVP de Week 6
-
-| Fuente | Función | Estado en esta entrega |
-|---|---|---|
-| Urbania | Inventario de anuncios y objetivo de precio de oferta | Adquirido en `data/raw/listings_urbania.csv`; 200 páginas de detalle son una recopilación directa auxiliar |
-| SIDPOL/MININTER | Incidentes reportados por distrito y periodo | Adquiridos y filtrados a Lima y Callao |
-| BCRP | Series distritales de precio de oferta y referencia de precio/alquiler | Adquiridas mediante la API pública |
-| OpenStreetMap | POIs para la conveniencia distrital | Adquiridos mediante la API Overpass |
-| INEI | Límites distritales, población y contexto socioeconómico | Adquiridos de los conjuntos de datos públicos documentados |
-| Fondo MIVIVIENDA | Oferta de proyectos registrados y contexto de promotores | Adquirida mediante la API pública de búsqueda |
-
-Las siguientes fuentes explícitamente **no se utilizan como entradas disponibles
-del MVP** porque todavía no se han adquirido de forma reproducible o no están
-lo suficientemente completas para la afirmación prevista:
-
-- Registros de transacciones de Alcabala/SAT: actualmente no existe en este repositorio un archivo de fuente versionado ni un script funcional de adquisición de Week 6.
-- Geometrías de estratos de ingreso del INEI: los atributos se muestrearon previamente, pero la geometría espacial no forma parte del almacén de variables de Week 6.
-- Licencias y conformidades municipales: la cobertura se limita al Cercado de Lima y no permite construir un puntaje de constructoras para toda la ciudad.
-- Datos de imágenes de calles: no existe un conjunto de datos etiquetado y legalmente utilizable para un modelo de calidad visual.
-- Historial de cumplimiento de CIPIEC/INDECOPI: la autenticación o la cobertura incompleta impide obtener un puntaje completo de confiabilidad.
-
-Para Week 6, el componente principal de modelado es la valoración de precios.
-El motor de recomendación es una capa determinista de puntaje ponderado que se
-construye después de disponer de los puntajes de los componentes. La
-geocodificación y las distancias a POIs a nivel de inmueble siguen siendo un
-enriquecimiento futuro, no evidencia actual.
-
-El objetivo actual es el **precio de oferta publicado**, no el precio de una
-transacción cerrada. No se afirma precisión a nivel de transacción. La línea
-base distrital de precio por m² se evalúa contra precios de oferta publicados
-hasta que esté disponible una fuente reproducible de transacciones.
-
-## Estado de componentes del producto (Week 6)
-
-| Componente | Estado | Cobertura | Limitaciones |
-|------------|--------|-----------|--------------|
-| **Motor de valoración** | Implementado | 3,896 anuncios, 20 distritos | Evalúa frente al precio de oferta, no transacciones reales |
-| **Índice de zona (seguridad + conveniencia)** |  Implementado | 47 distritos | Falta el componente visual (sin conjunto de datos de imágenes) |
-| **Geocodificación** | Prototipo | 10 anuncios (4 válidos) | No escalada al inventario completo de 3,896 anuncios |
-| **Puntaje de constructoras** | Parcial | 460 promotores MIVIVIENDA | Sin historial de plazos (CIPIEC) ni licencias municipales completas |
-| **Recomendación personalizada** |  Diseñada | - | Requiere prototipo de interfaz (planificado para Week 10) |
-| **Transacciones reales (Alcabala)** |  No incorporadas | - | Sin fuente reproducible en el repositorio actual |
-| **Modelo visual (calidad visual)** |  No implementado | - | Sin conjunto de datos de imágenes ni etiquetas manuales |
-
-### Hoja de ruta para Week 7-15
-
-| Componente | Plan Week 7 | Plan Week 10-15 | Dependencias críticas |
-|------------|-------------|-----------------|----------------------|
-| Geocodificación | Escalar al subconjunto prioritario (5 distritos con mayor volumen) | Completar el inventario | Límites de solicitudes de Nominatim, validación del cuadro delimitador |
-| Modelo visual | Evaluar fuentes: Mapillary frente a un conjunto propio | Implementar prototipo si hay datos disponibles | Etiquetas manuales, licencias legales |
-| Puntaje de constructoras | Documentar la cobertura actual como limitación | Integrar CIPIEC si hay acceso institucional | Autenticación de INDECOPI, cobertura histórica |
-| Alcabala | Investigar una fuente reproducible | Incorporarla como verdad de terreno para evaluación | Área, tipo de inmueble, clave de enlace |
-| Interfaz de recomendación | Wireframes → prototipo básico | Implementación completa con perfiles | Puntajes de componentes disponibles |
-
-## Notas de coherencia de métricas
-
-- **MAE evaluado contra precio de oferta**: MAE de la línea base S/ 155,372, MAE de Ridge S/ 155,396
-- **Brecha BCRP vs Urbania**: Week 4 §4 documentó diferencia ~15% entre precios BCRP y Urbania
-- **Cobertura desigual**: BCRP cubre solo 12 distritos frente a 20 distritos en los anuncios
-- **Sesgo de selección**: los anuncios representan 20 distritos, no una muestra aleatoria de Lima
+- Urbania ofrece precios publicados y solo 20 distritos.
+- BCRP cubre 12 distritos; 984 filas (25.26%) se marcan como parciales.
+- No existe fecha confiable por anuncio para validación temporal.
+- No hay transacciones enlazadas, coordenadas completas ni imágenes etiquetadas.
+- Los indicadores de zona son distritales y no causales.

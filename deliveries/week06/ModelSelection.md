@@ -1,181 +1,150 @@
-# Selección del modelo - InmoScore
+# Selección del modelo — InmoScore
 
 ## 1. Componente seleccionado
 
-La propuesta principal de Week 6 es un modelo de regresión supervisada para el
-**precio de oferta publicado en PEN**. El modelo es un componente de InmoScore,
-no el motor completo de recomendación.
+El componente analítico propuesto es una regresión supervisada para estimar el
+**precio de oferta publicado en PEN**. El candidato seleccionado para la
+siguiente iteración es Ridge sobre el logaritmo del precio.
 
-El primer modelo recomendado es una regresión lineal regularizada sobre el
-logaritmo del precio (Elastic Net o Ridge), con el distrito y los atributos del
-inmueble codificados mediante one-hot. Es interpretable, rápido, reproducible
-y apropiado para las 3,896 observaciones actuales después del filtrado.
-El objetivo logarítmico reduce la influencia de los valores atípicos de lujo y
-facilita la interpretación del error relativo.
+Ridge es apropiado para esta fase porque:
 
-## 2. Entradas y salidas esperadas
+- la relación entre área y precio es fuerte y aproximadamente multiplicativa;
+- hay variables correlacionadas como habitaciones, baños y estacionamientos;
+- la regularización estabiliza coeficientes sin perder interpretabilidad;
+- 3,896 observaciones no justifican todavía un modelo mucho más complejo;
+- la inferencia es rápida y compatible con explicaciones simples del producto.
 
-Entradas disponibles ahora: `area_m2`, `rooms`, `bathrooms`, `parking`, distrito
-o `ubigeo`, `crime_index_zone`, `urban_convenience_index`,
-`zone_composite_index`, `idh_2019`, `pct_pobreza_total` y campos contextuales
-opcionales del BCRP y MIVIVIENDA con indicadores de ausencia.
+La capa de recomendación personalizada no es el modelo de Week 6: se calcula
+después, combinando oportunidad de precio, zona y otros componentes disponibles.
 
-Las entradas para una iteración posterior incluyen coordenadas geocodificadas,
-distancias al POI más cercano, etapa del proyecto, antigüedad, piso, promotor
-normalizado y un puntaje de calidad visual después de disponer de un conjunto
-de datos de imágenes etiquetado.
+## 2. Entradas y salida
 
-Salidas:
+### Entradas utilizadas
 
-- `predicted_price_soles`;
-- precio predicho por metro cuadrado;
-- `opportunity_score = (predicted_price_soles - price_soles) / predicted_price_soles`;
-- intervalo de predicción o marca de incertidumbre;
-- explicación basada en las mayores contribuciones del modelo;
-- `data_partial` cuando falta un componente requerido.
+- `log_area_m2`;
+- `rooms`, `bathrooms`, `parking`;
+- `district` con codificación one-hot;
+- `crime_index_zone`, `urban_convenience_index`;
+- `idh_2019`, `pct_pobreza_total`;
+- `proyectos_nuevos_distrito`, `unidades_nuevas_distrito`.
 
-El precio observado del anuncio es el objetivo de la primera iteración. Debe
-identificarse como precio de oferta en la interfaz y la documentación.
+Los numéricos pasan por imputación de mediana y estandarización dentro del
+pipeline. La imputación es una salvaguarda del pipeline; en la ejecución actual
+las entradas seleccionadas están completas.
 
-## 3. Líneas base
+### Variables excluidas
 
-### Línea base A: mediana distrital por metro cuadrado
+- `price_per_m2`, `baseline_price_soles` y `opportunity_score_baseline`: fuga del objetivo;
+- `maintenance_fee`: cero ambiguo en 51.49% de filas;
+- `photos_count`: distribución concentrada en 1 y 10, probablemente codificación del extractor;
+- campos BCRP: se conservan como referencia externa, pero no se usan en el primer candidato por cobertura parcial y por compartir el sesgo de precios de oferta.
 
-`district_median_price_m2 * area_m2` es la línea base existente de Week 4. Es
-transparente y establece el mínimo que debe superar un modelo útil.
+### Salidas esperadas
 
-### Línea base B: modelo log-lineal de distrito y área
+1. `predicted_price_soles`;
+2. precio predicho por m²;
+3. `opportunity_score = (predicted_price_soles - price_soles) / predicted_price_soles`;
+4. intervalo o categoría de incertidumbre;
+5. explicación de variables relevantes;
+6. `data_partial` cuando falten referencias de contexto.
 
-Un modelo log-lineal de dos predictores, que utiliza área y distrito, es una
-línea base más sólida pero todavía interpretable. Comprueba si las variables
-contextuales adicionales realmente mejoran la regla existente.
+La interfaz debe mostrar explícitamente “precio de oferta estimado”.
 
-### Candidato: regresión regularizada
+## 3. Alternativas de referencia
 
-Ridge o Elastic Net agrega habitaciones, baños, estacionamiento y variables
-contextuales, con codificación one-hot del distrito e indicadores explícitos de
-ausencia. Un ensamble de árboles puede probarse como competidor secundario
-solo después de estabilizar la línea base de muestra pequeña; no debe
-seleccionarse únicamente por ser más complejo.
+### Baseline A — mediana distrital por m²
 
-## 4. Estrategia de evaluación
+La mediana de precio por m² se calcula solo con entrenamiento y se multiplica
+por el área. Es la regla existente, transparente y el mínimo que debe superar
+un modelo útil.
 
-Utilizar una división fija y reproducible por distrito cuando sea posible, o
-validación cruzada agrupada y repetida por distrito. No dividir aleatoriamente
-filas contextuales duplicadas para afirmar generalización geográfica.
+### Baseline B — regresión log-lineal de área y distrito
 
-Reportar MAE en PEN, MAE en PEN por metro cuadrado, error porcentual absoluto
-mediano, R-squared como métrica descriptiva secundaria, residuos por distrito,
-rango de precio y rango de área, además de la cobertura de predicción para
-cualquier intervalo de incertidumbre.
+Predice `log(price_soles)` usando `log_area_m2` y distrito. Esta alternativa
+prueba si los atributos adicionales realmente aportan señal frente a una
+regresión interpretable mínima.
 
-La regla de aceptación es que el candidato reduzca el MAE respecto a la línea
-base de mediana distrital sin producir errores materialmente peores en los
-distritos con baja cobertura. Un modelo no puede evaluarse contra Alcabala a
-nivel de anuncio hasta que las transacciones tengan área, tipo de inmueble y
-una clave de enlace defendible. Hasta entonces, comparar percentiles a nivel
-distrital y documentar la bimodalidad de cochera/depósito descrita en
-`Requirements.md`.
+### Candidato — Ridge contextual
 
-El resultado ejecutable de la línea base está almacenado en
-`data/processed/baseline_metrics.csv`. Utiliza una separación determinista
-80/20 dentro de cada distrito: cada quinta fila por distrito es dato de prueba
-y el precio mediano por m² se calcula únicamente con las filas de entrenamiento.
+Agrega características del inmueble y contexto distrital. Se fija
+preliminarmente `alpha=10`; el ajuste del hiperparámetro debe hacerse dentro de
+validación cruzada en la siguiente iteración, nunca mirando el holdout final.
 
-El resultado ejecutable de Ridge está almacenado en
-`data/processed/model_metrics.csv`. El candidato predice el logaritmo del
-precio publicado a partir del área, los atributos de habitaciones/baños/
-estacionamiento, el contexto distrital y las variables de oferta de proyectos.
-Se excluyen campos derivados similares al objetivo, como el precio publicado
-por m², el puntaje de oportunidad y la línea base de muestra completa, para
-evitar fuga de información.
+## 4. Diseño de evaluación preliminar
 
-En la separación determinista actual, la línea base distrital alcanza MAE
-S/ 155,372.04, MAE S/ 1,168.70 por m² y MdAPE 15.78%. Ridge alcanza MAE
-S/ 155,396.37, MAE S/ 1,165.01 por m², MdAPE 14.12% y $R^2=0.8512$ sobre el
-precio logarítmico. Por lo tanto, Ridge mejora ligeramente el error relativo y
-el error por m², pero todavía no supera a la línea base en MAE del precio total.
-La línea base sigue siendo el modelo de referencia hasta disponer de más ajuste
-o variables más completas a nivel de inmueble.
+`code/evaluate_models.py` crea una partición 80/20 estable a partir de un hash de
+`district + address`. Anuncios con la misma dirección permanecen juntos, lo que
+reduce la fuga entre unidades potencialmente pertenecientes al mismo edificio.
+Direcciones ausentes o demasiado cortas usan `listing_id` como respaldo.
 
-## 5. Capa de recomendación
+La ejecución contiene 3,116 filas de entrenamiento y 780 de prueba, con
+representación de los 20 distritos en ambos grupos.
 
-La recomendación es un puntaje determinista posterior, no el modelo predictivo
-de Week 6. Después de disponer de los puntajes de los componentes, normalizarlos
-de 0 a 1 y calcular
+Métricas:
 
-`personalized_score = w_price * opportunity_score + w_zone * zone_score + w_builder * builder_score`.
+- MAE en PEN como métrica principal de impacto monetario;
+- RMSE para penalizar errores grandes;
+- MAE en PEN/m²;
+- MdAPE como error relativo robusto;
+- P90 del error porcentual absoluto;
+- R² sobre log-precio como diagnóstico secundario;
+- MAE, MdAPE, sesgo y `n` por distrito.
 
-Los pesos provienen del perfil de usuario declarado. Los componentes faltantes
-se excluyen del numerador y el elemento se marca como parcial; ningún valor
-faltante se imputa silenciosamente. La primera demostración debe utilizar dos
-perfiles contrastantes y verificar que sus rankings difieran y que cada elemento
-tenga una explicación.
+## 5. Resultados preliminares
 
-## 6. Decisiones y no decisiones
+| Modelo | MAE (S/) | RMSE (S/) | MAE (S/ por m²) | MdAPE | P90 APE | R² log-precio |
+|---|---:|---:|---:|---:|---:|---:|
+| Ridge contextual | 141,372 | 270,269 | 1,055 | 13.58% | 37.28% | 0.8864 |
+| Log-lineal área + distrito | 152,591 | 296,501 | 1,120 | 14.72% | 37.78% | 0.8712 |
+| Mediana distrital por m² | 157,482 | 280,359 | 1,197 | 15.38% | 39.44% | 0.8502 |
 
-- **Seleccionado ahora:** valoración del precio de oferta con una regresión regularizada interpretable y una línea base de mediana distrital.
-- **No seleccionado ahora:** modelo visual, porque no existen un conjunto de imágenes ni etiquetas.
-- **No seleccionado ahora:** modelo completo de confiabilidad de constructoras, porque la cobertura de CIPIEC y sanciones es incompleta.
-- **No afirmado ahora:** MAE de transacciones a nivel de registro contra Alcabala.
+Ridge reduce el MAE 10.23% frente al baseline A y mejora todas las métricas
+reportadas. Por ello se selecciona como candidato, no como modelo listo para
+producción.
 
-Esto mantiene la propuesta de Week 6 técnicamente honesta y alineada con los
-datos que realmente pueden reproducirse desde el repositorio.
+Las variables contextuales son constantes dentro de cada distrito y, al usar
+también one-hot de distrito, existe redundancia. Ridge puede estabilizar esa
+colinealidad, pero sus coeficientes no deben interpretarse como efectos causales.
+La mejora frente al modelo log-lineal debe atribuirse al conjunto del pipeline,
+no aisladamente a seguridad, pobreza o conveniencia.
 
-## 7. Limitaciones actuales frente a la hoja de ruta
+El análisis por distrito muestra heterogeneidad: San Isidro y Miraflores tienen
+los mayores MAE absolutos. El sistema debe reportar incertidumbre y monitorear
+segmentos, no solo el promedio global.
 
-### Componentes no implementados en Week 6
+## 6. Criterio de aceptación
 
-| Componente | Estado actual | Impacto en modelo | Plan Week 7-15 |
-|------------|---------------|------------------|----------------|
-| **Geocodificación a escala** | Solo prototipo de 10 anuncios (4 válidos) | Bloquea distancias a POIs por inmueble, índice de conveniencia específico | Week 7: escalar a los 5 distritos con mayor volumen; Week 10-15: completar inventario |
-| **Modelo visual (calidad visual)** | Sin conjunto de datos de imágenes ni etiquetas | Componente de `zone_composite_index` ausente, reduce la precisión del puntaje de zona | Week 7: evaluar Mapillary frente a un conjunto propio; Week 10: implementar si hay datos disponibles |
-| **Puntaje de confiabilidad de constructoras** | Parcial (solo volumen MIVIVIENDA) | Puntaje incompleto, sin historial de plazos ni sanciones | Week 7: documentar cobertura actual; Week 10-15: integrar CIPIEC si hay acceso institucional |
-| **Transacciones reales (Alcabala)** | No incorporado | Evaluación contra precios de oferta, no contra una verdad de terreno real | Week 7: investigar una fuente reproducible; Week 10-15: incorporar para evaluación |
-| **Recomendación personalizada** | Diseñada en Week 5, no implementada | No hay prototipo de interfaz para demostrar valor al usuario | Week 10: wireframes → prototipo básico con 2 perfiles contrastantes |
+Para avanzar a prototipo, el candidato debe:
 
-### Limitaciones de datos en Week 6
+1. superar ambas líneas base en MAE y MdAPE sobre una partición no utilizada para ajuste;
+2. no degradar materialmente distritos con cobertura suficiente;
+3. conservar cobertura de predicción y explicaciones válidas;
+4. mantener `data_partial` visible;
+5. reproducirse desde el notebook y scripts sin pasos manuales.
 
-1. **Objetivo sesgado**: precio de oferta frente a transacción real
-   - Consecuencia: MAE puede no reflejar valor de mercado real
-   - Mitigación: Documentar explícitamente, usar Alcabala cuando disponible
+Week 6 cumple el primer criterio en el holdout preliminar. Los criterios de
+estabilidad, intervalos y validación externa siguen pendientes.
 
-2. **Cobertura desigual de fuentes**:
-   - BCRP: 12 distritos frente a 20 en anuncios
-   - MIVIVIENDA: 460 promotores vs constructoras activas en Lima
-   - Municipalidades: solo Cercado de Lima para licencias
-   - Consecuencia: `data_partial=true` en 25.26% de anuncios
+## 7. Evaluación siguiente
 
-3. **Sesgo de selección**:
-   - Urbania: 20 distritos, no muestra aleatoria de Lima
-   - SIDPOL: denuncias vs hechos reales de criminalidad
-   - OSM: densidad refleja intensidad de mapeo
+- Validación cruzada agrupada por dirección/edificio para ajustar `alpha`.
+- Validación temporal tan pronto exista fecha de publicación confiable.
+- Intervalos conformales o cuantílicos con cobertura global y por distrito.
+- Corrección de retransformación (smearing) y calibración del sesgo al volver de log-precio a PEN.
+- Curvas de error por rango de precio, área y densidad de muestra.
+- Comparación con un ensamble de árboles solo como competidor secundario.
+- Evaluación externa contra transacciones cuando exista área, tipo y enlace defendible.
 
-### Criterios de aceptación para Week 7 (Entrega 1)
+No se recomienda optimizar contra la serie BCRP como si fuera ground truth de
+transacciones: también representa precios de oferta y tiene cobertura parcial.
 
-- [ ] Documentación explícita de componentes faltantes en README.md
-- [ ] Hoja de ruta clara para cada componente no implementado
-- [ ] Métricas de evaluación alineadas con el objetivo actual (precio de oferta)
-- [ ] No afirmar superioridad del modelo sin evidencia reproducible
-- [ ] Prototipo funcional de al menos un componente adicional (geocodificación o puntaje de constructoras)
+## 8. Riesgos y decisión final
 
-### Decisiones de alcance para la Entrega 1
+El mayor riesgo es confundir precio publicado con valor de mercado. También hay
+riesgo de deriva, sesgo de portal y sobreconfianza en distritos pequeños. La
+decisión de Week 6 es:
 
-**INCLUIR en Week 7**:
-- Documentación completa de limitaciones actuales
-- Hoja de ruta detallada por componente
-- Prototipo escalado de geocodificación (mínimo 100 anuncios)
-- Evaluación honesta del modelo frente a la línea base
-
-**POSPONER para Week 10-15**:
-- Modelo visual completo (requiere un conjunto de datos de imágenes)
-- Puntaje de constructoras con CIPIEC (requiere acceso institucional)
-- Transacciones Alcabala (requiere negociación de fuente)
-- Interfaz de recomendación personalizada (requiere componentes base disponibles)
-
-**Estado actual (Week 6)**:
-- ✅ Documentación de componentes faltantes completada
-- ✅ Hoja de ruta por componente documentada
-- ✅ Métricas alineadas con el objetivo actual
-- ✅ No se afirma superioridad sin evidencia
-- ❌ Prototipo funcional adicional pendiente (geocodificación solo prototipo de 10 anuncios)
+- **avanzar con Ridge contextual** como candidato interpretable;
+- **mantener la mediana distrital** como guardrail y fallback;
+- **no desplegar** sin intervalos, monitoreo por segmento y validación temporal/externa;
+- **no iniciar un modelo visual o de constructoras** hasta contar con datos y etiquetas defendibles.

@@ -21,6 +21,19 @@ def main():
     listings["data_partial"] = listings[["bcrp_price_m2_usd", "bcrp_price_rent_ratio"]].isna().any(axis=1)
     listings.to_csv(OUT / "listings_eda.csv", index=False)
 
+    raw_listings = pd.read_csv(WEEK06 / "data" / "raw" / "listings_urbania.csv")
+    preprocessing = pd.DataFrame([
+        {"stage": "raw_urbania", "rows": len(raw_listings), "rows_removed": 0,
+         "rule": "Acquired listing inventory"},
+        {"stage": "valid_price_area", "rows": int((raw_listings.price_pen.gt(0) & raw_listings.area_total.gt(0)).sum()),
+         "rows_removed": int((~(raw_listings.price_pen.gt(0) & raw_listings.area_total.gt(0))).sum()),
+         "rule": "Require positive price and area"},
+        {"stage": "district_iqr_price_per_m2", "rows": len(listings),
+         "rows_removed": len(raw_listings) - len(listings),
+         "rule": "Keep price/m2 within [Q1 - 1.5 IQR, Q3 + 1.5 IQR] inside each district"},
+    ])
+    preprocessing.to_csv(OUT / "preprocessing_summary.csv", index=False)
+
     district = listings.groupby("district", as_index=False).agg(
         listings=("listing_id", "count"),
         price_median_soles=("price_soles", "median"),

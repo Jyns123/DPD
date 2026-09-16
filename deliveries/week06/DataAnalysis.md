@@ -1,149 +1,167 @@
-# Análisis de datos - InmoScore
+# Análisis exploratorio de datos — InmoScore
 
-## 1. Objetivo y unidad analítica
+## 1. Objetivo y alcance
 
-El objetivo es entender si los datos disponibles pueden respaldar un primer
-componente de valoración de precios para InmoScore. La unidad analítica
-principal es un anuncio publicado en Urbania. La tabla adquirida completa
-contiene 3,896 anuncios después del filtro IQR dentro de cada distrito
-documentado, 27 columnas originales o derivadas y 20 distritos de Lima. A cada
-anuncio se le unieron variables distritales de seguridad, conveniencia,
-pobreza, desarrollo y oferta de proyectos.
+Esta entrega evalúa si los datos disponibles permiten construir un primer
+componente de **valoración del precio de oferta publicado**. La unidad analítica
+es un anuncio inmobiliario y no una transacción cerrada. En consecuencia, los
+resultados describen el mercado anunciado en Urbania y no deben interpretarse
+como valor de tasación o precio final de compraventa.
 
-Este es un análisis exploratorio de precios de oferta. No es un análisis de
-precios de cierre. Un anuncio inmobiliario no es una transacción y los datos
-no contienen una fecha confiable del anuncio para realizar una validación
-temporal.
-
-## 2. Fuentes y estructura de datos
-
-La tabla principal de esta ejecución es
-`deliveries/week06/data/processed/listings_feature_store.csv`. Las entradas se
-describen en `DATA_PROVENANCE.md` e incluyen anuncios de Urbania, series de
-precios de oferta del BCRP, incidentes de SIDPOL/MININTER, POIs de OpenStreetMap,
-variables socioeconómicas del INEI y oferta de proyectos del Fondo MIVIVIENDA.
-
-El inventario de fuentes generado por el script está en
-`data/processed/source_inventory.csv`. La tabla procesada de anuncios está en
+El análisis reproducible está en `code/EDA_Week06.ipynb`. El notebook fue
+ejecutado sin errores y sus tablas se generan a partir de
 `data/processed/listings_eda.csv`.
 
-Las tablas cuantitativas de EDA son generadas por el script
-`code/run_eda_statistics.py`: `eda_numeric_summary.csv`, `eda_correlations.csv`
-y `eda_district_coverage.csv`. Proporcionan la evidencia numérica detrás de
-las afirmaciones de distribución y cobertura que siguen.
+## 2. Procedencia y trazabilidad desde Week 04
 
-## 3. Decisiones de calidad y preprocesamiento
+La fuente inicial fue identificada en `deliveries/week04/acquisition.md`:
+el conjunto público `lima-real-estate-price-predictor`, originalmente recopilado
+de Urbania y publicado en GitHub. Week 06 usa el inventario completo de 3,987
+anuncios; las muestras de Week 04 se conservan como evidencia de linaje.
 
-El pipeline de Week 4 ya eliminó los valores atípicos severos de precio por
-metro cuadrado dentro de cada distrito mediante la regla IQR. Week 6 conserva
-esa decisión y no imputa silenciosamente los valores faltantes.
+`code/validate_source_lineage.py` genera
+`data/processed/source_lineage_week04.csv` y confirma:
 
-Transformaciones adicionales:
+- 400/400 identificadores de la muestra inicial de Week 04 aparecen en el crudo de Week 06;
+- 500/500 identificadores de `week04/data/sample.csv` aparecen tanto en el crudo como en el feature store;
+- precio y área coinciden en los 500 registros compartidos.
 
-1. Los campos numéricos se conservan como valores numéricos y los precios permanecen en PEN.
-2. Se crean `log_price_soles` y `log_area_m2` para un candidato de regresión porque el precio y el área presentan sesgo a la derecha.
-3. `data_partial` es verdadero cuando faltan los campos de referencia del BCRP. Los valores faltantes del BCRP son estructurales porque la serie cubre solo 12 distritos.
-4. Las variables distritales se tratan como predictores contextuales, no como mediciones independientes a nivel de inmueble. Es esperable que se repitan entre anuncios.
-5. `listing_id` es la clave de identidad. Las comprobaciones de identidad duplicada deben ejecutarse nuevamente si se agregan más portales.
+Las fuentes complementarias son BCRP, SIDPOL/MININTER, OpenStreetMap, INEI y
+Fondo MIVIVIENDA. Los hashes, conteos y URL de procedencia están en
+`data/processed/extraction_manifest.csv` y `DATA_PROVENANCE.md`.
 
-## 4. Hallazgos exploratorios
+## 3. Estructura de la tabla analítica
 
-El resumen distrital generado muestra la distribución de anuncios, precio,
-precio por metro cuadrado, área, oportunidad de línea base y puntajes de zona.
-Los principales patrones que se deben reportar en la presentación son:
+Después del preprocesamiento quedan **3,896 anuncios, 30 campos y 20
+distritos**. Los campos pertenecen a cuatro grupos:
 
-- Los precios y las áreas presentan un fuerte sesgo a la derecha, por lo que las medianas y las transformaciones logarítmicas son más informativas que las medias por sí solas.
-- El distrito es una variable contextual fuerte porque la línea base de Week 4 está definida explícitamente como el precio distrital mediano por metro cuadrado multiplicado por el área.
-- El puntaje de oportunidad está relacionado mecánicamente con la misma línea base distrital; no se debe utilizar simultáneamente como objetivo y variable sin revisar la fuga de información.
-- Los campos del BCRP presentan ausencia estructural fuera de su cobertura de 12 distritos.
-- El compuesto de zona tiene actualmente dos componentes: seguridad y conveniencia urbana. El componente visual no está disponible y no debe presentarse como dato observado.
-- Los conteos de proyectos describen el registro en programas del Fondo MIVIVIENDA, no toda la actividad constructora de un distrito.
+1. identidad y localización textual: `listing_id`, `district`, `ubigeo`, `address`;
+2. características del anuncio: precio, área, habitaciones, baños, estacionamientos y mantenimiento;
+3. contexto distrital: seguridad reportada, conveniencia OSM, IDH, pobreza y oferta MIVIVIENDA;
+4. variables derivadas: precio por m², baseline, score de oportunidad y transformaciones logarítmicas.
 
-Por lo tanto, el análisis respalda un primer modelo de valoración, pero todavía
-no un modelo completo de recomendación de tres componentes.
+El diccionario completo está en `data_dictionary_week06.csv`. Las variables
+derivadas del objetivo se marcan como diagnósticas para impedir su uso como
+predictores.
 
-### Coherencia de métricas entre fuentes
+## 4. Preprocesamiento y validación
 
-**Brecha BCRP vs Urbania**: Documentado en Week 4, el BCRP reporta precios de oferta
-tomados de Urbania, pero existe una diferencia metodológica. Por ejemplo, para Miraflores:
-- BCRP: US$ 2,464/m²
-- Urbania (nuestra mediana): S/ 7,748/m² (≈ US$ 2,070/m²)
+El pipeline aplica las siguientes decisiones:
 
-Esta brecha de ~15% es esperable por diferencias de muestra y método, pero debe
-considerarse al usar BCRP como referencia de calibración. En Week 6, el modelo se
-evalúa contra precios de oferta de Urbania, no contra BCRP, para mantener
-consistencia metodológica.
+1. exige precio y área estrictamente positivos;
+2. normaliza distrito y conserva UBIGEO como clave geográfica;
+3. calcula `price_per_m2`;
+4. aplica la regla IQR al precio por m² **dentro de cada distrito**;
+5. elimina 91 observaciones fuera de esos límites y retiene 3,896 de 3,987 (97.72%);
+6. genera `log_price_soles` y `log_area_m2` para reducir asimetría;
+7. no imputa la ausencia estructural del BCRP: la señala mediante `data_partial`.
 
-La ejecución completa actual tiene 3,896 anuncios en 20 distritos. La
-cobertura distrital va de 19 a 289 anuncios. La distribución original de
-precios de oferta presenta sesgo a la derecha, por lo que el informe utiliza
-medianas y las transformaciones logarítmicas `log_price_soles` y
-`log_area_m2`. La línea base distrital es una referencia contextual y no se
-trata como una etiqueta independiente de transacción real.
+La reproducción con pandas 3 requirió sustituir `groupby.apply` por cuantiles
+calculados con `transform`; el resultado mantiene la misma regla estadística y
+ya funciona con el entorno incluido.
 
-La comparación preliminar de modelos está almacenada en
-`data/processed/baseline_metrics.csv` y `data/processed/model_metrics.csv`.
-Muestra que el candidato Ridge mejora el MdAPE y el MAE por metro cuadrado,
-pero todavía no mejora el MAE del precio total. Esto respalda conservar la
-línea base distrital simple como referencia de Week 6, en lugar de afirmar
-prematuramente la superioridad del modelo.
+### Controles de calidad
 
-El almacén completo de variables tiene 984 anuncios (25.26%) con
-`data_partial=true` porque los campos de referencia del BCRP no están
-disponibles fuera de los distritos que cubre. Esta es una ausencia estructural,
-no una ejecución fallida de recopilación.
+`code/validate_processed_data.py` y el notebook verifican:
 
-## 5. Posibles sesgos y limitaciones
+- 0 identificadores duplicados;
+- 0 precios, áreas o precios por m² no positivos;
+- 0 valores fuera de `[0,1]` en los índices normalizados;
+- 0 valores numéricos inválidos;
+- 62 filas candidatas a duplicado por dirección/precio/área en el crudo.
 
-- **Sesgo de selección:** los anuncios de Urbania son precios de oferta y representan solo 20 distritos; no son una muestra aleatoria de viviendas de Lima.
-- **Sesgo de cobertura:** las fuentes del BCRP, MIVIVIENDA, OSM y las municipalidades cubren poblaciones y geografías diferentes.
-- **Sesgo de medición:** la criminalidad reportada refleja denuncias y puede incluir efectos de población flotante. La densidad de OSM también refleja la intensidad del mapeo.
-- **Limitación del objetivo:** la tabla disponible no tiene un precio de cierre vinculado a cada anuncio, por lo que el objetivo del modelo de Week 6 es el precio de oferta.
-- **Confusión a pequeña escala:** el precio por metro cuadrado está afectado por el tipo de inmueble, antigüedad, piso, vista y estado, varios de los cuales no están disponibles.
-- **Deriva temporal:** no hay una fecha de captura confiable disponible para cada anuncio.
-- **Datos visuales faltantes:** no existe un conjunto de imágenes defendible ni un conjunto de etiquetas manuales para `visual_quality_score`.
+Los 62 candidatos no se eliminan automáticamente: distintas unidades de un
+mismo edificio pueden compartir dirección, precio y área. La partición de
+evaluación mantiene las direcciones iguales en el mismo lado del holdout para
+reducir fuga.
 
-## 6. Principales desafíos de datos
+### Ausencia y codificaciones ambiguas
 
-1. Geocodificar direcciones con Nominatim utilizando un límite de solicitudes y una caché documentados; rechazar coordenadas fuera de Lima y Callao.
-  - **Estado actual**: solo prototipo de 10 anuncios (4 válidos)
-   - **Bloquea**: Distancias a POIs por inmueble, índice de conveniencia específico
-  - **Plan Week 7**: escalar a los 5 distritos con mayor volumen (mínimo 100 anuncios)
+Los únicos campos ausentes de la tabla analítica son las dos referencias BCRP:
+984 filas (25.26%) en cada campo, correspondientes a distritos fuera de las 12
+series oficiales disponibles. Después de corregir alias y tildes (`Surco` ↔
+`Santiago de Surco`, `Magdalena` ↔ `Magdalena del Mar`), ambas variables tienen
+la misma cobertura y `data_partial` marca exactamente esas 984 filas.
 
-2. Add property-level distances to POI categories only after geocoding.
-   - **Dependencia**: Geocodificación a escala
-   - **Impacto**: Sin índice de conveniencia por inmueble, solo a nivel distrital
+Dos variables se conservan pero no se usan en el candidato:
 
-3. Obtener o crear una muestra de imágenes de calles legalmente utilizable y etiquetada manualmente antes de proponer un modelo visual.
-  - **Estado actual**: sin conjunto de datos de imágenes ni etiquetas manuales
-   - **Impacto**: Componente visual de `zone_composite_index` ausente
-  - **Plan Week 7**: evaluar Mapillary frente a un conjunto propio
+- `maintenance_fee=0` en 51.49% de filas puede significar “no informado”, no ausencia real de cuota;
+- `photos_count` vale 1 en 3,536 filas y 10 en 336, patrón compatible con una codificación/cota del extractor y no con un conteo continuo confiable.
 
-4. Normalizar los promotores por RUC y mantener explícitamente parcial el puntaje de confiabilidad hasta disponer de datos de cobertura y sanciones.
-   - **Estado actual**: Solo volumen MIVIVIENDA (460 promotores), sin CIPIEC
-   - **Cobertura**: Insuficiente para score metropolitano completo
-   - **Plan Week 7**: Documentar cobertura actual como limitación
+## 5. Distribuciones relevantes
 
-5. Adquirir el extracto de Alcabala con su procedencia en el repositorio. Hasta que existan el área y el tipo de inmueble, utilizarlo para comprobar distribuciones distritales y calibrar percentiles, no para calcular MAE a nivel de registro.
-   - **Estado actual**: No incorporado
-  - **Impacto**: evaluación contra precios de oferta, no contra una verdad de terreno real
-   - **Plan Week 7**: Investigar fuente reproducible
+| Variable | P25 | Mediana | P75 | P95 | Asimetría |
+|---|---:|---:|---:|---:|---:|
+| Precio de oferta (S/) | 380,000 | 539,001 | 829,625 | 1,870,000 | 4.77 |
+| Área (m²) | 67 | 90 | 137 | 292 | 2.87 |
+| Precio por m² (S/) | 4,717 | 6,236 | 7,625 | 10,142 | 0.38 |
 
-### Estado de componentes analíticos en Week 6
+Precio y área tienen una cola derecha marcada. Por ello, las medianas y
+cuartiles son más representativos que la media, y la regresión usa logaritmos.
+Los gráficos se encuentran en `figures/eda_distributions.png` y dentro del
+notebook ejecutado.
 
-| Componente analítico | Estado en datos Week 6 | Limitación |
-|---------------------|------------------------|------------|
-| **Motor de valoración** | 3,896 anuncios con atributos básicos | Sin atributos de antigüedad, piso, vista y estado |
-| **Índice de seguridad** | 47 distritos con índice criminalidad | Basado en denuncias, no hechos reales |
-| **Índice de conveniencia** | POIs por distrito | Sin distancias por inmueble (falta geocodificación) |
-| **Índice de desarrollo** | IDH, pobreza por distrito | Variables agregadas, no específicas por inmueble |
-| **Puntaje de constructoras** | Solo conteo de proyectos MIVIVIENDA | Sin historial de plazos, sanciones ni licencias completas |
-| **Calidad visual** | No disponible | Sin conjunto de datos de imágenes; componente ausente |
+## 6. Cobertura y relaciones
 
-## 7. Decisión para Week 6
+La cobertura distrital va de **19 anuncios en Magdalena del Mar** a **289 en
+Jesús María**. Esta desigualdad obliga a acompañar cualquier métrica distrital
+con su tamaño de muestra.
 
-Continuar con el modelo interpretable de valoración de precios y documentar las
-fuentes faltantes como limitaciones. No retrasar la entrega esperando un
-conjunto de datos completo de imágenes, CIPIEC o geocodificación. Estos son
-trabajos de seguimiento de Week 6 y deben registrarse por separado de la
-evidencia utilizada en este EDA.
+Las medianas de precio por m² también varían de forma material: alrededor de
+S/2,773 en San Martín de Porres frente a S/9,299 en Barranco. Esto justifica
+incluir el distrito como contexto, pero no demuestra causalidad.
+
+En correlaciones bivariadas con `log_price_soles` destacan:
+
+- `log_area_m2`: 0.797;
+- estacionamientos: 0.700;
+- baños: 0.604;
+- habitaciones: 0.412.
+
+Las variables de distrito deben interpretarse con cautela porque se repiten
+para todos los anuncios del mismo distrito. `price_per_m2`,
+`baseline_price_soles` y `opportunity_score_baseline` derivan del objetivo y se
+excluyen del modelo predictivo para evitar fuga.
+
+Además, incluir simultáneamente one-hot de distrito e indicadores distritales
+genera redundancia. La regularización la controla para predicción, pero las
+asociaciones no deben presentarse como efectos causales de seguridad, pobreza o
+conveniencia sobre el precio.
+
+## 7. Hallazgos iniciales
+
+1. Área, estacionamientos y distrito contienen señal suficiente para superar una referencia simple.
+2. Ridge contextual reduce el MAE preliminar de S/157,482 a S/141,372 y el MdAPE de 15.38% a 13.58%.
+3. El error absoluto sigue siendo alto en mercados caros: San Isidro presenta MAE aproximado de S/351 mil y Miraflores de S/309 mil.
+4. Magdalena del Mar solo aporta tres casos al holdout; su resultado distrital no es estable.
+5. La ausencia BCRP es estructural y no debe convertirse en un valor promedio sin indicador de cobertura.
+
+Estos resultados respaldan un primer modelo de valoración, pero no un motor de
+recomendación completo ni una estimación de precio de cierre.
+
+## 8. Sesgos y limitaciones
+
+- **Selección:** Urbania cubre usuarios, tipos de inmueble y 20 distritos; no es una muestra aleatoria de Lima.
+- **Objetivo:** el precio publicado puede incluir margen de negociación y no equivale a transacción.
+- **Temporalidad:** no existe una fecha fiable por anuncio; no es posible una validación temporal honesta.
+- **Granularidad:** seguridad, pobreza, IDH y conveniencia son distritales, no del entorno inmediato del inmueble.
+- **Medición:** SIDPOL refleja denuncias; OSM refleja tanto infraestructura como intensidad de mapeo.
+- **Cobertura:** MIVIVIENDA no representa toda la construcción nueva y las licencias municipales solo cubren Cercado de Lima.
+- **Variables omitidas:** antigüedad, piso, estado, vista, coordenadas completas e imágenes etiquetadas no están disponibles.
+- **Extremos:** el filtro IQR mejora robustez para el MVP, pero reduce representación del segmento de lujo y oportunidades atípicas.
+
+## 9. Adquisición adicional
+
+Se dejó un adaptador reproducible para Properati/Kaggle en
+`code/acquire_geocoded_property_sources.py`, pero no se incorporó al análisis:
+requiere CLI/credenciales y el conjunto es histórico. Antes de mezclarlo se debe
+validar periodo, moneda, duplicados entre portales y compatibilidad de campos.
+No se agregó ninguna descarga manual o sin procedencia.
+
+## 10. Conclusión
+
+La tabla es suficiente para una propuesta preliminar, interpretable y
+reproducible de valoración de **precios de oferta**. La decisión recomendada es
+continuar con Ridge como candidato, mantener la mediana distrital como guardrail
+y priorizar fechas, coordenadas e información de transacciones antes de afirmar
+precisión de mercado.

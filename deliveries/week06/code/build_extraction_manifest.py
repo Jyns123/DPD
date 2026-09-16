@@ -4,6 +4,8 @@ import hashlib
 from datetime import datetime, timezone
 from pathlib import Path
 
+import pandas as pd
+
 
 ROOT = Path(__file__).resolve().parents[3]
 RAW = ROOT / "deliveries" / "week06" / "data" / "raw"
@@ -20,6 +22,10 @@ SOURCE_METADATA = {
     "distritos_lima_geo.geojson": ("Public district boundary GeoJSON", "https://github.com/juaneladio/peru-geojson", "MIT repository; source data attribution"),
     "proyectos_mivivienda.csv": ("Fondo MIVIVIENDA public search API", "https://fondomivivienda.pe/buscador-proyectos", "Public source; attribution"),
     "entidades_tecnicas_ranking.csv": ("Fondo MIVIVIENDA ranking endpoint", "https://fondomivivienda.pe/api/ranking-et/list", "Public source; attribution"),
+    "estratos_ingreso_links.csv": ("INEI 2020 income-strata download index", "https://github.com/geogpsperu/estratos2020suyo.github.com", "Public derived data; verify upstream attribution"),
+    "estratos_ingreso_manzana.csv": ("INEI 2020 income strata by block", "https://github.com/geogpsperu/estratos2020suyo.github.com", "Public derived data; verify upstream attribution"),
+    "obras_licencias_cercado.csv": ("Municipalidad Metropolitana de Lima open data", "https://www.datosabiertos.gob.pe/", "Peruvian public open data; attribution"),
+    "obras_conformidades_cercado.csv": ("Municipalidad Metropolitana de Lima open data", "https://www.datosabiertos.gob.pe/", "Peruvian public open data; attribution"),
 }
 
 
@@ -34,21 +40,25 @@ def sha256(path):
 def count_shape(path):
     if path.suffix.lower() != ".csv":
         return "", ""
-    for encoding in ("utf-8", "latin-1"):
+    attempts = [
+        {"encoding": "utf-8"},
+        {"encoding": "utf-8-sig"},
+        {"encoding": "latin-1", "sep": ";", "engine": "python"},
+    ]
+    for options in attempts:
         try:
-            with path.open(encoding=encoding, newline="") as stream:
-                reader = csv.reader(stream)
-                header = next(reader, [])
-                rows = sum(1 for _ in reader)
-            break
-        except UnicodeDecodeError:
+            frame = pd.read_csv(path, **options)
+            if len(frame.columns) == 1 and options.get("sep") != ";":
+                continue
+            return len(frame), len(frame.columns)
+        except (UnicodeDecodeError, pd.errors.ParserError):
             continue
-    return rows, len(header)
+    return "", ""
 
 
 def main():
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    extracted_at = datetime.now(timezone.utc).isoformat()
+    manifest_generated_at = datetime.now(timezone.utc).isoformat()
     rows = []
     for path in sorted(RAW.iterdir()):
         if not path.is_file() or path.suffix.lower() not in {".csv", ".geojson"}:
@@ -57,7 +67,8 @@ def main():
         description, url, license_name = SOURCE_METADATA.get(path.name, ("Acquired Week 6 source", "", "Document source license"))
         rows.append({
             "file": path.name,
-            "extracted_at_utc": extracted_at,
+            "manifest_generated_at_utc": manifest_generated_at,
+            "file_modified_at_utc": datetime.fromtimestamp(path.stat().st_mtime, timezone.utc).isoformat(),
             "sha256": sha256(path),
             "rows": rows_count,
             "columns": columns_count,
@@ -66,7 +77,7 @@ def main():
             "license_or_terms": license_name,
         })
     with OUTPUT.open("w", encoding="utf-8", newline="") as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(stream, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     print(f"{len(rows)} source files -> {OUTPUT}")

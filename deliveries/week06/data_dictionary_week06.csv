@@ -1,31 +1,31 @@
-attribute_name,description,data_type,source_or_transformation,missing_value_policy
-listing_id,Unique listing identifier,string,Week 4 Urbania feature store,Must be present
-source,Portal source,string,Week 4 Urbania feature store,Must be present
-district,District label,string,Normalized from Urbania and INEI,Must be present
-ubigeo,INEI district code,string,Week 4 join key,Must be present
-address,Published textual address,string,Urbania,May be coarse or redacted
-urbanization,Published urbanization,string,Urbania,Keep missing if observed
-price_soles,Published offer price in PEN,float,Urbania,Target; must be present
-area_m2,Total property area,float,Urbania,Required predictor; must be present
-price_per_m2,Published price divided by area,float,Week 4 transformation,Derived only when price and area exist
-rooms,Number of bedrooms,integer,Urbania,Keep missing if observed
-bathrooms,Number of bathrooms,integer,Urbania,Keep missing if observed
-parking,Number of parking spaces,integer,Urbania,Keep missing if observed
-maintenance_fee,Monthly maintenance fee in PEN,float,Urbania,Zero may mean unreported
-photos_count,Number of published photos,integer,Urbania,Keep missing if observed
-district_median_price_m2,District offer-price baseline,float,Week 4 derived table,Review for leakage before modeling
-baseline_price_soles,District baseline times area,float,Week 4 transformation,Diagnostic only
-opportunity_score_baseline,Baseline opportunity score,float,Week 4 transformation,Diagnostic; not leakage-free target
-bcrp_price_m2_usd,External district offer-price reference,float,BCRP,Structural missingness outside 12 districts
-bcrp_price_rent_ratio,Price-to-rent reference,float,BCRP,Structural missingness outside 12 districts
-proyectos_nuevos_distrito,Registered MIVIVIENDA projects count,integer,Fondo MIVIVIENDA,Zero means not registered in program
-unidades_nuevas_distrito,Registered available units,integer,Fondo MIVIVIENDA,Zero means not registered in program
-crime_index_zone,Normalized reported-crime context score,float,SIDPOL/MININTER,Declare source coverage and bias
-crime_trend_zone,Reported-crime trend,string,SIDPOL/MININTER,Keep source category
-urban_convenience_index,POI density context score,float,OpenStreetMap,Declare mapping bias
-zone_composite_index,Current two-component zone score,float,Derived from safety and convenience,Mark incomplete until visual component exists
-idh_2019,District human development index,float,INEI,Context variable
-pct_pobreza_total,District poverty percentage,float,INEI,Context variable
-log_price_soles,Natural log of offer price,float,Week 6 transformation,Created for regression
-log_area_m2,Natural log of area,float,Week 6 transformation,Created for regression
-data_partial,Whether structural reference data is missing,boolean,Week 6 derived flag,True is shown explicitly
+attribute_name,description,data_type,unit,source_or_transformation,missing_value_policy,model_role
+listing_id,Identificador único del anuncio,string,NA,Urbania vía fuente documentada en Week 04,Obligatorio,identificador
+source,Portal de origen,string,NA,Constante Urbania,Obligatorio,auditoría
+district,Distrito normalizado,string,NA,Urbania normalizado con alias,Obligatorio,predictor categórico
+ubigeo,Código distrital INEI,string,código,Join con INEI,Obligatorio,clave geográfica
+address,Dirección textual publicada,string,NA,Urbania,Puede ser genérica o redactada,agrupación de evaluación
+urbanization,Urbanización publicada,string,NA,Urbania,Conservar como observado,no usado
+price_soles,Precio de oferta publicado,float,PEN,Urbania,Obligatorio,objetivo
+area_m2,Área total del inmueble,float,m²,Urbania,Obligatorio y positivo,predictor transformado
+price_per_m2,Precio dividido por área,float,PEN/m²,Derivación Week 06,Disponible si precio y área son válidos,diagnóstico_excluir_por_fuga
+rooms,Número de dormitorios,integer,conteo,Urbania,Imputación mediana futura,predictor
+bathrooms,Número de baños,integer,conteo,Urbania,Imputación mediana futura,predictor
+parking,Número de estacionamientos,integer,conteo,Urbania,Imputación mediana futura,predictor
+maintenance_fee,Cuota de mantenimiento publicada,float,PEN/mes,Urbania,Cero puede significar no informado,no usado
+photos_count,Conteo/código de fotografías,integer,conteo,Urbania,Distribución 1/10 requiere auditoría,no usado
+district_median_price_m2,Mediana distrital de oferta por m²,float,PEN/m²,Entrenamiento/tabla baseline,Calcular solo con entrenamiento,diagnóstico_excluir_por_fuga
+baseline_price_soles,Mediana distrital por m² multiplicada por área,float,PEN,Derivación Week 06,Diagnóstico,diagnóstico_excluir_por_fuga
+opportunity_score_baseline,Brecha relativa frente al baseline,float,proporción,Derivación Week 06,Diagnóstico,diagnóstico_excluir_por_fuga
+bcrp_price_m2_usd,Referencia BCRP distrital de oferta,float,USD/m²,API BCRP,Falta fuera de 12 distritos,referencia_externa
+bcrp_price_rent_ratio,Ratio precio/alquiler BCRP,float,ratio,API BCRP,Falta fuera de 12 distritos,referencia_externa
+proyectos_nuevos_distrito,Proyectos registrados en MIVIVIENDA,integer,conteo,Fondo MIVIVIENDA,Cero significa no registrado,predictor_contextual
+unidades_nuevas_distrito,Unidades disponibles registradas,integer,conteo,Fondo MIVIVIENDA,Cero significa no registrado,predictor_contextual
+crime_index_zone,Índice normalizado de denuncias,float,0-1,SIDPOL y población INEI,Obligatorio en alcance,predictor_contextual
+crime_trend_zone,Tendencia anual de denuncias,string,categoría,SIDPOL,Conservar categoría,no usado
+urban_convenience_index,Conveniencia por densidad de POIs,float,0-1,OpenStreetMap y área distrital,Obligatorio en alcance,predictor_contextual
+zone_composite_index,Compuesto de seguridad y conveniencia,float,0-1,Derivación 50/50,Incompleto sin componente visual,diagnóstico
+idh_2019,Índice de desarrollo humano distrital,float,0-1,INEI,Obligatorio en alcance,predictor_contextual
+pct_pobreza_total,Pobreza total distrital,float,porcentaje,INEI,Obligatorio en alcance,predictor_contextual
+log_price_soles,Logaritmo natural del precio,float,log(PEN),Derivación Week 06,Precio positivo requerido,objetivo_modelo
+log_area_m2,Logaritmo natural del área,float,log(m²),Derivación Week 06,Área positiva requerida,predictor
+data_partial,Indica ausencia de referencias BCRP,boolean,NA,Derivación Week 06,True se muestra explícitamente,bandera_calidad
