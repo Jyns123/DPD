@@ -15,11 +15,15 @@ no están disponibles.
 - `code/build_extraction_manifest.py`: registra la hora de extracción, hashes, conteos y metadatos de las fuentes.
 - `code/filter_urbania_details.py`: filtra la recopilación auxiliar de detalles a Lima/Callao.
 - `code/validate_duplicates.py`: informa candidatos a duplicados exactos y por clave de negocio.
+- `code/validate_processed_data.py`: valida la tabla procesada con la librería estándar de Python y genera `data/processed/validation_report.md`.
 - `code/geocode_listings.py`: geocodifica un subconjunto controlado de anuncios con caché de Nominatim y comprobaciones de cuadro delimitador. **[PROTOTIPO]** Solo 10 listings probados (4 válidos), no escalado a inventario completo.
 - `code/calculate_poi_distances.py`: calcula distancias Haversine al POI más cercano para coordenadas válidas. **[PROTOTIPO]** Funcionalidad disponible pero no utilizada en análisis principal por limitación de geocodificación.
+- `code/acquire_geocoded_property_sources.py`: prepara una fuente complementaria geocodificada basada en Properati/Kaggle cuando existan credenciales locales de Kaggle.
+- `code/enrich_geocoded_properties_with_pois.py`: calcula distancias al POI más cercano para cualquier CSV de propiedades con latitud/longitud.
 - `code/run_eda_statistics.py`: genera estadísticas descriptivas, correlaciones y tablas de cobertura distrital.
 - `code/evaluate_baseline.py`: evalúa la línea base de precio mediano por m² distrital en una separación determinista.
 - `code/evaluate_ridge_model.py`: evalúa el candidato Ridge de precio logarítmico sin fuga del objetivo.
+- `CODE.md`: mapa de scripts, dependencias de datos y orden sugerido de ejecución.
 - `data/processed/`: resultados generados utilizados por los documentos.
 - `PresentationWeek06.md`: fuente de la presentación, diapositiva por diapositiva, para exportar como PDF o PPTX.
 - `code/generate_presentation.py`: genera `PresentationWeek06.pptx` a partir del esquema aprobado.
@@ -61,6 +65,30 @@ del almacén de variables. Escribe:
 - `data/processed/eda_numeric_summary.csv`, `eda_correlations.csv` y `eda_district_coverage.csv`
 - `data/processed/baseline_metrics.csv`
 - `data/processed/model_metrics.csv`
+- `data/processed/validation_report.md` cuando se ejecuta `code/validate_processed_data.py`
+
+Para regenerar los diagnósticos y métricas después de construir el almacén de
+variables:
+
+```bash
+python3 deliveries/week06/code/build_extraction_manifest.py
+python3 deliveries/week06/code/validate_duplicates.py
+python3 deliveries/week06/code/run_eda_statistics.py
+python3 deliveries/week06/code/evaluate_baseline.py
+python3 deliveries/week06/code/evaluate_ridge_model.py
+python3 deliveries/week06/code/validate_processed_data.py
+```
+
+Para explorar una fuente complementaria con coordenadas explícitas, configure
+credenciales de Kaggle fuera del repositorio y ejecute:
+
+```bash
+python3 deliveries/week06/code/acquire_geocoded_property_sources.py
+python3 deliveries/week06/code/enrich_geocoded_properties_with_pois.py
+```
+
+Estos dos scripts son exploratorios y no reemplazan el feature store principal
+de Week 6.
 
 `data/raw/` contiene resultados reales de adquisición y Git lo ignora porque
 los archivos son grandes. Los CSV de `data/processed/` son resultados
