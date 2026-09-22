@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InmoScore · prototipo Week 7</title>
+<style>
+  :root {
+    --bg: #f4f4f2; --surface: #ffffff; --ink: #1b1b1a; --ink-2: #55544f; --muted: #8a8983;
+    --line: #d9d8d2; --soft: #ecebe6; --accent: #1f5fae; --accent-soft: #e3edf9;
+    --good: #1d7a3a; --warn-bg: #fff4d6; --warn-ink: #6b4b00;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+           padding: 14px 24px; background: var(--surface); border-bottom: 1px solid var(--line); }
+  header h1 { margin: 0; font-size: 20px; letter-spacing: -.2px; }
+  header .tag { font-size: 12px; color: var(--ink-2); border: 1px dashed var(--muted);
+                border-radius: 4px; padding: 2px 8px; }
+  header nav { margin-left: auto; display: flex; gap: 6px; }
+  .step { font-size: 13px; color: var(--muted); padding: 4px 10px; border-radius: 999px; border: 1px solid transparent; }
+  .step.on { color: var(--ink); border-color: var(--line); background: var(--soft); }
+  main { display: grid; grid-template-columns: 340px 1fr; gap: 20px; padding: 20px 24px; max-width: 1360px; margin: 0 auto; }
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; }
+  h2 { font-size: 15px; margin: 0 0 12px; }
+  .profiles { display: flex; gap: 8px; margin-bottom: 14px; }
+  .profiles button { flex: 1; font: inherit; font-size: 14px; padding: 8px; border-radius: 8px; cursor: pointer;
+                     background: var(--surface); border: 1px solid var(--line); color: var(--ink); }
+  .profiles button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+  .desc { font-size: 13px; color: var(--ink-2); margin: -4px 0 14px; min-height: 19px; }
+  fieldset { border: 0; padding: 0; margin: 0 0 16px; }
+  legend { font-size: 12px; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); margin-bottom: 8px; }
+  .field { display: grid; grid-template-columns: 1fr 130px; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 14px; }
+  .field input[type=number] { width: 100%; font: inherit; padding: 5px 8px; border: 1px solid var(--line); border-radius: 6px; text-align: right; }
+  .slider { display: grid; grid-template-columns: 110px 1fr 38px; align-items: center; gap: 10px; margin-bottom: 6px; font-size: 14px; }
+  .slider input { width: 100%; accent-color: var(--accent); }
+  .slider output { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+  .slider.off label { color: var(--muted); }
+  .cap { margin-top: 6px; padding: 10px 12px; background: var(--soft); border-radius: 8px; font-size: 13px; color: var(--ink-2); }
+  .cap strong { color: var(--ink); font-size: 15px; }
+  .cta { width: 100%; margin-top: 14px; font: inherit; font-weight: 600; padding: 10px; border-radius: 8px; border: 0;
+         background: var(--accent); color: #fff; cursor: pointer; }
+  .results-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+  .results-head h2 { margin: 0; }
+  .results-head span { color: var(--ink-2); font-size: 13px; }
+  .list { display: grid; gap: 10px; }
+  .card { display: grid; grid-template-columns: 34px 1fr 230px; gap: 14px; align-items: start; text-align: left; width: 100%;
+          background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; cursor: pointer; font: inherit; color: inherit; }
+  .card:hover, .card:focus-visible { border-color: var(--accent); outline: none; }
+  .card.selected { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+  .rank { font-size: 20px; font-weight: 700; color: var(--ink-2); }
+  .title { font-weight: 600; }
+  .meta { font-size: 13px; color: var(--ink-2); }
+  .why { margin-top: 8px; font-size: 13.5px; }
+  .why b { font-weight: 600; }
+  .partial { display: inline-block; margin-top: 6px; font-size: 12px; padding: 2px 8px; border-radius: 4px;
+             background: var(--warn-bg); color: var(--warn-ink); }
+  .scores { display: grid; gap: 5px; font-size: 12px; color: var(--ink-2); }
+  .bar { display: grid; grid-template-columns: 82px 1fr 34px; gap: 6px; align-items: center; }
+  .bar i { display: block; height: 8px; border-radius: 4px; background: var(--soft); position: relative; overflow: hidden; }
+  .bar i b { position: absolute; inset: 0 auto 0 0; background: var(--accent); border-radius: 4px; }
+  .bar.na i { background: repeating-linear-gradient(45deg, var(--soft) 0 4px, #fff 4px 8px); }
+  .bar em { font-style: normal; text-align: right; font-variant-numeric: tabular-nums; }
+  .total { font-size: 13px; color: var(--ink); font-weight: 600; margin-bottom: 2px; }
+  .detail { position: fixed; top: 0; right: 0; bottom: 0; width: min(520px, 100%); background: var(--surface);
+            border-left: 1px solid var(--line); box-shadow: -12px 0 32px rgba(0,0,0,.08); padding: 22px; overflow-y: auto;
+            transform: translateX(100%); transition: transform .2s; }
+  .detail.open { transform: none; }
+  .detail h3 { margin: 0 0 4px; font-size: 18px; }
+  .detail .close { float: right; font: inherit; border: 1px solid var(--line); background: var(--surface); border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+  .range { margin: 16px 0 6px; }
+  .range-track { position: relative; height: 34px; }
+  .range-track .band { position: absolute; top: 12px; height: 10px; background: var(--accent-soft); border-radius: 5px; }
+  .range-track .mark { position: absolute; top: 4px; width: 3px; height: 26px; border-radius: 2px; }
+  .range-legend { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-2); }
+  .kv { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; margin: 14px 0; font-size: 14px; }
+  .kv div span { display: block; font-size: 12px; color: var(--muted); }
+  .note { font-size: 12px; color: var(--muted); margin-top: 16px; border-top: 1px solid var(--line); padding-top: 10px; }
+  .verify { margin-top: 18px; padding: 14px; border: 1px dashed var(--muted); border-radius: 10px; display: grid; gap: 8px; }
+  .verify h3 { margin: 0; font-size: 14px; }
+  .verify p { margin: 0 0 4px; font-size: 13px; color: var(--ink-2); }
+  .card.mini { grid-template-columns: 34px 1fr; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } .card { grid-template-columns: 28px 1fr; } .scores { grid-column: 2; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>InmoScore</h1>
+  <span class="tag">Prototipo de baja fidelidad · Week 7 · datos reales de oferta</span>
+  <nav aria-label="Pasos del flujo">
+    <span class="step on" id="step1">1 · Perfil</span>
+    <span class="step" id="step2">2 · Ranking</span>
+    <span class="step" id="step3">3 · Detalle</span>
+  </nav>
+</header>
+
+<main>
+  <section class="panel" aria-labelledby="perfil-title">
+    <h2 id="perfil-title">Tu perfil</h2>
+    <div class="profiles" role="group" aria-label="Perfiles de ejemplo">
+      <button type="button" data-profile="maria">María</button>
+      <button type="button" data-profile="carlos">Carlos</button>
+      <button type="button" data-profile="custom">Personalizado</button>
+    </div>
+    <p class="desc" id="desc"></p>
+
+    <fieldset>
+      <legend>Perfil financiero</legend>
+      <label class="field">Ingreso mensual (S/) <input type="number" id="ingreso" step="500" min="0"></label>
+      <label class="field">Ahorro para la inicial (S/) <input type="number" id="ahorro" step="5000" min="0"></label>
+      <label class="field">Presupuesto máximo (S/) <input type="number" id="presupuesto" step="10000" min="0"></label>
+      <label class="field">Dormitorios mínimos <input type="number" id="dormitorios" step="1" min="1" max="6"></label>
+      <div class="cap">Precio máximo alcanzable: <strong id="cap">—</strong><br>
+        <span id="cap-why"></span></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>¿Qué pesa más para ti?</legend>
+      <div class="slider"><label for="w-precio">Precio</label><input type="range" id="w-precio" min="0" max="100"><output id="o-precio"></output></div>
+      <div class="slider"><label for="w-seguridad">Seguridad</label><input type="range" id="w-seguridad" min="0" max="100"><output id="o-seguridad"></output></div>
+      <div class="slider"><label for="w-conveniencia">Colegios y servicios</label><input type="range" id="w-conveniencia" min="0" max="100"><output id="o-conveniencia"></output></div>
+      <div class="slider off"><label for="w-constructora">Constructora</label><input type="range" id="w-constructora" min="0" max="100"><output id="o-constructora"></output></div>
+    </fieldset>
+    <button class="cta" type="button" id="go">Ver mi ranking personalizado</button>
+  </section>
+
+  <section aria-labelledby="ranking-title">
+    <div class="results-head">
+      <h2 id="ranking-title">Ranking personalizado</h2>
+      <span id="summary"></span>
+    </div>
+    <div class="list" id="list"></div>
+  </section>
+</main>
+
+<aside class="detail" id="detail" aria-label="Detalle del inmueble" aria-hidden="true"></aside>
+
+<script src="data.js"></script>
+<script>
+const DATA = window.INMOSCORE;
+const COMPONENTS = ["precio", "seguridad", "conveniencia", "constructora"];
+const LABEL = {precio: "Precio", seguridad: "Seguridad", conveniencia: "Colegios y serv.", constructora: "Constructora"};
+// mismos supuestos que code/08_recommendation_demo.py
+const TEA = 0.09, YEARS = 20, MAX_SHARE = 0.30, MIN_DOWN = 0.10, TOP = 10;
+const $ = (id) => document.getElementById(id);
+const number = (v) => Math.round(v).toLocaleString("es-PE").replace(/,/g, " ");
+const soles = (v) => "S/ " + number(v);
+const params = new URLSearchParams(location.search);
+let state = {profile: "maria", selected: null};
+
+function affordable(p) {
+  const r = Math.pow(1 + TEA, 1 / 12) - 1, n = YEARS * 12;
+  const loan = p.ingreso_mensual * MAX_SHARE * (1 - Math.pow(1 + r, -n)) / r;
+  const caps = {presupuesto: p.presupuesto_max, inicial: p.ahorro_inicial / MIN_DOWN, credito: loan + p.ahorro_inicial};
+  const binding = Object.entries(caps).sort((a, b) => a[1] - b[1])[0];
+  return {cap: binding[1], binding: binding[0], loan};
+}
+
+function readProfile() {
+  const pesos = {};
+  COMPONENTS.forEach((c) => { pesos[c] = Number($("w-" + c).value) / 100; });
+  return {ingreso_mensual: Number($("ingreso").value), ahorro_inicial: Number($("ahorro").value),
+          presupuesto_max: Number($("presupuesto").value), min_dormitorios: Number($("dormitorios").value), pesos};
+}
+
+function loadProfile(key) {
+  state.profile = key;
+  document.querySelectorAll(".profiles button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.profile === key));
+  if (key !== "custom") {
+    const p = DATA.perfiles[key];
+    $("desc").textContent = p.nombre + ": " + p.descripcion;
+    $("ingreso").value = p.ingreso_mensual; $("ahorro").value = p.ahorro_inicial;
+    $("presupuesto").value = p.presupuesto_max; $("dormitorios").value = p.min_dormitorios;
+    COMPONENTS.forEach((c) => { $("w-" + c).value = Math.round(p.pesos[c] * 100); });
+  } else {
+    $("desc").textContent = "Ajusta los valores; el ranking se recalcula al instante.";
+  }
+  update();
+}
+
+function rank(profile, atypical = false, top = TOP) {
+  const {cap} = affordable(profile);
+  const w = profile.pesos;
+  // los avisos bajo el intervalo del 80 % van a la lista "por verificar"
+  const pool = DATA.avisos.filter((a) => a.p <= cap && a.r >= profile.min_dormitorios && a.x === atypical);
+  const scored = pool.map((a) => {
+    const s = {precio: a.s[0], seguridad: a.s[1], conveniencia: a.s[2], constructora: null};
+    let num = 0, den = 0; const missing = [];
+    COMPONENTS.forEach((c) => {
+      if (s[c] === null) { if (w[c] > 0) missing.push(c); return; }
+      num += w[c] * s[c]; den += w[c];
+    });
+    return {...a, comp: s, score: den ? num / den : 0, missing};
+  });
+  scored.sort((x, y) => y.score - x.score || y.opp - x.opp);
+  // como maximo N avisos por distrito: seguridad y conveniencia son distritales
+  const perDistrict = {}, picked = [];
+  for (const item of scored) {
+    perDistrict[item.d] = (perDistrict[item.d] || 0) + 1;
+    if (perDistrict[item.d] <= DATA.max_por_distrito) picked.push(item);
+    if (picked.length === top) break;
+  }
+  return {pool: pool.length, top: picked};
+}
+
+function explanation(item, w) {
+  const text = {precio: item.t[0], seguridad: item.t[1], conveniencia: item.t[2]};
+  const best = ["precio", "seguridad", "conveniencia"]
+    .map((c) => [c, w[c] * item.comp[c]]).sort((a, b) => b[1] - a[1]).slice(0, 2).map((x) => x[0]);
+  const reasons = [];
+  if (item.missing.includes("constructora")) reasons.push("sin score de constructora (el aviso no identifica al promotor)");
+  reasons.push("el índice de zona usa 2 de sus 3 componentes (falta la calidad visual)");
+  return {sentences: best.map((c) => text[c]), partial: "Dato parcial: " + reasons.join("; ") + "."};
+}
+
+function bars(item) {
+  return COMPONENTS.map((c) => {
+    const v = item.comp[c];
+    return v === null
+      ? `<div class="bar na"><span>${LABEL[c]}</span><i></i><em>s/d</em></div>`
+      : `<div class="bar"><span>${LABEL[c]}</span><i><b style="width:${(v * 100).toFixed(0)}%"></b></i><em>${(v * 100).toFixed(0)}</em></div>`;
+  }).join("");
+}
+
+function update() {
+  const profile = readProfile();
+  COMPONENTS.forEach((c) => { $("o-" + c).textContent = $("w-" + c).value; });
+  const aff = affordable(profile);
+  $("cap").textContent = soles(aff.cap);
+  $("cap-why").textContent = {
+    presupuesto: "Limita tu presupuesto declarado.",
+    inicial: "Limita tu ahorro: la inicial mínima es 10 % del precio.",
+    credito: `Limita la cuota: crédito de ${soles(aff.loan)} a 20 años (TEA 9 %, cuota ≤ 30 % del ingreso).`,
+  }[aff.binding];
+  const result = rank(profile);
+  const verify = rank(profile, true, 3);
+  $("summary").textContent = `${number(result.pool)} avisos dentro de tu presupuesto · top ${result.top.length} · máximo ${DATA.max_por_distrito} por distrito`;
+  $("list").innerHTML = result.top.map((item, i) => {
+    const e = explanation(item, profile.pesos);
+    return `<button class="card${state.selected === item.id ? " selected" : ""}" data-id="${item.id}" type="button">
+      <div class="rank">${i + 1}</div>
+      <div><div class="title">${item.d} · ${soles(item.p)}</div>
+        <div class="meta">${item.m2} m² · ${item.r} dorm. · ${item.b} baños · ${item.a}</div>
+        <div class="why"><b>Por qué te lo recomendamos:</b> ${e.sentences.join(" ")}</div>
+        <span class="partial">${e.partial}</span></div>
+      <div class="scores"><div class="total">Score personalizado ${(item.score * 100).toFixed(0)}/100</div>${bars(item)}</div>
+    </button>`;
+  }).join("") + (verify.pool ? `<div class="verify"><h3>Por verificar (${verify.pool})</h3>
+    <p>Avisos con precio por debajo del rango esperado. El modelo no distingue una ganga de un error de área o de un
+      inmueble en mal estado, por eso no entran al ranking: revísalos antes de contactar.</p>
+    ${verify.top.map((item) => `<button class="card mini" data-id="${item.id}" type="button">
+      <div class="rank">?</div><div><div class="title">${item.d} · ${soles(item.p)}</div>
+      <div class="meta">${item.m2} m² · ${item.r} dorm. · ${item.a}</div><div class="why">${item.t[0]}</div></div></button>`).join("")}</div>` : "");
+  document.querySelectorAll(".card").forEach((card) => card.addEventListener("click", () => openDetail(Number(card.dataset.id))));
+  state.lastTop = result.top.concat(verify.top);
+  document.body.dataset.top = result.top.map((x) => x.id).join(",");
+}
+
+function openDetail(id) {
+  const item = state.lastTop.find((x) => x.id === id);
+  if (!item) return;
+  state.selected = id;
+  const w = readProfile().pesos, e = explanation(item, w);
+  const lo = Math.min(item.lo, item.p) * 0.9, hi = Math.max(item.hi, item.p) * 1.05;
+  const pos = (v) => ((v - lo) / (hi - lo) * 100).toFixed(1) + "%";
+  const gap = item.opp >= 0 ? `${(item.opp * 100).toFixed(0)} % bajo` : `${(-item.opp * 100).toFixed(0)} % sobre`;
+  $("detail").innerHTML = `
+    <button class="close" type="button" id="close">Cerrar</button>
+    <h3>${item.d} · ${soles(item.p)}</h3>
+    <div class="meta">${item.a} · aviso ${item.id}</div>
+    <div class="range">
+      <div class="range-track">
+        <div class="band" style="left:${pos(item.lo)};width:calc(${pos(item.hi)} - ${pos(item.lo)})"></div>
+        <div class="mark" style="left:${pos(item.pred)};background:var(--ink-2)" title="Valor estimado"></div>
+        <div class="mark" style="left:${pos(item.p)};background:var(--accent)" title="Precio pedido"></div>
+      </div>
+      <div class="range-legend"><span>Intervalo 80 %: ${soles(item.lo)} – ${soles(item.hi)}</span><span>Estimado ${soles(item.pred)}</span></div>
+    </div>
+    <p>El precio pedido está <b>${gap}</b> el valor estimado por el motor de valoración para un inmueble de ${item.m2} m²,
+      ${item.r} dormitorios y ${item.b} baños en ${item.d}.</p>
+    <div class="kv">
+      <div><span>Área</span>${item.m2} m²</div><div><span>Dormitorios / baños / cocheras</span>${item.r} / ${item.b} / ${item.k}</div>
+      <div><span>Precio por m²</span>${soles(item.p / item.m2)}</div><div><span>Conveniencia medida a nivel</span>${item.lvl}</div>
+    </div>
+    <h2>Componentes del score</h2>
+    <div class="scores">${bars(item)}</div>
+    <h2 style="margin-top:16px">Por qué te lo recomendamos</h2>
+    <p class="why">${e.sentences.join(" ")}</p>
+    <span class="partial">${e.partial}</span>
+    <p class="note">Valores estimados sobre precios de oferta publicados, no sobre precios de cierre. Según las
+      transacciones del Impuesto de Alcabala, la mediana de oferta supera a la de cierre entre 9 % y 82 % según el distrito.</p>`;
+  $("detail").classList.add("open");
+  $("detail").setAttribute("aria-hidden", "false");
+  $("close").addEventListener("click", closeDetail);
+  $("step3").classList.add("on");
+  document.querySelectorAll(".card").forEach((c) => c.classList.toggle("selected", Number(c.dataset.id) === id));
+}
+
+function closeDetail() {
+  $("detail").classList.remove("open");
+  $("detail").setAttribute("aria-hidden", "true");
+  $("step3").classList.remove("on");
+}
+
+document.querySelectorAll(".profiles button").forEach((b) => b.addEventListener("click", () => loadProfile(b.dataset.profile)));
+document.querySelectorAll("input").forEach((i) => i.addEventListener("input", () => {
+  if (state.profile !== "custom") { state.profile = "custom"; loadProfile("custom"); } else update();
+}));
+$("go").addEventListener("click", () => { $("step2").classList.add("on"); $("list").scrollIntoView({behavior: "smooth"}); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeDetail(); });
+
+loadProfile(params.get("perfil") || "maria");
+if (params.get("vista") === "ranking" || params.get("vista") === "detalle") $("step2").classList.add("on");
+if (params.get("vista") === "detalle") openDetail(Number(params.get("id")) || state.lastTop[0].id);
+</script>
+</body>
+</html>

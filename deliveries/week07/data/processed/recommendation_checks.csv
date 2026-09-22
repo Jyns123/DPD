@@ -1,0 +1,8 @@
+criterio,metrica,valor,cumple
+REQ-01: dos perfiles producen rankings distintos (perfil completo),Jaccard top-10,0.429,True
+REQ-01: rankings distintos con el mismo presupuesto y filtros (solo cambian los pesos),Jaccard top-10,0.667,True
+REQ-01: correlación de Spearman entre los scores de ambos perfiles (mismo inventario),rho,0.694,True
+REQ-02 / RNF-05: toda propiedad del ranking tiene explicación,% con explicación,1.0,True
+Ranking principal sin avisos de precio atípico (van a la lista por verificar),% atípicos en el ranking,0.0,True
+RF-23 / RNF-06: los avisos con dato parcial lo declaran en el texto,% parciales que lo declaran,1.0,True
+RNF-01: ranking de dos perfiles sobre el inventario completo en < 5 s,segundos,0.086,True

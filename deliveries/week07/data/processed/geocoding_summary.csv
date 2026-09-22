@@ -1,0 +1,7 @@
+district,avisos,exitosos,distrito_incorrecto,no_encontrados,precision_exacta,precision_calle,precision_zona,validado_por_nombre,tasa_exito
+BARRANCO,40,33,0,7,1,27,5,0,0.825
+JESUS MARIA,40,38,0,2,0,31,7,4,0.95
+PUEBLO LIBRE,40,27,0,13,0,26,1,0,0.675
+SAN BORJA,40,33,0,7,0,23,10,16,0.825
+SURQUILLO,40,35,0,5,1,24,10,3,0.875
+TOTAL,200,166,0,34,2,131,33,23,0.83

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="render-size" content="1680x1000">
+<title>InmoScore · arquitectura inicial</title>
+<style>
+  @page { size: 1680px 1000px; margin: 0; }
+  :root { --ink: #1b1b1a; --ink-2: #55544f; --muted: #8a8983; --line: #cfcec7; --bg: #ffffff;
+          --blue: #1f5fae; --blue-bg: #eaf2fc; --green: #1d7a3a; --green-bg: #eaf6ee;
+          --orange: #b4531f; --orange-bg: #fdf0e8; --gray-bg: #f5f5f2; }
+  * { box-sizing: border-box; margin: 0; }
+  body { width: 1680px; height: 1000px; padding: 34px 40px; background: var(--bg); color: var(--ink);
+         font: 15px/1.35 "Segoe UI", system-ui, sans-serif; }
+  h1 { font-size: 26px; letter-spacing: -.3px; }
+  .sub { color: var(--ink-2); margin: 4px 0 22px; display: flex; gap: 22px; align-items: center; }
+  .key { display: inline-flex; align-items: center; gap: 8px; }
+  .key i { width: 26px; height: 16px; border-radius: 4px; border: 2px solid var(--ink-2); display: inline-block; }
+  .key i.plan { border-style: dashed; }
+  .grid { display: grid; grid-template-columns: 250px 34px 270px 34px 330px 34px 290px 34px 290px; align-items: stretch; height: 820px; }
+  .col { display: flex; flex-direction: column; gap: 10px; }
+  .col h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); margin-bottom: 2px; }
+  .box { border: 2px solid var(--c, var(--line)); background: var(--b, #fff); border-radius: 10px; padding: 10px 12px; }
+  .box.plan { border-style: dashed; background: #fff; }
+  .box b { display: block; font-size: 15px; }
+  .box span { display: block; font-size: 13px; color: var(--ink-2); margin-top: 2px; }
+  .box .n { display: inline-block; font-size: 12px; font-weight: 700; color: var(--c); margin-right: 6px; }
+  .src { --c: #9b9a93; --b: var(--gray-bg); padding: 8px 12px; }
+  .ing { --c: var(--blue); --b: var(--blue-bg); }
+  .mod { --c: var(--orange); --b: var(--orange-bg); }
+  .srv { --c: var(--green); --b: var(--green-bg); }
+  .ui  { --c: var(--ink); --b: #fff; }
+  .arrow { display: flex; align-items: center; justify-content: center; }
+  .arrow svg { width: 34px; height: 24px; }
+  .stretch { flex: 1; }
+  .owner { font-size: 12px; color: var(--muted); margin-top: auto; padding-top: 6px; border-top: 1px solid var(--line); }
+  .actor { display: flex; gap: 12px; align-items: center; border: 2px solid var(--ink); border-radius: 999px; padding: 10px 16px; }
+  .actor svg { flex: none; }
+  .foot { margin-top: 14px; font-size: 13px; color: var(--ink-2); }
+</style>
+</head>
+<body>
+<h1>InmoScore · arquitectura inicial del producto de datos</h1>
+<div class="sub">
+  <span class="key"><i></i> implementado y ejecutable en Week 7</span>
+  <span class="key"><i class="plan"></i> planificado para Week 10–15</span>
+  <span>Los números (01–08) son los scripts de <code>deliveries/week07/code/</code></span>
+</div>
+
+<div class="grid">
+  <div class="col">
+    <h2>Fuentes públicas</h2>
+    <div class="box src"><b>Urbania</b><span>3 987 avisos de venta</span></div>
+    <div class="box src"><b>SAT de Lima · Alcabala</b><span>24 148 compraventas cerradas</span></div>
+    <div class="box src"><b>BCRP</b><span>precio/m² y ratio precio/alquiler</span></div>
+    <div class="box src"><b>MININTER · SIDPOL</b><span>29 833 registros de denuncias</span></div>
+    <div class="box src"><b>OpenStreetMap</b><span>16 987 POIs (Overpass)</span></div>
+    <div class="box src"><b>INEI</b><span>límites, población, IDH, pobreza</span></div>
+    <div class="box src"><b>Fondo MIVIVIENDA</b><span>747 proyectos, 453 promotores</span></div>
+    <div class="box src"><b>Nominatim (OSM)</b><span>geocodificación con caché</span></div>
+    <div class="box src plan"><b>Imágenes de calle</b><span>Mapillary o set propio · sin fuente</span></div>
+  </div>
+  <div class="arrow"><svg viewBox="0 0 34 24"><path d="M2 12h26M20 5l8 7-8 7" fill="none" stroke="#55544f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <div class="col">
+    <h2>Ingesta</h2>
+    <div class="box ing"><b><span class="n">01</span>Adquisición idempotente</b><span>descarga solo lo que falta · respeta robots.txt y límites de frecuencia · sin sistemas con autenticación</span></div>
+    <div class="box ing"><b>data/raw/</b><span>no versionado · manifiesto con SHA-256, filas y fecha por archivo (RNF-07)</span></div>
+    <div class="box ing plan"><b>Refresco programado</b><span>GitHub Actions: avisos semanal; SIDPOL, Alcabala y MIVIVIENDA mensual/trimestral (RNF-03)</span></div>
+    <div class="box ing plan"><b>Almacenamiento</b><span>CSV versionados → Parquet + DuckDB para el prototipo; un solo archivo por capa</span></div>
+    <div class="stretch"></div>
+    <div class="owner">Responsable: Denzel · apoyo Lisseth</div>
+  </div>
+  <div class="arrow"><svg viewBox="0 0 34 24"><path d="M2 12h26M20 5l8 7-8 7" fill="none" stroke="#55544f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <div class="col">
+    <h2>Procesamiento y modelos</h2>
+    <div class="box mod"><b><span class="n">02</span>Feature store</b><span>3 896 avisos × 30 variables · índices de seguridad y conveniencia por distrito · marca data_partial</span></div>
+    <div class="box mod"><b><span class="n">06</span>Geocodificación y POIs</b><span>validación contra el polígono distrital · distancias a colegio, parque y transporte</span></div>
+    <div class="box mod"><b><span class="n">04</span>Calibración con Alcabala</b><span>mediana de vivienda depurada de cocheras · brecha oferta/cierre por distrito</span></div>
+    <div class="box mod"><b><span class="n">05</span>Motor de valoración</b><span>gradient boosting sobre log(precio) · intervalo del 80 % · models/valuation_model.joblib</span></div>
+    <div class="box mod"><b><span class="n">07</span>Score de constructora</b><span>parcial: solo volumen MIVIVIENDA</span></div>
+    <div class="box mod plan"><b>Modelo de visión</b><span>visual_quality_score · bloqueado por falta de imágenes etiquetadas</span></div>
+    <div class="stretch"></div>
+    <div class="owner">Responsables: Jyns (modelos) · Lisseth (datos y EDA)</div>
+  </div>
+  <div class="arrow"><svg viewBox="0 0 34 24"><path d="M2 12h26M20 5l8 7-8 7" fill="none" stroke="#55544f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <div class="col">
+    <h2>Servicio</h2>
+    <div class="box srv"><b><span class="n">08</span>Capa de recomendación</b><span>score = Σ w·s / Σ w sobre componentes disponibles · filtro de asequibilidad · explicación en lenguaje natural · marca de dato parcial</span></div>
+    <div class="box srv plan"><b>API REST</b><span>FastAPI: POST /ranking (perfil → top-N explicado), GET /inmueble/{id}, GET /distritos</span></div>
+    <div class="box srv plan"><b>Registro de interacciones</b><span>guardar, descartar, contactar → ajuste de pesos (RF-25, RF-26)</span></div>
+    <div class="box srv plan"><b>Despliegue</b><span>contenedor en un servicio gratuito (Render o Hugging Face Spaces) · sin datos personales en el servidor (RNF-08)</span></div>
+    <div class="stretch"></div>
+    <div class="owner">Responsables: Denzel (despliegue) · Jyns (lógica)</div>
+  </div>
+  <div class="arrow"><svg viewBox="0 0 34 24"><path d="M2 12h26M20 5l8 7-8 7" fill="none" stroke="#55544f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <div class="col">
+    <h2>Interfaz</h2>
+    <div class="box ui"><b>Prototipo de baja fidelidad</b><span>prototype/index.html · 3 pasos: perfil → ranking → detalle · recalcula en el navegador con datos reales</span></div>
+    <div class="box ui plan"><b>Web app</b><span>perfil financiero y de estilo de vida · ranking explicado · mapa interactivo (RF-24) · comparador</span></div>
+    <div class="box ui plan"><b>Accesibilidad</b><span>contraste suficiente y navegación por teclado (RNF-12)</span></div>
+    <div class="stretch"></div>
+    <div class="actor">
+      <svg width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="9" r="6" fill="none" stroke="#1b1b1a" stroke-width="2"/><path d="M4 28c1.5-6 5.5-9 11-9s9.5 3 11 9" fill="none" stroke="#1b1b1a" stroke-width="2" stroke-linecap="round"/></svg>
+      <div><b>Comprador de vivienda propia</b><br><span style="font-size:13px;color:#55544f">declara perfil y pesos; recibe un ranking propio</span></div>
+    </div>
+    <div class="owner">Responsable: Mafer (UX/UI y frontend)</div>
+  </div>
+</div>
+<p class="foot">Flujo por lotes: los scores se precalculan en el pipeline y la capa de recomendación solo pondera y ordena, por eso el ranking de 3 896 avisos toma milisegundos (RNF-01 exige menos de 5 s).</p>
+</body>
+</html>

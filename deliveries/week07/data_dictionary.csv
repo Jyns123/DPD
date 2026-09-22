@@ -1,0 +1,316 @@
+file,attribute_name,description,data_type,format_or_unit,possible_values,missing_value_code
+alcabala_calibration.csv,district,"Distrito del aviso, normalizado a mayúsculas",string,categoria,20 valores distintos,sin faltantes
+alcabala_calibration.csv,n_avisos,Avisos de Urbania del distrito,integer,unidades,19 a 289,sin faltantes
+alcabala_calibration.csv,mediana_oferta,Mediana del precio de oferta de Urbania,float,PEN,218300 a 1.344e+06,sin faltantes
+alcabala_calibration.csv,area_mediana,Mediana del área de los avisos,float,m²,65 a 177,sin faltantes
+alcabala_calibration.csv,n_transacciones,Compraventas al 100 % con valor > 0,integer,unidades,250 a 3593,sin faltantes
+alcabala_calibration.csv,pct_bajo_umbral,Operaciones bajo S/ 80 000 (proxy de cocheras y depósitos),float,%,16.7 a 64,sin faltantes
+alcabala_calibration.csv,percentil_equivalente,Percentil (1 + f) / 2 donde cae la mediana de las viviendas,float,percentil,58.3 a 82,sin faltantes
+alcabala_calibration.csv,valor_mediana,Mediana cruda del valor de transferencia (incluye cocheras y depósitos),float,PEN,57038.2 a 395000,sin faltantes
+alcabala_calibration.csv,valor_regla_week04,Valor de referencia con la regla manual de Week 4 (p75 o p90),float,PEN,255000 a 1.54057e+06,sin faltantes
+alcabala_calibration.csv,percentil_regla_week04,Percentil elegido por la regla de Week 4,string,categoria,p75 | p75-p90 | p90,sin faltantes
+alcabala_calibration.csv,n_vivienda,Operaciones de S/ 80 000 o más,integer,unidades,188 a 1720,sin faltantes
+alcabala_calibration.csv,mediana_vivienda,Mediana de las operaciones de S/ 80 000 o más,float,PEN,192250 a 790906,sin faltantes
+alcabala_calibration.csv,brecha_oferta_vs_mediana_cruda,Mediana de oferta / mediana cruda de Alcabala − 1,float,proporción,0.278 a 22.563,sin faltantes
+alcabala_calibration.csv,brecha_oferta_vs_regla_week04,Mediana de oferta / valor de la regla de Week 4 − 1,float,proporción,-0.58 a 0.416,sin faltantes
+alcabala_calibration.csv,brecha_oferta_vs_vivienda,Mediana de oferta / mediana de vivienda de Alcabala − 1,float,proporción,0.09 a 0.815,sin faltantes
+alcabala_transacciones_distrito.csv,distrito,"Distrito, normalizado a mayúsculas sin tildes (salvo BREÑA)",string,categoria,44 valores distintos,sin faltantes
+alcabala_transacciones_distrito.csv,periodo,Período del extracto del SAT,string,AAAA-S#,2026-S1,sin faltantes
+alcabala_transacciones_distrito.csv,n_transacciones,Compraventas al 100 % con valor > 0,integer,unidades,1 a 3593,sin faltantes
+alcabala_transacciones_distrito.csv,valor_p25,Percentil 25 del valor de transferencia,float,PEN,12000 a 146071,sin faltantes
+alcabala_transacciones_distrito.csv,valor_mediana,Mediana cruda del valor de transferencia (incluye cocheras y depósitos),float,PEN,41000 a 395000,sin faltantes
+alcabala_transacciones_distrito.csv,valor_p75,Percentil 75 del valor de transferencia,float,PEN,41000 a 941182,sin faltantes
+alcabala_transacciones_distrito.csv,valor_p90,Percentil 90 del valor de transferencia,float,PEN,41000 a 2.13996e+06,sin faltantes
+alcabala_transacciones_distrito.csv,pct_bajo_umbral,Operaciones bajo S/ 80 000 (proxy de cocheras y depósitos),float,%,8.7 a 100,sin faltantes
+alcabala_transacciones_distrito.csv,percentil_equivalente,Percentil (1 + f) / 2 donde cae la mediana de las viviendas,float,percentil,54.3 a 100,sin faltantes
+alcabala_transacciones_distrito.csv,n_vivienda,Operaciones de S/ 80 000 o más,integer,unidades,0 a 1720,sin faltantes
+alcabala_transacciones_distrito.csv,mediana_vivienda,Mediana de las operaciones de S/ 80 000 o más,float,PEN,102810 a 790906,vacío (NA)
+alcabala_transacciones_distrito.csv,p25_vivienda,Percentil 25 de las operaciones de S/ 80 000 o más,float,PEN,87699.8 a 495320,vacío (NA)
+alcabala_transacciones_distrito.csv,p75_vivienda,Percentil 75 de las operaciones de S/ 80 000 o más,float,PEN,152460 a 1.54353e+06,vacío (NA)
+alcabala_transacciones_distrito.csv,n_primera_venta,Operaciones marcadas como primera venta (obra nueva),integer,unidades,0 a 1040,sin faltantes
+alcabala_transacciones_distrito.csv,mediana_primera_venta,Mediana del valor de las primeras ventas,float,PEN,54012 a 453600,vacío (NA)
+alcabala_transacciones_distrito.csv,ratio_valor_autovaluo_mediana,Mediana del valor de transferencia sobre el autovalúo,float,veces,0.4 a 23.1,sin faltantes
+baseline_precio_m2_distrito.csv,distrito,"Distrito, normalizado a mayúsculas sin tildes (salvo BREÑA)",string,categoria,20 valores distintos,sin faltantes
+baseline_precio_m2_distrito.csv,n_listados,Avisos del distrito tras el filtro IQR,integer,unidades,19 a 289,sin faltantes
+baseline_precio_m2_distrito.csv,precio_m2_mediana,Mediana del precio de oferta por m²,float,PEN/m²,2773 a 9299,sin faltantes
+baseline_precio_m2_distrito.csv,precio_m2_media,Media del precio de oferta por m²,float,PEN/m²,2810 a 9040,sin faltantes
+baseline_precio_m2_distrito.csv,precio_m2_p25,Percentil 25 del precio de oferta por m²,float,PEN/m²,2412 a 7595,sin faltantes
+baseline_precio_m2_distrito.csv,precio_m2_p75,Percentil 75 del precio de oferta por m²,float,PEN/m²,3219 a 10354,sin faltantes
+baseline_precio_m2_distrito.csv,area_mediana,Mediana del área de los avisos,float,m²,65 a 177,sin faltantes
+baseline_precio_m2_distrito.csv,precio_mediano,Mediana del precio de oferta,float,PEN,218300 a 1.344e+06,sin faltantes
+baseline_precio_m2_distrito.csv,crime_index_zone,Denuncias por 1 000 habitantes normalizadas min-max en 50 distritos (1 = más denuncias),float,0–1,0.149 a 0.697,sin faltantes
+baseline_precio_m2_distrito.csv,crime_trend_zone,Tendencia de denuncias 2025 vs 2024,string,categoria,empeorando | estable | mejorando,sin faltantes
+builder_score_partial.csv,promotor,"Promotor del Fondo MIVIVIENDA, normalizado a mayúsculas",string,texto,453 valores distintos,sin faltantes
+builder_score_partial.csv,proyectos,Proyectos registrados del promotor,integer,unidades,1 a 22,sin faltantes
+builder_score_partial.csv,proyectos_lima,Proyectos en Lima Metropolitana y Callao,integer,unidades,0 a 8,sin faltantes
+builder_score_partial.csv,unidades_disponibles,Unidades disponibles sumadas en sus proyectos,integer,unidades,1 a 3158,sin faltantes
+builder_score_partial.csv,departamentos,Departamentos del país donde tiene proyectos,integer,unidades,1 a 6,sin faltantes
+builder_score_partial.csv,programas,Programas del Fondo MIVIVIENDA,string,categorias separadas por |,nuevo_credito_mivivienda | nuevo_credito_mivivienda|techo_propio | techo_propio,sin faltantes
+builder_score_partial.csv,precio_min,Precio mínimo publicado en sus proyectos,float,PEN,0 a 943722,sin faltantes
+builder_score_partial.csv,precio_max,Precio máximo publicado en sus proyectos,float,PEN,19500 a 475000,sin faltantes
+builder_score_partial.csv,builder_score_partial,"0,6 × percentil de proyectos + 0,4 × percentil de unidades (log)",float,0–1,0.229 a 0.996,sin faltantes
+builder_score_partial.csv,componentes_disponibles,Componentes usados en el score,string,texto,volumen MIVIVIENDA,sin faltantes
+builder_score_partial.csv,componentes_faltantes,"Componentes con peso que faltan, separados por |",string,texto,plazos (CIPIEC)|sanciones (INDECOPI)|antiguedad,sin faltantes
+builder_score_partial.csv,data_partial,Verdadero si falta un componente o referencia; nunca se imputa,boolean,booleano,True,sin faltantes
+crime_index_distrito.csv,distrito,"Distrito, normalizado a mayúsculas sin tildes (salvo BREÑA)",string,categoria,50 valores distintos,sin faltantes
+crime_index_distrito.csv,ubigeo,Código UBIGEO del distrito (INEI),integer,6 dígitos,70101 a 150143,sin faltantes
+crime_index_distrito.csv,denuncias_prev,Denuncias registradas en 2024,integer,unidades,68 a 36163,sin faltantes
+crime_index_distrito.csv,denuncias_ult,Denuncias registradas en 2025,integer,unidades,44 a 32046,sin faltantes
+crime_index_distrito.csv,poblacion_2020,Población estimada 2020 (superficie × densidad),float,habitantes,1738 a 1.11239e+06,sin faltantes
+crime_index_distrito.csv,denuncias_x1000hab,Denuncias 2025 por cada 1 000 residentes,float,denuncias/1 000 hab,7.75 a 80.71,sin faltantes
+crime_index_distrito.csv,crime_index_zone,Denuncias por 1 000 habitantes normalizadas min-max en 50 distritos (1 = más denuncias),float,0–1,0 a 1,sin faltantes
+crime_index_distrito.csv,var_anual,Variación relativa de denuncias 2025 vs 2024,float,proporción,-0.384 a 0.445,sin faltantes
+crime_index_distrito.csv,crime_trend_zone,Tendencia de denuncias 2025 vs 2024,string,categoria,empeorando | estable | mejorando,sin faltantes
+district_summary.csv,district,"Distrito del aviso, normalizado a mayúsculas",string,categoria,20 valores distintos,sin faltantes
+district_summary.csv,listings,Avisos del distrito,integer,unidades,19 a 289,sin faltantes
+district_summary.csv,price_median_soles,Mediana del precio de oferta,float,PEN,218300 a 1.344e+06,sin faltantes
+district_summary.csv,price_per_m2_median,Mediana del precio por m²,float,PEN/m²,2773.11 a 9298.61,sin faltantes
+district_summary.csv,area_median_m2,Mediana del área,float,m²,65 a 177,sin faltantes
+district_summary.csv,zone_index,zone_composite_index del distrito,float,0–1,0.325 a 0.705,sin faltantes
+district_summary.csv,crime_index,crime_index_zone del distrito,float,0–1,0.149 a 0.697,sin faltantes
+district_summary.csv,partial_rows,Avisos con data_partial verdadero,integer,unidades,0 a 255,sin faltantes
+duplicate_summary.csv,dataset,Tabla evaluada,string,texto,listings_urbania | listings_urbania_address_price_area | pois_lima,sin faltantes
+duplicate_summary.csv,rows,Filas del archivo o tabla,integer,unidades,3987 a 16987,sin faltantes
+duplicate_summary.csv,exact_duplicate_rows,Filas idénticas en todas las columnas,integer,unidades,0 a 0,sin faltantes
+duplicate_summary.csv,business_key_columns,Columnas usadas como clave de negocio,string,texto,address_key|price_key|area_key | listing_id | poi_id,sin faltantes
+duplicate_summary.csv,business_key_duplicate_rows,"Filas que comparten la clave de negocio (se reportan, no se eliminan)",integer,unidades,0 a 62,sin faltantes
+eda_correlations.csv,Unnamed: 0,Variable de la fila en la matriz de correlaciones de Spearman,string,texto,10 valores distintos,sin faltantes
+eda_correlations.csv,price_soles,Precio de oferta publicado,float,PEN,-0.238 a 1,sin faltantes
+eda_correlations.csv,area_m2,Área total publicada,float,m²,-0.229 a 1,sin faltantes
+eda_correlations.csv,price_per_m2,Precio de oferta dividido entre el área,float,PEN/m²,-0.631 a 1,sin faltantes
+eda_correlations.csv,rooms,Dormitorios,float,unidades,-0.282 a 1,sin faltantes
+eda_correlations.csv,bathrooms,Baños,float,unidades,-0.126 a 1,sin faltantes
+eda_correlations.csv,parking,Cocheras,float,unidades,-0.248 a 1,sin faltantes
+eda_correlations.csv,opportunity_score_baseline,"(baseline − precio) / baseline con la mediana de la muestra completa; diagnóstico, tiene fuga",float,proporción,-0.631 a 1,sin faltantes
+eda_correlations.csv,zone_composite_index,"0,5 × seguridad + 0,5 × conveniencia; le falta el componente visual",float,0–1,-0.562 a 1,sin faltantes
+eda_correlations.csv,crime_index_zone,Denuncias por 1 000 habitantes normalizadas min-max en 50 distritos (1 = más denuncias),float,0–1,-0.562 a 1,sin faltantes
+eda_correlations.csv,urban_convenience_index,"Densidad ponderada de colegios, parques, transporte, mercados y salud por km²",float,0–1,-0.165 a 1,sin faltantes
+eda_district_coverage.csv,district,"Distrito del aviso, normalizado a mayúsculas",string,categoria,20 valores distintos,sin faltantes
+eda_district_coverage.csv,listings,Avisos del distrito,integer,unidades,19 a 289,sin faltantes
+eda_district_coverage.csv,price_median_soles,Mediana del precio de oferta,float,PEN,218300 a 1.344e+06,sin faltantes
+eda_district_coverage.csv,price_per_m2_median,Mediana del precio por m²,float,PEN/m²,2773.11 a 9298.61,sin faltantes
+eda_district_coverage.csv,price_per_m2_p25,Percentil 25 del precio por m²,float,PEN/m²,2411.61 a 7594.87,sin faltantes
+eda_district_coverage.csv,price_per_m2_p75,Percentil 75 del precio por m²,float,PEN/m²,3218.68 a 10353.9,sin faltantes
+eda_district_coverage.csv,area_median_m2,Mediana del área,float,m²,65 a 177,sin faltantes
+eda_district_coverage.csv,zone_index,zone_composite_index del distrito,float,0–1,0.325 a 0.705,sin faltantes
+eda_district_coverage.csv,safety_index,1 − crime_index_zone,float,0–1,0.303 a 0.851,sin faltantes
+eda_district_coverage.csv,convenience_index,urban_convenience_index del distrito,float,0–1,0.071 a 0.648,sin faltantes
+eda_district_coverage.csv,partial_rows,Avisos con data_partial verdadero,integer,unidades,0 a 255,sin faltantes
+eda_district_coverage.csv,partial_pct,Porcentaje de avisos con data_partial verdadero,float,%,0 a 100,sin faltantes
+eda_numeric_summary.csv,variable,Variable resumida,string,texto,10 valores distintos,sin faltantes
+eda_numeric_summary.csv,count,Observaciones no vacías,float,unidades,3896 a 3896,sin faltantes
+eda_numeric_summary.csv,mean,Media,float,unidad de la variable,-0.002 a 741813,sin faltantes
+eda_numeric_summary.csv,std,Desviación estándar,float,unidad de la variable,0.099 a 727756,sin faltantes
+eda_numeric_summary.csv,min,Mínimo,float,unidad de la variable,-1.155 a 79000,sin faltantes
+eda_numeric_summary.csv,25%,Percentil 25,float,unidad de la variable,-0.148 a 380000,sin faltantes
+eda_numeric_summary.csv,50%,Mediana,float,unidad de la variable,-0 a 539001,sin faltantes
+eda_numeric_summary.csv,75%,Percentil 75,float,unidad de la variable,0.157 a 829625,sin faltantes
+eda_numeric_summary.csv,max,Máximo,float,unidad de la variable,0.648 a 1.01775e+07,sin faltantes
+eda_numeric_summary.csv,skew,Asimetría (sesgo),float,adimensional,-0.605 a 4.772,sin faltantes
+geocoding_summary.csv,district,"Distrito del aviso, normalizado a mayúsculas",string,categoria,BARRANCO | JESUS MARIA | PUEBLO LIBRE | SAN BORJA | SURQUILLO | TOTAL,sin faltantes
+geocoding_summary.csv,avisos,Avisos geocodificados en el distrito,integer,unidades,40 a 200,sin faltantes
+geocoding_summary.csv,exitosos,Avisos con coordenada validada,integer,unidades,27 a 166,sin faltantes
+geocoding_summary.csv,distrito_incorrecto,Avisos cuyo punto cayó en otro distrito (no se imputan),integer,unidades,0 a 0,sin faltantes
+geocoding_summary.csv,no_encontrados,Avisos sin resultado en Nominatim,integer,unidades,2 a 34,sin faltantes
+geocoding_summary.csv,precision_exacta,Exitosos con precisión de edificio,integer,unidades,0 a 2,sin faltantes
+geocoding_summary.csv,precision_calle,Exitosos con precisión de calle,integer,unidades,23 a 131,sin faltantes
+geocoding_summary.csv,precision_zona,Exitosos con precisión de zona o urbanización,integer,unidades,1 a 33,sin faltantes
+geocoding_summary.csv,validado_por_nombre,Exitosos validados por el nombre del distrito en OSM,integer,unidades,0 a 23,sin faltantes
+geocoding_summary.csv,tasa_exito,exitosos / avisos,float,proporción,0.675 a 0.95,sin faltantes
+listings_eda.csv,listing_id,Identificador del aviso en Urbania,integer,entero,3.38786e+06 a 1.49912e+08,sin faltantes
+listings_eda.csv,source,Portal de origen del aviso,string,categoria,Urbania,sin faltantes
+listings_eda.csv,district,"Distrito del aviso, normalizado a mayúsculas",string,categoria,20 valores distintos,sin faltantes
+listings_eda.csv,ubigeo,Código UBIGEO del distrito (INEI),integer,6 dígitos,150103 a 150141,sin faltantes
+listings_eda.csv,address,"Dirección publicada en el aviso, tal como aparece",string,texto libre,3440 valores distintos,sin faltantes
+listings_eda.csv,urbanization,Urbanización publicada en el aviso,string,texto libre,334 valores distintos,sin faltantes
+listings_eda.csv,price_soles,Precio de oferta publicado,float,PEN,79000 a 1.01775e+07,sin faltantes
+listings_eda.csv,area_m2,Área total publicada,float,m²,21 a 827,sin faltantes
+listings_eda.csv,price_per_m2,Precio de oferta dividido entre el área,float,PEN/m²,1211.76 a 15425.5,sin faltantes
+listings_eda.csv,rooms,Dormitorios,integer,unidades,1 a 10,sin faltantes
+listings_eda.csv,bathrooms,Baños,integer,unidades,1 a 20,sin faltantes
+listings_eda.csv,parking,Cocheras,integer,unidades,0 a 10,sin faltantes
+listings_eda.csv,maintenance_fee,Mantenimiento mensual; 0 puede significar no informado,float,PEN/mes,0 a 1.365e+06,sin faltantes
+listings_eda.csv,photos_count,Fotos publicadas en el aviso,integer,unidades,1 a 10,sin faltantes
+listings_eda.csv,district_median_price_m2,"Mediana distrital del precio por m² (muestra completa, tras filtro IQR)",float,PEN/m²,2773 a 9299,sin faltantes
+listings_eda.csv,baseline_price_soles,Línea base A: mediana distrital de precio/m² × área,float,PEN,72248 a 7.31831e+06,sin faltantes
+listings_eda.csv,opportunity_score_baseline,"(baseline − precio) / baseline con la mediana de la muestra completa; diagnóstico, tiene fuga",float,proporción,-1.155 a 0.728,sin faltantes
+listings_eda.csv,bcrp_price_m2_usd,"Precio por m² de departamentos del BCRP, último trimestre",float,USD/m²,1510.42 a 2604.5,vacío (NA)
+listings_eda.csv,bcrp_price_rent_ratio,"Años de alquiler para igualar el precio de compra (BCRP), último trimestre",float,años,14.97 a 18.15,vacío (NA)
+listings_eda.csv,proyectos_nuevos_distrito,Proyectos del Fondo MIVIVIENDA en el distrito,integer,unidades,1 a 26,sin faltantes
+listings_eda.csv,unidades_nuevas_distrito,Unidades disponibles en proyectos MIVIVIENDA del distrito,integer,unidades,6 a 2236,sin faltantes
+listings_eda.csv,crime_index_zone,Denuncias por 1 000 habitantes normalizadas min-max en 50 distritos (1 = más denuncias),float,0–1,0.149 a 0.697,sin faltantes
+listings_eda.csv,crime_trend_zone,Tendencia de denuncias 2025 vs 2024,string,categoria,empeorando | estable | mejorando,sin faltantes
+listings_eda.csv,urban_convenience_index,"Densidad ponderada de colegios, parques, transporte, mercados y salud por km²",float,0–1,0.071 a 0.648,sin faltantes
+listings_eda.csv,zone_composite_index,"0,5 × seguridad + 0,5 × conveniencia; le falta el componente visual",float,0–1,0.325 a 0.705,sin faltantes
+listings_eda.csv,idh_2019,"Índice de desarrollo humano del distrito, 2019",float,0–1,0.686855 a 0.845217,sin faltantes
+listings_eda.csv,pct_pobreza_total,Porcentaje de pobreza total del distrito,float,%,0.0573463 a 17.7039,sin faltantes
+listings_eda.csv,log_price_soles,Logaritmo natural del precio de oferta,float,log PEN,11.2772 a 16.1357,sin faltantes
+listings_eda.csv,log_area_m2,Logaritmo natural del área,float,log m²,3.04452 a 6.7178,sin faltantes
+listings_eda.csv,data_partial,Verdadero si falta un componente o referencia; nunca se imputa,boolean,booleano,False | True,sin faltantes
+listings_feature_store.csv,listing_id,Identificador del aviso en Urbania. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial,integer,entero,3.38786e+06 a 1.49912e+08,sin faltantes
+listings_feature_store.csv,source,Portal de origen del aviso. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial,string,categoria,Urbania,sin faltantes
+listings_feature_store.csv,district,"Distrito del aviso, normalizado a mayúsculas. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial",string,categoria,20 valores distintos,sin faltantes
+listings_feature_store.csv,ubigeo,Código UBIGEO del distrito (INEI). Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial,integer,6 dígitos,150103 a 150141,sin faltantes
+listings_feature_store.csv,address,"Dirección publicada en el aviso, tal como aparece. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial",string,texto libre,3440 valores distintos,sin faltantes
+listings_feature_store.csv,urbanization,Urbanización publicada en el aviso. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial,string,texto libre,334 valores distintos,sin faltantes
+listings_feature_store.csv,price_soles,Precio de oferta publicado. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial,float,PEN,79000 a 1.01775e+07,sin faltantes
+listings_feature_store.csv,area_m2,Área total publicada. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial,float,m²,21 a 827,sin faltantes
+listings_feature_store.csv,price_per_m2,Precio de oferta dividido entre el área. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial,float,PEN/m²,1211.76 a 15425.5,sin faltantes
+listings_feature_store.csv,rooms,Dormitorios. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial,integer,unidades,1 a 10,sin faltantes
+listings_feature_store.csv,bathrooms,Baños. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial,integer,unidades,1 a 20,sin faltantes
+listings_feature_store.csv,parking,Cocheras. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial,integer,unidades,0 a 10,sin faltantes
+listings_feature_store.csv,maintenance_fee,Mantenimiento mensual; 0 puede significar no informado. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial,float,PEN/mes,0 a 1.365e+06,sin faltantes
+listings_feature_store.csv,photos_count,Fotos publicadas en el aviso. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial,integer,unidades,1 a 10,sin faltantes
+listings_feature_store.csv,district_median_price_m2,"Mediana distrital del precio por m² (muestra completa, tras filtro IQR). Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial",float,PEN/m²,2773 a 9299,sin faltantes
+listings_feature_store.csv,baseline_price_soles,Línea base A: mediana distrital de precio/m² × área. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial,float,PEN,72248 a 7.31831e+06,sin faltantes
+listings_feature_store.csv,opportunity_score_baseline,"(baseline − precio) / baseline con la mediana de la muestra completa; diagnóstico, tiene fuga. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial",float,proporción,-1.155 a 0.728,sin faltantes
+listings_feature_store.csv,bcrp_price_m2_usd,"Precio por m² de departamentos del BCRP, último trimestre. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial",float,USD/m²,1510.42 a 2604.5,vacío (NA)
+listings_feature_store.csv,bcrp_price_rent_ratio,"Años de alquiler para igualar el precio de compra (BCRP), último trimestre. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial",float,años,14.97 a 18.15,vacío (NA)
+listings_feature_store.csv,proyectos_nuevos_distrito,Proyectos del Fondo MIVIVIENDA en el distrito. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial,integer,unidades,1 a 26,sin faltantes
+listings_feature_store.csv,unidades_nuevas_distrito,Unidades disponibles en proyectos MIVIVIENDA del distrito. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial,integer,unidades,6 a 2236,sin faltantes
+listings_feature_store.csv,crime_index_zone,Denuncias por 1 000 habitantes normalizadas min-max en 50 distritos (1 = más denuncias). Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial,float,0–1,0.149 a 0.697,sin faltantes
+listings_feature_store.csv,crime_trend_zone,Tendencia de denuncias 2025 vs 2024. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial,string,categoria,empeorando | estable | mejorando,sin faltantes
+listings_feature_store.csv,urban_convenience_index,"Densidad ponderada de colegios, parques, transporte, mercados y salud por km². Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial",float,0–1,0.071 a 0.648,sin faltantes
+listings_feature_store.csv,zone_composite_index,"0,5 × seguridad + 0,5 × conveniencia; le falta el componente visual. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial",float,0–1,0.325 a 0.705,sin faltantes
+listings_feature_store.csv,idh_2019,"Índice de desarrollo humano del distrito, 2019. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial",float,0–1,0.686855 a 0.845217,sin faltantes
+listings_feature_store.csv,pct_pobreza_total,Porcentaje de pobreza total del distrito. Mismas columnas que listings_eda.csv sin las transformaciones log ni data_partial,float,%,0.0573463 a 17.7039,sin faltantes
+listings_geocoded.csv,listing_id,Identificador del aviso en Urbania,integer,entero,3.83144e+06 a 1.49905e+08,sin faltantes
+listings_geocoded.csv,district,"Distrito del aviso, normalizado a mayúsculas",string,categoria,BARRANCO | JESUS MARIA | PUEBLO LIBRE | SAN BORJA | SURQUILLO,sin faltantes
+listings_geocoded.csv,address,"Dirección publicada en el aviso, tal como aparece",string,texto libre,194 valores distintos,sin faltantes
+listings_geocoded.csv,geocode_status,Resultado de la geocodificación,string,categoria,not_found | success,sin faltantes
+listings_geocoded.csv,precision,"Nivel del punto devuelto: exacta (edificio), calle o zona",string,categoria,calle | exacta | zona,vacío (NA)
+listings_geocoded.csv,validacion,Cómo se validó el distrito: polígono (±300 m) o nombre en OSM,string,categoria,nombre_distrito | poligono,vacío (NA)
+listings_geocoded.csv,latitude,Latitud WGS84; vacía si no se validó,float,grados,-12.1546 a -12.0666,vacío (NA)
+listings_geocoded.csv,longitude,Longitud WGS84; vacía si no se validó,float,grados,-77.077 a -76.9805,vacío (NA)
+listings_geocoded.csv,query,Consulta enviada a Nominatim en el último intento,string,texto,178 valores distintos,vacío (NA)
+listings_geocoded.csv,display_name,Dirección que devolvió Nominatim,string,texto,113 valores distintos,vacío (NA)
+listings_geocoded.csv,intentos,"Consultas usadas: dirección, calle sin número, urbanización",integer,1–3,0 a 3,sin faltantes
+listings_poi_distances.csv,listing_id,Identificador del aviso en Urbania,integer,entero,4.63761e+06 a 1.49905e+08,sin faltantes
+listings_poi_distances.csv,district,"Distrito del aviso, normalizado a mayúsculas",string,categoria,BARRANCO | JESUS MARIA | PUEBLO LIBRE | SAN BORJA | SURQUILLO,sin faltantes
+listings_poi_distances.csv,address,"Dirección publicada en el aviso, tal como aparece",string,texto libre,160 valores distintos,sin faltantes
+listings_poi_distances.csv,geocode_status,Resultado de la geocodificación,string,categoria,success,sin faltantes
+listings_poi_distances.csv,precision,"Nivel del punto devuelto: exacta (edificio), calle o zona",string,categoria,calle | exacta | zona,sin faltantes
+listings_poi_distances.csv,validacion,Cómo se validó el distrito: polígono (±300 m) o nombre en OSM,string,categoria,nombre_distrito | poligono,sin faltantes
+listings_poi_distances.csv,latitude,Latitud WGS84; vacía si no se validó,float,grados,-12.1546 a -12.0666,sin faltantes
+listings_poi_distances.csv,longitude,Longitud WGS84; vacía si no se validó,float,grados,-77.077 a -76.9805,sin faltantes
+listings_poi_distances.csv,query,Consulta enviada a Nominatim en el último intento,string,texto,148 valores distintos,sin faltantes
+listings_poi_distances.csv,display_name,Dirección que devolvió Nominatim,string,texto,113 valores distintos,sin faltantes
+listings_poi_distances.csv,intentos,"Consultas usadas: dirección, calle sin número, urbanización",integer,1–3,1 a 3,sin faltantes
+listings_poi_distances.csv,dist_colegio_km,Distancia Haversine al colegio más cercano de OSM,float,km,0.005 a 0.614,sin faltantes
+listings_poi_distances.csv,n_colegio_1km,POIs de la categoría colegio a 1 km o menos,integer,unidades,6 a 64,sin faltantes
+listings_poi_distances.csv,dist_parque_km,Distancia Haversine al parque más cercano de OSM,float,km,0.004 a 0.361,sin faltantes
+listings_poi_distances.csv,n_parque_1km,POIs de la categoría parque a 1 km o menos,integer,unidades,17 a 98,sin faltantes
+listings_poi_distances.csv,dist_transporte_km,Distancia Haversine al transporte más cercano de OSM,float,km,0 a 0.67,sin faltantes
+listings_poi_distances.csv,n_transporte_1km,POIs de la categoría transporte a 1 km o menos,integer,unidades,5 a 28,sin faltantes
+listings_poi_distances.csv,dist_mercado_km,Distancia Haversine al mercado más cercano de OSM,float,km,0 a 1.071,sin faltantes
+listings_poi_distances.csv,n_mercado_1km,POIs de la categoría mercado a 1 km o menos,integer,unidades,0 a 10,sin faltantes
+listings_poi_distances.csv,dist_salud_km,Distancia Haversine al salud más cercano de OSM,float,km,0.02 a 1.142,sin faltantes
+listings_poi_distances.csv,n_salud_1km,POIs de la categoría salud a 1 km o menos,integer,unidades,0 a 15,sin faltantes
+listings_scored.csv,listing_id,Identificador del aviso en Urbania,integer,entero,3.38786e+06 a 1.49912e+08,sin faltantes
+listings_scored.csv,district,"Distrito del aviso, normalizado a mayúsculas",string,categoria,20 valores distintos,sin faltantes
+listings_scored.csv,ubigeo,Código UBIGEO del distrito (INEI),integer,6 dígitos,150103 a 150141,sin faltantes
+listings_scored.csv,address,"Dirección publicada en el aviso, tal como aparece",string,texto libre,3440 valores distintos,sin faltantes
+listings_scored.csv,urbanization,Urbanización publicada en el aviso,string,texto libre,334 valores distintos,sin faltantes
+listings_scored.csv,price_soles,Precio de oferta publicado,float,PEN,79000 a 1.01775e+07,sin faltantes
+listings_scored.csv,area_m2,Área total publicada,float,m²,21 a 827,sin faltantes
+listings_scored.csv,price_per_m2,Precio de oferta dividido entre el área,float,PEN/m²,1211.76 a 15425.5,sin faltantes
+listings_scored.csv,rooms,Dormitorios,integer,unidades,1 a 10,sin faltantes
+listings_scored.csv,bathrooms,Baños,integer,unidades,1 a 20,sin faltantes
+listings_scored.csv,parking,Cocheras,integer,unidades,0 a 10,sin faltantes
+listings_scored.csv,fold,Pliegue de validación: posición dentro del distrito módulo 5,integer,0–4,0 a 4,sin faltantes
+listings_scored.csv,predicted_price_soles,Precio estimado fuera de pliegue por el modelo seleccionado,float,PEN,136599 a 7.87142e+06,sin faltantes
+listings_scored.csv,predicted_low_80,Límite inferior del intervalo de predicción del 80 %,float,PEN,106746 a 6.15118e+06,sin faltantes
+listings_scored.csv,predicted_high_80,Límite superior del intervalo de predicción del 80 %,float,PEN,174669 a 1.00652e+07,sin faltantes
+listings_scored.csv,baseline_price_soles,Línea base A: mediana distrital de precio/m² × área,float,PEN,72802 a 7.31801e+06,sin faltantes
+listings_scored.csv,opportunity_score,(estimado − precio) / estimado; positivo = precio bajo lo esperado,float,proporción,-1.8736 a 0.7644,sin faltantes
+listings_scored.csv,below_interval,El precio pedido está bajo el intervalo del 80 %,boolean,booleano,False | True,sin faltantes
+listings_scored.csv,valuation_model,Modelo que generó la predicción,string,categoria,D_gradient_boosting,sin faltantes
+missingness_summary.csv,column,Columna del feature store,string,texto,30 valores distintos,sin faltantes
+missingness_summary.csv,missing_values,Valores faltantes en la columna,integer,unidades,0 a 984,sin faltantes
+missingness_summary.csv,total_rows,Filas totales,integer,unidades,3896 a 3896,sin faltantes
+missingness_summary.csv,missing_pct,Porcentaje de faltantes,float,%,0 a 25.26,sin faltantes
+model_comparison.csv,model,"Modelo evaluado (A, B, C1, C2, D)",string,categoria,A_mediana_distrital | B_loglineal_distrito | C1_ridge_week06 | C2_ridge_v2 | D_gradient_boosting,sin faltantes
+model_comparison.csv,mae_soles,Error absoluto medio del precio,float,PEN,127396 a 166668,sin faltantes
+model_comparison.csv,mae_soles_sd,Desviación estándar del MAE entre pliegues,float,PEN,1766.94 a 15325,sin faltantes
+model_comparison.csv,mae_soles_m2,Error absoluto medio por m²,float,PEN/m²,941.04 a 1165.81,sin faltantes
+model_comparison.csv,mdape,Error porcentual absoluto mediano,float,proporción,0.1192 a 0.1515,sin faltantes
+model_comparison.csv,mdape_sd,Desviación estándar del MdAPE entre pliegues,float,proporción,0.0026 a 0.0076,sin faltantes
+model_comparison.csv,pct_within_10,Proporción de avisos con error de 10 % o menos,float,proporción,0.347 a 0.4317,sin faltantes
+model_comparison.csv,r2_log,R² sobre el logaritmo del precio,float,adimensional,0.8441 a 0.897,sin faltantes
+model_comparison.csv,delta_mae_vs_A,Cambio relativo del MAE frente a la línea base A,float,proporción,-0.1708 a 0.0849,sin faltantes
+model_comparison.csv,mdape_distritos_chicos,MdAPE en distritos con menos de 50 avisos,float,proporción,0.152 a 0.1753,sin faltantes
+model_comparison.csv,ratio_mdape_chicos_vs_A,MdAPE en distritos chicos / MdAPE de la línea base A,float,veces,0.8669 a 1,sin faltantes
+model_comparison.csv,acepta,Cumple la regla de aceptación de Week 6,boolean,booleano,False | True,sin faltantes
+model_comparison.csv,seleccionado,Modelo seleccionado para el producto,boolean,booleano,False | True,sin faltantes
+model_cv_folds.csv,model,"Modelo evaluado (A, B, C1, C2, D)",string,categoria,A_mediana_distrital | B_loglineal_distrito | C1_ridge_week06 | C2_ridge_v2 | D_gradient_boosting,sin faltantes
+model_cv_folds.csv,fold,Pliegue de validación: posición dentro del distrito módulo 5,integer,0–4,0 a 4,sin faltantes
+model_cv_folds.csv,n,Avisos evaluados,integer,unidades,770 a 786,sin faltantes
+model_cv_folds.csv,mae_soles,Error absoluto medio del precio,float,PEN,124809 a 192249,sin faltantes
+model_cv_folds.csv,mae_soles_m2,Error absoluto medio por m²,float,PEN/m²,913.843 a 1200.65,sin faltantes
+model_cv_folds.csv,mdape,Error porcentual absoluto mediano,float,proporción,0.112 a 0.1578,sin faltantes
+model_cv_folds.csv,pct_within_10,Proporción de avisos con error de 10 % o menos,float,proporción,0.3232 a 0.458,sin faltantes
+model_cv_folds.csv,r2_log,R² sobre el logaritmo del precio,float,adimensional,0.8354 a 0.9021,sin faltantes
+recommendation_checks.csv,criterio,Criterio de aceptación verificado,string,texto,REQ-01: correlación de Spearman entre los scores de ambos perfiles (mismo inventario) | REQ-01: dos perfiles producen rankings distintos (perfil completo) | REQ-01: rankings distintos con el mismo presupuesto y filtros (solo cambian los pesos) | REQ-02 / RNF-05: toda propiedad del ranking tiene explicación | RF-23 / RNF-06: los avisos con dato parcial lo declaran en el texto | RNF-01: ranking de dos perfiles sobre el inventario completo en < 5 s | Ranking principal sin avisos de precio atípico (van a la lista por verificar),sin faltantes
+recommendation_checks.csv,metrica,Métrica usada para verificarlo,string,texto,% atípicos en el ranking | % con explicación | % parciales que lo declaran | Jaccard top-10 | rho | segundos,sin faltantes
+recommendation_checks.csv,valor,Valor observado,float,numérico,0 a 1,sin faltantes
+recommendation_checks.csv,cumple,Si el criterio se cumple,boolean,booleano,True,sin faltantes
+recommendations_demo.csv,perfil,Perfil de usuario de la demostración,string,categoria,carlos | maria,sin faltantes
+recommendations_demo.csv,lista,ranking = top del perfil; por_verificar = avisos con precio bajo el intervalo del 80 %,string,categoria,por_verificar | ranking,sin faltantes
+recommendations_demo.csv,rank,Posición en el ranking del perfil,integer,1–10,1 a 10,sin faltantes
+recommendations_demo.csv,listing_id,Identificador del aviso en Urbania,integer,entero,1.46567e+08 a 1.49897e+08,sin faltantes
+recommendations_demo.csv,district,"Distrito del aviso, normalizado a mayúsculas",string,categoria,MAGDALENA DEL MAR | PUEBLO LIBRE | SAN MARTIN DE PORRES | SAN MIGUEL | SURQUILLO,sin faltantes
+recommendations_demo.csv,address,"Dirección publicada en el aviso, tal como aparece",string,texto libre,18 valores distintos,sin faltantes
+recommendations_demo.csv,price_soles,Precio de oferta publicado,float,PEN,101790 a 416500,sin faltantes
+recommendations_demo.csv,area_m2,Área total publicada,float,m²,56 a 262,sin faltantes
+recommendations_demo.csv,rooms,Dormitorios,integer,unidades,2 a 5,sin faltantes
+recommendations_demo.csv,predicted_price_soles,Precio estimado fuera de pliegue por el modelo seleccionado,float,PEN,200910 a 492823,sin faltantes
+recommendations_demo.csv,opportunity_score,(estimado − precio) / estimado; positivo = precio bajo lo esperado,float,proporción,0.1224 a 0.4934,sin faltantes
+recommendations_demo.csv,s_precio,"Componente de precio: (opportunity_score + 0,25) / 0,5 recortado a 0–1",float,0–1,0.822006 a 0.997908,sin faltantes
+recommendations_demo.csv,s_seguridad,Percentil del distrito en seguridad entre 47 distritos,float,0–1,0.574468 a 0.957447,sin faltantes
+recommendations_demo.csv,s_conveniencia,"Cercanía a POIs si el aviso está geocodificado; si no, percentil distrital",float,0–1,0.87234 a 0.978723,sin faltantes
+recommendations_demo.csv,nivel_conveniencia,Nivel de la conveniencia usada,string,categoria,distrito,sin faltantes
+recommendations_demo.csv,precio_atipico,El precio pedido está bajo el intervalo del 80 %: no entra al ranking principal,boolean,booleano,False | True,sin faltantes
+recommendations_demo.csv,personalized_score,Σ peso × componente / Σ pesos de los componentes disponibles,float,0–1,0.8505 a 0.9707,sin faltantes
+recommendations_demo.csv,data_partial,Verdadero si falta un componente o referencia; nunca se imputa,boolean,booleano,True,sin faltantes
+recommendations_demo.csv,componentes_faltantes,"Componentes con peso que faltan, separados por |",string,texto,constructora,sin faltantes
+recommendations_demo.csv,explicacion,Explicación en lenguaje natural que acompaña al aviso,string,texto,17 valores distintos,sin faltantes
+residuals_by_district.csv,district,"Distrito del aviso, normalizado a mayúsculas",string,categoria,20 valores distintos,sin faltantes
+residuals_by_district.csv,n,Avisos evaluados,integer,unidades,19 a 289,sin faltantes
+residuals_by_district.csv,mdape_A,MdAPE de la línea base A en el distrito,float,proporción,0.0948 a 0.2474,sin faltantes
+residuals_by_district.csv,mdape_sel,MdAPE del modelo seleccionado en el distrito,float,proporción,0.0755 a 0.1851,sin faltantes
+residuals_by_district.csv,mae_A,MAE de la línea base A en el distrito,float,PEN,47514.2 a 431668,sin faltantes
+residuals_by_district.csv,mae_sel,MAE del modelo seleccionado en el distrito,float,PEN,35767.6 a 424054,sin faltantes
+residuals_by_district.csv,modelo_seleccionado,Nombre del modelo seleccionado,string,categoria,D_gradient_boosting,sin faltantes
+source_manifest.csv,file,Archivo fuente en data/raw/,string,texto,9 valores distintos,sin faltantes
+source_manifest.csv,sha256,Hash SHA-256 del archivo,string,hex,9 valores distintos,sin faltantes
+source_manifest.csv,file_modified_utc,"Fecha de modificación del archivo, usada como fecha de extracción",string,ISO 8601 UTC,9 valores distintos,sin faltantes
+source_manifest.csv,rows,Filas del archivo o tabla,float,unidades,10 a 62337,vacío (NA)
+source_manifest.csv,columns,Columnas del archivo,float,unidades,5 a 26,vacío (NA)
+source_manifest.csv,missing_cells,Celdas vacías en el archivo,float,unidades,0 a 56379,vacío (NA)
+source_manifest.csv,duplicate_rows,Filas duplicadas exactas en el archivo,float,unidades,0 a 0,vacío (NA)
+source_manifest.csv,description,Descripción de la fuente,string,texto,9 valores distintos,sin faltantes
+source_manifest.csv,source_url,URL de la fuente,string,URL,9 valores distintos,sin faltantes
+source_manifest.csv,license_or_terms,Licencia o términos de uso,string,texto,"Datos abiertos del Estado, con atribucion | Datos publicos del BCRP, con atribucion | Fuente publica, con atribucion | MIT del repositorio; atribucion INEI | MIT del repositorio; contenido sujeto a terminos de Urbania | ODbL, atribucion requerida",sin faltantes
+zone_convenience_index.csv,ubigeo,Código UBIGEO del distrito (INEI),integer,6 dígitos,70101 a 150143,sin faltantes
+zone_convenience_index.csv,distrito,"Distrito, normalizado a mayúsculas sin tildes (salvo BREÑA)",string,categoria,47 valores distintos,sin faltantes
+zone_convenience_index.csv,superficie,Superficie del distrito,float,km²,2.12 a 303.31,sin faltantes
+zone_convenience_index.csv,poblacion_2020,Población estimada 2020 (superficie × densidad),float,habitantes,1738 a 1.11239e+06,sin faltantes
+zone_convenience_index.csv,n_colegio,Colegios de OSM dentro del polígono distrital,integer,unidades,0 a 622,sin faltantes
+zone_convenience_index.csv,n_parque,Parques de OSM dentro del polígono distrital,integer,unidades,2 a 629,sin faltantes
+zone_convenience_index.csv,n_transporte,Paraderos y estaciones de OSM dentro del polígono distrital,integer,unidades,0 a 207,sin faltantes
+zone_convenience_index.csv,n_mercado,Supermercados y mercados de OSM dentro del polígono distrital,integer,unidades,0 a 37,sin faltantes
+zone_convenience_index.csv,n_salud,Hospitales y clínicas de OSM dentro del polígono distrital,integer,unidades,0 a 54,sin faltantes
+zone_convenience_index.csv,urban_convenience_index,"Densidad ponderada de colegios, parques, transporte, mercados y salud por km²",float,0–1,0.004 a 0.701,sin faltantes
+zone_index_distrito.csv,ubigeo,Código UBIGEO del distrito (INEI),integer,6 dígitos,70101 a 150143,sin faltantes
+zone_index_distrito.csv,distrito,"Distrito, normalizado a mayúsculas sin tildes (salvo BREÑA)",string,categoria,47 valores distintos,sin faltantes
+zone_index_distrito.csv,poblacion_2020,Población estimada 2020 (superficie × densidad),float,habitantes,1738 a 1.11239e+06,sin faltantes
+zone_index_distrito.csv,urban_convenience_index,"Densidad ponderada de colegios, parques, transporte, mercados y salud por km²",float,0–1,0.004 a 0.701,sin faltantes
+zone_index_distrito.csv,denuncias_x1000hab,Denuncias 2025 por cada 1 000 residentes,float,denuncias/1 000 hab,10.6 a 80.71,sin faltantes
+zone_index_distrito.csv,crime_index_zone,Denuncias por 1 000 habitantes normalizadas min-max en 50 distritos (1 = más denuncias),float,0–1,0.039 a 1,sin faltantes
+zone_index_distrito.csv,crime_trend_zone,Tendencia de denuncias 2025 vs 2024,string,categoria,empeorando | estable | mejorando,sin faltantes
+zone_index_distrito.csv,idh_2019,"Índice de desarrollo humano del distrito, 2019",float,0–1,0.59894 a 0.845217,sin faltantes
+zone_index_distrito.csv,pct_pobreza_total,Porcentaje de pobreza total del distrito,float,%,0.0573463 a 26.0667,sin faltantes
+zone_index_distrito.csv,n_listados,Avisos del distrito tras el filtro IQR,float,unidades,19 a 289,vacío (NA)
+zone_index_distrito.csv,precio_m2_mediana,Mediana del precio de oferta por m²,float,PEN/m²,2773 a 9299,vacío (NA)
+zone_index_distrito.csv,safety_index,1 − crime_index_zone,float,0–1,0 a 0.961,sin faltantes
+zone_index_distrito.csv,zone_composite_index,"0,5 × seguridad + 0,5 × conveniencia; le falta el componente visual",float,0–1,0.217 a 0.705,sin faltantes

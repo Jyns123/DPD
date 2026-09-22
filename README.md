@@ -1,121 +1,119 @@
-# InmoScore — Asistente Inteligente de Búsqueda Inmobiliaria
+# InmoScore — Asistente inteligente de búsqueda inmobiliaria
 
-**Curso:** DS3022 — Desarrollo de Producto de Datos · UTEC  
-**Semestre:** 2026-2  
-**Estado:** Week 6 completado (entrega mayor Week 7)
+**Curso:** DS3022 Desarrollo de Producto de Datos · UTEC · Prof. Germain Garcia-Zanabria · 2026-2
+**Piloto:** Lima Metropolitana y Callao
+**Estado:** Delivery 1 entregado (Week 7). Siguiente hito: prototipo funcional (Week 10, 14 de octubre).
 
-## Resumen del Proyecto
+InmoScore es un asistente de búsqueda para compradores de **vivienda propia** (no inversionistas). Para cada aviso estima un valor de referencia con su intervalo de incertidumbre y lo ordena según el perfil financiero y las prioridades de cada comprador: precio, seguridad, colegios y servicios, y confiabilidad de la constructora. Cada recomendación se explica en lenguaje natural y declara qué datos le faltan.
 
-InmoScore es un asistente de búsqueda inmobiliaria para compradores de vivienda propia en Lima Metropolitana. Integra un motor de valoración de precios, un índice compuesto de zona (seguridad + conveniencia), y un motor de recomendación personalizado, para identificar inmuebles subvalorados y priorizarlos según el perfil financiero y de estilo de vida de cada usuario.
+**Punto de entrada:** [`deliveries/week07/Delivery1Report.pdf`](deliveries/week07/Delivery1Report.pdf) y el prototipo [`deliveries/week07/prototype/index.html`](deliveries/week07/prototype/index.html), que se abre con doble clic.
 
-## Equipo
+## Equipo y responsabilidades
 
-| Integrante | Rol |
-|---|---|
-| Denzel | Cloud & DevOps Engineer |
-| Jyns | Machine Learning Engineer |
-| Lisseth | Data Analyst |
-| Mafer | Full-Stack Developer & UX/UI Designer |
+| Integrante | Rol | Responsabilidades |
+|---|---|---|
+| **Denzel** | Cloud & DevOps Engineer | Infraestructura y despliegue, contenedor de la API, GitHub Actions para refresco y pruebas, ejecución de la geocodificación completa |
+| **Jyns** | Machine Learning Engineer | Motor de valoración y su evaluación, capa de recomendación y explicaciones, decisión sobre el modelo de visión |
+| **Lisseth** | Data Analyst | Adquisición y calidad de datos, EDA, diccionario de datos, geocodificación y POIs, calibración con Alcabala |
+| **Mafer** | Full-Stack Developer & UX/UI Designer | Web app y mapa, wireframes y prototipos, prueba con usuarios, página del proyecto y video |
 
-## Estructura del Repositorio
+## Cronograma
+
+| Semana | Fecha | Entrega | Estado |
+|---|---|---|---|
+| Week 04 | 2 set 2026 | Tema, equipo y selección de datasets | ✅ [`deliveries/week04/`](deliveries/week04/) |
+| Week 05 | 9 set 2026 | Propuesta, Data Product Canvas y requerimientos | ✅ [`deliveries/week05/`](deliveries/week05/) |
+| Week 06 | 16 set 2026 | EDA y selección de modelo | ✅ [`deliveries/week06/`](deliveries/week06/) |
+| Week 07 | 23 set 2026 | **Delivery 1:** definición integrada | ✅ [`deliveries/week07/`](deliveries/week07/) |
+| Week 08 | 30 set 2026 | Sin entrega (examen parcial): retroalimentación y decisiones de stack | ⬜ |
+| Week 09 | 7 oct 2026 | Sin entrega: geocodificación completa, API y web app | ⬜ |
+| Week 10 | 14 oct 2026 | Prototipo funcional desplegado | ⬜ |
+| Week 11 | 21 oct 2026 | Sin entrega: explicaciones SHAP, calibración Alcabala, prueba con usuarios | ⬜ |
+| Week 12 | 28 oct 2026 | Prototipo refinado, evaluación y casos de estudio | ⬜ |
+| Week 13–14 | 4–11 nov 2026 | Sin entrega: refresco programado, accesibilidad, reporte final y video | ⬜ |
+| Week 15 | 18 nov 2026 | **Delivery 2:** presentación final y entrega reproducible | ⬜ |
+
+El plan detallado, con prioridades MoSCoW y responsables por tarea, está en §9 del [reporte de Delivery 1](deliveries/week07/Delivery1Report.pdf).
+
+## Estado del producto (Week 7)
+
+| Componente | Estado | Resultado |
+|---|---|---|
+| Motor de valoración | ✅ | Gradient boosting: MAE S/ 127 396 frente a S/ 153 633 de la línea base (−17 %); intervalo del 80 % con cobertura 80,1 % |
+| Transacciones reales (Alcabala) | ✅ | 24 148 compraventas; la oferta supera al cierre entre 9 % y 14 % en los distritos comparables |
+| Índice de zona | 🟡 | Seguridad y conveniencia en 47 distritos; falta el componente visual |
+| Geocodificación y POIs | 🟡 | 200 avisos de 5 distritos, 83 % validados; inventario completo en Week 9 |
+| Score de constructora | 🟡 | Parcial: volumen de 453 promotores del Fondo MIVIVIENDA |
+| Recomendación personalizada | ✅ | Criterios de REQ-01 y REQ-02 verificados con dos perfiles; prototipo de baja fidelidad |
+| Modelo de visión | ❌ | Sin imágenes etiquetadas; decisión en Week 10 |
+
+## Fuentes de datos
+
+Todas son públicas. El método de obtención y la licencia de cada una están en [`deliveries/week04/acquisition.md`](deliveries/week04/acquisition.md); los hashes de los archivos usados en Delivery 1 están en [`deliveries/week07/data/processed/source_manifest.csv`](deliveries/week07/data/processed/source_manifest.csv).
+
+| Fuente | Aporta | Volumen |
+|---|---|---|
+| SAT de Lima (Impuesto de Alcabala) | Compraventas cerradas: valor, fecha, distrito | 24 148 compraventas, 44 distritos |
+| Urbania | Avisos: precio, área, dormitorios, baños, dirección | 3 987 avisos (3 896 tras el filtro IQR) |
+| OpenStreetMap (Overpass) | Colegios, parques, transporte, mercados, salud | 16 987 POIs |
+| MININTER / SIDPOL | Denuncias por distrito, mes y modalidad | 29 833 filas de Lima y Callao |
+| BCRP | Precio por m² y ratio precio/alquiler | 957 observaciones (12 distritos) |
+| Fondo MIVIVIENDA | Proyectos y promotores de vivienda nueva | 747 proyectos, 453 promotores |
+| INEI | Límites, población, IDH, pobreza, estratos por manzana | 51 distritos |
+| Nominatim (OSM) | Coordenadas de los avisos | 200 avisos consultados |
+
+## Estructura del repositorio
 
 ```
 .
-├── README.md
-├── .gitignore
-├── .venv/
+├── README.md                       este archivo
 └── deliveries/
-    ├── week04/     # Topic, Team, and Dataset Selection
-    ├── week05/     # Project Proposal, Data Product Canvas, and Requirements
-    └── week06/     # Exploratory Data Analysis and Model Selection
+    ├── week04/                     dataset, diccionario, adquisición y nota de calidad
+    │   ├── data/sample.csv, data/samples/
+    │   ├── scripts/                adquisición por fuente y features derivadas
+    │   ├── acquisition.md, data_dictionary.csv, data_quality_note.md
+    ├── week05/                     propuesta, canvas, requerimientos y presentación
+    │   ├── ProjectProposal.pdf/.docx, DataProductCanvas.pdf, Requirements.md
+    │   ├── RequirementsArtifacts.md, artifacts/ (wireframes y storyboards)
+    │   └── PresentationWeek05.pptx
+    ├── week06/                     EDA y selección de modelo
+    │   ├── DataAnalysis.md, ModelSelection.md, DATA_PROVENANCE.md
+    │   ├── PresentationWeek06.md, data_dictionary_week06.csv
+    │   ├── code/, data/processed/
+    └── week07/                     Delivery 1
+        ├── Delivery1Report.pdf/.md, PresentationWeek07.pptx/.pdf
+        ├── DataProductCanvas.pdf, Requirements.md, data_dictionary.csv
+        ├── code/                   pipeline 01–08 y scripts de documentación
+        ├── data/processed/         25 CSV procesados
+        ├── design/                 arquitectura, flujos y wireframes (PNG y PDF)
+        ├── figures/, models/, prototype/
 ```
 
-## Estado de Entregas
+Los datos crudos se descargan a `data/raw/` dentro de cada entrega y no se versionan (`.gitignore`); solo se versionan las muestras, los datos procesados y los scripts que los regeneran.
 
-### Week 4 ✅ COMPLETO
-- [x] README.md con equipo, producto, problema, dominio
-- [x] data/sample.csv (500 filas)
-- [x] data_dictionary.csv completo
-- [x] acquisition.md detallado
-- [x] data_quality_note.md excepcional
-- [x] scripts de adquisición funcionales
+## Ejecución
 
-### Week 5 ✅ COMPLETO
-- [x] ProjectProposal.pdf + .docx
-- [x] DataProductCanvas.pdf
-- [x] Requirements.md completo (8 REQs, 26 RFs, 13 RNFs)
-- [x] PresentationWeek05.pptx
-- [x] README.md actualizado
+Requiere Python 3.10 o superior. El pipeline vigente es el de Week 7:
 
-### Week 6 ✅ COMPLETO (con limitaciones documentadas)
-- [x] DataAnalysis.md sólido
-- [x] ModelSelection.md apropiado
-- [x] data_dictionary_week06.csv
-- [x] code/ con scripts reproducibles
-- [x] data/processed/ con outputs analíticos
-- [x] PresentationWeek06.pdf + .md
-- [x] DATA_PROVENANCE.md transparente
-- [x] README.md con alcance decision explícito
+```bash
+cd deliveries/week07
+python -m pip install -r requirements.txt
 
-**Nota**: Archivos de Week 6 aún no commitados a Git (requieren `git add deliveries/week06/`).
+python code/run_pipeline.py --acquire   # descarga las fuentes que falten y ejecuta los pasos 02 a 08
+python code/run_pipeline.py             # solo recalcula, con los datos ya descargados
+```
 
-## Estado de Componentes del Producto (Week 6)
+Luego se abre `prototype/index.html` en el navegador. Para regenerar la documentación (canvas, diagramas, wireframes, diccionario, reporte y presentación), ver [`deliveries/week07/README.md`](deliveries/week07/README.md). Las instrucciones de las entregas anteriores están en el README de cada carpeta.
 
-| Componente | Estado | Cobertura | Limitaciones |
-|------------|--------|-----------|--------------|
-| **Motor de valoración** | ✅ Implementado | 3,896 listings, 20 distritos | Evalúa vs precio de oferta, no transacciones reales |
-| **Índice de zona (seguridad + conveniencia)** | ✅ Implementado | 47 distritos | Falta componente visual (sin dataset de imágenes) |
-| **Geocodificación** | 🔧 Prototipo | 10 listings (4 válidos) | No escalado a inventario completo de 3,896 listings |
-| **Score constructoras** | 🔧 Parcial | 460 promotores MIVIVIENDA | Sin historial de plazos (CIPIEC) ni licencias municipales completas |
-| **Recomendación personalizada** | 📋 Diseñado | - | Requiere prototipo UI (planificado Week 10) |
-| **Transacciones reales (Alcabala)** | ❌ No incorporado | - | Sin fuente reproducible en repositorio actual |
-| **Vision model (calidad visual)** | ❌ No implementado | - | Sin dataset de imágenes ni labels manuales |
+## Enlaces
 
-**Preparación para Delivery 1 (Week 7)**: 9/10
-- Documentación excelente y técnicamente honesta
-- Gaps claramente documentados con roadmap
-- Pendiente: prototipo funcional adicional (geocodificación escalada) y commit de archivos Week 6
+- [Reporte de Delivery 1](deliveries/week07/Delivery1Report.pdf) · [fuente editable](deliveries/week07/Delivery1Report.md)
+- [Presentación de Week 7](deliveries/week07/PresentationWeek07.pptx)
+- [Data Product Canvas](deliveries/week07/DataProductCanvas.pdf)
+- [Requerimientos](deliveries/week07/Requirements.md)
+- [Diccionario de datos](deliveries/week07/data_dictionary.csv)
+- [Arquitectura](deliveries/week07/design/architecture.pdf) · [flujo de datos](deliveries/week07/design/data_workflow.pdf) · [flujo del usuario](deliveries/week07/design/user_flow.pdf)
+- [Propuesta de proyecto (Week 5)](deliveries/week05/ProjectProposal.pdf)
+- [Análisis de datos (Week 6)](deliveries/week06/DataAnalysis.md) · [selección de modelo (Week 6)](deliveries/week06/ModelSelection.md)
 
-## Fuentes de Datos
-
-| # | Fuente | Estado | Cobertura |
-|---|--------|--------|-----------|
-| 1 | Urbania.pe | ✅ Adquirido | 3,987 avisos crudos → 3,896 después de filtrado IQR |
-| 2 | OpenStreetMap | ✅ Adquirido | 16,987 POIs de Lima |
-| 3 | MININTER / SIDPOL | ✅ Adquirido | 29,833 filas Lima/Callao |
-| 4 | INEI distritos | ✅ Adquirido | 51 distritos |
-| 5 | BCRP precios | ✅ Adquirido | 957 observaciones (12 distritos) |
-| 6 | Fondo MIVIVIENDA | ✅ Adquirido | 747 proyectos, 460 promotores |
-| 7 | INEI estratos | ✅ Adquirido | 9,206 manzanas (6 distritos) |
-| 8 | Municipalidad Lima | 🟡 Parcial | 254 filas, solo Cercado |
-| 9 | Mapillary | ⬜ Pendiente | Requiere token API |
-| 10 | CIPIEC / INDECOPI | ⬜ Pendiente | Requiere autenticación |
-
-## Nota sobre volumen de datos
-- **Week 4**: 3,987 listings crudos de Urbania
-- **Week 6**: 3,896 listings después de filtrado IQR por distrito (remoción de outliers precio/m²)
-- La diferencia de 91 listings corresponde a limpieza de datos, no error de adquisición
-
-## Próximos Pasos (Week 7 - Delivery 1)
-
-### CRÍTICAS 🔴
-1. [ ] Geocodificación: escalar a subset prioritario (top 5 distritos por volumen) - actualmente solo prototipo de 10 listings
-2. [ ] Commitar archivos Week 6 a Git (actualmente untracked)
-3. [ ] Prototipo funcional adicional de al menos un componente (geocodificación o constructora score)
-
-### IMPORTANTES 🟡
-4. [ ] Constructora score: documentar cobertura actual como limitación (parcialmente documentado)
-5. [ ] Vision model: decidir entre Mapillary o dataset propio
-6. [ ] Preparar prototipo UI básico para Week 10
-
-## Cómo Reproducir
-
-Ver instrucciones específicas en cada entrega:
-
-- **Week 4**: [`deliveries/week04/README.md`](deliveries/week04/README.md)
-- **Week 5**: [`deliveries/week05/README.md`](deliveries/week05/README.md)
-- **Week 6**: [`deliveries/week06/README.md`](deliveries/week06/README.md)
-
-## Licencia
-
-Este proyecto es desarrollado con fines académicos para el curso DS3022 de UTEC.
+Proyecto académico del curso DS3022 de UTEC.

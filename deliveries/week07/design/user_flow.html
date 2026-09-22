@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="render-size" content="1680x920">
+<title>InmoScore · flujo del usuario</title>
+<style>
+  @page { size: 1680px 920px; margin: 0; }
+  :root { --ink: #1b1b1a; --ink-2: #55544f; --muted: #8a8983; --line: #cfcec7; --accent: #1f5fae; --warn: #fff4d6; }
+  * { box-sizing: border-box; margin: 0; }
+  body { width: 1680px; height: 920px; padding: 34px 40px; background: #fff; color: var(--ink);
+         font: 15px/1.35 "Segoe UI", system-ui, sans-serif; }
+  h1 { font-size: 26px; letter-spacing: -.3px; }
+  .sub { color: var(--ink-2); margin: 4px 0 22px; }
+  .flow { display: grid; grid-template-columns: 1fr 40px 1fr 40px 1fr; align-items: start; }
+  .arrow { align-self: center; margin-top: -120px; text-align: center; }
+  .card { border: 2px solid var(--line); border-radius: 12px; overflow: hidden; background: #fff; }
+  .card header { padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  .card header b { color: var(--accent); font-size: 13px; letter-spacing: .6px; }
+  .card header h2 { font-size: 19px; margin-top: 2px; }
+  .shot { height: 300px; overflow: hidden; border-bottom: 1px solid var(--line); background: #f4f4f2; }
+  .shot img { width: 100%; display: block; }
+  .body { padding: 12px 16px; font-size: 14px; color: var(--ink-2); }
+  .body ul { padding-left: 18px; margin-top: 4px; }
+  .body li { margin: 3px 0; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tags span { font-size: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px; color: var(--ink); }
+  .alt { margin-top: 22px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .alt div { border: 1.5px dashed var(--muted); border-radius: 10px; padding: 12px 14px; font-size: 14px; color: var(--ink-2); }
+  .alt b { display: block; color: var(--ink); margin-bottom: 3px; }
+</style>
+</head>
+<body>
+<h1>InmoScore · flujo principal del usuario en tres pasos</h1>
+<p class="sub">Capturas del prototipo de baja fidelidad (<code>prototype/index.html</code>) con datos reales. RNF-04 pide llegar al ranking en menos de tres pasos; aquí basta con elegir o ajustar el perfil.</p>
+
+<div class="flow">
+  <div class="card">
+    <header><b>PASO 1</b><h2>Declarar el perfil</h2></header>
+    <div class="shot"><img src="wireframes/wf-01-perfil-maria.png" alt="Pantalla de perfil"></div>
+    <div class="body">Ingreso, ahorro para la inicial, presupuesto y dormitorios; pesos de precio, seguridad, colegios y constructora.
+      <ul><li>Calcula el precio máximo alcanzable y dice qué lo limita: presupuesto, inicial o cuota.</li></ul>
+      <div class="tags"><span>RF-19</span><span>RF-20</span><span>REQ-08</span><span>RNF-08</span></div></div>
+  </div>
+  <div class="arrow"><svg width="34" height="24" viewBox="0 0 34 24"><path d="M2 12h26M20 5l8 7-8 7" fill="none" stroke="#55544f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="card">
+    <header><b>PASO 2</b><h2>Recibir el ranking explicado</h2></header>
+    <div class="shot"><img src="wireframes/wf-02-ranking-maria.png" alt="Ranking personalizado"></div>
+    <div class="body">Top 10 dentro del presupuesto, con máximo 3 avisos por distrito; se recalcula al mover un peso.
+      <ul><li>Cada tarjeta trae su explicación y las barras de cada componente del score.</li></ul>
+      <div class="tags"><span>RF-21</span><span>RF-22</span><span>REQ-01</span><span>REQ-02</span><span>RNF-01</span></div></div>
+  </div>
+  <div class="arrow"><svg width="34" height="24" viewBox="0 0 34 24"><path d="M2 12h26M20 5l8 7-8 7" fill="none" stroke="#55544f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="card">
+    <header><b>PASO 3</b><h2>Revisar el detalle</h2></header>
+    <div class="shot"><img src="wireframes/wf-04-detalle-maria.png" alt="Detalle del inmueble" style="margin-left:-36%;width:136%"></div>
+    <div class="body">Precio pedido frente al valor estimado y su intervalo del 80 %, componentes y explicación completa.
+      <ul><li>Aclara que la estimación se basa en precios de oferta, no de cierre.</li></ul>
+      <div class="tags"><span>RF-13</span><span>RF-14</span><span>RF-23</span><span>RNF-05</span></div></div>
+  </div>
+</div>
+
+<div class="alt">
+  <div><b>Flujo alternativo · dato parcial</b>Si falta un componente con peso (constructora, calidad visual), el aviso no se omite ni se imputa: la tarjeta lo declara en un recuadro amarillo (RF-23, RNF-06).</div>
+  <div><b>Flujo alternativo · precio atípico</b>Si el precio queda bajo el intervalo del 80 %, el aviso sale del ranking y aparece en “Por verificar”: puede ser una ganga o un error de área.</div>
+  <div><b>Pendiente para Week 10–12</b>Mapa interactivo (RF-24), guardar, descartar y comparar (RF-25) y ajuste de pesos con el feedback implícito (RF-26).</div>
+</div>
+</body>
+</html>

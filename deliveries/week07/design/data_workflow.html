@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="render-size" content="1680x1040">
+<title>InmoScore · flujo de datos</title>
+<style>
+  @page { size: 1680px 1040px; margin: 0; }
+  :root { --ink: #1b1b1a; --ink-2: #55544f; --muted: #8a8983; --line: #cfcec7;
+          --blue: #1f5fae; --orange: #b4531f; --green: #1d7a3a; }
+  * { box-sizing: border-box; margin: 0; }
+  body { width: 1680px; height: 1040px; padding: 34px 40px; background: #fff; color: var(--ink);
+         font: 15px/1.35 "Segoe UI", system-ui, sans-serif; }
+  h1 { font-size: 26px; letter-spacing: -.3px; }
+  .sub { color: var(--ink-2); margin: 4px 0 24px; }
+  .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 46px; position: relative; margin-bottom: 40px; }
+  .step { border: 2px solid var(--c); border-radius: 12px; padding: 14px 16px 12px; position: relative; background: #fff; min-height: 380px;
+          display: flex; flex-direction: column; }
+  .step::after { content: ""; position: absolute; right: -40px; top: 50%; width: 30px; height: 2px; background: var(--ink-2); }
+  .step::before { content: ""; position: absolute; right: -41px; top: calc(50% - 6px); border: 7px solid transparent; border-left-color: var(--ink-2); border-right: 0; transform: translateX(0); }
+  .row .step:last-child::after, .row .step:last-child::before { display: none; }
+  .ing { --c: var(--blue); } .mod { --c: var(--orange); } .srv { --c: var(--green); }
+  .num { font-size: 13px; font-weight: 700; color: var(--c); letter-spacing: .5px; }
+  h2 { font-size: 18px; margin: 2px 0 8px; }
+  .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: .7px; color: var(--muted); margin-top: 8px; }
+  ul { padding-left: 18px; font-size: 13.5px; color: var(--ink-2); }
+  li { margin: 2px 0; }
+  code { font: 12.5px Consolas, monospace; color: var(--ink); }
+  .out { margin-top: auto; padding-top: 8px; border-top: 1px solid var(--line); font-size: 13px; }
+  .out b { color: var(--c); }
+  .turn { position: absolute; right: 20px; bottom: -34px; font-size: 13px; color: var(--muted); }
+  .foot { font-size: 13px; color: var(--ink-2); }
+</style>
+</head>
+<body>
+<h1>InmoScore · flujo de datos de extremo a extremo</h1>
+<p class="sub">Un solo comando reproduce todo desde <code>data/raw/</code>: <code>python code/run_pipeline.py</code> (con <code>--acquire</code> descarga antes las fuentes). Cada paso escribe en <code>data/processed/</code> y no modifica sus entradas.</p>
+
+<div class="row">
+  <div class="step ing"><span class="num">PASO 01</span><h2>Adquisición</h2>
+    <div class="lbl">Entradas</div><ul><li>9 fuentes públicas: Urbania, SAT, BCRP, SIDPOL, OSM, INEI, MIVIVIENDA</li></ul>
+    <div class="lbl">Reglas</div><ul><li>descarga solo lo que falta</li><li>robots.txt, límite de frecuencia, sin autenticación</li></ul>
+    <div class="out"><b>data/raw/</b> (no versionado) · 9 archivos, 62 337 filas de Alcabala</div></div>
+  <div class="step mod"><span class="num">PASO 02</span><h2>Feature store</h2>
+    <div class="lbl">Operaciones</div><ul><li>filtro IQR de precio/m² por distrito: 3 987 → 3 896</li><li>índice de criminalidad por 1 000 hab.</li><li>POIs asignados a polígonos distritales</li><li>join BCRP y MIVIVIENDA; marca <code>data_partial</code></li></ul>
+    <div class="out"><b>listings_eda.csv</b> 3 896 × 30 · manifiesto SHA-256 · duplicados reportados</div></div>
+  <div class="step mod"><span class="num">PASO 03</span><h2>Análisis exploratorio</h2>
+    <div class="lbl">Operaciones</div><ul><li>resumen numérico y asimetría</li><li>correlaciones de Spearman</li><li>cobertura y dispersión por distrito</li><li>relación entorno–precio</li></ul>
+    <div class="out"><b>eda_*.csv</b> + 4 figuras</div></div>
+  <div class="step mod"><span class="num">PASO 04</span><h2>Calibración Alcabala</h2>
+    <div class="lbl">Operaciones</div><ul><li>24 148 compraventas al 100 %</li><li>mediana de vivienda: operaciones ≥ S/ 80 000</li><li>brecha oferta/cierre en 20 distritos</li></ul>
+    <div class="out"><b>alcabala_calibration.csv</b> · brecha +9 % a +14 % en distritos homogéneos</div></div>
+</div>
+
+<div class="row">
+  <div class="step mod"><span class="num">PASO 05</span><h2>Motor de valoración</h2>
+    <div class="lbl">Operaciones</div><ul><li>5 modelos, validación rotada de 5 pliegues</li><li>regla de aceptación de Week 6</li><li>intervalo del 80 % cross-conformal</li></ul>
+    <div class="out"><b>listings_scored.csv</b> (predicción fuera de pliegue) · <b>valuation_model.joblib</b> · MAE −17 %</div></div>
+  <div class="step mod"><span class="num">PASO 06</span><h2>Geocodificación</h2>
+    <div class="lbl">Operaciones</div><ul><li>200 avisos de los 5 distritos con más oferta</li><li>limpieza de dirección, 3 intentos, caché</li><li>validación de distrito; sin imputar</li><li>distancias Haversine a POIs</li></ul>
+    <div class="out"><b>listings_poi_distances.csv</b> · 166 avisos validados (83 %)</div></div>
+  <div class="step mod"><span class="num">PASO 07</span><h2>Score de constructora</h2>
+    <div class="lbl">Operaciones</div><ul><li>volumen de proyectos y unidades por promotor</li><li>declarado parcial: sin plazos, sanciones ni antigüedad</li></ul>
+    <div class="out"><b>builder_score_partial.csv</b> · 453 promotores</div></div>
+  <div class="step srv"><span class="num">PASO 08</span><h2>Recomendación</h2>
+    <div class="lbl">Operaciones</div><ul><li>filtro de asequibilidad por perfil</li><li>score ponderado sobre componentes disponibles</li><li>explicación y marca de dato parcial</li><li>verificación de criterios de aceptación</li></ul>
+    <div class="out"><b>recommendations_demo.csv</b> · <b>prototype/data.js</b></div></div>
+</div>
+<p class="foot">Azul: ingesta · naranja: procesamiento y modelos · verde: servicio al usuario. Las figuras quedan en <code>figures/</code>; el diccionario de todas las columnas en <code>data_dictionary.csv</code>.</p>
+</body>
+</html>
