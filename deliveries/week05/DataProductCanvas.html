@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Data Product Canvas — InmoScore</title>
+<style>
+  @page { size: 420mm 297mm; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 420mm; height: 297mm;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color: #111; background: #fff;
+    padding: 7mm 7mm 5mm;
+    display: flex; flex-direction: column;
+  }
+  h1 {
+    font-size: 24pt; font-weight: 700; color: #1a3fd4;
+    text-align: center; letter-spacing: -.4px; margin-bottom: 1.5mm;
+  }
+  .sub { text-align: center; font-size: 9pt; color: #666; margin-bottom: 4mm; }
+  .grid {
+    flex: 1; display: grid;
+    grid-template-columns: 1.15fr 1.25fr 1.35fr 1fr .95fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2.6mm;
+  }
+  .box {
+    border: 1.7px solid var(--c); border-radius: 5mm;
+    background: var(--bg);
+    padding: 2.8mm 3.2mm; position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .box > h2 {
+    font-size: 14.5pt; font-weight: 700; letter-spacing: -.2px;
+    margin-bottom: .8mm; padding-right: 10mm; color: var(--c);
+  }
+  /* paleta por caja, misma que la version excalidraw */
+  .rojo    { --c:#e03131; --bg:#fff5f5; }
+  .violeta { --c:#7048e8; --bg:#f3f0ff; }
+  .azul    { --c:#1971c2; --bg:#e7f5ff; }
+  .ambar   { --c:#f08c00; --bg:#fff9db; }
+  .verde   { --c:#2f9e44; --bg:#ebfbee; }
+  .neutro  { --c:#495057; --bg:#f8f9fa; }
+  .q { font-size: 7.2pt; color: #8a8a8a; line-height: 1.25; margin-bottom: 1.6mm; }
+  .n {
+    position: absolute; top: 2.4mm; right: 2.8mm;
+    width: 6.6mm; height: 6.6mm; border: 1.5px solid var(--c);
+    color: var(--c); background: #fff; border-radius: 50%;
+    font-size: 8.5pt; font-weight: 700; display: flex;
+    align-items: center; justify-content: center;
+  }
+  .body { font-size: 8.0pt; line-height: 1.34; flex: 1; }
+  .body p { margin-bottom: 1.4mm; }
+  .body ul { list-style: none; margin-bottom: 1.4mm; }
+  .body li { padding-left: 2.4mm; position: relative; margin-bottom: .7mm; }
+  .body li::before {
+    content: "•"; position: absolute; left: 0; color: var(--c); font-weight: 700;
+  }
+  .lbl {
+    display: block; font-weight: 700; font-size: 7.6pt;
+    text-transform: uppercase; letter-spacing: .35px; color: var(--c);
+    margin: 1.4mm 0 .5mm;
+  }
+  .lbl:first-child { margin-top: 0; }
+  b { font-weight: 700; }
+  code {
+    font-family: "Consolas", monospace; font-size: 7.5pt;
+    background: rgba(255,255,255,.75); padding: 0 .5mm; border-radius: 1px;
+  }
+  .new { box-shadow: inset 0 0 0 1.2px var(--c); }
+  .warn { color: #a33; font-weight: 700; }
+  .divider { border-top: 1px dashed #aaa; margin: 1.6mm 0 1.2mm; }
+  .span2 { grid-row: span 2; }
+  .foot { font-size: 7pt; color: #888; text-align: right; margin-top: 2mm; }
+</style>
+</head>
+<body>
+
+<h1>Data Product Canvas</h1>
+<div class="sub"><b>InmoScore</b> — Asistente inteligente de búsqueda inmobiliaria &nbsp;·&nbsp; DS3022 Desarrollo de Producto de Datos, UTEC &nbsp;·&nbsp; v2 — actualizado al cierre de Week 5 (8 set 2026)</div>
+
+<div class="grid">
+
+  <!-- 1 PROBLEMA -->
+  <div class="box rojo">
+    <span class="n">1</span>
+    <h2>Problema</h2>
+    <div class="q">¿Cuál es el problema? ¿Por qué es un problema?</div>
+    <div class="body">
+      <p>Los compradores de vivienda propia en Lima no tienen forma de saber si un inmueble está <b>bien valorado</b>, cómo es realmente su <b>entorno</b> (seguridad, calidad urbana), ni qué tan <b>confiable</b> es la constructora detrás del proyecto.</p>
+      <p>Es la decisión financiera más grande de su vida y la toman con información incompleta: solo ven precio y fotos.</p>
+      <ul>
+        <li>¿Por qué no saben si el precio es justo? → Ningún portal (Urbania, Properati) muestra un precio de referencia de mercado.</li>
+        <li>¿Por qué no conocen el entorno real? → La información de seguridad y calidad urbana no está integrada al listado.</li>
+        <li>¿Por qué compran en riesgo con constructoras? → No existe un historial público consolidado de cumplimiento de plazos.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 3 DATA -->
+  <div class="box azul new">
+    <span class="n">3</span>
+    <h2>Data</h2>
+    <div class="q">¿Qué data tienes interna y externa? ¿Qué data nueva puedes crear?</div>
+    <div class="body">
+      <span class="lbl">Ground truth — transacciones cerradas</span>
+      <ul>
+        <li><b>SAT de Lima, Impuesto de Alcabala:</b> 24 148 compraventas reales en 44 distritos (ene–jun 2026), con valor de transferencia y marca de primera venta.</li>
+      </ul>
+      <span class="lbl">Precio de oferta</span>
+      <ul>
+        <li><b>Urbania.pe:</b> 3 987 avisos + 200 fichas propias vía sitemap.</li>
+        <li><b>BCRP:</b> precio oficial por m² y ratio precio/alquiler por distrito, trimestral desde 1998 (957 obs.).</li>
+      </ul>
+      <span class="lbl">Entorno urbano</span>
+      <ul>
+        <li><b>OpenStreetMap / Overpass:</b> 16 987 POIs de Lima.</li>
+        <li><b>MININTER–SIDPOL:</b> 29 833 denuncias policiales de Lima y Callao.</li>
+        <li><b>INEI:</b> polígonos distritales, población, IDH y estratos de ingreso por manzana (9 206 manzanas).</li>
+      </ul>
+      <span class="lbl">Oferta y constructoras</span>
+      <ul>
+        <li><b>Fondo MIVIVIENDA:</b> 747 proyectos, 460 promotores.</li>
+        <li><b>Municipalidad de Lima:</b> licencias y conformidades de obra.</li>
+      </ul>
+      <span class="lbl">Data nueva (derivada)</span>
+      <ul>
+        <li><code>opportunity_score</code>, <code>zone_composite_index</code>, <code>crime_index_zone</code>, <code>urban_convenience_index</code> y baseline de precio por m² por distrito.</li>
+      </ul>
+      <span class="lbl">Sin fuente todavía</span>
+      <ul>
+        <li class="warn">Imágenes de entorno para el modelo de visión.</li>
+        <li class="warn">Coordenadas de los listados (requiere geocodificar).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 5 SOLUCION -->
+  <div class="box verde span2">
+    <span class="n">5</span>
+    <h2>Solución</h2>
+    <div class="q">¿Cómo será la solución? ¿Cuál es el output esperado?</div>
+    <div class="body">
+      <span class="lbl">Brainstorming</span>
+      <ul>
+        <li>Visualización geoespacial estática que cruza criminalidad y precio por zona. <i>Descartada: pasiva, no se adapta al usuario.</i></li>
+        <li>Asistente conversacional (LLM) sobre zonas y precios. <i>Descartado: no genera ranking accionable ni comparable.</i></li>
+      </ul>
+      <div class="divider"></div>
+      <span class="lbl">Solución priorizada</span>
+      <p>Sistema de recomendación híbrido compuesto por tres modelos que trabajan en conjunto:</p>
+      <ul>
+        <li><b>Motor de valoración.</b> Entrada: área, distrito, dormitorios, baños, antigüedad + variables de entorno. Salida: <code>predicted_price_soles</code> → <code>opportunity_score</code>, qué tan por debajo de su valor real está listado un inmueble.</li>
+        <li><b>Modelo de visión de entorno.</b> Entrada: imágenes de zonas de Lima. Salida: <code>visual_quality_score</code> — densidad urbana, áreas verdes, estado de infraestructura. <span class="warn">Bloqueado: sin dataset de imágenes.</span></li>
+        <li><b>Motor de recomendación personalizado.</b> Entrada: <code>opportunity_score</code> + <code>zone_composite_index</code> (seguridad + conveniencia + percepción visual) + <code>constructora_reliability_score</code> + perfil del usuario (pesos financieros y de estilo de vida). Salida: ranking final distinto por usuario, con explicación en lenguaje natural.</li>
+      </ul>
+      <div class="divider"></div>
+      <span class="lbl">¿Cuál es el tipo de modelo?</span>
+      <p>Sistema <b>híbrido</b>: predictivo (valoración de precio y calidad visual) + prescriptivo (recomendación final ponderada según el perfil del usuario).</p>
+      <div class="divider"></div>
+      <span class="lbl">Estado al cierre de Week 5</span>
+      <ul>
+        <li>Índice de zona operativo en 47 distritos, con 2 de sus 3 componentes.</li>
+        <li>Baseline de precio por m² calculado para 20 distritos.</li>
+        <li>Motor de valoración y de recomendación: pendientes de entrenar (Week 6).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 6 ACTORES -->
+  <div class="box neutro">
+    <span class="n">6</span>
+    <h2>Actores</h2>
+    <div class="q">¿Quiénes son tus stakeholders? ¿Quién es el sponsor?</div>
+    <div class="body">
+      <span class="lbl">Stakeholders</span>
+      <ul>
+        <li>Compradores de vivienda (usuario final).</li>
+        <li>Constructoras e inmobiliarias confiables (beneficiarias indirectas, posible expansión B2B).</li>
+        <li>Entidades financieras y bancos (evaluación de crédito hipotecario).</li>
+        <li>Municipalidades distritales y SAT de Lima (zonificación, licencias, transferencias).</li>
+        <li>PNP / MININTER (datos oficiales de criminalidad).</li>
+        <li>INDECOPI (sanciones a promotoras inmobiliarias).</li>
+        <li>Juntas vecinales (percepción del entorno).</li>
+      </ul>
+      <span class="lbl">Equipo</span>
+      <ul>
+        <li>Denzel — Cloud &amp; DevOps</li>
+        <li>Jyns — ML Engineer</li>
+        <li>Lisseth — Data Analyst</li>
+        <li>Mafer — Full-Stack &amp; UX/UI</li>
+      </ul>
+      <span class="lbl">Sponsor</span>
+      <p>Prof. Germain Garcia-Zanabria / Curso DS3022. En un escenario real, una fintech o inmobiliaria interesada en diferenciarse por transparencia.</p>
+    </div>
+  </div>
+
+  <!-- 8 IMPACTO -->
+  <div class="box verde">
+    <span class="n">8</span>
+    <h2>Impacto</h2>
+    <div class="q">¿Cuál es el impacto? ¿Dónde se va a ver la mejora?</div>
+    <div class="body">
+      <p>Reducir <b>de días a minutos</b> el tiempo que toma comparar propiedades de forma informada, y dar visibilidad a constructoras confiables frente a las informales.</p>
+      <p>La mejora se ve en la <b>calidad de la decisión de compra</b> del usuario (menos arrepentimiento post-compra) y en la reducción del gap entre precio pagado y precio justo de mercado.</p>
+      <div class="divider"></div>
+      <span class="lbl">Por qué ahora es medible</span>
+      <p>Con las transacciones del Impuesto de Alcabala se puede cuantificar ese gap contra <b>ventas cerradas reales</b>, no contra precios pedidos. Hasta Week 4 el proyecto no tenía forma de medirlo.</p>
+    </div>
+  </div>
+
+  <!-- 2 USUARIO -->
+  <div class="box violeta">
+    <span class="n">2</span>
+    <h2>Usuario</h2>
+    <div class="q">¿Quiénes tienen este problema? ¿A quiénes va a impactar?</div>
+    <div class="body">
+      <p>Personas naturales (25–45 años aprox.) buscando comprar su primera vivienda o cambiar de vivienda en Lima Metropolitana, con capacidad de acceder a crédito hipotecario o ahorro propio.</p>
+      <p>Compradores directos como usuario principal; indirectamente, constructoras e inmobiliarias confiables que hoy no tienen forma de diferenciarse de las informales.</p>
+      <p><b>No</b> son inversionistas: priorizan cercanía a colegios y trabajo, seguridad del barrio y capacidad real de financiamiento, por encima de la rentabilidad de alquiler.</p>
+    </div>
+  </div>
+
+  <!-- 4 HIPOTESIS -->
+  <div class="box ambar">
+    <span class="n">4</span>
+    <h2>Hipótesis</h2>
+    <div class="q">¿Cuáles son las posibles causas del problema?</div>
+    <div class="body">
+      <ul>
+        <li>El mercado inmobiliario digital está <b>fragmentado</b> entre portales que no cruzan información.</li>
+        <li>No existe un actor, público o privado, que consolide <b>precio + entorno + reputación</b> en un solo lugar.</li>
+        <li>La asimetría de información favorece al vendedor y a la constructora, no al comprador.</li>
+        <li>La información pública existe y es de calidad, pero está <b>dispersa entre seis entidades</b> distintas (SAT, BCRP, MININTER, INEI, MIVIVIENDA, municipalidades) y en formatos no comparables.</li>
+      </ul>
+      <div class="divider"></div>
+      <span class="lbl">Validada en Week 4</span>
+      <p>La última hipótesis quedó confirmada: fue posible consolidar las seis fuentes en un solo feature store, pero cada una exigió su propio método de acceso, normalización y control de calidad.</p>
+    </div>
+  </div>
+
+  <!-- 7 METRICAS -->
+  <div class="box azul new">
+    <span class="n">7</span>
+    <h2>Métricas claves</h2>
+    <div class="q">¿Cuáles serían las métricas que deberíamos usar?</div>
+    <div class="body">
+      <ul>
+        <li><b>MAE del motor de valoración</b> — <code>predicted_price_soles</code> contra el valor de transferencia real del Impuesto de Alcabala.</li>
+        <li><b>Baseline a superar:</b> precio mediano por m² por distrito, ya calculado para 20 distritos.</li>
+        <li><b>% de concordancia</b> entre el ranking del modelo y el orden de preferencia que un usuario piloto asignaría manualmente — mide el motor de recomendación.</li>
+        <li><b>Accuracy / F1 del modelo de visión</b> contra etiquetas manuales. <span class="warn">Condicionada a conseguir el dataset de imágenes.</span></li>
+        <li><b>Tiempo promedio de decisión</b> del usuario (encuesta piloto) frente al proceso manual actual.</li>
+      </ul>
+      <div class="divider"></div>
+      <span class="lbl">Precaución metodológica</span>
+      <p>La comparación con Alcabala debe hacerse <b>por percentil de distrito, no por mediana cruda</b>. Cocheras y depósitos se inscriben como predios independientes: en San Isidro el <b>64%</b> de las compraventas están bajo S/ 80 000, y la mediana del distrito sale S/ 57 038, que es el precio de un estacionamiento, no de un departamento. Donde predominan esas operaciones el <b>p90</b> coincide con la mediana de listados (San Isidro −0 %, Surco +1 %, San Borja +1 %); donde son menos del 30 %, ajusta el <b>p75</b>.</p>
+    </div>
+  </div>
+
+  <!-- 9 ACCIONES -->
+  <div class="box ambar new">
+    <span class="n">9</span>
+    <h2>Acciones</h2>
+    <div class="q">¿Cuáles son los siguientes pasos?</div>
+    <div class="body">
+      <span class="lbl">Bloqueo principal</span>
+      <ul>
+        <li><b>Geocodificar</b> las direcciones de los listados con Nominatim. Sin coordenadas no hay distancias a POIs, que es el enriquecimiento central del pipeline.</li>
+      </ul>
+      <span class="lbl">Week 6 — EDA y modelado</span>
+      <ul>
+        <li>Definir el criterio de percentil para comparar Alcabala contra listados.</li>
+        <li>Entrenar el baseline del motor de valoración y medir su MAE contra transacciones reales.</li>
+        <li>Calibrar los pesos del <code>zone_composite_index</code>.</li>
+      </ul>
+      <span class="lbl">Riesgos a resolver</span>
+      <ul>
+        <li>Conseguir fuente de imágenes de entorno (Mapillary requiere token) o replantear el alcance del modelo de visión.</li>
+        <li>Solicitar acceso institucional al <b>CIPIEC</b> del Ministerio de Vivienda para el historial de plazos de constructoras.</li>
+        <li>Contrastar los POIs de OSM contra el padrón del MINEDU: el sesgo de mapeo comunitario infla distritos bien mapeados.</li>
+      </ul>
+      <span class="lbl">Week 10</span>
+      <ul>
+        <li>Prototipo funcional con los modelos integrados y la interfaz de perfil de usuario.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="foot">Las cajas <b>3, 7 y 9</b> (borde doble) cambiaron respecto a la v1 tras la adquisición de datos de Week 4. Detalle en <b>deliveries/week04/acquisition.md</b> y <b>data_quality_note.md</b>.</div>
+
+</body>
+</html>
