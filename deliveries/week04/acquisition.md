@@ -23,6 +23,7 @@ El alcance de esta primera iteración es **Perú, Lima Metropolitana y Callao**.
 | `entidades_tecnicas_ranking.csv` | 10 | Fondo MIVIVIENDA (ranking de ET) | `fetch_entidades_tecnicas.py` |
 | `estratos_ingreso_manzana_sample.csv` | 9 206 | INEI, planos estratificados 2020 | `fetch_estratos_ingreso.py` |
 | `estratos_ingreso_links.csv` | 50 | índice de descarga por distrito | `fetch_estratos_ingreso.py` |
+| `alcabala_transacciones_distrito.csv` | 44 | SAT de Lima, Impuesto de Alcabala | `fetch_alcabala_transacciones.py` |
 | `crime_index_distrito.csv` | 50 | derivada: seguridad por distrito | `build_crime_index.py` |
 | `baseline_precio_m2_distrito.csv` | 20 | derivada: baseline de precio por m² | `build_baseline_precio_m2.py` |
 | `zone_convenience_index.csv` | 47 | derivada: conveniencia urbana | `build_zone_index.py` |
@@ -120,6 +121,26 @@ python scripts/fetch_bcrp_precios.py
 4. Convertir el período `T1.26` al formato `2026-T1` y consolidar en formato largo.
 
 **Nota metodológica:** el BCRP construye la serie a partir de precios **de oferta** de Urbania, no de transacciones cerradas. Comparte por tanto el sesgo de nuestra fuente de listados: ambos miden lo que se pide, no lo que se paga. Sirve como referencia externa e independiente, no como precio de transacción real. La descarga directa de sus archivos Excel está bloqueada por protección anti-bot; la API pública sí responde.
+
+## 3c. Transacciones reales (Impuesto de Alcabala)
+
+**Fuente:** Servicio de Administración Tributaria de Lima (SAT), determinaciones del Impuesto de Alcabala, vía la Plataforma Nacional de Datos Abiertos. El alcabala grava la transferencia de propiedad inmueble, así que su base es el **valor real de la operación**, no el precio pedido. Implementado en `scripts/fetch_alcabala_transacciones.py`.
+
+```bash
+python scripts/fetch_alcabala_transacciones.py
+```
+
+1. Descargar el CSV del período (17,5 MB, 62 337 registros para enero–junio 2026).
+2. Filtrar a `Tipo Transferencia = "Compra/Venta"` y `Porcentaje de Propiedad = 100`, para excluir donaciones, particiones hereditarias y transferencias de alícuotas: quedan **24 148 operaciones en 44 distritos**.
+3. Agregar por distrito los percentiles 25, 50, 75 y 90 del valor de transferencia.
+4. Calcular `pct_bajo_umbral`: proporción de operaciones bajo S/ 80 000, que sirve como proxy de cuántas son cocheras o depósitos.
+5. Separar las operaciones marcadas como `Primera Venta? = SI` (obra nueva) de las reventas.
+
+**Campos de la fuente:** fecha de transferencia, fecha y número de liquidación, tipo de transferencia, distrito, primera venta y su motivo, autovalúo, factor de ajuste, porcentaje de propiedad, tipo de propietario, valor de transferencia en soles y en dólares, base imponible y exonerada, e impuesto.
+
+**Es el ground truth que faltaba.** Hasta encontrarlo, tanto los listados de Urbania como la serie del BCRP eran precios de oferta, y el proyecto no tenía forma de medir el error del motor de valoración contra ventas cerradas. Las limitaciones de la fuente están en `data_quality_note.md`.
+
+**Otros períodos.** El SAT publica un dataset por trimestre. La URL sigue el patrón `Alcabala_Medio_de_Determinacion_<meses>_<año>_<trimestre>_SAT.csv` bajo `datosabiertos.gob.pe/sites/default/files/`; el diccionario `PERIODOS` del script está preparado para acumular varios y construir una serie temporal.
 
 ## 4. Imágenes de entorno + modelo de visión
 

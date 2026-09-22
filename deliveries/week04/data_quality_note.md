@@ -80,6 +80,15 @@ Notas sobre `data/sample.csv` y las fuentes que lo alimentan. Lo que sigue no so
 - **Son de 2020**, construidos sobre el Censo 2017. En distritos con crecimiento reciente estarán desactualizados.
 - El sample cubre 6 de 50 distritos (los del Callao, por orden de UBIGEO). Ampliarlo es solo cuestión de subir el parámetro `n`.
 
+### Transacciones de Alcabala (SAT de Lima)
+- **Distribución bimodal.** Cocheras y depósitos se inscriben como predios independientes y se transfieren por su cuenta, así que aparecen como compraventas de S/ 20 000–80 000. En San Isidro son el **64%** de las operaciones, en Miraflores el 52%, en Surco el 52%. Usar la mediana cruda del distrito da resultados absurdos: la mediana de San Isidro sale S/ 57 038, que no es el precio de un departamento sino el de una cochera.
+- **No hay área ni tipo de predio.** El dataset no distingue departamento, casa, terreno, cochera ni depósito, y no trae metraje. Por eso **no se puede calcular precio por m² por operación**, que es justo lo que necesita el motor de valoración.
+- **Mitigación que sí funciona:** comparar por percentiles y elegir el percentil según cuánta cochera tenga el distrito. Donde más del 45% de operaciones están bajo S/ 80 000, el **p90** coincide casi exacto con la mediana de listados (San Isidro −0%, Surco +1%, San Borja +1%, Magdalena +5%); donde es menos del 30%, el **p75** ajusta mejor. El criterio formal se define en Week 6.
+- **Solo Lima Metropolitana.** El SAT de Lima cubre 44 distritos; Callao tiene su propia administración tributaria y no está en esta fuente.
+- **Cobertura temporal corta.** Se descargó enero–junio 2026. El SAT publica por trimestre, así que construir una serie histórica exige acumular varios archivos.
+- **Valores en cero y atípicos:** hay operaciones con valor de transferencia 0 (transferencias no onerosas mal clasificadas) y un máximo de S/ 102,9 millones. Se filtran las de valor 0 y las de propiedad parcial.
+- **Es base imponible, no precio pactado.** El valor declarado para alcabala puede subdeclararse para reducir el impuesto. Es más confiable que el precio pedido, pero no es un contrato de compraventa auditado.
+
 ### Índices de zona
 - El `zone_composite_index` va con **dos de los tres componentes** del pitch: seguridad y conveniencia, a 50/50. Falta el de percepción visual.
 - Un distrito del geojson viene sin geometría y se salta; por eso el índice cubre 47 distritos y no 49.

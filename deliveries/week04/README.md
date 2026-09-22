@@ -77,6 +77,7 @@ deliveries/week04/
 pip install -r requirements.txt
 
 # fuentes
+python scripts/fetch_alcabala_transacciones.py
 python scripts/fetch_listings_urbania.py
 python scripts/fetch_denuncias_sidpol.py
 python scripts/fetch_distritos_geojson.py
