@@ -1,0 +1,38 @@
+[
+  {
+    "name": "María",
+    "income": 8500,
+    "savings": 100000,
+    "budget": 550000,
+    "minRooms": 2,
+    "minArea": 55,
+    "districts": [
+      "Ate",
+      "Santiago De Surco",
+      "San Miguel"
+    ],
+    "weights": {
+      "price": 0.55,
+      "safety": 0.2,
+      "convenience": 0.25
+    }
+  },
+  {
+    "name": "Carlos",
+    "income": 15000,
+    "savings": 200000,
+    "budget": 1000000,
+    "minRooms": 3,
+    "minArea": 80,
+    "districts": [
+      "Miraflores",
+      "San Isidro",
+      "Barranco"
+    ],
+    "weights": {
+      "price": 0.25,
+      "safety": 0.35,
+      "convenience": 0.4
+    }
+  }
+]

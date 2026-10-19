@@ -1,0 +1,49 @@
+{
+  "version": "1.0",
+  "seed": 20261013,
+  "holdout_fraction_groups": 0.2,
+  "cv_folds": 5,
+  "selection_rule": "development pooled MAE below baseline; small-district MdAPE ratio <=1.10; then minimum MAE",
+  "small_district_definition": "fewer than 50 rows in development, fixed before final evaluation",
+  "iqr": {
+    "multiplier": 1.5,
+    "min_district_training_rows": 8,
+    "applied_to": "training_only"
+  },
+  "price_ranges_soles": [
+    "<300k",
+    "300k–<600k",
+    "600k–<1M",
+    "1M–<2M",
+    ">=2M"
+  ],
+  "models": [
+    "A_mediana_distrital",
+    "B_loglineal_distrito",
+    "C_ridge_v2",
+    "D_gradient_boosting"
+  ],
+  "input_sha256": "255bbf8f07ddb77fca6331f982980930d03c5e67374af6057cdd5cb941069ded",
+  "input_file": "deliveries/data_quality/data/processed/listings_clean.csv",
+  "rows_total": 3896,
+  "rows_development": 3117,
+  "rows_reserved_final": 779,
+  "scope": "historically_prefiltered_snapshot_3896_rows",
+  "limitations": [
+    "Historical input was already filtered using full-dataset IQR; unavailable 91 rows cannot be recovered by this protocol.",
+    "No publication timestamps: grouped holdout is not temporal validation.",
+    "Target is advertised asking price, not transaction price."
+  ],
+  "environment": {
+    "python": "3.12.14",
+    "pandas": "2.2.3",
+    "numpy": "2.3.5",
+    "sklearn": "1.7.2",
+    "joblib": "1.6.0"
+  },
+  "code_sha256": {
+    "models.py": "c49fa4bba00a7e0269ab4bf893fbce540d237fec82498b65fc6ca6c42a7c0e65",
+    "protocol.py": "68f56bff0cde8fa5b11985bf080e8822bb488b53eef95c5a214fe251a5ecf90e",
+    "run_evaluation.py": "7f47017256d27cf84d42066fb8a58476bd4f0a4d204eacb8bf3f3a625712f41c"
+  }
+}

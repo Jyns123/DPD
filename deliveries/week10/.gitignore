@@ -1,0 +1,24 @@
+# Dependencies and build outputs
+/node_modules/
+**/node_modules/
+/.next/
+/out/
+/coverage/
+/tsconfig.tsbuildinfo
+/next-env.d.ts
+*.log
+.DS_Store
+# Every local installation creates its own database and sessions.
+/storage/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+.env*
+!.env.example
+/.venv/
+# Presentation generation intermediates
+presentation/.validation/
+presentation/.build/*.pptx
+presentation/.build/*.ndjson
+presentation/.build/*.json
+/.npm-cache/

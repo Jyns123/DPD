@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "listings": 3896,
+  "districts": 20,
+  "geocoded_street_or_building": 133,
+  "unknown_maintenance": 2009,
+  "possible_duplicate_rows": 24,
+  "model_prediction_rows_checked": 100
+}
