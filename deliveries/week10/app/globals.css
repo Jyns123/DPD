@@ -23,6 +23,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .header{height:88px;border-bottom:1px solid var(--line);background:var(--cream);position:relative;z-index:30}
 .header-inner{max-width:1376px;padding:0 48px;margin:auto;height:100%;display:flex;align-items:center;justify-content:space-between;gap:22px}
 .brand{display:inline-flex;align-items:center;font-size:1.7rem;letter-spacing:-1.3px;font-weight:700;white-space:nowrap}
+.brand-logo{height:90px;width:auto;margin-right:16px}
+.brand-logo-footer{height:90px;width:auto;margin-right:10px}
 .brand-symbol{background:var(--forest);color:var(--lime);width:38px;height:38px;border-radius:11px;display:grid;place-items:center;margin-right:9px}
 .brand-light{font-weight:400}
 .brand-dot{color:#626f65}
@@ -757,7 +759,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 }
 
 
-.property-title{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;white-space:normal;min-height:2.8em;line-height:1.4;overflow:hidden}.property-reference{flex-wrap:wrap;row-gap:4px}.nav-account-links{display:none}@media(max-width:1000px){.nav.nav-open .nav-account-links{display:flex;flex-direction:column;border-top:1px solid var(--line);padding-top:8px}}
+.property-title{display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;white-space:normal;min-height:2.8em;line-height:1.4;overflow:hidden}.property-reference{flex-wrap:wrap;row-gap:4px}.nav-account-links{display:none}@media(max-width:1000px){.nav.nav-open .nav-account-links{display:flex;flex-direction:column;border-top:1px solid var(--line);padding-top:8px}}
 @media(max-width:760px){.page-heading>.button{font-size:.94rem;width:auto;min-width:auto;padding:10px 14px}.page-heading>.button svg{width:18px;height:18px}}
 
 .footer-main{display:grid;grid-template-columns:minmax(240px,2fr) repeat(2,minmax(150px,1fr));gap:48px;padding-top:18px;padding-bottom:40px}
