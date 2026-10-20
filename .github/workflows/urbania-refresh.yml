@@ -1,0 +1,74 @@
+# Refresco diario de los avisos de Urbania y del catálogo de la web (deliveries/week10).
+# La captura respeta robots.txt y se detiene ante 403/429: mientras Urbania bloquee el
+# acceso automático, el paso de captura falla y no se publica nada.
+name: Refresco Urbania
+
+on:
+  schedule:
+    - cron: "30 11 * * *" # 06:30 en Lima (UTC-5)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: urbania-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: deliveries/week10
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            deliveries/week10/urbania/requirements.txt
+            deliveries/week10/analytics/requirements.txt
+
+      - name: Instalar dependencias
+        run: python -m pip install -r urbania/requirements.txt -r analytics/requirements.txt
+
+      - name: Pruebas de la captura
+        working-directory: deliveries/week10/urbania
+        run: python -m unittest discover -s tests
+
+      - name: Capturar listados de Urbania
+        run: >-
+          python urbania/update.py
+          --db data/urbania/urbania.sqlite
+          --out data/urbania/urbania_actual.csv
+          --evidence-dir "$RUNNER_TEMP/captures"
+
+      - name: Regenerar y validar el catálogo de la web
+        run: |
+          python analytics/prepare_data.py
+          python analytics/validate_data.py
+
+      - name: Publicar los datos en main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add data/urbania data/catalog.json data/manifest.json tests/results/data-validation.json
+          if git diff --cached --quiet; then echo "Sin cambios en los datos"; exit 0; fi
+          git commit -m "datos week10: refresco diario de Urbania"
+          git pull --rebase
+          git push
+
+      - name: Guardar evidencia de la captura
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: urbania-captures-${{ github.run_id }}
+          path: ${{ runner.temp }}/captures
+          retention-days: 14
+          if-no-files-found: ignore
