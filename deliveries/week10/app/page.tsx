@@ -1,2 +1,3 @@
 import InmoScoreApp from '../components/inmoscore-app';
-export default function Page() { return <InmoScoreApp />; }
+import { getListings } from '../lib/catalog';
+export default function Page() { return <InmoScoreApp listingCount={getListings().length} />; }

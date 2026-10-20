@@ -13,7 +13,8 @@
     "typecheck": "tsc --noEmit",
     "test": "node --experimental-strip-types --test tests/backend.test.ts tests/auth.test.ts tests/database.test.ts",
     "test:api": "node tests/api-smoke.mjs",
-    "data:prepare": ".venv/bin/python analytics/prepare_data.py"
+    "data:prepare": ".venv/bin/python analytics/prepare_data.py",
+    "data:refresh": ".venv/bin/python urbania/update.py --db data/urbania/urbania.sqlite --out data/urbania/urbania_actual.csv && .venv/bin/python analytics/prepare_data.py"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

@@ -1,18 +1,25 @@
 {
   "metadata": {
-    "source": "Urbania vía dataset público y fuentes distritales; instantánea histórica",
+    "source": "Urbania vía dataset público histórico y captura propia de avisos activos; fuentes distritales",
     "dataAsOf": "2026-09-02",
-    "preparedAt": "2026-10-19T20:38:33.951620+00:00",
+    "preparedAt": "2026-10-20T22:20:57.705255+00:00",
     "counts": {
-      "listings": 3896,
+      "listings": 3897,
       "districts": 20,
       "preciseLocations": 133
     },
     "modelName": "D_gradient_boosting",
     "finalMAE": 119801,
     "finalMdAPE": 0.122,
-    "scope": "historical",
-    "notice": "Inventario histórico; disponibilidad no verificada."
+    "scope": "historical+live",
+    "notice": "Inventario histórico y avisos vistos en Urbania; disponibilidad no verificada.",
+    "live": {
+      "liveListings": 3,
+      "liveNew": 1,
+      "liveUpdated": 2,
+      "liveExcluded": 3,
+      "liveDataAsOf": "2026-10-20"
+    }
   },
   "districts": [
     "Ate",
@@ -74896,7 +74903,7 @@
     {
       "id": "146876201",
       "district": "San Juan De Lurigancho",
-      "address": "El Periodista  al 100",
+      "address": "El Periodista al 100",
       "price": 122850.0,
       "area": 47.0,
       "rooms": 1,
@@ -74915,9 +74922,11 @@
         "maintenance_unknown",
         "missing_geocode"
       ],
-      "url": null,
+      "url": "https://urbania.pe/inmueble/clasificado/veclapin-venta-de-departamento-en-san-juan-de-lurigancho-lima-1-dormitorio-146876201",
       "availability": "unverified",
-      "duplicateGroupId": "1e1eba86eb991dde"
+      "duplicateGroupId": "1e1eba86eb991dde",
+      "source": "urbania_fase1",
+      "observedAt": "2026-10-20"
     },
     {
       "id": "149813914",
@@ -75434,9 +75443,11 @@
         "maintenance_unknown",
         "missing_geocode"
       ],
-      "url": null,
+      "url": "https://urbania.pe/inmueble/clasificado/veclapin-venta-de-departamento-en-san-juan-de-lurigancho-lima-1-dormitorio-148064958",
       "availability": "unverified",
-      "duplicateGroupId": "43adf94f2014736e"
+      "duplicateGroupId": "43adf94f2014736e",
+      "source": "urbania_fase1",
+      "observedAt": "2026-10-20"
     },
     {
       "id": "149238254",
@@ -99810,6 +99821,34 @@
       "url": null,
       "availability": "unverified",
       "duplicateGroupId": "bfe6f7caa0362a09"
+    },
+    {
+      "id": "150834281",
+      "district": "San Juan De Lurigancho",
+      "address": "Las Alhucemas",
+      "price": 150750.0,
+      "area": 37.0,
+      "rooms": 1,
+      "bathrooms": 1,
+      "parking": null,
+      "maintenance": null,
+      "predictedPrice": 149687,
+      "scores": {
+        "price": 0.478,
+        "safety": 0.638,
+        "convenience": 0.404
+      },
+      "location": null,
+      "dataPartial": true,
+      "flags": [
+        "maintenance_unknown",
+        "missing_geocode"
+      ],
+      "url": "https://urbania.pe/inmueble/clasificado/veclapin-venta-de-departamento-en-las-flores-san-juan-de-lurigancho-1-dormitorio-150834281",
+      "availability": "unverified",
+      "duplicateGroupId": null,
+      "source": "urbania_fase1",
+      "observedAt": "2026-10-20"
     }
   ]
 }

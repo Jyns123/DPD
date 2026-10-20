@@ -30,7 +30,7 @@ export type CatalogListing = {
   area: number;
   rooms: number;
   bathrooms: number;
-  parking: number;
+  parking: number | null;
   maintenance: number | null;
   predictedPrice: number | null;
   scores: PreferenceWeights;
@@ -40,6 +40,9 @@ export type CatalogListing = {
   url: string | null;
   availability: "unverified";
   duplicateGroupId: string | null;
+  // Present only for listings seen by the own Urbania capture (urbania/).
+  source?: "urbania_fase1";
+  observedAt?: string;
 };
 
 export type RankedListing = CatalogListing & {

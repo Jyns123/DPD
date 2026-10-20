@@ -18,6 +18,7 @@ import types
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import joblib
 import numpy as np
@@ -35,6 +36,19 @@ CONTEXT = [
 ]
 FEATURES = ["area_m2", "rooms", "bathrooms", "parking", "maintenance_fee", *CONTEXT, "district"]
 MODEL_NAME = "D_gradient_boosting"
+# Own Urbania capture (urbania/update.py). Its slugs map to historical district names;
+# Lima Cercado is not in the historical inventory, so it has no district context.
+LIVE_PATH = WEEK10 / "data/urbania/urbania_actual.csv"
+LIVE_DISTRICTS = {
+    "ate-vitarte": "ATE", "barranco": "BARRANCO", "brena": "BREÑA", "chorrillos": "CHORRILLOS",
+    "jesus-maria": "JESUS MARIA", "la-molina": "LA MOLINA", "la-victoria": "LA VICTORIA",
+    "lince": "LINCE", "los-olivos": "LOS OLIVOS", "magdalena": "MAGDALENA DEL MAR",
+    "miraflores": "MIRAFLORES", "pueblo-libre": "PUEBLO LIBRE", "san-borja": "SAN BORJA",
+    "san-isidro": "SAN ISIDRO", "san-juan-de-lurigancho": "SAN JUAN DE LURIGANCHO",
+    "san-martin-de-porres": "SAN MARTIN DE PORRES", "san-miguel": "SAN MIGUEL",
+    "santiago-de-surco": "SANTIAGO DE SURCO", "surquillo": "SURQUILLO",
+}
+LIMA = ZoneInfo("America/Lima")
 
 
 def sha256(path: Path) -> str:
@@ -119,11 +133,57 @@ def finite_or_none(value):
     return number if math.isfinite(number) else None
 
 
+def lima_date(value: str) -> str:
+    # A date without time (browser sample) is kept; an instant is expressed in Lima time.
+    return value if len(value) == 10 else datetime.fromisoformat(value).astimezone(LIMA).date().isoformat()
+
+
+def merge_live(raw: pd.DataFrame) -> tuple[pd.DataFrame, set[str], dict]:
+    """Add the active units of the own capture to the historical inventory.
+
+    Only complete units enter: price in soles, total area, rooms and bathrooms. A listing
+    already in the historical file keeps what a card does not show (parking, maintenance,
+    geocoding) and takes the newer published price, area, rooms, bathrooms and address.
+    """
+    raw = raw.assign(listing_id=raw["listing_id"].astype(str), live_url=None, observed_at=None)
+    if not LIVE_PATH.exists():
+        return raw, set(), {"liveListings": 0}
+    live = pd.read_csv(LIVE_PATH, dtype={"posting_id": str, "district": str, "last_observed_at": str})
+    withdrawn = set(live.loc[live["state"] == "withdrawn", "posting_id"])
+    number = {c: pd.to_numeric(live[c], errors="coerce") for c in ("price_pen", "area_m2", "bedrooms", "bathrooms")}
+    usable = ((live["state"] == "active") & (live["listing_kind"] == "unit") & live["district"].isin(list(LIVE_DISTRICTS))
+              & (number["price_pen"] > 0) & (number["area_m2"] > 0) & number["bedrooms"].notna() & number["bathrooms"].notna()
+              & live["last_observed_at"].notna())
+    fresh = pd.DataFrame({
+        "listing_id": live["posting_id"], "district": live["district"].map(LIVE_DISTRICTS),
+        "address": live["address"], "price_soles": number["price_pen"], "area_m2": number["area_m2"],
+        "rooms": number["bedrooms"], "bathrooms": number["bathrooms"],
+        "live_url": live["url"], "observed_at": live["last_observed_at"],
+    })[usable]
+    fresh = fresh.astype({"rooms": int, "bathrooms": int})
+    fresh["observed_at"] = fresh["observed_at"].map(lima_date)
+    known = fresh["listing_id"].isin(raw["listing_id"])
+    updates = fresh[known].set_index("listing_id")
+    rows = raw["listing_id"].isin(updates.index)
+    for column in ["price_soles", "area_m2", "rooms", "bathrooms", "live_url", "observed_at"]:
+        raw.loc[rows, column] = raw.loc[rows, "listing_id"].map(updates[column])
+    address = raw.loc[rows, "listing_id"].map(updates["address"])
+    raw.loc[rows, "address"] = address.where(address.notna(), raw.loc[rows, "address"])
+    # District context is constant within a district in the historical file.
+    context = raw.groupby("district")[CONTEXT].first()
+    new = fresh[~known].join(context, on="district").assign(
+        source="Urbania (captura propia)", parking=np.nan, maintenance_fee=np.nan)
+    stats = {"liveListings": len(fresh), "liveNew": len(new), "liveUpdated": int(known.sum()),
+             "liveExcluded": len(live) - len(fresh), "liveDataAsOf": fresh["observed_at"].max() if len(fresh) else None}
+    return pd.concat([raw, new], ignore_index=True), withdrawn, stats
+
+
 def prepare_catalog(force_source: bool, model_bundle: dict, model_source: Path) -> tuple[Path, list[Path]]:
     contained_data = WEEK10 / "data/listings_clean.csv"
     source_data = contained_data
     clean_path = source_data if force_source else first_existing(contained_data, source_data)
     raw = pd.read_csv(clean_path)
+    raw, withdrawn, live_stats = merge_live(raw)
 
     # Load matching Week 7 context and listing metadata. Exact validated street
     # coordinates are the only coordinates exposed to the application.
@@ -183,9 +243,11 @@ def prepare_catalog(force_source: bool, model_bundle: dict, model_source: Path) 
             flags.append("geocode_context_only")
         if district_key not in district_scores["safety"] or district_key not in district_scores["convenience"]:
             flags.append("missing_context")
+        live = isinstance(row.get("live_url"), str)
         lookup = links.get(str(row["listing_id"]), {})
-        retired = str(lookup.get("status", "")).startswith("retirado")
-        url = None if retired else lookup.get("url")
+        # A newer sighting in the own capture prevails over the earlier link check.
+        retired = str(row["listing_id"]) in withdrawn or (not live and str(lookup.get("status", "")).startswith("retirado"))
+        url = row["live_url"] if live else None if retired else lookup.get("url")
         if retired:
             flags.append("retired_at_last_check")
         valid_location = (row.get("geocode_status") == "success" and row.get("precision") in ("exacta", "calle") and pd.notna(row.get("validacion"))
@@ -208,19 +270,25 @@ def prepare_catalog(force_source: bool, model_bundle: dict, model_source: Path) 
             "url": url, "availability": "unverified",
             "duplicateGroupId": None if pd.isna(row.get("duplicate_group_id")) else str(row["duplicate_group_id"]),
         }
+        if live:
+            item.update(source="urbania_fase1", observedAt=row["observed_at"])
         items.append(item)
 
     unique_districts = sorted(district_names)
+    with_live = live_stats["liveListings"] > 0
     catalog = {
         "metadata": {
-            "source": "Urbania vía dataset público y fuentes distritales; instantánea histórica",
+            "source": ("Urbania vía dataset público histórico y captura propia de avisos activos; fuentes distritales"
+                       if with_live else "Urbania vía dataset público y fuentes distritales; instantánea histórica"),
             "dataAsOf": "2026-09-02",
             "preparedAt": datetime.now(timezone.utc).isoformat(),
             "counts": {"listings": len(items), "districts": len(unique_districts),
                        "preciseLocations": sum(x["location"] is not None for x in items)},
             "modelName": MODEL_NAME, "finalMAE": 119801, "finalMdAPE": 0.122,
-            "scope": "historical",
-            "notice": "Inventario histórico; disponibilidad no verificada.",
+            "scope": "historical+live" if with_live else "historical",
+            "notice": ("Inventario histórico y avisos vistos en Urbania; disponibilidad no verificada."
+                       if with_live else "Inventario histórico; disponibilidad no verificada."),
+            "live": live_stats,
         },
         "districts": unique_districts,
         "listings": items,
@@ -257,7 +325,7 @@ def main() -> int:
     input_paths = [clean_path, original_model_source]
     for candidate in [WEEK10 / "data/sources/listings_geocoded.csv",
                       WEEK10 / "data/sources/zone_index_distrito.csv",
-                      WEEK10 / "data/sources/duplicate_links_lookup.json"]:
+                      WEEK10 / "data/sources/duplicate_links_lookup.json", LIVE_PATH]:
         if candidate.exists(): input_paths.append(candidate)
     output_paths = [WEEK10 / "data/listings_clean.csv", *outputs,
                     WEEK10 / "models/valuation_model.joblib"]
