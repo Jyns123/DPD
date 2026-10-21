@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T22:54:39.753842+00:00",
+  "generatedAt": "2026-10-21T16:20:31.706568+00:00",
   "inputs": [
     {
       "path": "data/listings_clean.csv",
@@ -23,7 +23,7 @@
     },
     {
       "path": "data/urbania/urbania_actual.csv",
-      "sha256": "38ded9dab8bdaf64ee55ffb8d7f500dff81890da4d87934f6bf71c4a60d0408f"
+      "sha256": "0687250900e99a0dfb48d115dddd4e96f88ce60735383297155d855332886be5"
     }
   ],
   "outputs": [
@@ -34,8 +34,8 @@
     },
     {
       "path": "data/catalog.json",
-      "sha256": "9e1bc9cfae68fe49c1c465de032b8b60b1be2a146ba000ec58e48c10164e9689",
-      "bytes": 3897723
+      "sha256": "26365b4921a82c2731bf034599f8ca1b470c593824f2a3ad9f81745d71d786d8",
+      "bytes": 4163571
     },
     {
       "path": "data/demo_profiles.json",
@@ -139,7 +139,7 @@
     }
   ],
   "counts": {
-    "listings": 5713,
+    "listings": 6035,
     "districts": 20,
     "preciseLocations": 133
   },

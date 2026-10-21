@@ -1,11 +1,11 @@
 {
   "status": "passed",
-  "listings": 5713,
+  "listings": 6035,
   "districts": 20,
   "geocoded_street_or_building": 133,
-  "unknown_maintenance": 3826,
+  "unknown_maintenance": 4148,
   "possible_duplicate_rows": 24,
   "model_prediction_rows_checked": 88,
-  "live_listings": 2282,
-  "live_new_listings": 1817
+  "live_listings": 2663,
+  "live_new_listings": 2139
 }
