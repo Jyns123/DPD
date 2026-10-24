@@ -23,6 +23,7 @@ presentation/.build/*.ndjson
 presentation/.build/*.json
 /.npm-cache/
 # Urbania capture: the database and CSV are versioned; its lock and HTML evidence are not.
+# NOTE: Urbania scraper is currently disabled due to Cloudflare 403 responses.
 !data/urbania/urbania.sqlite
 data/urbania/*.lock
 /captures/
