@@ -2,7 +2,7 @@
 
 **DS3022 · Desarrollo de Producto de Datos · UTEC · 2026-2**  
 **Hito:** prototipo funcional, 14 de octubre de 2026  
-**Corte de implementación y verificación:** 19 de octubre de 2026  
+**Corte de implementación y verificación:** 24 de octubre de 2026  
 **Piloto:** vivienda propia en Lima Metropolitana.
 
 ## 1. Propósito y alcance
@@ -11,7 +11,7 @@ InmoScore ayuda a comparar viviendas según la situación financiera y las prior
 
 Esta entrega transforma el prototipo HTML de Week 7 en una aplicación Next.js con interfaz adaptable, API y persistencia por cuenta. El recorrido principal es **landing → registro e inicio de sesión → perfil → recomendaciones → detalle → guardados y comparación**. Cada comprador crea una cuenta con correo y contraseña.
 
-El catálogo conserva **3 896 avisos reales históricos**, provenientes del dataset público de Urbania usado en el proyecto. No se presenta como inventario actualmente disponible. Las fotografías son referenciales y están identificadas como tales. No se realizan contactos, reservas ni aprobaciones hipotecarias.
+El catálogo conserva **3 896 avisos históricos**, provenientes del dataset público de Urbania usado en el proyecto. No se presenta como inventario actualmente disponible. Esta versión usa una ilustración genérica cuando faltan fotografías; no representa la vivienda anunciada. No se realizan contactos, reservas ni aprobaciones hipotecarias.
 
 ## 2. Funcionalidades implementadas
 
@@ -25,8 +25,8 @@ El catálogo conserva **3 896 avisos reales históricos**, provenientes del data
 | Capacidad de compra | Tope por ingreso, ahorro y presupuesto bajo supuestos hipotecarios explícitos | `affordableCap()` |
 | Detalle | Precio publicado frente a referencia, atributos, indicadores, precisión geográfica y datos faltantes | `/inmueble/{id}`, `screenshots/05-detail.jpg` |
 | Guardados | Favoritos persistidos en SQLite por cuenta y recuperados después de recargar | `/guardados`, `/api/favorites` |
-| Comparación | Tabla de hasta tres viviendas con precios, atributos, mantenimiento e indicadores | `screenshots/08-compare.jpg` |
-| Mapa | Límites distritales locales, selección de un aviso, punto geocodificado y zoom; enlace opcional a mapa externo | `public/districts.geojson`, `screenshots/09-map.jpg` |
+| Comparación | Tabla de hasta tres viviendas con precios, atributos, mantenimiento e indicadores | Función de comparación en la aplicación |
+| Ubicación | Punto aproximado y enlace a OpenStreetMap cuando un aviso tiene coordenadas; sin mapa distrital local en esta versión | Función de ubicación en la aplicación |
 | Vista móvil | Navegación compacta, filtros desplegables y tarjetas en una columna | `screenshots/07-mobile.jpg` |
 | Estados de interfaz | Carga, errores de validación, búsqueda sin coincidencias, ausencia de coordenadas y cuenta anónima | UI, pruebas unitarias y de API |
 
@@ -71,7 +71,7 @@ flowchart TD
   E --> DB[(db/sqlite.ts: SQLite local)]
   E -. futuro, no implementado .-> F[(RDS PostgreSQL o MySQL)]
   R --> U
-  G[GeoJSON local y coordenadas validadas] --> U
+  G[Coordenadas validadas y enlace a mapa externo] --> U
 ```
 
 **Interfaz.** Next.js estándar con React, CSS propio y Lucide, ejecutado sobre Node.js. Se conserva el nombre InmoScore y se incorpora una dirección visual de tonos claros, verde oscuro y acentos naturales. La tipografía usa `rem`, con base entre 18 y 22 px y mínimo de 14,6 px. La navegación distingue explorar, perfil, guardados y cuenta. Los requisitos mínimos se separan de las prioridades relativas. Se usan controles nativos, foco visible, diálogo de comparación con manejo de foco y Escape, y soporte para movimiento reducido.
@@ -82,7 +82,7 @@ flowchart TD
 
 **Modelo por lotes.** El servidor Next.js recibe precios de referencia ya calculados. Esto permite conservar la integración analítica con scikit-learn y ejecutar una aplicación local ligera. La aplicación no reentrena ni vuelve a seleccionar el modelo con solicitudes de compradores.
 
-**Mapa.** Se reemplazó una primera integración de mapa externo embebido que no resultó verificable en el navegador por una representación SVG local de límites distritales reales. Se usan únicamente coordenadas disponibles; no se ubican avisos en centros distritales por defecto. El mapa no incluye calles y no se presenta como dirección exacta o cartografía catastral.
+**Ubicación.** Se usan únicamente las coordenadas disponibles; no se colocan avisos en el centro del distrito por defecto. Cuando hay coordenadas, la ficha ofrece un enlace a OpenStreetMap y advierte que el punto es aproximado. Esta versión no contiene el GeoJSON necesario para un mapa distrital local.
 
 ## 5. Componente analítico y personalización
 
@@ -138,7 +138,7 @@ La verificación del ranking no reemplaza una evaluación de usabilidad con comp
 | `screenshots/06-saved.jpg` | Favoritos persistidos |
 | `screenshots/07-mobile.jpg` | Ranking móvil |
 | `screenshots/08-compare.jpg` | Comparación de dos viviendas |
-| `screenshots/09-map.jpg` | Mapa local de límites distritales |
+| `screenshots/09-map.jpg` | Vista de ubicaciones disponibles |
 | `screenshots/10-register.jpg` | Registro propio con confirmación de contraseña |
 | `screenshots/11-account.jpg` | Cuenta y cierre de sesión propios |
 

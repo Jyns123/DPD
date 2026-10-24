@@ -1,9 +1,9 @@
 # Week 10 — Prototipo funcional de InmoScore
 
 **Curso:** DS3022 · Desarrollo de Producto de Datos · UTEC · 2026-2  
-**Hito del curso:** 14 de octubre de 2026 · **Actualización de esta implementación:** 20 de octubre de 2026.
+**Hito del curso:** 14 de octubre de 2026 · **Actualización de esta implementación:** 24 de octubre de 2026.
 
-Prototipo integrado para compradores de vivienda propia en Lima: landing, registro e inicio de sesión con correo y contraseña, perfil, ranking personalizado, detalle, mapa, favoritos, comparación y administración de cuenta. Funciona con **3 896 avisos históricos reales**, más los avisos vistos por la captura propia de Urbania (`urbania/`), y con valoraciones de un modelo Gradient Boosting serializado. La disponibilidad actual de los anuncios no está verificada.
+Prototipo integrado para compradores de vivienda propia en Lima: landing, registro e inicio de sesión con correo y contraseña, perfil, ranking personalizado, detalle, ubicación, favoritos, comparación y administración de cuenta. Funciona con **3 896 avisos históricos reales** y valoraciones de un modelo Gradient Boosting serializado. La disponibilidad actual de los anuncios no está verificada. Esta versión usa ilustraciones locales en lugar de fotos reales de los inmuebles y no incluye un mapa distrital local; cuando hay coordenadas, ofrece un enlace a OpenStreetMap.
 
 **Empezar por:** `PrototypeReport.md`, la aplicación local y `PresentationWeek10.pptx`. El reporte se entrega únicamente en Markdown.
 
@@ -13,7 +13,6 @@ Prototipo integrado para compradores de vivienda propia en Lima: landing, regist
 |---|---|
 | Código completo del prototipo | `app/`, `components/`, `lib/`, `db/`, configuración y lockfile |
 | Datos procesados CSV/JSON | `data/listings_clean.csv`, `data/catalog.json`, `data/demo_profiles.json`, `data/manifest.json` |
-| Captura de Urbania y refresco diario | `urbania/`, `data/urbania/`, `.github/workflows/urbania-refresh.yml` |
 | Modelo y evidencia analítica | `models/valuation_model.joblib`, `models/source_model.joblib`, `models/evaluation/` |
 | Reporte | `PrototypeReport.md` |
 | Presentación editable | `PresentationWeek10.pptx` |
@@ -48,7 +47,7 @@ Opcionalmente, copiar `.env.example` a `.env.local` para configurar `SQLITE_PATH
 - `/ingresar`: inicio de sesión con correo y contraseña.
 - `/registro`: creación de una cuenta y perfil con consentimiento de guardado.
 - `/perfil`: edición de presupuesto, requisitos y pesos.
-- `/explorar`: ranking, filtros, orden por precio, paginación y mapa.
+- `/explorar`: ranking, filtros, orden por precio, paginación y vista de ubicaciones disponibles.
 - `/inmueble/{id}`: atributos, referencia del modelo, indicadores y datos faltantes.
 - `/guardados`: favoritos persistidos por cuenta.
 - `/cuenta`: perfil, cierre de sesión y eliminación de la cuenta.
@@ -58,9 +57,7 @@ InmoScore administra sus propias cuentas. Guarda las contraseñas con scrypt, sa
 ## Arquitectura y datos
 
 ```text
-Urbania → urbania/update.py (GitHub Actions, diario) → data/urbania/urbania_actual.csv
-                ↓
-CSV limpio + avisos recientes + contexto distrital + geocodificación + modelo serializado
+CSV limpio + contexto distrital + geocodificación + modelo serializado
                 ↓ analytics/prepare_data.py
        catalog.json con valoraciones precalculadas
                 ↓
@@ -75,7 +72,7 @@ El modelo predice el **logaritmo del precio de oferta**; el pipeline offline apl
 
 La persistencia se separa mediante el contrato asíncrono de `db/repository.ts`; `db/sqlite.ts` implementa ese contrato en SQLite. Una futura conexión a RDS para PostgreSQL o MySQL requerirá otro adaptador y sus propias migraciones. Esa implementación no forma parte de esta entrega.
 
-El mapa incluido usa un GeoJSON local con límites distritales y **133 puntos geocodificados** con precisión de calle o edificio. No depende de un servicio de mapas externo para representar los puntos, no muestra calles y declara la precisión. El enlace opcional a OpenStreetMap permite consultar el mapa externo.
+Hay **133 avisos con coordenadas validadas** a nivel de calle o edificio. La interfaz indica cuando no dispone del GeoJSON distrital y ofrece coordenadas y un enlace a OpenStreetMap para los avisos ubicados. La entrega no incluye el GeoJSON local ni permite calcular distancias precisas a servicios por inmueble.
 
 Para regenerar el catálogo desde los insumos contenidos en esta carpeta, Python 3.12 es la versión recomendada:
 
@@ -89,15 +86,7 @@ No se necesitan otras carpetas del repositorio. El artefacto fuente confiable es
 
 El generador no descarga anuncios, no actualiza su disponibilidad y no vuelve a ejecutar la selección del modelo. La fecha del archivo fuente no equivale a la fecha de publicación de cada anuncio.
 
-### Avisos recientes de Urbania
-
-`urbania/` captura las cards de los listados públicos de Urbania: precio, área total, dormitorios, baños, dirección, ubicación y enlace. Respeta `robots.txt`, espera 10 s entre solicitudes y se detiene ante 403/429 sin intentar evadirlos. Guarda su historial en `data/urbania/urbania.sqlite` y exporta `data/urbania/urbania_actual.csv`.
-
-`prepare_data.py` incorpora al catálogo los departamentos activos con precio en soles, área, dormitorios y baños. Un ID que ya existía en el histórico toma los datos de la card más reciente; uno nuevo se valora con el mismo modelo. Estos avisos llevan `source: "urbania_fase1"` y `observedAt`, la fecha en que se vieron. La ficha lo indica y la portada cuenta los avisos del catálogo. Las reglas completas están en `urbania/README.md`.
-
-El workflow `.github/workflows/urbania-refresh.yml` repite cada día a las 06:30 de Lima la captura, la regeneración y la validación del catálogo, y sube los datos a `main`. También puede lanzarse a mano desde la pestaña Actions. Localmente, con `urbania/requirements.txt` instalado en `.venv`, `npm run data:refresh` hace lo mismo sin el commit. Tras actualizar `catalog.json`, la versión de producción debe recompilarse con `npm run build`.
-
-**Estado al 20-10-2026:** desde la máquina de desarrollo, Urbania respondió 403 con desafío de Cloudflare a las peticiones HTTP automáticas; se espera lo mismo desde los servidores de GitHub. Mientras dure, cada ejecución termina en rojo en el paso de captura y el catálogo conserva los datos anteriores. Por ahora, la base contiene la muestra observada en navegador ese día: 3 avisos cumplen las condiciones, 2 ya figuraban en el histórico y 1 es nuevo.
+**Nota sobre Urbania:** El módulo `urbania/` para captura de avisos en tiempo real está incluido pero actualmente desactivado debido a respuestas 403 con desafío de Cloudflare. La carpeta `data/urbania/` contiene una muestra histórica capturada manualmente, pero el scraper automático no está operativo en esta versión.
 
 ## API
 
@@ -129,7 +118,7 @@ npm run test:api
 
 La suite pasa **18 pruebas unitarias**: 9 de ranking, 4 de contraseñas/tokens y 5 de SQLite, persistencia, caducidad y aislamiento. Las **33 comprobaciones de API** validan registro, credenciales, cookies, rotación/revocación de sesión, origen, perfil, favoritos, ranking y eliminación de una cuenta sin afectar otra. Solo se ejecutan en loopback: crean y eliminan cuentas sintéticas propias, sin tocar las cuentas existentes. También se ejecutaron sobre el build servido con `npm start`. Evidencia en `tests/results/api-smoke.json`.
 
-La captura de Urbania tiene 50 pruebas propias, sin red (`cd urbania && python -m unittest discover -s tests`). `analytics/validate_data.py` comprueba el catálogo con los avisos recientes incluidos y deja su resultado en `tests/results/data-validation.json`.
+`analytics/validate_data.py` comprueba el catálogo y deja su resultado en `tests/results/data-validation.json`.
 
 En navegador se comprobó el flujo de registro, perfil, favoritos, cierre y nuevo inicio de sesión. El ranking se revisó en anchos de 320, 390, 768, 1440, 2560 y 3840 px sin desbordamiento horizontal; la raíz tipográfica crece de 18 a 22 px. Evidencia en `tests/results/responsive.json` y capturas renovadas en `screenshots/`.
 
@@ -138,9 +127,8 @@ Para RDS faltan el adaptador específico, migraciones del motor elegido, importa
 ## Fuentes y límites de uso
 
 - Avisos: dataset público `MathiuCz/lima-real-estate-price-predictor`, recopilado originalmente de Urbania; licencia del repositorio MIT, contenido sujeto a los términos del portal. Se mantiene como demostración académica privada; no se afirma licencia para republicación comercial.
-- Avisos recientes: captura propia de los listados públicos de Urbania (`urbania/`), con atribución y enlace a cada anuncio; mismo uso académico y mismos términos del portal.
 - Indicadores: SIDPOL/MININTER, OpenStreetMap, BCRP, INEI y Fondo MIVIVIENDA, según trazabilidad del proyecto y `data/manifest.json`.
-- Límites distritales: GeoJSON público derivado de `juaneladio/peru-geojson`, incluido como muestra del proyecto; no es cartografía catastral.
-- Fotografías de la interfaz: Unsplash, imágenes referenciales sin vínculo con los avisos. URLs de origen en `public/ASSETS.md`.
+- Límites distritales: la versión anterior referenciaba un GeoJSON derivado de `juaneladio/peru-geojson`. Ese archivo no está en esta entrega; no se muestra como cartografía local.
+- Imágenes de la interfaz: ilustración local que no representa los avisos. Los archivos fotográficos originales no están en esta entrega.
 
 Los avisos retirados conocidos se excluyen del ranking; los demás conservan disponibilidad no verificada. No se usan fotos de los inmuebles, no se confirma su estado físico y no se efectúan contactos ni reservas. El modelo sigue sujeto al sesgo del filtro histórico de 91 filas, a la antigüedad del inventario y a la falta de validación temporal.
