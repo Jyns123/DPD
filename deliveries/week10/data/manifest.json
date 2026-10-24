@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T16:15:28.498291+00:00",
+  "generatedAt": "2026-10-24T15:02:49.668220+00:00",
   "inputs": [
     {
       "path": "data/listings_clean.csv",
@@ -23,7 +23,7 @@
     },
     {
       "path": "data/urbania/urbania_actual.csv",
-      "sha256": "001eb69e1c0c238f331679c6ae4653ef461af4dbbc7cd35e20211ff8a572122d"
+      "sha256": "a539d8ad9cb41661e1b456583f2856268ad9e7c028926315cf535a6a55caf80e"
     }
   ],
   "outputs": [
@@ -34,8 +34,8 @@
     },
     {
       "path": "data/catalog.json",
-      "sha256": "b5375196f506b1c48ac97d6d27cc8f0678306b8890cd93a1c357501c7e67f136",
-      "bytes": 4289852
+      "sha256": "d3e1b544b31fe9acb50cc888af1940756d9d5348f49f13d4baac327f8c7f1775",
+      "bytes": 4406201
     },
     {
       "path": "data/demo_profiles.json",
@@ -53,19 +53,9 @@
       "bytes": 7598
     },
     {
-      "path": "models/evaluation/evaluation_report.md",
-      "sha256": "ee1285e4257960ce6d2a47e0e0f13a1d494c0175345fcc0beed2dafe733dae9d",
-      "bytes": 2299
-    },
-    {
-      "path": "models/evaluation/split_assignments.csv",
-      "sha256": "0c46365d7db3fd000bdbae828d6192b192444ceccb0f0214ba4406865415d323",
-      "bytes": 190766
-    },
-    {
-      "path": "models/evaluation/final_training_iqr_thresholds.csv",
-      "sha256": "b5f63f847dead6b1a452f6be39cb83c1b7aa6063c9f31ccc0fb3de9f5b0b271d",
-      "bytes": 1253
+      "path": "models/evaluation/cv_model_comparison.csv",
+      "sha256": "139342dc00780524c1376602d617d444838bcb66bef88ce40a5acd5ade927a4b",
+      "bytes": 858
     },
     {
       "path": "models/evaluation/final_training_summary.json",
@@ -73,34 +63,14 @@
       "bytes": 115
     },
     {
-      "path": "models/evaluation/final_test_opened.json",
-      "sha256": "57c984e404968ac7e24f462417a436cdc9986930358f3f9dae79f43f270cbe92",
-      "bytes": 265
-    },
-    {
-      "path": "models/evaluation/cv_fold_metrics.csv",
-      "sha256": "2ac59f386e90d00ac1a577a174c9bf8b673d295c5554bbdb0237f3f4beb84faf",
-      "bytes": 2447
-    },
-    {
-      "path": "models/evaluation/final_metrics.csv",
-      "sha256": "d9cba78de1f1d94119c4d681a20286ce66efe7c72774ecbb945973458c2ebfb9",
-      "bytes": 336
-    },
-    {
       "path": "models/evaluation/protocol.json",
       "sha256": "7a2c57e4d71c27a7092ad11664b4e8997b8251c78102e6b2cf9f97e1c67afd8c",
       "bytes": 1666
     },
     {
-      "path": "models/evaluation/cv_model_comparison.csv",
-      "sha256": "139342dc00780524c1376602d617d444838bcb66bef88ce40a5acd5ade927a4b",
-      "bytes": 858
-    },
-    {
-      "path": "models/evaluation/cv_segments.csv",
-      "sha256": "2850d2153eb5a8ab4b2d20d53de7422b38a5b437f311c2f00ec9d509e875c8a3",
-      "bytes": 15861
+      "path": "models/evaluation/split_assignments.csv",
+      "sha256": "0c46365d7db3fd000bdbae828d6192b192444ceccb0f0214ba4406865415d323",
+      "bytes": 190766
     },
     {
       "path": "models/evaluation/selection.json",
@@ -108,14 +78,54 @@
       "bytes": 266
     },
     {
-      "path": "models/evaluation/filter_audit.csv",
-      "sha256": "05ad20574051fa63cae7c8dcd73e02e531b0f0d0dd7aafaa566e781079848b5c",
-      "bytes": 288
+      "path": "models/evaluation/final_metrics.csv",
+      "sha256": "d9cba78de1f1d94119c4d681a20286ce66efe7c72774ecbb945973458c2ebfb9",
+      "bytes": 336
     },
     {
       "path": "models/evaluation/final_segments.csv",
       "sha256": "139bd7ec606f0727bbb535091bfcf0e8443e83869218bc847983686ca7ed9c7b",
       "bytes": 7787
+    },
+    {
+      "path": "models/evaluation/cv_fold_metrics.csv",
+      "sha256": "2ac59f386e90d00ac1a577a174c9bf8b673d295c5554bbdb0237f3f4beb84faf",
+      "bytes": 2447
+    },
+    {
+      "path": "models/evaluation/evaluation_report.md",
+      "sha256": "ee1285e4257960ce6d2a47e0e0f13a1d494c0175345fcc0beed2dafe733dae9d",
+      "bytes": 2299
+    },
+    {
+      "path": "models/evaluation/filter_audit.csv",
+      "sha256": "05ad20574051fa63cae7c8dcd73e02e531b0f0d0dd7aafaa566e781079848b5c",
+      "bytes": 288
+    },
+    {
+      "path": "models/evaluation/final_training_iqr_thresholds.csv",
+      "sha256": "b5f63f847dead6b1a452f6be39cb83c1b7aa6063c9f31ccc0fb3de9f5b0b271d",
+      "bytes": 1253
+    },
+    {
+      "path": "models/evaluation/cv_segments.csv",
+      "sha256": "2850d2153eb5a8ab4b2d20d53de7422b38a5b437f311c2f00ec9d509e875c8a3",
+      "bytes": 15861
+    },
+    {
+      "path": "models/evaluation/final_test_opened.json",
+      "sha256": "57c984e404968ac7e24f462417a436cdc9986930358f3f9dae79f43f270cbe92",
+      "bytes": 265
+    },
+    {
+      "path": "analytics/reference_evaluation/models.py",
+      "sha256": "c49fa4bba00a7e0269ab4bf893fbce540d237fec82498b65fc6ca6c42a7c0e65",
+      "bytes": 9312
+    },
+    {
+      "path": "analytics/reference_evaluation/protocol.py",
+      "sha256": "68f56bff0cde8fa5b11985bf080e8822bb488b53eef95c5a214fe251a5ecf90e",
+      "bytes": 9609
     },
     {
       "path": "analytics/reference_evaluation/requirements.txt",
@@ -126,20 +136,10 @@
       "path": "analytics/reference_evaluation/run_evaluation.py",
       "sha256": "7f47017256d27cf84d42066fb8a58476bd4f0a4d204eacb8bf3f3a625712f41c",
       "bytes": 15683
-    },
-    {
-      "path": "analytics/reference_evaluation/protocol.py",
-      "sha256": "68f56bff0cde8fa5b11985bf080e8822bb488b53eef95c5a214fe251a5ecf90e",
-      "bytes": 9609
-    },
-    {
-      "path": "analytics/reference_evaluation/models.py",
-      "sha256": "c49fa4bba00a7e0269ab4bf893fbce540d237fec82498b65fc6ca6c42a7c0e65",
-      "bytes": 9312
     }
   ],
   "counts": {
-    "listings": 6189,
+    "listings": 6332,
     "districts": 20,
     "preciseLocations": 133
   },
