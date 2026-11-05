@@ -7,6 +7,14 @@ type Me = { user: { id: string; name: string; email: string } | null; profile: B
 type Ranking = { listings: RankedListing[]; total: number; cap: number; warnings: string[] };
 const DEFAULT: BuyerProfile = { name: "", income: 15000, savings: 150000, budget: 700000, minRooms: 2, minArea: 55, districts: [], weights: { price: .35, safety: .35, convenience: .30 } };
 const MARIA: BuyerProfile = { ...DEFAULT, name: "María", minRooms: 3, minArea: 60, weights: { price: .20, safety: .45, convenience: .35 } };
+const PREDEFINED_PROFILES: Record<string, BuyerProfile> = {
+  "Familia Joven": { ...DEFAULT, name: "Familia Joven", income: 12000, savings: 80000, budget: 500000, minRooms: 2, minArea: 55, districts: [], weights: { price: .40, safety: .30, convenience: .30 } },
+  "Inversionista": { ...DEFAULT, name: "Inversionista", income: 20000, savings: 300000, budget: 1000000, minRooms: 1, minArea: 40, districts: [], weights: { price: .60, safety: .20, convenience: .20 } },
+  "Premium": { ...DEFAULT, name: "Premium", income: 25000, savings: 500000, budget: 1500000, minRooms: 3, minArea: 80, districts: ["SAN ISIDRO", "MIRAFLORES", "SAN BORJA"], weights: { price: .25, safety: .50, convenience: .25 } },
+  "Estudiante": { ...DEFAULT, name: "Estudiante", income: 3500, savings: 30000, budget: 250000, minRooms: 1, minArea: 35, districts: [], weights: { price: .50, safety: .25, convenience: .25 } },
+};
+const loadSearchHistory = () => { try { const h = localStorage.getItem("searchHistory"); return h ? JSON.parse(h) : []; } catch { return []; } };
+const saveSearchHistory = (h: any[]) => localStorage.setItem("searchHistory", JSON.stringify(h.slice(0, 10)));
 const MONEY = new Intl.NumberFormat("es-PE", { maximumFractionDigits: 0 });
 const soles = (n: number) => `S/ ${MONEY.format(n)}`;
 const thousands = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
