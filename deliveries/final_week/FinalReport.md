@@ -100,9 +100,10 @@ InmoScore provides:
 
 | Attribute | Value |
 |-----------|-------|
-| Total listings | 3,896 |
+| Historical base listings | 3,896 |
+| Listings in final application catalog | 6,332 (historical base plus Urbania capture observed 2026-10-24) |
 | Districts | 20 districts in Lima |
-| Time period | Historical listings (no specific dates) |
+| Time period | Historical listings plus a dated capture; current availability is not verified |
 | Fields | 40 columns including price, area, rooms, bathrooms, location |
 
 ### 3.3 Additional Data Sources
@@ -357,7 +358,7 @@ Model (models/valuation_model.joblib)
 ### 10.1 Product Capabilities
 
 InmoScore successfully delivers:
-- **Personalized Rankings**: 3,896 listings can be ranked by individual preferences
+- **Personalized Rankings**: 6,332 catalog listings can be ranked by individual preferences
 - **Price References**: Model estimates provide objective market benchmarks
 - **Affordability Calculations**: Users understand their purchasing power
 - **Comparison Tools**: Side-by-side comparison of up to 3 properties
@@ -447,7 +448,7 @@ The product flow enables users to:
 ### 12.1 Data Limitations
 
 - **Historical Listings**: No verification of current availability
-- **Limited Geocoding**: Only 133/3,896 listings have precise coordinates
+- **Limited Geocoding**: Only 133/6,332 catalog listings have precise coordinates
 - **Maintenance Data**: 2,009 listings lack maintenance fee information
 - **Temporal Validation**: Cannot assess price trends or market changes
 - **Selection Bias**: 91 listings excluded by IQR filtering

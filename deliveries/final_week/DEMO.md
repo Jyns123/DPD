@@ -22,7 +22,7 @@ Abran `http://127.0.0.1:5173`. La aplicación crea su base SQLite local al inici
 
 ## Guion de demostración
 
-1. **Presenten el problema.** InmoScore es un sistema de recomendación que ordena avisos de vivienda según un perfil. El catálogo reúne 3 896 avisos históricos de 20 distritos; no confirma que sigan disponibles. La imagen de vivienda es ilustrativa, no una foto del aviso.
+1. **Presenten el problema.** InmoScore es un sistema de recomendación que ordena avisos de vivienda según un perfil. El catálogo reúne 6 332 avisos en 20 distritos: 3 896 registros históricos y una captura de Urbania observada el 24/10/2026. La captura no confirma disponibilidad actual. La imagen de vivienda es ilustrativa, no una foto del aviso.
 2. **Muestren a María.** Entren con la cuenta de prueba, abran `Mi perfil` y pulsen `Usar perfil de ejemplo: María`. Vayan al ranking y anoten el primer aviso. Si mencionan el tope de compra, aclaren que es una simulación, no una precalificación bancaria.
 3. **Cambien una prioridad.** Modifiquen solo una, por ejemplo precio o seguridad. Miren el primer aviso de nuevo, tomen una captura del ranking y digan en una frase si el orden cambió o no. Peguen la captura en una diapositiva de su presentación.
 4. **Cierren con el límite real.** Las métricas vienen de avisos históricos. La aplicación no verifica disponibilidad actual ni precio final de compraventa. Si el jurado pregunta por ubicación, una ficha con coordenadas ofrece un enlace a OpenStreetMap; el punto es aproximado y esta versión no incluye un mapa distrital local.

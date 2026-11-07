@@ -15,14 +15,15 @@ import pandas as pd
 import sklearn
 from threadpoolctl import threadpool_limits
 
-ROOT = Path(__file__).resolve().parents[3]
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
-from deliveries.evaluation.code.models import MODEL_NAMES, create_model, metrics
-from deliveries.evaluation.code.protocol import DistrictIQR, make_partitions
+ROOT = Path(__file__).resolve().parents[2]
+EVALUATION_DIR = Path(__file__).resolve().parent
+if str(EVALUATION_DIR) not in sys.path:
+    sys.path.insert(0, str(EVALUATION_DIR))
+from models import MODEL_NAMES, create_model, metrics
+from protocol import DistrictIQR, make_partitions
 
-DEFAULT_INPUT = ROOT / "deliveries/data_quality/data/processed/listings_clean.csv"
-DEFAULT_OUTPUT = ROOT / "deliveries/evaluation/results"
+DEFAULT_INPUT = ROOT / "data/listings_clean.csv"
+DEFAULT_OUTPUT = ROOT / "models/reproduced_evaluation"
 BASELINE = "A_mediana_distrital"
 PRICE_EDGES = [0, 300000, 600000, 1000000, 2000000, np.inf]
 PRICE_LABELS = ["<300k", "300k–<600k", "600k–<1M", "1M–<2M", ">=2M"]

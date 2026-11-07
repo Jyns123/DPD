@@ -7,7 +7,7 @@
 
 ## Novedades en Week 14
 
-Esta versión refinada incluye mejoras significativas respecto a Week 10:
+En esta versión refinada completamos los siguientes avances:
 
 - **Producto refinado**: Mejoras en funcionalidad, usabilidad y confiabilidad.
 - **Evaluación completa**: Métricas y estudios de caso documentados en este reporte.
@@ -22,7 +22,7 @@ InmoScore ayuda a comparar viviendas según la situación financiera y las prior
 
 Esta entrega transforma el prototipo HTML de Week 7 en una aplicación Next.js con interfaz adaptable, API y persistencia por cuenta. El recorrido principal es **landing → registro e inicio de sesión → perfil → recomendaciones → detalle → guardados y comparación**. Cada comprador crea una cuenta con correo y contraseña.
 
-El catálogo conserva **3 896 avisos históricos**, provenientes del dataset público de Urbania usado en el proyecto. No se presenta como inventario actualmente disponible. Esta versión usa una ilustración genérica cuando faltan fotografías; no representa la vivienda anunciada. No se realizan contactos, reservas ni aprobaciones hipotecarias.
+La evaluación del modelo usa **3 896 avisos históricos** del dataset público de Urbania. El catálogo final que consume la aplicación tiene **6 332 avisos**: los 3 896 registros históricos más avisos de una captura de Urbania observada el 24/10/2026 (3 002 observados, 566 coincidentes con registros existentes). La captura no confirma disponibilidad actual. Esta versión usa una ilustración genérica cuando faltan fotografías; no representa la vivienda anunciada. No se realizan contactos, reservas ni aprobaciones hipotecarias.
 
 ## 2. Funcionalidades implementadas
 
@@ -65,7 +65,7 @@ Los 2 006 mantenimientos originalmente codificados como cero conservan su valor 
 
 Los 24 avisos de 12 grupos de posibles duplicados se conservaron con un identificador de grupo. No se asume que coincidencia de dirección, precio y área pruebe identidad de la vivienda. En esta iteración, los anuncios que constaban como retirados en la revisión de enlaces se excluyen del ranking; todos los demás mantienen disponibilidad no verificada.
 
-El catálogo histórico original tenía 3 987 avisos. El procesamiento previo descartó 91 por IQR distrital de precio por m². No se recuperaron esas filas en Week 10. La fecha de modificación del archivo fuente no demuestra la fecha de publicación de cada anuncio.
+El catálogo histórico original tenía 3 987 avisos. El procesamiento previo descartó 91 por IQR distrital de precio por m²; esas filas no se recuperaron en el conjunto histórico usado para esta evaluación. La fecha de modificación del archivo fuente no demuestra la fecha de publicación de cada anuncio.
 
 ## 4. Arquitectura y decisiones técnicas
 
@@ -125,7 +125,7 @@ El orden por afinidad admite hasta tres avisos por distrito para diversificar la
 | Verificación | Resultado |
 |---|---|
 | Modelos y ranking | 9 pruebas unitarias existentes: filtros, paginación, diversidad, pesos inválidos, coordenadas, TEA y retiros conocidos |
-| Datos y modelo | Catálogo con 3 896 avisos y 20 distritos; 133 ubicaciones válidas. Las 100 referencias comprobadas del JSON coinciden con el pipeline serializado |
+| Datos y modelo | Catálogo con 6 332 avisos y 20 distritos; evaluación histórica sobre 3 896 avisos y 133 ubicaciones precisas en el catálogo. Las 100 referencias comprobadas del JSON coinciden con el pipeline serializado |
 | Compilación y tipos | Build de Next.js y TypeScript sin errores |
 | Contraseñas y tokens | 4 pruebas: salt único, verificación correcta, Unicode, formato y límites |
 | SQLite y aislamiento | 5 pruebas: creación automática, reapertura, cuentas aisladas, caducidad/revocación, borrado en cascada y límites de intentos |
@@ -167,7 +167,7 @@ El guion reproducible está en `DEMO.md`; no se requiere un video para reproduci
 4. **Coordenadas incompletas.** Se recuperaron correctamente 133 puntos con precisión de calle/edificio. Los demás avisos conservan contexto distrital sin puntos ficticios.
 5. **Consistencia financiera.** Se corrigió el cálculo de tasa efectiva mensual y la combinación de crédito con ahorro. Los supuestos están visibles y no se confunden con una oferta bancaria.
 6. **Cuentas y persistencia.** La aplicación administra cuentas propias y guarda perfiles/favoritos en SQLite local. El contrato asíncrono del repositorio separa la interfaz de persistencia; un adaptador para RDS y sus migraciones quedan como trabajo futuro.
-7. **Alcance de archivos.** La implementación nueva, los entornos de trabajo y los artefactos de entrega se concentran en `deliveries/week10/`. El generador entregado utiliza copias locales de los insumos y no requiere modificar las semanas previas.
+7. **Alcance de archivos.** El código, los datos, los entornos y los artefactos de esta entrega se reúnen en una sola carpeta del proyecto. El generador utiliza copias locales de los insumos y no requiere acceder a otras carpetas del repositorio.
 
 ## 9. Publicación y trabajo restante
 

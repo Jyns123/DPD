@@ -87,7 +87,8 @@ Traditional property search is overwhelming and opaque. InmoScore provides:
 
 ### Primary Dataset
 - **Source:** Urbania Lima Real Estate Dataset (GitHub: `MathiuCz/lima-real-estate-price-predictor`)
-- **Size:** 3,896 listings across 20 districts
+- **Base historical dataset:** 3,896 listings across 20 districts
+- **Catalog used by the app:** 6,332 listings, including the 3,896 historical records and an Urbania capture observed on 2026-10-24 (3,002 captured listings; 566 overlap with existing records)
 - **License:** MIT (repository); content subject to Urbania terms
 - **Usage:** Academic demonstration only
 
@@ -97,8 +98,8 @@ Traditional property search is overwhelming and opaque. InmoScore provides:
 - OpenStreetMap: Geocoding (133 listings with precise coordinates)
 
 ### Data Limitations
-- Historical listings with no availability verification
-- Limited geocoding coverage (133/3,896 listings)
+- The catalog combines historical listings and a dated capture; current availability is not verified
+- Limited geocoding coverage (133/6,332 catalog listings)
 - 2,009 listings missing maintenance fee data
 - No temporal validation (cannot assess price trends)
 
