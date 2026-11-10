@@ -1,0 +1,17 @@
+test_district_conflict_keeps_entire_historical_record (test_data_pipeline.CaptureIntegrationTests.test_district_conflict_keeps_entire_historical_record) ... ok
+test_reject_duplicate_capture_id (test_data_pipeline.CaptureIntegrationTests.test_reject_duplicate_capture_id) ... ok
+test_reject_missing_historical_id (test_data_pipeline.CaptureIntegrationTests.test_reject_missing_historical_id) ... ok
+test_reject_rental_infinite_and_fractional_rooms (test_data_pipeline.CaptureIntegrationTests.test_reject_rental_infinite_and_fractional_rooms) ... ok
+test_update_preserves_unobserved_fields (test_data_pipeline.CaptureIntegrationTests.test_update_preserves_unobserved_fields) ... ok
+test_current_catalog_and_evidence (test_data_pipeline.CatalogValidationTests.test_current_catalog_and_evidence) ... ok
+test_reject_changed_detailed_metric (test_data_pipeline.CatalogValidationTests.test_reject_changed_detailed_metric) ... ok
+test_reject_duplicate_catalog_id (test_data_pipeline.CatalogValidationTests.test_reject_duplicate_catalog_id) ... ok
+test_reject_invalid_prediction (test_data_pipeline.CatalogValidationTests.test_reject_invalid_prediction) ... ok
+test_reject_stale_count (test_data_pipeline.CatalogValidationTests.test_reject_stale_count) ... ok
+test_reject_unflagged_area_outside_observed_range (test_data_pipeline.CatalogValidationTests.test_reject_unflagged_area_outside_observed_range) ... ok
+test_reject_unflagged_district_conflict (test_data_pipeline.CatalogValidationTests.test_reject_unflagged_district_conflict) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.441s
+
+OK

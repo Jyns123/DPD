@@ -1,0 +1,62 @@
+{
+  "scope": "diagnostic_new_capture_ids",
+  "model_changed": false,
+  "target": "advertised_price_soles",
+  "capture_observed_through": "2026-10-24",
+  "capture_rows_used": 3000,
+  "historical_ids_excluded": 564,
+  "capture_valid_rows": 3002,
+  "capture_district_conflicts": 2,
+  "new_ids": 2436,
+  "metrics_all_new_ids": {
+    "n": 2436,
+    "mae_soles": 1097833.1517841178,
+    "mdape": 0.15254919540291847,
+    "pct_within_10": 0.33497536945812806
+  },
+  "metrics_within_historical_area_range": {
+    "n": 2419,
+    "mae_soles": 1064630.2318836432,
+    "mdape": 0.1510709111367654,
+    "pct_within_10": 0.33732947498966515
+  },
+  "area_range": {
+    "min": 21.0,
+    "max": 827.0,
+    "source": "data/listings_clean.csv",
+    "meaning": "rango observado, no regla universal del mercado"
+  },
+  "new_ids_outside_area_range": 17,
+  "catalog_ids_outside_area_range": 17,
+  "missing_features": {
+    "area_m2": 0,
+    "rooms": 0,
+    "bathrooms": 0,
+    "parking": 2436,
+    "maintenance_fee": 2436,
+    "crime_index_zone": 0,
+    "urban_convenience_index": 0,
+    "zone_composite_index": 0,
+    "idh_2019": 0,
+    "pct_pobreza_total": 0,
+    "proyectos_nuevos_distrito": 0,
+    "unidades_nuevas_distrito": 0,
+    "district": 0
+  },
+  "inputs": {
+    "capture_sha256": "a539d8ad9cb41661e1b456583f2856268ad9e7c028926315cf535a6a55caf80e",
+    "model_sha256": "b79c9c36b1abba17cee208f425228221e8bb9e3a6c25d0b774e718970aee3a3f",
+    "historical_sha256": "255bbf8f07ddb77fca6331f982980930d03c5e67374af6057cdd5cb941069ded"
+  },
+  "limits": [
+    "Son precios de anuncios; no hay precios de transacciones cerradas.",
+    "Se excluyen IDs históricos, pero pueden existir anuncios repetidos con otro ID.",
+    "La captura proviene del mismo portal; no es una muestra independiente del mercado.",
+    "La fecha registrada es de observación, no de publicación.",
+    "Parking y mantenimiento no se observan en los IDs nuevos y permanecen ausentes.",
+    "Áreas fuera del rango histórico se conservan tal como llegaron y requieren revisión; no se adivinan decimales.",
+    "La media de error incluye precios extremos tal como figuran en la captura; revisar largest_differences.csv antes de interpretar el MAE.",
+    "Este diagnóstico no reemplaza ni permite ajustar el modelo contra la prueba final histórica."
+  ],
+  "student_next_step": "Revisar cinco avisos del catálogo y explicar si faltan datos o existe una diferencia grande; no cambiar el precio para acercarlo a la predicción."
+}

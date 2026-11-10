@@ -1,0 +1,25 @@
+InmoScore — cómo continuar
+
+1. Lean guia/Guia_para_continuar_InmoScore.docx. Explica qué cambió y cómo probarlo.
+2. Extraigan todo el ZIP. En proyecto_final, abran una terminal y ejecuten:
+   npm ci
+   npm run dev
+3. Abran http://127.0.0.1:5173. Se necesita Node.js 22.13 o superior.
+4. En la portada luminosa, elijan «Probar el ejemplo de María» o abran «Dos perfiles, dos búsquedas».
+   Alternen María y Carlos para ver el primer resultado que devuelve el ranking.
+5. Para continuar, sigan proyecto_final/CIERRE_DEL_EQUIPO.md.
+
+El código de la web, API, datos y modelos está dentro de proyecto_final.
+Python es opcional para abrir la web; se usa para revisar datos y entrenamiento.
+El Word y 03_instalacion_y_ejecucion.md explican las herramientas y comandos.
+REVISION_DE_REQUISITOS.md separa lo comprobado de los pendientes del grupo.
+INTERFAZ_WEB.md resume la portada, las tres escenas ilustrativas, las rutas y los archivos que pueden editar.
+
+Qué se conserva: archivos fuente y modelos originales; presentación del grupo.
+Qué cambió: interfaz, comprobaciones de datos, respuestas de la API, controles del ranking
+y documentación. El ejemplo de María usa el mismo perfil que la guía.
+Qué falta: ejecutar sus casos, revisar cinco avisos señalados, actualizar tres diapositivas
+y grabar su demostración. No necesitan rehacer la aplicación.
+
+La copia original completa se conserva por separado como entrega_original.zip.
+No se modificó el repositorio de GitHub ni se desplegó un servicio público.

@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "listings": 6332,
+  "districts": 20,
+  "preciseLocations": 133,
+  "capture_rows": 3000,
+  "capture_valid_rows": 3002,
+  "capture_district_conflicts": 2,
+  "outside_historical_area_range": 17,
+  "unknown_maintenance": 4445,
+  "possible_duplicate_rows": 24,
+  "model_check": "all_integrated_rows",
+  "model_prediction_rows_checked": 6332,
+  "limits": [
+    "La prueba verifica reproducibilidad, no disponibilidad ni precios de venta.",
+    "Las métricas finales corresponden al conjunto histórico de prueba."
+  ]
+}
