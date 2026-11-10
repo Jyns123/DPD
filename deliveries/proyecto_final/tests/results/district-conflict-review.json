@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "conflicts": [
+    {
+      "id": "149232937",
+      "all_original_values_preserved": true,
+      "source": null,
+      "observedAt": null
+    },
+    {
+      "id": "149753335",
+      "all_original_values_preserved": true,
+      "source": null,
+      "observedAt": null
+    }
+  ],
+  "sources_and_models_match_previous_verified_hashes": true,
+  "metadata_live": {
+    "liveListings": 3000,
+    "liveNew": 2436,
+    "liveUpdated": 564,
+    "liveValidListings": 3002,
+    "liveDistrictConflicts": 2,
+    "liveExcluded": 588,
+    "liveDataAsOf": "2026-10-24"
+  },
+  "tests_passed": 12
+}

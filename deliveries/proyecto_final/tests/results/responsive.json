@@ -1,0 +1,38 @@
+[
+  {
+    "bodyFont": "19.08px",
+    "document": 320,
+    "rootFont": "18px",
+    "viewport": 320
+  },
+  {
+    "bodyFont": "19.08px",
+    "document": 390,
+    "rootFont": "18px",
+    "viewport": 390
+  },
+  {
+    "bodyFont": "19.5651px",
+    "document": 768,
+    "rootFont": "18.4576px",
+    "viewport": 768
+  },
+  {
+    "bodyFont": "21.8445px",
+    "document": 1440,
+    "rootFont": "20.608px",
+    "viewport": 1440
+  },
+  {
+    "bodyFont": "23.32px",
+    "document": 2560,
+    "rootFont": "22px",
+    "viewport": 2560
+  },
+  {
+    "bodyFont": "23.32px",
+    "document": 3840,
+    "rootFont": "22px",
+    "viewport": 3840
+  }
+]

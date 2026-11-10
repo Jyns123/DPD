@@ -1,0 +1,18 @@
+{
+  "models/valuation_model.joblib": {
+    "sha256": "b79c9c36b1abba17cee208f425228221e8bb9e3a6c25d0b774e718970aee3a3f",
+    "original_unchanged": true
+  },
+  "models/source_model.joblib": {
+    "sha256": "017d616829d0e1fced3e562cfe7818e1b4eab42b268753ce36ca4547c5f76eeb",
+    "original_unchanged": true
+  },
+  "data/listings_clean.csv": {
+    "sha256": "255bbf8f07ddb77fca6331f982980930d03c5e67374af6057cdd5cb941069ded",
+    "original_unchanged": true
+  },
+  "data/urbania/urbania_actual.csv": {
+    "sha256": "a539d8ad9cb41661e1b456583f2856268ad9e7c028926315cf535a6a55caf80e",
+    "original_unchanged": true
+  }
+}

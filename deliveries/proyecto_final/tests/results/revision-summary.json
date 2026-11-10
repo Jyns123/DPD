@@ -1,0 +1,81 @@
+{
+  "recordedAt": "2026-11-09T00:28:40.840225+00:00",
+  "runtime": "Windows; Node.js 24.22.1; local Next.js; isolated SQLite QA database",
+  "unit_tests": {
+    "passed": 20,
+    "failed": 0
+  },
+  "api_tests": {
+    "passed": 38,
+    "failed": 0,
+    "evidence": "api-smoke.json"
+  },
+  "python_tests": {
+    "passed": 12,
+    "failed": 0,
+    "evidence": "data-pipeline-tests.txt"
+  },
+  "build": "passed",
+  "typescript": "passed",
+  "eslint": {
+    "errors": 0,
+    "warnings": 10,
+    "warning": "existing local img optimization"
+  },
+  "corrections": [
+    "Ranking API requires a string from the supported sort options",
+    "Public responses hide estimates and price scores for 19 records requiring input review",
+    "Two district conflicts preserve the full historical row and remain flagged for review",
+    "Maria example uses data/demo_profiles.json without changing district spelling",
+    "A favorite action started as a visitor continues after login",
+    "Profile explains that at least one preference weight must be positive",
+    "Map link uses the available coordinates of the listing"
+  ],
+  "browser_checks": {
+    "status": "passed",
+    "previous_review": [
+      "San Miguel filter and removable chip",
+      "separate matched and selected count",
+      "comparison of two listings",
+      "unsupported-area detail hides estimate and price per m2",
+      "320px and 390px layout",
+      "mobile filter Tab and Escape focus return"
+    ],
+    "current_review": [
+      "Maria example matches JSON: 180 matched, 9 selected",
+      "favorite continues after registration and login without removing an existing favorite",
+      "zero-weight profile feedback",
+      "district-conflict detail and comparison",
+      "map link destination",
+      "missing cartography stated, inactive zoom hidden"
+    ],
+    "test_account_cleanup": "Temporary continuity account deleted through local API after checks"
+  },
+  "browser_check_method": "Manual interaction through controlled Chrome; not a user study.",
+  "document_review": {
+    "status": "passed",
+    "pages": 6,
+    "visual_review": "passed"
+  },
+  "clean_package_check": {
+    "status": "passed",
+    "evidence": [
+      "evidencias/clean-api-smoke.txt",
+      "evidencias/clean-build.txt",
+      "evidencias/clean-data-check.txt",
+      "evidencias/clean-lint.txt",
+      "evidencias/clean-npm-ci.txt",
+      "evidencias/clean-python-tests.txt",
+      "evidencias/clean-unit-tests.txt",
+      "revision/entrega_profesor/proyecto_final/tests/results/clean-package-check.json"
+    ],
+    "result": "tests/results/clean-package-check.json",
+    "note": "Clean intermediate extraction tested with fresh Node dependencies and an isolated SQLite database. Final TSX synchronized before build; 145 code/data/model files and CSS match the frozen source. Python used the supplied existing environment. This is separate from final ZIP integrity."
+  },
+  "limits": [
+    "No public deployment",
+    "No model retraining or claim of accuracy improvement",
+    "No independent temporal validation",
+    "No new external capture"
+  ]
+}
