@@ -55,7 +55,7 @@
 
 **Challenges:**
 - Initial scope was ambitious; had to narrow down for prototype
-- Urbania live data integration proved infeasible due to Cloudflare 403
+- Urbania HTTP access was intermittent: a two-page capture succeeded on 2026-11-08, while a separate full sweep received Cloudflare 403
 - Limited time for extensive user testing
 - Final documentation rush before Week 15 deadline
 
@@ -68,8 +68,8 @@
 
 **Challenges:**
 - Historical data with no temporal validation
-- Limited geocoding coverage (133/3,896 listings)
-- 2,009 listings missing maintenance fee data
+- Limited geocoding coverage (133/6,340 catalog listings (2.1%))
+- 4,453 of 6,340 catalog listings (70.24%) missing maintenance fee data; 2,009 in the historical base
 - Selection bias from IQR filtering in Week 7
 
 **Impact:**
@@ -116,7 +116,7 @@
 
 ### 3. Real-Time Data Integration
 
-**Challenge:** Urbania scraper blocked by Cloudflare 403 responses.
+**Challenge:** Intermittent Cloudflare 403 responses prevent certifying unattended Urbania refreshes, despite a successful partial capture.
 
 **How We Addressed It:**
 - Attempted scraper implementation (urbania/update.py)
@@ -142,7 +142,7 @@
 
 **Change:** Investigate real-time data integration options earlier (Week 5-6).
 
-**Rationale:** Spent significant effort on Urbania scraper that ultimately failed due to Cloudflare. Could have explored official APIs or data partnerships earlier.
+**Rationale:** Spent significant effort on a scraper with intermittent Cloudflare blocks; a partial capture succeeded, but stable unattended operation remains unverified. Could have explored official APIs or data partnerships earlier.
 
 ### 2. More Extensive User Testing
 

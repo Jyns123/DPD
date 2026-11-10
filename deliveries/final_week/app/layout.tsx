@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import InmoScoreApp from "../components/inmoscore-app";
+import { getCaptureDate, getListings } from "../lib/catalog";
 
 export const metadata: Metadata = {
   title: "InmoScore — Tu próximo hogar, con más claridad",
@@ -17,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es-PE">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased"><InmoScoreApp listingCount={getListings().length} captureDate={getCaptureDate()} />{children}</body>
     </html>
   );
 }

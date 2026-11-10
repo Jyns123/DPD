@@ -7,7 +7,7 @@
 
 Se hizo más visible y comprensible la información importante para explorar viviendas:
 
-- El aviso ahora aclara que el catálogo combina anuncios históricos con una captura de Urbania del 24/10/2026 y que la disponibilidad actual debe confirmarse directamente con el anunciante.
+- El aviso ahora aclara que el catálogo combina anuncios históricos con capturas fechadas de Urbania; la interfaz indica la última observación registrada sin afirmar que todo el inventario sea de esa fecha y que la disponibilidad actual debe confirmarse directamente con el anunciante.
 - Se informa que es posible explorar sin crear una cuenta y que la cuenta se necesita para guardar viviendas.
 - El aviso usa un panel destacado, texto legible e icono decorativo oculto a lectores de pantalla; se expone como nota accesible.
 

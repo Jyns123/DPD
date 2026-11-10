@@ -19,7 +19,7 @@
 8. [Prototyping Process](#8-prototyping-process)
 9. [Evaluation](#9-evaluation)
 10. [Results](#10-results)
-11. [Case Studies](#11-case-studies)
+11. [Reproducible Demonstration Case](#11-reproducible-demonstration-case)
 12. [Limitations](#12-limitations)
 13. [Conclusions](#13-conclusions)
 
@@ -101,9 +101,9 @@ InmoScore provides:
 | Attribute | Value |
 |-----------|-------|
 | Historical base listings | 3,896 |
-| Listings in final application catalog | 6,332 (historical base plus Urbania capture observed 2026-10-24) |
+| Listings in final application catalog | 6,340 (historical base plus dated Urbania captures; 37 listings observed on 2026-11-08) |
 | Districts | 20 districts in Lima |
-| Time period | Historical listings plus a dated capture; current availability is not verified |
+| Time period | Historical listings plus captures from 2026-10-20 through 2026-11-08; only 37 catalogue listings were observed on the latest date |
 | Fields | 40 columns including price, area, rooms, bathrooms, location |
 
 ### 3.3 Additional Data Sources
@@ -120,9 +120,9 @@ InmoScore provides:
 
 - **Historical Data**: Listings are not verified for current availability
 - **No Temporal Validation**: Cannot assess price trends over time
-- **Incomplete Coverage**: Only 133 listings have precise geocoding
+- **Incomplete Coverage**: Only 133 of 6,340 catalogue listings (2.1%) have precise geocoding
 - **Selection Bias**: 91 listings excluded by IQR filtering in Week 7
-- **Maintenance Unknown**: 2,009 listings lack maintenance fee data
+- **Maintenance Unknown**: 4,453 of 6,340 catalog listings (70.24%) lack maintenance fee data; 2,009 belong to the historical base
 
 ---
 
@@ -132,10 +132,10 @@ InmoScore provides:
 
 The data preparation pipeline (`analytics/prepare_data.py`) performs:
 
-1. **Data Loading**: Load `listings_clean.csv` and district context files
-2. **Feature Engineering**: Create composite indices and derived features
-3. **Imputation**: Fill missing values (IQR-based for numerical, mode for categorical)
-4. **Scaling**: Standardize numerical features
+1. **Data Loading**: Load `listings_clean.csv` and the dated capture
+2. **Context Loading**: Read district indices and validated geocoding
+3. **Capture Merge**: Update 567 historical IDs and add 2,444 usable new IDs from the accumulated dated captures
+4. **Model Preprocessing**: Preserve numeric missing values for HistGradientBoosting and one-hot encode district using the fitted pipeline
 5. **Model Application**: Apply trained Gradient Boosting model to all listings
 6. **Catalog Generation**: Create `catalog.json` with predictions and scores
 
@@ -150,10 +150,10 @@ The data preparation pipeline (`analytics/prepare_data.py`) performs:
 
 ### 4.3 Data Quality Notes
 
-- **Missing Values**: Handled via IQR-based imputation for numerical features
+- **Missing Values**: The selected HistGradientBoosting model handles numeric missing values. IQR filters training outliers; it is not an imputation method.
 - **Outliers**: 91 listings excluded by IQR filtering in historical evaluation
 - **Duplicates**: 24 potential duplicates identified with link lookup
-- **Geocoding**: 133 listings have street/building-level precision; others are approximate
+- **Geocoding**: 133 of 6,340 catalogue listings (2.1%) have validated street/building-level coordinates; no point is shown for the remaining listings
 
 ---
 
@@ -207,24 +207,33 @@ The data preparation pipeline (`analytics/prepare_data.py`) performs:
 ### 6.1 Model Selection
 
 **Selected Model:** Gradient Boosting (Model D)
-- **Framework:** scikit-learn GradientBoostingRegressor
+- **Framework:** scikit-learn HistGradientBoostingRegressor
 - **Objective:** Predict log(price) to stabilize variance
 - **Features:** 13 features including property attributes and district context
 
 ### 6.2 Baseline Comparison
 
-| Model | MAE (S/) | MdAPE | Improvement vs Baseline |
-|-------|---------|-------|------------------------|
-| A: Median by district | 153,665 | 16.1% | 0% (baseline) |
-| B: Log-linear with district | 153,155 | 13.7% | -0.8% |
-| C: Ridge v2 | 142,694 | 13.7% | -7.6% |
-| **D: Gradient Boosting** | **119,801** | **12.2%** | **-22.0%** |
+Selection used only pooled out-of-fold predictions on the 3,117 development listings:
 
-**Conclusion:** Gradient Boosting selected for 22% error reduction vs. baseline.
+| Model | Development MAE (S/) | Development MdAPE | MAE reduction vs baseline |
+|-------|---------------------|-------------------|---------------------------|
+| A: Median by district | 154,449 | 15.08% | 0% |
+| B: Log-linear with district | 153,155 | 13.66% | 0.84% |
+| C: Ridge v2 | 142,694 | 13.66% | 7.61% |
+| D: Gradient Boosting | 135,553 | 12.04% | 12.23% |
+
+After selection, only the baseline and selected model were evaluated on the 779 reserved final listings:
+
+| Model | Final-test MAE (S/) | Final-test MdAPE | MAE reduction vs baseline |
+|-------|--------------------|------------------|---------------------------|
+| A: Median by district | 153,665 | 16.11% | 0% |
+| D: Gradient Boosting | 119,801 | 12.18% | 22.04% |
+
+Gradient Boosting was selected using development performance and the small-district guardrail. The final-test result confirms the comparison for the historical snapshot; it was not used for selection.
 
 ### 6.3 Evaluation Strategy
 
-- **Dataset Split:** 3,117 training, 779 test (80/20 split)
+- **Dataset Split:** 3,117 development and 779 final test, grouped by possible duplicates. Training-only IQR removes 19 development rows; the exported model is fitted on 3,098 rows.
 - **Cross-Validation:** 5-fold CV on training set
 - **Metrics:** MAE (absolute error), MdAPE (percentage error)
 - **Segment Analysis:** Performance evaluated by price segments
@@ -249,9 +258,8 @@ Next.js Application (app/, components/)
     ↓ (API Routes)
 API Layer (app/api/)
     ↓ (SQLite)
-Database (db/sqlite.ts → storage/inmoscore.sqlite)
-    ↓ (Read-only)
-Catalog (data/catalog.json)
+Account API -> Repository -> SQLite (profiles, favorites, sessions)
+Ranking API -> Read-only catalogue (data/catalog.json)
     ↑ (Generated by)
 Analytics Pipeline (analytics/prepare_data.py)
     ↑ (Uses)
@@ -326,7 +334,7 @@ Model (models/valuation_model.joblib)
 - **MdAPE**: 12.2%
 - **Improvement vs. baseline**: 22.0%
 
-**Interpretation:** The model predicts prices with a median error of 12.2%, meaning typical predictions are within ±12% of actual listing prices.
+**Interpretation:** The median absolute percentage error on the historical final test is 12.2%. This aggregate statistic is not a confidence interval or an error guarantee for an individual property.
 
 ### 9.2 Segment Analysis
 
@@ -334,7 +342,7 @@ Model (models/valuation_model.joblib)
 |---------------|---|----------|-------|
 | All prices | 779 | 119,801 | Overall performance |
 | ≥ S/ 2M | 36 | 663,562 | 2.6% worse than baseline |
-| < S/ 2M | 743 | ~108,000 | Better than baseline |
+| < S/ 2M | 743 | 93,454 | Weighted MAE from the four saved price segments |
 
 **Conclusion:** Model performs poorly on luxury segment due to limited training data.
 
@@ -358,7 +366,7 @@ Model (models/valuation_model.joblib)
 ### 10.1 Product Capabilities
 
 InmoScore successfully delivers:
-- **Personalized Rankings**: 6,332 catalog listings can be ranked by individual preferences
+- **Personalized Rankings**: 6,340 catalog listings can be ranked by individual preferences
 - **Price References**: Model estimates provide objective market benchmarks
 - **Affordability Calculations**: Users understand their purchasing power
 - **Comparison Tools**: Side-by-side comparison of up to 3 properties
@@ -366,80 +374,32 @@ InmoScore successfully delivers:
 
 ### 10.2 User Experience
 
-The product flow enables users to:
-1. Register in < 2 minutes
-2. Set up profile in < 5 minutes
-3. Receive instant ranking based on their criteria
-4. Understand why properties are recommended
-5. Save and compare options
-6. Delete account with all data if desired
+The implemented flow supports profile setup, filtered ranking, price references, favorites, comparison and account deletion. Task completion times and comprehension have not yet been measured with buyers. Functional checks do not establish usability outcomes.
 
 ### 10.3 Technical Achievements
 
 - **Model**: 22% error reduction vs. baseline
-- **Performance**: Ranking queries complete in < 200ms
+- **Performance**: The catalogue is precalculated; this review does not establish a production latency or load benchmark
 - **Reliability**: Error handling for partial failures (favorites)
 - **Security**: Passwords hashed with scrypt (N=32768, r=8, p=3)
 - **Accessibility**: Semantic HTML, keyboard navigation, focus indicators
 
 ---
 
-## 11. Case Studies
+## 11. Reproducible Demonstration Case
 
-### 11.1 Case Study 1: First-Time Buyer "María"
+This is a synthetic demonstration executed on the included catalogue, not a buyer study or evidence of a property visit.
 
-**Profile:**
-- Income: S/ 8,500/month
-- Savings: S/ 100,000
-- Budget: S/ 550,000
-- Requirements: 3+ rooms, 60+ m²
-- Districts: Ate, Santiago de Surco, San Miguel
-- Weights: Price 55%, Safety 20%, Convenience 25%
+**Profile:** María from the interface: income S/ 15,000/month, savings S/ 150,000, declared budget S/ 700,000, at least three bedrooms and 60 m², no district restriction. Initial relative weights: price 0.20, safety 0.45, convenience 0.35.
 
-**Results:**
-- Ranking returned 12 properties within budget
-- Top recommendation: 3-bedroom apartment in Ate at S/ 520,000
-- Model estimate: S/ 540,000 (opportunity: 3.7% below estimate)
-- Safety score: High (low crime index in Ate)
+| Configuration | Calculated cap (S/) | First listing ID | District | Asking price (S/) | Score |
+|---------------|--------------------|------------------|----------|------------------|----------|
+| Initial profile | 662,958 | 150180312 | San Martin De Porres | 148,000 | 94 |
+| Only price weight changes to 0.80 | 662,958 | 148659917 | San Martin De Porres | 149,999 | 96 |
 
-**User Decision:** María visited the property and found it met her needs. The price reference gave her confidence in negotiations.
+Both configurations return 60 options after the maximum of three per district is applied in affinity ordering. Changing one weight changes the order, while the financial cap stays constant. These low asking prices must be checked with the source; model gaps are not evidence of a bargain or current availability. Affinity is a weighted score, not a satisfaction probability.
 
-### 11.2 Case Study 2: Budget-Conscious Buyer
-
-**Profile:**
-- Income: S/ 5,000/month
-- Savings: S/ 50,000
-- Budget: S/ 350,000
-- Requirements: 2+ rooms, 50+ m²
-- Districts: Any
-- Weights: Price 70%, Safety 15%, Convenience 15%
-
-**Results:**
-- Ranking returned 8 properties within budget
-- Top recommendation: 2-bedroom apartment in San Juan de Lurigancho at S/ 320,000
-- Model estimate: S/ 310,000 (slightly above estimate)
-- Trade-off: Lower price but higher crime index
-
-**User Decision:** Buyer prioritized affordability and found suitable option despite lower safety score.
-
-### 11.3 Case Study 3: District-Focused Buyer
-
-**Profile:**
-- Income: S/ 15,000/month
-- Savings: S/ 200,000
-- Budget: S/ 800,000
-- Requirements: 3+ rooms, 70+ m²
-- Districts: San Isidro, Miraflores only
-- Weights: Price 30%, Safety 40%, Convenience 30%
-
-**Results:**
-- Ranking returned 3 properties within budget in target districts
-- Top recommendation: 3-bedroom apartment in San Isidro at S/ 750,000
-- Model estimate: S/ 780,000 (3.8% below estimate)
-- Safety: Excellent (lowest crime index)
-- Convenience: High (best urban convenience index)
-
-**User Decision:** Buyer prioritized location and safety, willing to pay premium for prime district.
+The profile named María in `data/demo_profiles.json` has different inputs; the live demonstration uses the interface profile above. No visits, negotiations or buyer decisions were observed in this exercise.
 
 ---
 
@@ -448,8 +408,8 @@ The product flow enables users to:
 ### 12.1 Data Limitations
 
 - **Historical Listings**: No verification of current availability
-- **Limited Geocoding**: Only 133/6,332 catalog listings have precise coordinates
-- **Maintenance Data**: 2,009 listings lack maintenance fee information
+- **Limited Geocoding**: Only 133/6,340 catalog listings (2.1%) have precise coordinates
+- **Maintenance Data**: 4,453 of 6,340 catalog listings (70.24%) lack maintenance fee information; 2,009 belong to the historical base
 - **Temporal Validation**: Cannot assess price trends or market changes
 - **Selection Bias**: 91 listings excluded by IQR filtering
 
@@ -473,7 +433,7 @@ The product flow enables users to:
 - **Data License**: Urbania data is for academic demonstration only
 - **No Commercial Use**: Cannot be used for commercial real estate transactions
 - **No Financial Advice**: Affordability calculations are simulations, not pre-qualification
-- **Privacy Considerations: User data stored locally; no GDPR compliance assessment
+- **Privacy Considerations**: User data stored locally; no GDPR compliance assessment
 
 ---
 
@@ -523,9 +483,13 @@ InmoScore successfully demonstrates a data product that:
 
 InmoScore achieves its core objective: helping home buyers in Lima make more informed decisions by providing personalized, transparent, and data-driven property recommendations. While the prototype has limitations (historical data, local deployment, SQLite persistence), it demonstrates a viable approach to combining machine learning with user-centric design to solve a real-world problem.
 
-The product is ready for the next phase: production deployment with enhanced data sources, improved ML models, and expanded features based on user feedback.
+The product is a local academic prototype. A production phase requires verified inventory, a deployment and persistence plan, and further user, security and operational validation.
 
 ---
+
+## Demonstration video
+
+Pending recording and publication. No published URL is available yet. The team must record the 5-7 minute demonstration described in `DEMO_VIDEO_INSTRUCTIONS.md` and add the verified URL to this report and the project README.
 
 ## Appendix
 

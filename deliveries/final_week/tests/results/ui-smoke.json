@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "checks": 7,
+  "results": [
+    "anonymous_profile_survives_navigation",
+    "location_view_uses_external_map_without_missing_geojson",
+    "detail_location_loads",
+    "browser_back_restores_search",
+    "mobile_320_has_no_horizontal_overflow",
+    "unknown_resources_return_404",
+    "no_browser_runtime_errors"
+  ]
+}

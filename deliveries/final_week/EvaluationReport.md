@@ -1,11 +1,11 @@
-# InmoScore — Week 14: Versión refinada y presentación final
+# InmoScore — Entrega final: producto y evaluación
 
 **DS3022 · Desarrollo de Producto de Datos · UTEC · 2026-2**  
 **Hito:** presentación final, 18 de noviembre de 2026  
-**Corte de implementación y verificación:** 4 de noviembre de 2026  
+**Corte de implementación y verificación:** 8 de noviembre de 2026<br>
 **Piloto:** vivienda propia en Lima Metropolitana.
 
-## Novedades en Week 14
+## Estado de la entrega final
 
 En esta versión refinada completamos los siguientes avances:
 
@@ -22,7 +22,7 @@ InmoScore ayuda a comparar viviendas según la situación financiera y las prior
 
 Esta entrega transforma el prototipo HTML de Week 7 en una aplicación Next.js con interfaz adaptable, API y persistencia por cuenta. El recorrido principal es **landing → registro e inicio de sesión → perfil → recomendaciones → detalle → guardados y comparación**. Cada comprador crea una cuenta con correo y contraseña.
 
-La evaluación del modelo usa **3 896 avisos históricos** del dataset público de Urbania. El catálogo final que consume la aplicación tiene **6 332 avisos**: los 3 896 registros históricos más avisos de una captura de Urbania observada el 24/10/2026 (3 002 observados, 566 coincidentes con registros existentes). La captura no confirma disponibilidad actual. Esta versión usa una ilustración genérica cuando faltan fotografías; no representa la vivienda anunciada. No se realizan contactos, reservas ni aprobaciones hipotecarias.
+La evaluación del modelo usa **3 896 avisos históricos** del dataset público de Urbania. El catálogo final que consume la aplicación tiene **6 340 avisos**: los 3 896 registros históricos más avisos de capturas de Urbania, con actualización parcial del 8/11/2026 (37 avisos observados ese día) (3 011 observados, 567 coincidentes con registros existentes). La captura no confirma disponibilidad actual. Esta versión usa una ilustración genérica cuando faltan fotografías; no representa la vivienda anunciada. No se realizan contactos, reservas ni aprobaciones hipotecarias.
 
 ## 2. Funcionalidades implementadas
 
@@ -45,7 +45,7 @@ InmoScore administra sus propias cuentas con correo y contraseña. El registro c
 
 ## 3. Datos y procesamiento
 
-### 3.1 Insumos contenidos en Week 14
+### 3.1 Insumos contenidos en final_week
 
 | Insumo | Contenido y uso |
 |---|---|
@@ -61,7 +61,7 @@ InmoScore administra sus propias cuentas con correo y contraseña. El registro c
 
 ### 3.2 Calidad y procedencia
 
-Los 2 006 mantenimientos originalmente codificados como cero conservan su valor original y se representan como ambiguos. Otros tres importes sospechosos quedan ausentes para modelado. Por tanto, **2 009 avisos tienen mantenimiento no confirmado** en el catálogo. No se inventaron cuotas ni tipos de cambio.
+Los 2 006 mantenimientos originalmente codificados como cero conservan su valor original y se representan como ambiguos. Otros tres importes sospechosos quedan ausentes para modelado. Por tanto, **2 009 de los 3 896 avisos históricos** tienen mantenimiento no confirmado. En el catálogo fusionado son **4 453 de 6 340 (70,24 %)**. Las **133 ubicaciones precisas representan el 2,1 % del catálogo**. No se inventaron cuotas ni tipos de cambio.
 
 Los 24 avisos de 12 grupos de posibles duplicados se conservaron con un identificador de grupo. No se asume que coincidencia de dirección, precio y área pruebe identidad de la vivienda. En esta iteración, los anuncios que constaban como retirados en la revisión de enlaces se excluyen del ranking; todos los demás mantienen disponibilidad no verificada.
 
@@ -125,7 +125,7 @@ El orden por afinidad admite hasta tres avisos por distrito para diversificar la
 | Verificación | Resultado |
 |---|---|
 | Modelos y ranking | 9 pruebas unitarias existentes: filtros, paginación, diversidad, pesos inválidos, coordenadas, TEA y retiros conocidos |
-| Datos y modelo | Catálogo con 6 332 avisos y 20 distritos; evaluación histórica sobre 3 896 avisos y 133 ubicaciones precisas en el catálogo. Las 100 referencias comprobadas del JSON coinciden con el pipeline serializado |
+| Datos y modelo | Catálogo con 6 340 avisos y 20 distritos; evaluación histórica sobre 3 896 avisos y 133 ubicaciones precisas en el catálogo. Las 6 340 referencias del JSON se comprueban contra el pipeline serializado y las entradas fusionadas, incluidos los 567 registros históricos actualizados |
 | Compilación y tipos | Build de Next.js y TypeScript sin errores |
 | Contraseñas y tokens | 4 pruebas: salt único, verificación correcta, Unicode, formato y límites |
 | SQLite y aislamiento | 5 pruebas: creación automática, reapertura, cuentas aisladas, caducidad/revocación, borrado en cascada y límites de intentos |
@@ -161,7 +161,7 @@ El guion reproducible está en `DEMO.md`; no se requiere un video para reproduci
 
 ## 8. Desafíos técnicos y decisiones
 
-1. **Datos disponibles frente a inventario vigente.** Se mantuvo el dataset académico y se declaró su condición histórica. No se ejecutó un scraper nuevo ni se asumió disponibilidad por obtener una ficha indexada.
+1. **Datos disponibles frente a inventario vigente.** Se mantuvo el dataset académico y se declaró su condición histórica. El 8/11/2026 se capturó una página de Miraflores y otra de Barranco con el cliente HTTP: 60 registros, de los cuales 37 son utilizables por la web. Otra ejecución de los 20 distritos se detuvo ante HTTP 403. No se asume disponibilidad ni cobertura completa a partir de estas capturas.
 2. **Portabilidad del modelo.** El artefacto evaluado contenía wrappers de código del proyecto. Se incluyeron sus fuentes para abrirlo y se exportó un pipeline de scikit-learn sin dependencia de módulos privados de otras entregas.
 3. **Costo de inferencia en el runtime web.** Se calculan referencias offline y se sirve un catálogo JSON. La API online ejecuta filtros y ponderaciones; se puede regenerar el catálogo sin reescribir la UI.
 4. **Coordenadas incompletas.** Se recuperaron correctamente 133 puntos con precisión de calle/edificio. Los demás avisos conservan contexto distrital sin puntos ficticios.

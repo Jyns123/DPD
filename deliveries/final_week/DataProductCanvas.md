@@ -38,7 +38,7 @@ InmoScore provides personalized, transparent property recommendations with objec
 
 ## Data Sources
 
-- **Primary:** Urbania Lima Real Estate Dataset (3,896 listings, 20 districts)
+- **Primary:** 3,896 historical Urbania records for evaluation. The application catalogue contains 6,340 listings in 20 districts, including captures dated 2026-10-20 through 2026-11-08 (only 37 catalogue listings observed on 2026-11-08) (3,011 usable records: 567 updates and 2,444 additions). Availability is unverified. Precise locations: 133/6,340 (2.1%); maintenance unknown: 4,453/6,340 (70.24%).
 - **Context:** SIDPOL/MININTER (crime index), INEI (IDH, poverty), OpenStreetMap (geocoding)
 
 ---
@@ -73,7 +73,7 @@ InmoScore provides personalized, transparent property recommendations with objec
 | Risk | Mitigation |
 |------|------------|
 | Historical data not representative | Document limitation; plan real-time integration |
-| Model poor on luxury segment | Segment model; show confidence intervals |
+| Model poor on luxury segment | Document segment error; evaluate a segment model and recalibrated intervals in future work |
 | Legal data restrictions | Academic use only; no commercial republication |
 | Technical constraints (Node.js 22.13+) | Document requirements; provide deployment guide |
 

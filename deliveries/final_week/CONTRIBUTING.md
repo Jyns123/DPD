@@ -49,7 +49,7 @@ This project was developed by the following team:
 - Evaluated multiple model candidates (median baseline, log-linear, Ridge, Gradient Boosting)
 - Implemented cross-validation with 5-fold CV
 - Selected Gradient Boosting as final model (22% error reduction vs. baseline)
-- Trained final model on training set (3,117 listings)
+- Fitted the selected model on development only: 3,117 rows before training-only IQR, 3,098 after filtering
 - Evaluated on test set (779 listings)
 - Analyzed performance by price segments
 - Documented evaluation results in `models/evaluation/evaluation_report.md`

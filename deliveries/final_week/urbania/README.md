@@ -2,7 +2,7 @@
 
 Captura propia de los listados de Urbania integrada en el prototipo de Week 10. Guarda su estado en `../data/urbania/` y, a través de `analytics/prepare_data.py`, alimenta el catálogo que carga la web (ver «Integración con la web»).
 
-Se verificaron en navegador los filtros de distritos, dormitorios y precios, además de la paginación. No se exploraron ni implementaron los demás filtros. El objetivo es un piloto reproducible y una base incremental. La actualización corre a diario con GitHub Actions (`.github/workflows/urbania-refresh.yml`), pero el 20-10-2026 Urbania respondió 403 a las peticiones HTTP directas: mientras dure el bloqueo, cada ejecución se detiene sin datos nuevos. No se certificó una captura masiva en producción.
+Se verificaron en navegador los filtros de distritos, dormitorios y precios, además de la paginación. No se exploraron ni implementaron los demás filtros. El objetivo es un piloto reproducible y una base incremental. El workflow apunta a `final_week` y está configurado a diario. En la revalidación del 8/11/2026 el cliente `requests` capturó dos páginas (60 registros) sin intervención; un barrido independiente de 20 distritos recibió HTTP 403 y se detuvo. El acceso es intermitente, no un bloqueo permanente ni una captura masiva estable certificada. La ejecución en GitHub Actions aún necesita validación desde esa red.
 
 ## Lo que cambió frente al primer notebook
 
@@ -46,7 +46,7 @@ python analytics/prepare_data.py   # regenera data/catalog.json para la web
 
 `capture.py` también puede recorrer un solo distrito o una consulta filtrada (`python urbania/capture.py --district san-juan-de-lurigancho --db data/urbania/urbania.sqlite --max-pages 3`), y `urbania_phase1.py export` vuelve a escribir el CSV desde la base.
 
-`capture.py` es una captura HTTP normal. Identifica el cliente, consulta robots, espera al menos 10 segundos entre solicitudes y se detiene ante 403/429/verificación; no incorpora bypass. El navegador de esta sesión sí cargó las páginas, mientras que la prueba HTTP directa anterior devolvió 403. El 20-10-2026 se repitió la prueba con el user-agent del cliente: `robots.txt` respondió 200, pero el listado y el sitemap respondieron 403 con `cf-mitigated: challenge` (desafío de Cloudflare); `update.py`, ejecutado contra el sitio, se detuvo en el primer listado. **No se ha validado el adaptador HTTP contra una descarga actual exitosa**; puede detenerse antes del listado. El mapeo y las muestras de esta entrega se verificaron mediante navegador.
+`capture.py` es una captura HTTP normal. Identifica el cliente, consulta robots, espera al menos 10 segundos entre solicitudes y se detiene ante 403/429/verificación; no incorpora bypass. El navegador de esta sesión sí cargó las páginas, mientras que la prueba HTTP directa anterior devolvió 403. El 20-10-2026 se repitió la prueba con el user-agent del cliente: `robots.txt` respondió 200, pero el listado y el sitemap respondieron 403 con `cf-mitigated: challenge` (desafío de Cloudflare); `update.py`, ejecutado contra el sitio, se detuvo en el primer listado. **Revalidación 8/11/2026:** el adaptador HTTP sí descargó y procesó una página de Miraflores y otra de Barranco, mientras `curl` recibió 403. Un barrido independiente con `requests` también recibió 403; no se certifica estabilidad del acceso. El mapeo y las muestras de esta entrega se verificaron mediante navegador.
 
 Se puede importar HTML de una captura accesible, registrando su fecha UTC real:
 
@@ -89,7 +89,7 @@ Para la ejecución periódica (sección siguiente), la base se conserva versiona
 
 ## Actualización periódica
 
-`update.py` recorre sin filtros los 20 distritos del catálogo con un único cliente HTTP y, al terminar, regenera el CSV. Cada distrito pasa por `capture`, con las mismas reglas: una ejecución parcial no marca ausencias.
+`update.py` restaura primero una base vacía desde el CSV existente, conservando fechas y estados, y recorre sin filtros los 20 distritos del catálogo con un único cliente HTTP y, al terminar, regenera el CSV. Cada distrito pasa por `capture`, con las mismas reglas: una ejecución parcial no marca ausencias.
 
 - Ante 403/429 o una página de verificación, la ejecución se detiene. Los distritos restantes se omiten sin consultarse.
 - Un candado (`urbania.sqlite.lock`) garantiza un único proceso por base: una segunda ejecución simultánea termina sin hacer nada.
@@ -99,7 +99,7 @@ Para la ejecución periódica (sección siguiente), la base se conserva versiona
 
 El workflow `.github/workflows/urbania-refresh.yml` lo ejecuta a diario a las 06:30 de Lima (11:30 UTC; GitHub puede retrasar las ejecuciones programadas) y también puede lanzarse a mano desde la pestaña Actions. Pasos: pruebas de esta carpeta, `update.py`, `prepare_data.py`, `validate_data.py` y un commit en `main` con `data/urbania/`, el catálogo, el manifiesto y el resultado de la validación. El HTML capturado y los resúmenes quedan 14 días como artefacto de la ejecución.
 
-**Estado actual:** con el bloqueo de Cloudflare, cada ejecución termina en el primer listado con código 2 y aparece en rojo en Actions; no se publica nada y el catálogo conserva los datos anteriores. Para que funcione hace falta un acceso autorizado y estable, por ejemplo permiso de Urbania para este cliente. El código no intenta saltar el desafío.
+**Estado revalidado el 8/11/2026:** hubo una captura HTTP exitosa de dos páginas y otra ejecución bloqueada al iniciar el barrido de 20 distritos. Por tanto, el acceso es intermitente. Ante 403/429 se conserva el CSV anterior, se omiten los distritos pendientes y el proceso termina con código 2. No se usan evasión de desafíos, proxies ni resolución automática de CAPTCHA. Para acreditar una actualización programada estable todavía hace falta verificar el acceso desde el runner o acordar un acceso autorizado con Urbania.
 
 ## Integración con la web
 
@@ -118,3 +118,19 @@ Si el ID ya existe en el histórico, la card más reciente reemplaza precio, ár
 El proyecto Gran Bosque Ciruelo publica 1 a 3 dormitorios y sigue apareciendo con el filtro hasta 1. Su rango incluye una tipología posible; eso no prueba que todas las unidades cumplan ni que el precio “desde” corresponda a esa tipología. No se usa la etiqueta “En planos” como único criterio de exclusión: la ruta `/proyecto/` y el tipo de card son señales más específicas.
 
 La disponibilidad de un HTML en un navegador no garantiza estabilidad de acceso para un proceso automático. La atribución y el enlace al anuncio se conservan; el acceso estable debe resolverse antes de declarar el servicio listo para producción.
+
+## Resultado incorporado el 8/11/2026
+
+La descarga exitosa observó 60 registros (una página por distrito en Miraflores y Barranco). Frente a la captura acumulada: 10 IDs nuevos, nueve contenidos cambiados y 41 sin cambio. Se incorporaron desde los HTML guardados por esa ejecución, preservando sus timestamps reales y marcando cobertura parcial. No se confunde esta incorporación con el barrido completo posterior, que se bloqueó.
+
+La captura acumulada contiene ahora 3.600 registros; 3.011 son utilizables por la web (567 actualizan IDs históricos y 2.444 son adicionales). El catálogo final tiene 6.340 avisos. **Solo 37 avisos del catálogo se observaron el 8/11/2026**; el resto mantiene fechas anteriores. Las 6.340 predicciones se validaron sin reentrenar ni reabrir la prueba histórica.
+
+Evidencia: [revalidación de acceso](../tests/results/urbania-access.json) y [validación de datos](../tests/results/data-validation.json). Los HTML originales están en `../captures/revalidation-2026-11-08/`, ignorados por Git. Las 56 pruebas del módulo cubren también arranque desde CSV y conservación del exportado ante bloqueo.
+
+Prueba manual acotada, desde `final_week`:
+
+```bash
+.venv/bin/python urbania/update.py --district miraflores --district barranco --max-pages 1 --db data/urbania/urbania.sqlite --out data/urbania/urbania_actual.csv --evidence-dir captures
+```
+
+Ejecutar `npm run data:refresh` para el recorrido configurado y posterior preparación/validación. Una respuesta bloqueada es un fallo de captura y debe investigarse; no se reporta como actualización exitosa ni se reintenta en bucle.

@@ -12,7 +12,7 @@ InmoScore is a data product that helps home buyers in Lima Metropolitana find pr
 
 ### Representative Image
 
-![InmoScore Logo](/logo.png)
+![InmoScore Logo](public/logo.png)
 
 ---
 
@@ -30,8 +30,8 @@ InmoScore is a data product that helps home buyers in Lima Metropolitana find pr
 ### Installation
 
 ```bash
-git clone <repository-url>
-cd final_week
+git clone https://github.com/Jyns123/DPD.git
+cd DPD/deliveries/final_week
 npm ci
 ```
 
@@ -47,6 +47,24 @@ Open http://127.0.0.1:5173 in your browser.
 
 - Node.js 22.13 or higher
 - Python 3.12 (for data preparation, optional)
+
+---
+
+## Data preparation and validation
+
+The included catalogue lets you run the app without Python. To regenerate and validate it, create a separate Python 3.12 environment in this folder:
+
+```bash
+python3.12 -m venv .venv
+.venv/bin/python -m pip install -r analytics/requirements.txt -r urbania/requirements.txt
+npm run data:prepare
+npm run data:validate
+npm run test:data
+```
+
+`data:validate` checks all effective historical and capture inputs and all catalogue price references, without training or reopening the historical final test. `python3 analytics/validate_data.py --catalog-only` performs only structural checks without loading the model and does not overwrite the full validation result.
+
+The scheduled [Urbania workflow](../../.github/workflows/urbania-refresh.yml) updates this `final_week` folder. It runs capture tests, validator tests, preparation and full validation before committing generated data. A blocked capture leaves the last exported CSV untouched and exits without publishing. On 2026-11-08 a two-page capture succeeded, but a separate full sweep received HTTP 403; unattended access remains intermittent. See [access evidence](tests/results/urbania-access.json). Publication of refreshed data does not deploy the application or regenerate the static submission PDFs. Counts in this page describe the included catalogue after the partial refresh dated 2026-11-08; current generated counts are recorded in `tests/results/data-validation.json`.
 
 ---
 
@@ -72,14 +90,7 @@ Traditional property search is overwhelming and opaque. InmoScore provides:
 
 ## Demonstration Video
 
-**Coming Soon** - A 5-7 minute demo video will be uploaded to YouTube. The video will demonstrate:
-- Problem statement and target users
-- Main product features
-- ML approach and evaluation results
-- Live demonstration of the application
-- Limitations and future work
-
-**Link:** [To be added]
+**Pending recording and publication.** No published demonstration video is included yet. Follow [the recording guide](DEMO_VIDEO_INSTRUCTIONS.md) to produce a 5-7 minute video, then add its verified URL here and in `FinalReport.md`. See [the delivery checklist](CHECKLIST.md) for the remaining work.
 
 ---
 
@@ -88,7 +99,7 @@ Traditional property search is overwhelming and opaque. InmoScore provides:
 ### Primary Dataset
 - **Source:** Urbania Lima Real Estate Dataset (GitHub: `MathiuCz/lima-real-estate-price-predictor`)
 - **Base historical dataset:** 3,896 listings across 20 districts
-- **Catalog used by the app:** 6,332 listings, including the 3,896 historical records and an Urbania capture observed on 2026-10-24 (3,002 captured listings; 566 overlap with existing records)
+- **Catalog used by the app:** 6,340 listings, including the 3,896 historical records and dated Urbania captures (3,011 usable listings; 567 overlap with historical IDs and 2,444 additions). Only 37 catalogue listings were observed on 2026-11-08; other capture dates range from 2026-10-20 to 2026-10-24
 - **License:** MIT (repository); content subject to Urbania terms
 - **Usage:** Academic demonstration only
 
@@ -99,8 +110,8 @@ Traditional property search is overwhelming and opaque. InmoScore provides:
 
 ### Data Limitations
 - The catalog combines historical listings and a dated capture; current availability is not verified
-- Limited geocoding coverage (133/6,332 catalog listings)
-- 2,009 listings missing maintenance fee data
+- Limited geocoding coverage: 133/6,340 catalog listings (2.1%)
+- 4,453 of 6,340 catalog listings (70.24%) missing maintenance fee data; 2,009 in the historical base
 - No temporal validation (cannot assess price trends)
 
 ---
@@ -108,7 +119,7 @@ Traditional property search is overwhelming and opaque. InmoScore provides:
 ## Model Information
 
 ### Selected Model
-- **Type:** Gradient Boosting (scikit-learn GradientBoostingRegressor)
+- **Type:** Gradient Boosting (scikit-learn HistGradientBoostingRegressor)
 - **Objective:** Predict log(price) for variance stabilization
 - **Features:** 13 features (property attributes + district context)
 
@@ -132,7 +143,7 @@ Traditional property search is overwhelming and opaque. InmoScore provides:
 - **Authentication:** Custom implementation (no email verification)
 
 ### Production Deployment Guide
-See `AWS_DEPLOYMENT_GUIDE.md` for instructions on deploying to:
+The [AWS deployment guide](AWS_DEPLOYMENT_GUIDE.md) describes a future deployment requiring infrastructure and a PostgreSQL adapter. It has not been executed as a complete production deployment. It discusses:
 - AWS ECS (Docker containers)
 - AWS RDS (PostgreSQL)
 - AWS API Gateway
@@ -199,13 +210,14 @@ npm run typecheck
 
 ## Relevant Links
 
-- **Final Report:** [FinalReport.md](FinalReport.md)
+- **Final Report:** [PDF](FinalReport.pdf) · [editable Markdown](FinalReport.md)
+- **Final Presentation:** [PDF](PresentationFinal.pdf) · [editable PowerPoint](PresentationFinal.pptx)
 - **Requirements:** [Requirements.md](Requirements.md)
 - **Data Product Canvas:** [DataProductCanvas.md](DataProductCanvas.md)
 - **Team Contributions:** [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Team Reflection:** [REFLECTION.md](REFLECTION.md)
 - **Demo Guide:** [DEMO.md](DEMO.md)
-- **AWS Deployment Guide:** [AWS_DEPLOYMENT_GUIDE.md]
+- **AWS Deployment Guide:** [AWS_DEPLOYMENT_GUIDE.md](AWS_DEPLOYMENT_GUIDE.md)
 
 ---
 

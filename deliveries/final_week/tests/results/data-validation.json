@@ -1,11 +1,16 @@
 {
   "status": "passed",
-  "listings": 6332,
+  "listings": 6340,
   "districts": 20,
   "geocoded_street_or_building": 133,
-  "unknown_maintenance": 4445,
+  "geocoded_percentage": 2.1,
+  "unknown_maintenance": 4453,
+  "unknown_maintenance_percentage": 70.24,
   "possible_duplicate_rows": 24,
-  "model_prediction_rows_checked": 88,
-  "live_listings": 3002,
-  "live_new_listings": 2436
+  "live_listings": 3011,
+  "live_new_listings": 2444,
+  "live_updated_listings": 567,
+  "historical_input_rows": 3896,
+  "model_check": "passed",
+  "model_prediction_rows_checked": 6340
 }

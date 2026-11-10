@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Prepare the self-contained Week 10 offline catalogue and model bundle.
+"""Prepare the self-contained final catalogue and model bundle.
 
 Run from any working directory with the evaluation environment:
-    python /path/to/deliveries/week10/analytics/prepare_data.py
+    python /path/to/deliveries/final_week/analytics/prepare_data.py
 
-By default, inputs already copied under Week 10 are preferred. All inputs, historical source wrappers and model artifacts are contained in Week 10.
+Inputs, historical source wrappers and model artifacts are contained in this delivery.
 No other delivery folder is read or modified.
 """
 from __future__ import annotations
@@ -27,8 +27,8 @@ from threadpoolctl import threadpool_limits
 threadpool_limits(limits=1)
 
 
-WEEK10 = Path(__file__).resolve().parents[1]
-ROOT = WEEK10
+BASE_DIR = Path(__file__).resolve().parents[1]
+ROOT = BASE_DIR
 CONTEXT = [
     "crime_index_zone", "urban_convenience_index", "zone_composite_index",
     "idh_2019", "pct_pobreza_total", "proyectos_nuevos_distrito",
@@ -38,7 +38,7 @@ FEATURES = ["area_m2", "rooms", "bathrooms", "parking", "maintenance_fee", *CONT
 MODEL_NAME = "D_gradient_boosting"
 # Own Urbania capture (urbania/update.py). Its slugs map to historical district names;
 # Lima Cercado is not in the historical inventory, so it has no district context.
-LIVE_PATH = WEEK10 / "data/urbania/urbania_actual.csv"
+LIVE_PATH = BASE_DIR / "data/urbania/urbania_actual.csv"
 LIVE_DISTRICTS = {
     "ate-vitarte": "ATE", "barranco": "BARRANCO", "brena": "BREÑA", "chorrillos": "CHORRILLOS",
     "jesus-maria": "JESUS MARIA", "la-molina": "LA MOLINA", "la-victoria": "LA VICTORIA",
@@ -72,15 +72,15 @@ def first_existing(*paths: Path) -> Path:
 
 
 def load_portable_model(force_source: bool) -> tuple[dict, Path]:
-    contained = WEEK10 / "models/valuation_model.joblib"
-    source = WEEK10 / "models/source_model.joblib"
+    contained = BASE_DIR / "models/valuation_model.joblib"
+    source = BASE_DIR / "models/source_model.joblib"
     path = source if force_source else first_existing(contained, source)
     # The original fitted artifact contains thin estimator wrappers from this
     # source folder. They are needed only to read it; the exported bundle below
     # contains the plain sklearn pipeline and therefore needs no project imports.
     # Restore historical module names only to open the included trusted source
     # artifact. Exported valuation_model.joblib contains sklearn objects only.
-    reference = WEEK10 / "analytics/reference_evaluation"
+    reference = BASE_DIR / "analytics/reference_evaluation"
     for name in ("deliveries", "deliveries.evaluation", "deliveries.evaluation.code"):
         if name not in sys.modules:
             module = types.ModuleType(name)
@@ -138,7 +138,7 @@ def lima_date(value: str) -> str:
     return value if len(value) == 10 else datetime.fromisoformat(value).astimezone(LIMA).date().isoformat()
 
 
-def merge_live(raw: pd.DataFrame) -> tuple[pd.DataFrame, set[str], dict]:
+def merge_live(raw: pd.DataFrame, live_path: Path = LIVE_PATH) -> tuple[pd.DataFrame, set[str], dict]:
     """Add the active units of the own capture to the historical inventory.
 
     Only complete units enter: price in soles, total area, rooms and bathrooms. A listing
@@ -146,9 +146,9 @@ def merge_live(raw: pd.DataFrame) -> tuple[pd.DataFrame, set[str], dict]:
     geocoding) and takes the newer published price, area, rooms, bathrooms and address.
     """
     raw = raw.assign(listing_id=raw["listing_id"].astype(str), live_url=None, observed_at=None)
-    if not LIVE_PATH.exists():
+    if not live_path.exists():
         return raw, set(), {"liveListings": 0}
-    live = pd.read_csv(LIVE_PATH, dtype={"posting_id": str, "district": str, "last_observed_at": str})
+    live = pd.read_csv(live_path, dtype={"posting_id": str, "district": str, "last_observed_at": str})
     withdrawn = set(live.loc[live["state"] == "withdrawn", "posting_id"])
     number = {c: pd.to_numeric(live[c], errors="coerce") for c in ("price_pen", "area_m2", "bedrooms", "bathrooms")}
     usable = ((live["state"] == "active") & (live["listing_kind"] == "unit") & live["district"].isin(list(LIVE_DISTRICTS))
@@ -179,7 +179,7 @@ def merge_live(raw: pd.DataFrame) -> tuple[pd.DataFrame, set[str], dict]:
 
 
 def prepare_catalog(force_source: bool, model_bundle: dict, model_source: Path) -> tuple[Path, list[Path]]:
-    contained_data = WEEK10 / "data/listings_clean.csv"
+    contained_data = BASE_DIR / "data/listings_clean.csv"
     source_data = contained_data
     clean_path = source_data if force_source else first_existing(contained_data, source_data)
     raw = pd.read_csv(clean_path)
@@ -187,9 +187,9 @@ def prepare_catalog(force_source: bool, model_bundle: dict, model_source: Path) 
 
     # Load matching Week 7 context and listing metadata. Exact validated street
     # coordinates are the only coordinates exposed to the application.
-    geocoded_path = WEEK10 / "data/sources/listings_geocoded.csv"
-    zone_path = WEEK10 / "data/sources/zone_index_distrito.csv"
-    links_path = WEEK10 / "data/sources/duplicate_links_lookup.json"
+    geocoded_path = BASE_DIR / "data/sources/listings_geocoded.csv"
+    zone_path = BASE_DIR / "data/sources/zone_index_distrito.csv"
+    links_path = BASE_DIR / "data/sources/duplicate_links_lookup.json"
     geo = pd.read_csv(geocoded_path) if geocoded_path.exists() else pd.DataFrame()
     zones = pd.read_csv(zone_path) if zone_path.exists() else pd.DataFrame()
     links = json.loads(links_path.read_text(encoding="utf-8")) if links_path.exists() else {}
@@ -293,11 +293,11 @@ def prepare_catalog(force_source: bool, model_bundle: dict, model_source: Path) 
         "districts": unique_districts,
         "listings": items,
     }
-    output = WEEK10 / "data/catalog.json"
+    output = BASE_DIR / "data/catalog.json"
     write_json(output, catalog)
     if len({x["id"] for x in items}) != len(items):
         raise ValueError("IDs de listing duplicados en el catálogo.")
-    profile_output = WEEK10 / "data/demo_profiles.json"
+    profile_output = BASE_DIR / "data/demo_profiles.json"
     write_json(profile_output, [
         {"name": "María", "income": 8500, "savings": 100000, "budget": 550000,
          "minRooms": 2, "minArea": 55, "districts": ["Ate", "Santiago De Surco", "San Miguel"],
@@ -311,25 +311,25 @@ def prepare_catalog(force_source: bool, model_bundle: dict, model_source: Path) 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--from-source", action="store_true", help="reexportar el artefacto fuente incluido dentro de Week 10")
+    parser.add_argument("--from-source", action="store_true", help="reexportar el artefacto fuente incluido en esta entrega")
     args = parser.parse_args()
     model_bundle, model_source = load_portable_model(args.from_source)
     original_model_source = model_source
     if model_source.name != "valuation_model.joblib":
-        target_model = WEEK10 / "models/valuation_model.joblib"
+        target_model = BASE_DIR / "models/valuation_model.joblib"
         target_model.parent.mkdir(parents=True, exist_ok=True)
         joblib.dump(model_bundle, target_model, compress=3)
         model_source = target_model
     clean_path, outputs = prepare_catalog(args.from_source, model_bundle, model_source)
 
     input_paths = [clean_path, original_model_source]
-    for candidate in [WEEK10 / "data/sources/listings_geocoded.csv",
-                      WEEK10 / "data/sources/zone_index_distrito.csv",
-                      WEEK10 / "data/sources/duplicate_links_lookup.json", LIVE_PATH]:
+    for candidate in [BASE_DIR / "data/sources/listings_geocoded.csv",
+                      BASE_DIR / "data/sources/zone_index_distrito.csv",
+                      BASE_DIR / "data/sources/duplicate_links_lookup.json", LIVE_PATH]:
         if candidate.exists(): input_paths.append(candidate)
-    output_paths = [WEEK10 / "data/listings_clean.csv", *outputs,
-                    WEEK10 / "models/valuation_model.joblib"]
-    for directory in [WEEK10 / "models/evaluation", WEEK10 / "analytics/reference_evaluation"]:
+    output_paths = [BASE_DIR / "data/listings_clean.csv", *outputs,
+                    BASE_DIR / "models/valuation_model.joblib"]
+    for directory in [BASE_DIR / "models/evaluation", BASE_DIR / "analytics/reference_evaluation"]:
         output_paths.extend(path for path in directory.rglob("*") if path.is_file())
     # Preserve order while avoiding entries repeated in `outputs`.
     output_paths = list(dict.fromkeys(output_paths))
@@ -339,13 +339,13 @@ def main() -> int:
                    for path in input_paths],
         "outputs": [{"path": str(path.relative_to(ROOT)), "sha256": sha256(path), "bytes": path.stat().st_size}
                     for path in output_paths if path.exists()],
-        "counts": json.loads((WEEK10 / "data/catalog.json").read_text(encoding="utf-8"))["metadata"]["counts"],
+        "counts": json.loads((BASE_DIR / "data/catalog.json").read_text(encoding="utf-8"))["metadata"]["counts"],
         "modelName": MODEL_NAME,
         "limitations": ["La disponibilidad de publicaciones no está verificada.",
                         "Solo se incluyen coordenadas validadas a nivel de calle.",
                         "Las métricas reportan la prueba final histórica; los perfiles no implican recomendación financiera."],
     }
-    write_json(WEEK10 / "data/manifest.json", manifest)
+    write_json(BASE_DIR / "data/manifest.json", manifest)
     print(json.dumps(manifest["counts"], ensure_ascii=False))
     return 0
 

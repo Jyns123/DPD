@@ -199,8 +199,8 @@
 | ID | Constraint | Description |
 |----|------------|-------------|
 | DC-1 | Historical Data | Listings are not verified for current availability |
-| DC-2 | Limited Geocoding | Only 133/3,896 listings have precise coordinates |
-| DC-3 | Maintenance Data | 2,009 listings lack maintenance fee information |
+| DC-2 | Limited Geocoding | Only 133/6,340 catalog listings (2.1%) have precise coordinates |
+| DC-3 | Maintenance Data | 4,453 of 6,340 catalog listings (70.24%) lack maintenance fee information; 2,009 belong to the historical base |
 | DC-4 | District Coverage | Limited to 20 districts in dataset |
 
 ### 5.4 Scope Constraints
@@ -304,7 +304,7 @@
 | Risk | Likelihood | Impact | Mitigation |
 |------|------------|--------|------------|
 | Historical data not representative | High | High | Clearly document limitation; plan for real-time data integration |
-| Model estimates inaccurate for luxury segment | Medium | Medium | Segment model by price range; show confidence intervals |
+| Model estimates inaccurate for luxury segment | Medium | Medium | Report segment error; evaluate segmentation and recalibrated intervals in future work |
 | Geocoding coverage limited | Medium | Low | Clearly document limitation; improve coverage in future |
 
 ### 8.3 User Risks

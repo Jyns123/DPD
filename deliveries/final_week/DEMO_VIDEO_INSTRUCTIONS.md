@@ -30,7 +30,7 @@ The video must explain and demonstrate:
 
 3. **Data** (30-45 seconds)
    - Data sources (Urbania dataset, district indicators)
-   - Dataset characteristics (6,332 catalog listings, 20 districts; 3,896 historical records used for evaluation)
+   - Dataset characteristics (6,340 catalog listings, 20 districts; 3,896 historical records used for evaluation)
    - Data limitations (dated capture, no verification of current availability)
 
 4. **Principal Product Features** (2-3 minutes)
@@ -93,7 +93,7 @@ The video must explain and demonstrate:
 **Visual:** Dataset statistics, district map
 
 **Narration:**
-"InmoScore's application catalog contains 6,332 listings across 20 districts: 3,896 historical records and listings from an Urbania capture observed on October 24, 2026. District-level indicators include crime index, urban convenience, and socioeconomic data from INEI. The model evaluation uses the 3,896 historical records. Availability is not verified, and only 133 catalog listings have precise geocoding."
+"InmoScore's application catalog contains 6,340 listings across 20 districts: 3,896 historical records and listings from dated Urbania captures; only 37 catalogue listings were observed during the partial refresh on November 8, 2026. District-level indicators include crime index, urban convenience, and socioeconomic data from INEI. The model evaluation uses the 3,896 historical records. Availability is not verified, and only 133 catalog listings have precise geocoding."
 
 ### Part 4: Product Features - Registration and Profile (45 seconds)
 

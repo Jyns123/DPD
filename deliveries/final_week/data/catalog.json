@@ -2,9 +2,9 @@
   "metadata": {
     "source": "Urbania vía dataset público histórico y captura propia de avisos activos; fuentes distritales",
     "dataAsOf": "2026-09-02",
-    "preparedAt": "2026-10-24T15:02:49.520746+00:00",
+    "preparedAt": "2026-11-08T17:22:01.630421+00:00",
     "counts": {
-      "listings": 6332,
+      "listings": 6340,
       "districts": 20,
       "preciseLocations": 133
     },
@@ -14,11 +14,11 @@
     "scope": "historical+live",
     "notice": "Inventario histórico y avisos vistos en Urbania; disponibilidad no verificada.",
     "live": {
-      "liveListings": 3002,
-      "liveNew": 2436,
-      "liveUpdated": 566,
-      "liveExcluded": 588,
-      "liveDataAsOf": "2026-10-24"
+      "liveListings": 3011,
+      "liveNew": 2444,
+      "liveUpdated": 567,
+      "liveExcluded": 589,
+      "liveDataAsOf": "2026-11-08"
     }
   },
   "districts": [
@@ -3937,7 +3937,7 @@
       "availability": "unverified",
       "duplicateGroupId": "7d2d06aacce848c9",
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "148357076",
@@ -4512,7 +4512,7 @@
       "availability": "unverified",
       "duplicateGroupId": "c647dcb41a70c7db",
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "148475534",
@@ -5379,14 +5379,14 @@
       "district": "Barranco",
       "address": "AVENIDA PEDRO DE OSMA",
       "price": 696218.0,
-      "area": 83.0,
+      "area": 82.0,
       "rooms": 2,
       "bathrooms": 2,
       "parking": 0,
       "maintenance": 499.0,
-      "predictedPrice": 680093,
+      "predictedPrice": 673379,
       "scores": {
-        "price": 0.426,
+        "price": 0.396,
         "safety": 0.064,
         "convenience": 0.851
       },
@@ -5395,9 +5395,11 @@
       "flags": [
         "missing_geocode"
       ],
-      "url": null,
+      "url": "https://urbania.pe/inmueble/clasificado/veclapin-venta-de-departamento-en-barranco-lima-2-dormitorios-146007021",
       "availability": "unverified",
-      "duplicateGroupId": "f6546bb33993abb1"
+      "duplicateGroupId": "f6546bb33993abb1",
+      "source": "urbania_fase1",
+      "observedAt": "2026-11-08"
     },
     {
       "id": "148049495",
@@ -54092,7 +54094,7 @@
       "availability": "unverified",
       "duplicateGroupId": "35ac9123128b71d9",
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "4412841",
@@ -107310,7 +107312,7 @@
       "id": "149338547",
       "district": "Miraflores",
       "address": "Calle Lola Pardo Vargas al 0",
-      "price": 714000.0,
+      "price": 688893.0,
       "area": 141.0,
       "rooms": 3,
       "bathrooms": 2,
@@ -107318,7 +107320,7 @@
       "maintenance": null,
       "predictedPrice": 1076162,
       "scores": {
-        "price": 0.985,
+        "price": 0.989,
         "safety": 0.043,
         "convenience": 0.957
       },
@@ -107332,7 +107334,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-20"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "149350691",
@@ -108648,7 +108650,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-22"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "149796712",
@@ -111728,7 +111730,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "150108849",
@@ -116852,7 +116854,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "150423614",
@@ -117272,7 +117274,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "150441765",
@@ -118700,7 +118702,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "150504923",
@@ -122088,7 +122090,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-22"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "150630759",
@@ -123880,7 +123882,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "150692913",
@@ -131104,13 +131106,13 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "150872598",
       "district": "Miraflores",
       "address": "Av. Parque Armendariz 159 - Piso 6",
-      "price": 2175900.0,
+      "price": 2052750.0,
       "area": 180.0,
       "rooms": 2,
       "bathrooms": 2,
@@ -131132,7 +131134,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "150872692",
@@ -131552,7 +131554,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-20"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "150880797",
@@ -131586,7 +131588,7 @@
       "id": "150881049",
       "district": "Miraflores",
       "address": "CALLE SAN MARTIN",
-      "price": 952000.0,
+      "price": 918000.0,
       "area": 150.0,
       "rooms": 3,
       "bathrooms": 2,
@@ -131594,7 +131596,7 @@
       "maintenance": null,
       "predictedPrice": 1091252,
       "scores": {
-        "price": 0.831,
+        "price": 0.879,
         "safety": 0.043,
         "convenience": 0.957
       },
@@ -131608,7 +131610,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-22"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "150884907",
@@ -135080,7 +135082,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "150958825",
@@ -135444,7 +135446,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "150969341",
@@ -136900,7 +136902,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "150997265",
@@ -139252,7 +139254,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "151047310",
@@ -142422,7 +142424,7 @@
       "id": "151102824",
       "district": "Barranco",
       "address": "Jirón Tacna 440",
-      "price": 825060.0,
+      "price": 795000.0,
       "area": 91.0,
       "rooms": 2,
       "bathrooms": 2,
@@ -142430,7 +142432,7 @@
       "maintenance": null,
       "predictedPrice": 752086,
       "scores": {
-        "price": 0.229,
+        "price": 0.329,
         "safety": 0.064,
         "convenience": 0.851
       },
@@ -142444,7 +142446,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "151103344",
@@ -147008,7 +147010,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "151170909",
@@ -149584,7 +149586,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "151208643",
@@ -152048,7 +152050,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-21"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "151248713",
@@ -158236,7 +158238,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "151341506",
@@ -159440,7 +159442,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-22"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "151356333",
@@ -162576,7 +162578,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "151380378",
@@ -166331,6 +166333,34 @@
       "observedAt": "2026-10-24"
     },
     {
+      "id": "151413800",
+      "district": "Barranco",
+      "address": "Jirón Fedelli 105",
+      "price": 477400.0,
+      "area": 42.0,
+      "rooms": 1,
+      "bathrooms": 1,
+      "parking": null,
+      "maintenance": null,
+      "predictedPrice": 453349,
+      "scores": {
+        "price": 0.34,
+        "safety": 0.064,
+        "convenience": 0.851
+      },
+      "location": null,
+      "dataPartial": true,
+      "flags": [
+        "maintenance_unknown",
+        "missing_geocode"
+      ],
+      "url": "https://urbania.pe/inmueble/clasificado/veclapin-venta-de-departamento-en-barranco-lima-1-dormitorio-151413800",
+      "availability": "unverified",
+      "duplicateGroupId": null,
+      "source": "urbania_fase1",
+      "observedAt": "2026-11-08"
+    },
+    {
       "id": "151414037",
       "district": "Santiago De Surco",
       "address": "Avenida Manuel Olguin al 400",
@@ -167112,7 +167142,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "151422795",
@@ -167532,7 +167562,7 @@
       "availability": "unverified",
       "duplicateGroupId": null,
       "source": "urbania_fase1",
-      "observedAt": "2026-10-24"
+      "observedAt": "2026-11-08"
     },
     {
       "id": "151429469",
@@ -167757,6 +167787,34 @@
       "duplicateGroupId": null,
       "source": "urbania_fase1",
       "observedAt": "2026-10-24"
+    },
+    {
+      "id": "151432070",
+      "district": "Miraflores",
+      "address": "av. Pardo al 1100",
+      "price": 686550.0,
+      "area": 88.0,
+      "rooms": 2,
+      "bathrooms": 2,
+      "parking": null,
+      "maintenance": null,
+      "predictedPrice": 685377,
+      "scores": {
+        "price": 0.495,
+        "safety": 0.043,
+        "convenience": 0.957
+      },
+      "location": null,
+      "dataPartial": true,
+      "flags": [
+        "maintenance_unknown",
+        "missing_geocode"
+      ],
+      "url": "https://urbania.pe/inmueble/clasificado/veclapin-venta-de-departamento-en-miraflores-lima-2-dormitorios-151432070",
+      "availability": "unverified",
+      "duplicateGroupId": null,
+      "source": "urbania_fase1",
+      "observedAt": "2026-11-08"
     },
     {
       "id": "151432095",
@@ -168625,6 +168683,174 @@
       "duplicateGroupId": null,
       "source": "urbania_fase1",
       "observedAt": "2026-10-24"
+    },
+    {
+      "id": "151478049",
+      "district": "Miraflores",
+      "address": "Casimiro Ulloa al 300",
+      "price": 914250.0,
+      "area": 100.0,
+      "rooms": 2,
+      "bathrooms": 2,
+      "parking": null,
+      "maintenance": null,
+      "predictedPrice": 731533,
+      "scores": {
+        "price": 0.042,
+        "safety": 0.043,
+        "convenience": 0.957
+      },
+      "location": null,
+      "dataPartial": true,
+      "flags": [
+        "maintenance_unknown",
+        "missing_geocode"
+      ],
+      "url": "https://urbania.pe/inmueble/clasificado/veclapin-venta-de-departamento-en-miraflores-lima-2-dormitorios-151478049",
+      "availability": "unverified",
+      "duplicateGroupId": null,
+      "source": "urbania_fase1",
+      "observedAt": "2026-11-08"
+    },
+    {
+      "id": "151478380",
+      "district": "Barranco",
+      "address": "Av. El Sol Oeste Cdra 2 Piso 8 Barranco",
+      "price": 621000.0,
+      "area": 66.0,
+      "rooms": 2,
+      "bathrooms": 2,
+      "parking": null,
+      "maintenance": null,
+      "predictedPrice": 574528,
+      "scores": {
+        "price": 0.267,
+        "safety": 0.064,
+        "convenience": 0.851
+      },
+      "location": null,
+      "dataPartial": true,
+      "flags": [
+        "maintenance_unknown",
+        "missing_geocode"
+      ],
+      "url": "https://urbania.pe/inmueble/clasificado/veclapin-venta-de-departamento-en-barranco-lima-2-dormitorios-151478380",
+      "availability": "unverified",
+      "duplicateGroupId": null,
+      "source": "urbania_fase1",
+      "observedAt": "2026-11-08"
+    },
+    {
+      "id": "151497748",
+      "district": "Barranco",
+      "address": "Pedro de Osma",
+      "price": 433728.0,
+      "area": 37.0,
+      "rooms": 1,
+      "bathrooms": 1,
+      "parking": null,
+      "maintenance": null,
+      "predictedPrice": 394380,
+      "scores": {
+        "price": 0.223,
+        "safety": 0.064,
+        "convenience": 0.851
+      },
+      "location": null,
+      "dataPartial": true,
+      "flags": [
+        "maintenance_unknown",
+        "missing_geocode"
+      ],
+      "url": "https://urbania.pe/inmueble/clasificado/veclapin-venta-de-departamento-en-barranco-lima-1-dormitorio-151497748",
+      "availability": "unverified",
+      "duplicateGroupId": null,
+      "source": "urbania_fase1",
+      "observedAt": "2026-11-08"
+    },
+    {
+      "id": "151508741",
+      "district": "Barranco",
+      "address": "Jr Ramon Ribeyro 900",
+      "price": 748000.0,
+      "area": 114.0,
+      "rooms": 2,
+      "bathrooms": 2,
+      "parking": null,
+      "maintenance": null,
+      "predictedPrice": 789190,
+      "scores": {
+        "price": 0.658,
+        "safety": 0.064,
+        "convenience": 0.851
+      },
+      "location": null,
+      "dataPartial": true,
+      "flags": [
+        "maintenance_unknown",
+        "missing_geocode"
+      ],
+      "url": "https://urbania.pe/inmueble/clasificado/veclapin-venta-de-departamento-en-barranco-lima-2-dormitorios-151508741",
+      "availability": "unverified",
+      "duplicateGroupId": null,
+      "source": "urbania_fase1",
+      "observedAt": "2026-11-08"
+    },
+    {
+      "id": "151513202",
+      "district": "Barranco",
+      "address": "AV Republica DE Panama 348 Dpto 5 - Barranco",
+      "price": 430000.0,
+      "area": 69.0,
+      "rooms": 3,
+      "bathrooms": 2,
+      "parking": null,
+      "maintenance": null,
+      "predictedPrice": 582153,
+      "scores": {
+        "price": 0.963,
+        "safety": 0.064,
+        "convenience": 0.851
+      },
+      "location": null,
+      "dataPartial": true,
+      "flags": [
+        "maintenance_unknown",
+        "missing_geocode"
+      ],
+      "url": "https://urbania.pe/inmueble/clasificado/veclapin-venta-de-departamento-en-barranco-lima-3-dormitorios-151513202",
+      "availability": "unverified",
+      "duplicateGroupId": null,
+      "source": "urbania_fase1",
+      "observedAt": "2026-11-08"
+    },
+    {
+      "id": "151535486",
+      "district": "Barranco",
+      "address": "San Martín 625",
+      "price": 399000.0,
+      "area": 49.0,
+      "rooms": 1,
+      "bathrooms": 1,
+      "parking": null,
+      "maintenance": null,
+      "predictedPrice": 447659,
+      "scores": {
+        "price": 0.796,
+        "safety": 0.064,
+        "convenience": 0.851
+      },
+      "location": null,
+      "dataPartial": true,
+      "flags": [
+        "maintenance_unknown",
+        "missing_geocode"
+      ],
+      "url": "https://urbania.pe/inmueble/clasificado/veclapin-venta-de-departamento-en-barranco-lima-1-dormitorio-151535486",
+      "availability": "unverified",
+      "duplicateGroupId": null,
+      "source": "urbania_fase1",
+      "observedAt": "2026-11-08"
     },
     {
       "id": "3743351",

@@ -2,7 +2,7 @@ import catalogData from "../data/catalog.json";
 import type { CatalogListing } from "./recommendation";
 
 type Catalog = {
-  metadata: Record<string, unknown>;
+  metadata: { live?: { liveDataAsOf?: string | null } };
   listings: CatalogListing[];
   districts: string[];
 };
@@ -20,6 +20,10 @@ export function getListing(id: string): CatalogListing | undefined {
 
 export function getDistricts(): string[] {
   return catalog.districts;
+}
+
+export function getCaptureDate(): string | null {
+  return catalog.metadata.live?.liveDataAsOf ?? null;
 }
 
 export function isKnownListing(id: unknown): id is string {

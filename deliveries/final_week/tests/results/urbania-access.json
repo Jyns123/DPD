@@ -1,0 +1,270 @@
+{
+  "checked_on": "2026-11-08",
+  "timezone": "America/Lima",
+  "conclusion": "intermittent_http_access; partial_capture_integrated; unattended_full_refresh_not_verified",
+  "curl_probe": {
+    "robots_status": 200,
+    "listing_status": 403,
+    "cf_mitigated": "challenge"
+  },
+  "successful_module_probe": {
+    "started_at": "2026-11-08T17:09:16.894675+00:00",
+    "finished_at": "2026-11-08T17:09:37.702477+00:00",
+    "status": "ok",
+    "complete_districts": 0,
+    "districts": 2,
+    "exported": 60,
+    "results": [
+      {
+        "district": "miraflores",
+        "run_id": 1,
+        "complete": false,
+        "reason": "Límite de páginas",
+        "error": null,
+        "unique_ids": 30,
+        "pages": 1,
+        "stats": {
+          "new": 30,
+          "changed": 0,
+          "unchanged": 0,
+          "excluded": 0
+        }
+      },
+      {
+        "district": "barranco",
+        "run_id": 2,
+        "complete": false,
+        "reason": "Límite de páginas",
+        "error": null,
+        "unique_ids": 30,
+        "pages": 1,
+        "stats": {
+          "new": 30,
+          "changed": 0,
+          "unchanged": 0,
+          "excluded": 0
+        }
+      }
+    ]
+  },
+  "full_refresh_attempt": {
+    "started_at": "2026-11-08T17:12:57.786171+00:00",
+    "finished_at": "2026-11-08T17:13:07.960383+00:00",
+    "status": "blocked",
+    "complete_districts": 0,
+    "districts": 20,
+    "restored_from_csv": 3590,
+    "exported": 3590,
+    "results": [
+      {
+        "district": "miraflores",
+        "run_id": 1,
+        "complete": false,
+        "reason": "HTTP 403; no reintentar ni marcar avisos retirados",
+        "error": "CaptureStopped",
+        "unique_ids": 0,
+        "pages": 0,
+        "stats": {
+          "new": 0,
+          "changed": 0,
+          "unchanged": 0,
+          "excluded": 0
+        }
+      },
+      {
+        "district": "santiago-de-surco",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      },
+      {
+        "district": "san-isidro",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      },
+      {
+        "district": "san-miguel",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      },
+      {
+        "district": "san-borja",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      },
+      {
+        "district": "surquillo",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      },
+      {
+        "district": "jesus-maria",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      },
+      {
+        "district": "magdalena",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      },
+      {
+        "district": "barranco",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      },
+      {
+        "district": "lima-cercado",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      },
+      {
+        "district": "chorrillos",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      },
+      {
+        "district": "pueblo-libre",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      },
+      {
+        "district": "lince",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      },
+      {
+        "district": "la-victoria",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      },
+      {
+        "district": "la-molina",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      },
+      {
+        "district": "brena",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      },
+      {
+        "district": "ate-vitarte",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      },
+      {
+        "district": "los-olivos",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      },
+      {
+        "district": "san-martin-de-porres",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      },
+      {
+        "district": "san-juan-de-lurigancho",
+        "complete": false,
+        "reason": "Omitido: el sitio bloqueó la ejecución",
+        "error": null
+      }
+    ],
+    "note": "Temporary validation attempt before no-overwrite fix; no source CSV was replaced by this blocked run."
+  },
+  "integration": {
+    "source": "HTML pages and observation timestamps from successful_module_probe; partial local import, not a successful full sweep",
+    "pages": [
+      {
+        "url": "https://urbania.pe/buscar/venta-de-departamentos-en-miraflores--lima--lima",
+        "observed_at": "2026-11-08T17:09:27.066878+00:00",
+        "sha256": "673d6d2b6e3a6c3974ffd1e05783e500ac94a1468810d1de142f41bce10d424f",
+        "rows": 30,
+        "stats": {
+          "new": 3,
+          "changed": 6,
+          "unchanged": 21,
+          "excluded": 0
+        }
+      },
+      {
+        "url": "https://urbania.pe/buscar/venta-de-departamentos-en-barranco--lima--lima",
+        "observed_at": "2026-11-08T17:09:37.535281+00:00",
+        "sha256": "dd6a2b15c7e37f5a944f9f1fedc62cd0c556cbf77fbc988d00ba541e3daa1f14",
+        "rows": 30,
+        "stats": {
+          "new": 7,
+          "changed": 3,
+          "unchanged": 20,
+          "excluded": 0
+        }
+      }
+    ],
+    "captured_rows": 60,
+    "new_capture_ids": 10,
+    "changed_capture_rows": 9,
+    "unchanged_capture_rows": 41,
+    "capture_store_rows": 3600,
+    "catalog_rows": 6340,
+    "catalog_observed_today": 37,
+    "catalog_observation_dates": {
+      "2026-10-24": 2274,
+      "2026-11-08": 37,
+      "2026-10-20": 121,
+      "2026-10-22": 383,
+      "2026-10-21": 196
+    },
+    "full_validation": {
+      "status": "passed",
+      "listings": 6340,
+      "districts": 20,
+      "geocoded_street_or_building": 133,
+      "geocoded_percentage": 2.1,
+      "unknown_maintenance": 4453,
+      "unknown_maintenance_percentage": 70.24,
+      "possible_duplicate_rows": 24,
+      "live_listings": 3011,
+      "live_new_listings": 2444,
+      "live_updated_listings": 567,
+      "historical_input_rows": 3896,
+      "model_check": "passed",
+      "model_prediction_rows_checked": 6340
+    }
+  },
+  "tests": {
+    "urbania": {
+      "passed": 56,
+      "failed": 0
+    }
+  },
+  "limits": [
+    "Only one page each of Miraflores and Barranco was captured successfully.",
+    "A separate 20-district sweep stopped at its first listing (HTTP 403), skipping the remaining 19 districts.",
+    "No CAPTCHA solving, proxy rotation, browser fingerprint spoofing or challenge bypass was used.",
+    "Success locally does not certify GitHub Actions network access."
+  ],
+  "github_existing_workflow": {
+    "url": "https://github.com/Jyns123/DPD/actions/runs/42503761775",
+    "conclusion": "failure",
+    "failed_step": "Capturar listados de Urbania",
+    "recent_five_runs": "failure",
+    "note": "Existing committed workflow failed in capture. Local changes have not been pushed.",
+    "capture_error": "HTTP 403; CaptureStopped; exit code 2"
+  }
+}

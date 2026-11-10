@@ -1,5 +1,5 @@
 {
-  "name": "inmoscore-week14",
+  "name": "inmoscore-final",
   "version": "1.0.0",
   "private": true,
   "engines": {
@@ -9,12 +9,14 @@
     "dev": "node scripts/start-local.mjs dev --webpack",
     "build": "node scripts/start-local.mjs build --webpack",
     "start": "node scripts/start-local.mjs start",
-    "lint": "eslint . --ignore-pattern .next",
+    "lint": "eslint . --ignore-pattern .next --max-warnings 0",
     "typecheck": "tsc --noEmit",
     "test": "node --experimental-strip-types --test tests/backend.test.ts tests/auth.test.ts tests/database.test.ts",
     "test:api": "node tests/api-smoke.mjs",
     "data:prepare": ".venv/bin/python analytics/prepare_data.py",
-    "data:refresh": ".venv/bin/python urbania/update.py --db data/urbania/urbania.sqlite --out data/urbania/urbania_actual.csv && .venv/bin/python analytics/prepare_data.py"
+    "data:refresh": ".venv/bin/python urbania/update.py --db data/urbania/urbania.sqlite --out data/urbania/urbania_actual.csv && .venv/bin/python analytics/prepare_data.py && .venv/bin/python analytics/validate_data.py",
+    "data:validate": ".venv/bin/python analytics/validate_data.py",
+    "test:data": ".venv/bin/python -m unittest discover -s analytics/tests -v"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
