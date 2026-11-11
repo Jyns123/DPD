@@ -16,7 +16,7 @@
     "data:prepare": "node scripts/run-python.mjs analytics/prepare_data.py",
     "data:check": "node scripts/run-python.mjs analytics/validate_data.py",
     "model:evaluate": "node scripts/run-python.mjs analytics/reference_evaluation/run_evaluation.py",
-    "data:refresh": ".venv/bin/python urbania/update.py --db data/urbania/urbania.sqlite --out data/urbania/urbania_actual.csv && .venv/bin/python analytics/prepare_data.py"
+    "data:refresh": "node scripts/run-python.mjs scripts/refresh_data.py"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

@@ -1,7 +1,6 @@
 """Actualización periódica: recorre sin filtros los distritos del catálogo con un solo cliente HTTP.
 Respeta robots y 10 s entre solicitudes; ante 403/429/verificación detiene toda la ejecución, sin bypass."""
 import argparse
-import fcntl
 import json
 import os
 from datetime import datetime, timezone
@@ -11,28 +10,46 @@ from urbania_phase1 import DISTRICTS, Search, Store
 
 # robots.txt (consultado el 20-10-2026) permite page=2..5 y excluye las páginas siguientes.
 MAX_PAGES=5
-EXIT_CODES={'ok':0,'skipped':0,'error':1,'blocked':2}
+EXIT_CODES={'ok':0,'skipped':3,'error':1,'blocked':2}
+
+def acquire_lock(lock):
+ if os.name == 'nt':
+  import msvcrt
+  lock.seek(0);lock.write(b'\0');lock.flush();lock.seek(0)
+  try:msvcrt.locking(lock.fileno(),msvcrt.LK_NBLCK,1)
+  except OSError:return False
+ else:
+  import fcntl
+  try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+  except BlockingIOError:return False
+ return True
 
 def update(db_path='urbania.sqlite',districts=None,max_pages=MAX_PAGES,evidence_dir='captures',out='urbania_actual.csv',client=None):
- with open(db_path+'.lock','w') as lock:
+ Path(db_path).parent.mkdir(parents=True,exist_ok=True)
+ with open(db_path+'.lock','a+b') as lock:
   # Un único proceso por base: si otra actualización la está usando, esta no hace nada.
-  try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
-  except BlockingIOError:return {'status':'skipped','reason':'Otra actualización usa la misma base'}
+  if not acquire_lock(lock):return {'status':'skipped','reason':'Otra actualización usa la misma base'}
+  seed=Store(db_path)
+  try:restored=seed.restore_export(out) if out else 0
+  finally:seed.close()
   client=client or Client();started=datetime.now(timezone.utc);results=[]
   for district in districts or list(DISTRICTS):
    # Tras un bloqueo no se consulta nada más: los distritos pendientes quedan sin evidencia.
    if client.stopped:results.append({'district':district,'complete':False,'reason':'Omitido: el sitio bloqueó la ejecución','error':None});continue
    results.append({'district':district,**capture(Search(district),db_path,max_pages,client,evidence_dir)})
+  status='blocked' if client.stopped else 'error' if any(r['error'] for r in results) else 'ok'
   exported=0
-  if out:
+  # A failed or blocked run must not replace the last published CSV, even if
+  # an earlier district in this run was readable. Keep partial work in SQLite.
+  if out and status=='ok':
+   Path(out).parent.mkdir(parents=True,exist_ok=True)
    db=Store(db_path)
    try:exported=db.export(out+'.tmp')
    finally:db.close()
    # Reemplazo atómico: quien lea el CSV nunca ve un archivo a medio escribir.
    if exported:os.replace(out+'.tmp',out)
-  status='blocked' if client.stopped else 'error' if any(r['error'] for r in results) else 'ok'
   summary={'started_at':started.isoformat(),'finished_at':datetime.now(timezone.utc).isoformat(),'status':status,
-   'complete_districts':sum(r['complete'] for r in results),'districts':len(results),'exported':exported,'results':results}
+   'complete_districts':sum(r['complete'] for r in results),'districts':len(results),'restored_from_csv':restored,'exported':exported,'results':results}
   folder=Path(evidence_dir)/'updates';folder.mkdir(parents=True,exist_ok=True)
   (folder/f'{started:%Y%m%dT%H%M%SZ}.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
   return summary

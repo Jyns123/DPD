@@ -261,6 +261,54 @@ class Store:
    CREATE TABLE IF NOT EXISTS checks(id INTEGER PRIMARY KEY,posting_id TEXT NOT NULL,checked_at TEXT NOT NULL,
     http_status INTEGER NOT NULL,evidence TEXT NOT NULL);
   ''')
+ def restore_export(self,path):
+  """Seed an empty database from its CSV without pretending it was seen today.
+
+  Final delivery may include only the export. Preserve timestamps, states and
+  scope membership so a scheduled cold start does not discard earlier pages.
+  """
+  if self.db.execute('SELECT COUNT(*) FROM listings').fetchone()[0]:return 0
+  path=Path(path)
+  if not path.exists():return 0
+  records=[];seen=set()
+  numeric={'price_pen','price_usd','bedrooms','bedrooms_min','bedrooms_max',
+           'area_m2','area_m2_min','area_m2_max','bathrooms','bathrooms_min','bathrooms_max'}
+  with path.open(newline='',encoding='utf-8-sig') as stream:
+   for original in csv.DictReader(stream):
+    pid=original['posting_id'];url=canonical_posting(original['url'])
+    if pid in seen or re.search(r'-(\d+)$',url)[1]!=pid:raise ValueError('ID duplicado o inválido en CSV inicial')
+    if original['source']!='urbania':raise ValueError('Fuente no reconocida en CSV inicial')
+    seen.add(pid);row={k:(original.get(k) or None) for k in CONTENT_FIELDS};row['url']=url
+    for field in numeric:
+     value=original.get(field);row[field]=number(value) if value else None
+     if value and row[field] is None:raise ValueError(f'Número inválido en CSV inicial: {field}')
+    flag=original.get('price_is_from','').lower()
+    if flag not in {'true','false','1','0'}:raise ValueError('price_is_from inválido en CSV inicial')
+    row['price_is_from']=flag in {'true','1'}
+    row['quality_flags']=[s.strip() for s in (original.get('quality_flags') or '').split(' | ') if s.strip()]
+    state=original['state']
+    if state not in {'active','not_observed','withdrawal_pending','withdrawn'}:raise ValueError('Estado inválido en CSV inicial')
+    first,last,observed=(original[k] for k in ['first_ingested_at','last_ingested_at','last_observed_at'])
+    for value in [first,last,observed]:datetime.fromisoformat(value)
+    serialized=json.dumps(stable_payload(row),sort_keys=True,ensure_ascii=False)
+    legacy_run=int(original['last_seen_run']) if original.get('last_seen_run') else None
+    if legacy_run is not None and legacy_run<0:raise ValueError('last_seen_run inválido en CSV inicial')
+    records.append((pid,first,last,observed,serialized,hashlib.sha256(serialized.encode()).hexdigest(),state,row['district'],legacy_run))
+  self.db.execute('BEGIN IMMEDIATE')
+  try:
+   # Keep old export counters without colliding with IDs of new runs. This is
+   # a bootstrap boundary marker, not a reconstruction of historical run logs.
+   boundary=max((r[-1] or 0 for r in records),default=0)
+   existing_boundary=self.db.execute('SELECT COALESCE(MAX(id),0) FROM runs').fetchone()[0]
+   if boundary>existing_boundary:self.db.execute("INSERT INTO runs VALUES(?,?,?,'restored_csv_boundary')",(boundary,utcnow(),utcnow()))
+   for pid,first,last,observed,serialized,digest,state,district,legacy_run in records:
+    self.db.execute('INSERT INTO listings(source,posting_id,first_ingested_at,last_ingested_at,last_observed_at,payload,content_hash,state,last_seen_run) VALUES(?,?,?,?,?,?,?,?,?)',
+                    ('urbania',pid,first,last,observed,serialized,digest,state,legacy_run))
+    self.db.execute('INSERT INTO versions(source,posting_id,hash,observed_at,payload) VALUES(?,?,?,?,?)',('urbania',pid,digest,observed,serialized))
+    if district in DISTRICTS:self.db.execute('INSERT INTO members VALUES(?,?,?,0)',(Search(district).key,pid,legacy_run or 0))
+   self.db.execute('COMMIT')
+  except Exception:self.db.execute('ROLLBACK');raise
+  return len(records)
  def close(self):self.db.close()
  def start(self,now=None):
   return self.db.execute("INSERT INTO runs(started_at,state) VALUES(?,'running')",(now or utcnow(),)).lastrowid

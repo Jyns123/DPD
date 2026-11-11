@@ -1,13 +1,11 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { flushSync } from "react-dom";
 import type {
   BuyerProfile,
   CatalogListing,
   RankedListing,
 } from "../lib/recommendation";
 import { needsInputReview, validateProfile } from "../lib/recommendation";
-import demoProfiles from "../data/demo_profiles.json";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -37,7 +35,6 @@ import {
   Bookmark,
   Building2,
   LoaderCircle,
-  CircleHelp,
 } from "lucide-react";
 
 type Me = {
@@ -64,21 +61,8 @@ const DEFAULT: BuyerProfile = {
   districts: [],
   weights: { price: 0.35, safety: 0.35, convenience: 0.3 },
 };
-// The example button and the manual use the same JSON, including catalog district names.
-const mariaSource = demoProfiles.find((example) => example.name === "María");
-const MARIA: BuyerProfile | undefined = mariaSource && {
-  ...mariaSource,
-  districts: [...mariaSource.districts],
-};
-const carlosSource = demoProfiles.find((example) => example.name === "Carlos");
-const CARLOS: BuyerProfile | undefined = carlosSource && {
-  ...carlosSource,
-  districts: [...carlosSource.districts],
-};
 const MONEY = new Intl.NumberFormat("es-PE", { maximumFractionDigits: 0 });
 const soles = (n: number) => `S/ ${MONEY.format(n)}`;
-const thousands = (n: number) =>
-  String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 const day = (iso?: string | null) =>
   iso ? iso.slice(0, 10).split("-").reverse().join("/") : "fecha desconocida";
 const PHOTOS = ["/interior.jpg", "/interior-2.jpg", "/interior-3.jpg"];
@@ -116,18 +100,7 @@ function pricePerSquareMeter(item: CatalogListing) {
   return `${soles(Math.round(item.price / item.area))} por m²`;
 }
 function changePage(update: () => void) {
-  const screen = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const page = document as Document & {
-    startViewTransition?: (callback: () => void) => { finished: Promise<void> };
-  };
-  if (screen.matches || !page.startViewTransition) {
-    update();
-    return;
-  }
-  document.documentElement.classList.add("view-transition-active");
-  page.startViewTransition(() => flushSync(update)).finished.finally(() => {
-    document.documentElement.classList.remove("view-transition-active");
-  });
+  update();
 }
 function districtIndicator(
   item: CatalogListing,
@@ -194,25 +167,7 @@ function Link({
     </a>
   );
 }
-function Notice() {
-  return (
-    <div className="data-notice" role="note">
-      <Info size={16} aria-hidden="true" />
-      <span>
-        <strong>Importante:</strong> El catálogo combina avisos históricos y una
-        captura de Urbania del 24/10/2026; no confirma disponibilidad actual.
-        Verifícala con el anunciante. Puedes explorar sin cuenta; crea una solo
-        para guardar viviendas.
-      </span>
-    </div>
-  );
-}
-
-export default function InmoScoreApp({
-  listingCount,
-}: {
-  listingCount: number;
-}) {
+export default function InmoScoreApp() {
   const [path, setPath] = useState("/"),
     [me, setMe] = useState<Me>({ user: null, profile: null, favorites: [] });
   const [profile, setProfile] = useState<BuyerProfile>({
@@ -245,12 +200,8 @@ export default function InmoScoreApp({
     [authConfirm, setAuthConfirm] = useState(""),
     [deletePassword, setDeletePassword] = useState("");
   const [rankingBusy, setRankingBusy] = useState(false);
-  const [previewName, setPreviewName] = useState<"María" | "Carlos">("María");
-  const [previewData, setPreviewData] = useState<{
-    name: "María" | "Carlos";
-    ranking: Ranking;
-  } | null>(null);
-  const [previewError, setPreviewError] = useState<"María" | "Carlos" | null>(null);
+  const [sessionLoaded, setSessionLoaded] = useState(false);
+  const [emptyFinancialFields, setEmptyFinancialFields] = useState<string[]>([]);
   const [pendingFavorite, setPendingFavorite] = useState<{
     id: string;
     returnPath: string;
@@ -308,12 +259,17 @@ export default function InmoScoreApp({
           const m = (await r.json()) as Me;
           setMe(m);
           if (m.profile) setProfile(m.profile);
+          else if (m.user) {
+            setProfile((p) => ({ ...p, name: m.user!.name, income: 0, savings: 0, budget: 0 }));
+            setEmptyFinancialFields(["income", "savings", "budget"]);
+          }
         } else if (r.status !== 401)
           setToast(
             "No se pudo recuperar la cuenta. Puedes explorar como visitante.",
           );
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => { if (active) setSessionLoaded(true); });
     api<{ districts: string[] }>("/api/districts")
       .then((d) => setDistricts(d.districts ?? []))
       .catch(() => {});
@@ -322,6 +278,17 @@ export default function InmoScoreApp({
       window.removeEventListener("popstate", pop);
     };
   }, []);
+  useEffect(() => {
+    if (!sessionLoaded || !me.user || path !== "/") return;
+    const destination = me.profile ? "/explorar" : "/registro";
+    let active = true;
+    queueMicrotask(() => {
+      if (!active) return;
+      window.history.replaceState({}, "", destination);
+      setPath(destination);
+    });
+    return () => { active = false; };
+  }, [sessionLoaded, me.user, me.profile, path]);
   useEffect(() => {
     if (!toast) return;
     const t = setTimeout(() => setToast(""), 5000);
@@ -379,26 +346,6 @@ export default function InmoScoreApp({
       requestId.current += 1;
     };
   }, [path, loadRanking]);
-  useEffect(() => {
-    if (path !== "/") return;
-    const example = previewName === "María" ? MARIA : CARLOS;
-    if (!example) return;
-    let active = true;
-    api<Ranking>("/api/ranking", {
-      method: "POST",
-      body: JSON.stringify({ profile: example, limit: 1 }),
-    })
-      .then((ranking) => {
-        if (active) {
-          setPreviewData({ name: previewName, ranking });
-          setPreviewError(null);
-        }
-      })
-      .catch(() => {
-        if (active) setPreviewError(previewName);
-      });
-    return () => { active = false; };
-  }, [path, previewName]);
   useEffect(() => {
     if (!path.startsWith("/inmueble/")) return;
     let active = true;
@@ -459,16 +406,6 @@ export default function InmoScoreApp({
   const change = (key: keyof BuyerProfile, value: unknown) => {
     setProfile((p) => ({ ...p, [key]: value }));
     setPage(0);
-  };
-  const applyExampleProfile = (example: BuyerProfile | undefined = MARIA) => {
-    if (!example) return;
-    setProfile({
-      ...example,
-      districts: [...example.districts],
-      weights: { ...example.weights },
-    });
-    setPage(0);
-    setError("");
   };
   const toggleFavorite = async (id: string) => {
     if (!me.user) {
@@ -560,7 +497,10 @@ export default function InmoScoreApp({
       setAuthPassword("");
       setAuthConfirm("");
       if (m.profile) setProfile(m.profile);
-      else setProfile((p) => ({ ...p, name: m.user?.name || p.name }));
+      else {
+        setProfile((p) => ({ ...p, name: m.user?.name || p.name, income: 0, savings: 0, budget: 0 }));
+        setEmptyFinancialFields(["income", "savings", "budget"]);
+      }
       let nextPath = m.profile ? "/explorar" : "/registro";
       let message =
         path === "/registro"
@@ -604,6 +544,7 @@ export default function InmoScoreApp({
       setAuthEmail("");
       setAuthName("");
       setAuthConfirm("");
+      setEmptyFinancialFields([]);
       reset();
       go("/");
       setToast("Sesión cerrada.");
@@ -615,10 +556,6 @@ export default function InmoScoreApp({
   };
   const weightsUI = () => (
     <div className="weights">
-      <p className="weight-help">
-        Cada control indica importancia, de 0 a 100. No tienen que sumar 100: el
-        cálculo ajusta sus pesos. Deja al menos uno por encima de cero.
-      </p>
       {(
         [
           {
@@ -737,8 +674,12 @@ export default function InmoScoreApp({
           </div>
           {typeof ranked.score === "number" && (
             <div className="match-reason">
-              <Check size={14} />
-              {ranked.reasons?.[0] || "Coincide con tus filtros"}
+              <span className="match-reason-title">Por qué aparece en tu búsqueda</span>
+              <ul>
+                {(ranked.reasons?.slice(0, 3) || ["Coincide con tus filtros"]).map((reason) => (
+                  <li key={reason}><Check size={14} aria-hidden="true" />{reason}</li>
+                ))}
+              </ul>
             </div>
           )}
           <div className="card-foot">
@@ -771,9 +712,6 @@ export default function InmoScoreApp({
   const currentMapListing =
     result?.listings.find((item) => item.id === mapListing?.id) ||
     result?.listings[0];
-  const activeExample = previewName === "María" ? MARIA : CARLOS;
-  const exampleRanking = previewData?.name === previewName ? previewData.ranking : null;
-  const firstExampleListing = exampleRanking?.listings[0];
   return (
     <div className="site-shell">
       <a href="#main" className="skip-link">
@@ -781,7 +719,7 @@ export default function InmoScoreApp({
       </a>
       <header className="header">
         <div className="header-inner">
-          <Link href="/" className="brand">
+          <Link href={me.user ? (me.profile ? "/explorar" : "/registro") : "/"} className="brand">
             <img src="/logo.png" alt="InmoScore Logo" className="brand-logo" />
             Inmo<span className="brand-light">Score</span>
             <span className="brand-dot"></span>
@@ -797,7 +735,7 @@ export default function InmoScoreApp({
             >
               Explorar viviendas
             </Link>
-            <Link href="/#como-funciona">Cómo funciona</Link>
+            {!me.user && <Link href="/#como-funciona">Cómo funciona</Link>}
             <Link
               href="/guardados"
               className={path === "/guardados" ? "active" : ""}
@@ -864,23 +802,16 @@ export default function InmoScoreApp({
         </div>
       </header>
       <main id="main" key={path} className="route-enter" tabIndex={-1}>
-        {path === "/" && (
+        {path === "/" && sessionLoaded && !me.user && (
           <>
             <section className="hero wrap">
               <div className="hero-copy">
-                <span className="hero-kicker">INMOSCORE / BÚSQUEDA DE VIVIENDA</span>
                 <h1>
-                  Viviendas
-                  <br />
-                  en Lima.
-                  <br />
-                  <em>Filtra y compara.</em>
+                  Encuentra un lugar<br />
+                  <em>para llamar hogar.</em>
                 </h1>
-                <p>Explora avisos de venta con los datos a la vista.</p>
                 <p className="hero-sub">
-                  Elige distrito, presupuesto y espacio. Compara el precio
-                  publicado con la referencia del modelo y los indicadores del
-                  distrito. La disponibilidad debe confirmarse.
+                  Busca, compara y descubre viviendas en Lima que se ajusten a lo que buscas.
                 </p>
                 <div className="hero-actions">
                   <Link
@@ -889,28 +820,6 @@ export default function InmoScoreApp({
                   >
                     Explorar viviendas <ArrowUpRight size={19} />
                   </Link>
-                  {MARIA && (
-                    <button
-                      type="button"
-                      className="text-link hero-example"
-                      onClick={() => {
-                        applyExampleProfile();
-                        go("/explorar");
-                      }}
-                    >
-                      Probar el ejemplo de María <ArrowRight size={16} />
-                    </button>
-                  )}
-                </div>
-                <div className="hero-proof">
-                  <span>
-                    <CheckCircle2 size={16} />
-                    Avisos históricos identificados
-                  </span>
-                  <span>
-                    <CheckCircle2 size={16} />
-                    Prioridades ajustables
-                  </span>
                 </div>
               </div>
               <div className="hero-visual">
@@ -920,21 +829,7 @@ export default function InmoScoreApp({
                   alt="Escena residencial ilustrativa de Lima; no corresponde a un anuncio"
                 />
                 <div className="hero-photo-shade" />
-                <div className="hero-photo-tag">LIMA / CATÁLOGO HISTÓRICO</div>
-                <div className="hero-floating">
-                  <span className="floating-icon">
-                    <Sparkles size={23} />
-                  </span>
-                  <div>
-                    <strong>La comparación empieza por tus criterios</strong>
-                    <span>Precio, seguridad distrital y servicios</span>
-                  </div>
-                  <ArrowUpRight size={20} />
-                </div>
-                <span className="hero-image-note">Imagen ilustrativa · no corresponde a ningún aviso</span>
-                <div className="hero-index">
-                  <span>01 / EXPLORAR</span>
-                </div>
+                <span className="hero-image-note">Imagen ilustrativa</span>
               </div>
             </section>
             <section className="search-section wrap">
@@ -1005,173 +900,23 @@ export default function InmoScoreApp({
                   Explorar viviendas
                 </button>
               </form>
-              <Notice />
+              <p className="landing-notice">El catálogo incluye avisos históricos. Confirma la disponibilidad con el anunciante.</p>
             </section>
-            <section className="trust-strip wrap">
-              <div>
-                <strong>{thousands(listingCount)}</strong>
-                <span>avisos en el catálogo</span>
+            <section id="como-funciona" className="landing-discover wrap">
+              <div className="landing-discover-image">
+                <img src="/imagenes/lima-interior-dia.webp" alt="Interior ilustrativo de una vivienda" loading="lazy" />
+                <span>Imagen ilustrativa</span>
               </div>
-              <div>
-                <strong>20</strong>
-                <span>distritos de Lima</span>
-              </div>
-              <div>
-                <strong>3 criterios</strong>
-                <span>para decidir a tu manera</span>
-              </div>
-              <p>
-                Una instantánea para explorar.
-                <br />
-                <strong>Confirma cada aviso antes de decidir.</strong>
-              </p>
-            </section>
-            <section className="visual-diptych wrap" aria-label="Escenas ilustrativas de Lima y de una vivienda">
-              <figure className="visual-tile visual-tile-city">
-                <img src="/imagenes/lima-barrio-residencial.webp" alt="Calle residencial ilustrativa de Lima" loading="lazy" />
-                <figcaption><span>01 / EL ENTORNO</span><strong>Mira la ciudad con contexto.</strong><small>Imagen ilustrativa; el catálogo indica cuándo faltan datos de zona.</small></figcaption>
-              </figure>
-              <figure className="visual-tile visual-tile-home">
-                <img src="/imagenes/lima-interior-dia.webp" alt="Interior ilustrativo de una vivienda luminosa en Lima" loading="lazy" />
-                <figcaption><span>02 / LA VIVIENDA</span><strong>Compara lo que importa para ti.</strong><small>Imagen ilustrativa; confirma cada aviso con su anunciante.</small></figcaption>
-              </figure>
-            </section>
-            {MARIA && CARLOS && activeExample && (
-              <section className="ranking-story wrap" aria-labelledby="ranking-story-title">
-                <div className="ranking-story-copy">
-                  <span className="eyebrow">DOS PERFILES DE EJEMPLO · UN MISMO CATÁLOGO</span>
-                  <h2 id="ranking-story-title">Dos perfiles, <em>dos búsquedas.</em></h2>
-                  <p>
-                    Cada perfil trae su propio presupuesto, requisitos y prioridades.
-                    Cambia de perfil para ver qué opciones entran y cómo se ordenan.
-                  </p>
-                  <div className="example-switch" role="group" aria-label="Perfil de ejemplo">
-                    {(["María", "Carlos"] as const).map((name) => (
-                      <button
-                        key={name}
-                        type="button"
-                        className={previewName === name ? "selected" : ""}
-                        aria-pressed={previewName === name}
-                        onClick={() => setPreviewName(name)}
-                      >
-                        {name}
-                      </button>
-                    ))}
-                  </div>
-                  <p className="example-profile-note">
-                    {previewName}: hasta {soles(activeExample.budget)}, desde {activeExample.minArea} m²
-                    y {activeExample.minRooms}+ dormitorios.
-                  </p>
+              <div className="landing-discover-copy">
+                <span className="landing-discover-label">UNA BÚSQUEDA MÁS CLARA</span>
+                <h2>Encuentra más que una dirección.</h2>
+                <p>Tu próximo hogar es una decisión importante. Encuentra opciones que encajen contigo y compáralas con información a la vista.</p>
+                <div className="landing-benefits">
+                  <div><span><SlidersHorizontal size={20} /></span><div><h3>Busca a tu manera</h3><p>Elige tus distritos, presupuesto y espacio ideal.</p></div></div>
+                  <div><span><Scale size={20} /></span><div><h3>Compara con confianza</h3><p>Revisa precios, características e indicadores del entorno.</p></div></div>
+                  <div><span><Heart size={20} /></span><div><h3>Guarda tus favoritos</h3><p>Ten tus opciones a mano para volver a ellas cuando quieras.</p></div></div>
                 </div>
-                <div className="ranking-story-panel">
-                  <div className="ranking-panel-top"><span>PERFIL DE {previewName.toUpperCase()}</span><span>01 / DEMOSTRACIÓN</span></div>
-                  <div className="ranking-bars" aria-label={`Prioridades de ${previewName}`}>
-                    {([
-                      { key: "price", label: "Precio" },
-                      { key: "safety", label: "Seguridad distrital" },
-                      { key: "convenience", label: "Servicios" },
-                    ] as const).map(({ key, label }) => (
-                      <div className="ranking-bar" key={key}>
-                        <div><span>{label}</span><strong>{Math.round(activeExample.weights[key] * 100)}</strong></div>
-                        <span className="ranking-bar-track"><i style={{ width: `${activeExample.weights[key] * 100}%` }} /></span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="ranking-example-result" role="status" aria-live="polite">
-                    {previewError === previewName ? (
-                      <p>No se pudo consultar el ranking de ejemplo. Puedes abrir la búsqueda para probarlo.</p>
-                    ) : !exampleRanking ? (
-                      <p>Consultando el catálogo para este perfil…</p>
-                    ) : firstExampleListing ? (
-                      <>
-                        <span>PRIMER RESULTADO POR AFINIDAD · AVISO HISTÓRICO</span>
-                        <strong>{firstExampleListing.district}</strong>
-                        <p>{soles(firstExampleListing.price)} · {firstExampleListing.area} m² · {firstExampleListing.rooms} dorm.</p>
-                        <small>{firstExampleListing.score}% de afinidad según estas prioridades. Disponibilidad no verificada.</small>
-                      </>
-                    ) : (
-                      <p>Este perfil no encuentra avisos con sus filtros actuales.</p>
-                    )}
-                  </div>
-                  <button
-                    type="button"
-                    className="ranking-open"
-                    onClick={() => { applyExampleProfile(activeExample); go("/explorar"); }}
-                  >
-                    Abrir la búsqueda de {previewName} <ArrowUpRight size={17} />
-                  </button>
-                </div>
-              </section>
-            )}
-            <section id="como-funciona" className="how-section wrap">
-              <div className="section-intro">
-                <div>
-                  <span className="eyebrow">
-                    UNA DECISIÓN GRANDE, UN PROCESO CLARO
-                  </span>
-                  <h2>
-                    Tu búsqueda comienza con tus prioridades.
-                    <br />
-                  </h2>
-                </div>
-              </div>
-              <div className="steps">
-                {[
-                  {
-                    icon: <UserRound size={28} />,
-                    title: "Cuéntanos qué buscas",
-                    text: "Define tu presupuesto, el espacio que necesitas y los distritos que tienes en mente.",
-                  },
-                  {
-                    icon: <SlidersHorizontal size={28} />,
-                    title: "Dale peso a lo importante",
-                    text: "¿Precio, seguridad o servicios? Ajusta tus prioridades y mira cómo cambia tu selección.",
-                  },
-                  {
-                    icon: <House size={28} />,
-                    title: "Compara con contexto",
-                    text: "Entiende el precio de referencia, guarda tus opciones y compara hasta tres viviendas.",
-                  },
-                ].map((s, i) => (
-                  <article key={s.title}>
-                    <span className="step-number">0{i + 1}</span>
-                    {s.icon}
-                    <h3>{s.title}</h3>
-                    <p>{s.text}</p>
-                  </article>
-                ))}
-              </div>
-            </section>
-            <section className="principle-section wrap">
-              <div className="principle-image">
-                <img
-                  src="/interior-2.jpg"
-                  alt="Vivienda luminosa, imagen ilustrativa"
-                  loading="lazy"
-                />
-                <span>Imagen referencial</span>
-              </div>
-              <div>
-                <h2>
-                  Una recomendación
-                  <br />
-                  que puedes entender.
-                </h2>
-                <p>
-                  Compara el precio pedido con una referencia del modelo y
-                  conoce la información disponible del distrito.
-                </p>
-                <div className="principle-line">
-                  <ShieldCheck size={21} />
-                  Indicadores con su alcance y sus límites.
-                </div>
-                <div className="principle-line">
-                  <CircleHelp size={21} />
-                  Datos faltantes visibles, sin completar por suposición.
-                </div>
-                <Link href="/explorar" className="text-link">
-                  Conocer las recomendaciones <ArrowRight size={17} />
-                </Link>
+                <Link href="/explorar" className="text-link">Explorar viviendas <ArrowRight size={17} /></Link>
               </div>
             </section>
             <section className="closing wrap">
@@ -1393,9 +1138,6 @@ export default function InmoScoreApp({
                     <span>02</span>
                     <div>
                       <h2>Un presupuesto que encaje contigo</h2>
-                      <p>
-                        Montos en soles. Simulación, no aprobación bancaria.
-                      </p>
                     </div>
                   </div>
                   <div className="field-grid">
@@ -1418,10 +1160,13 @@ export default function InmoScoreApp({
                             type="number"
                             min="0"
                             max="1000000000"
-                            value={profile[f.key]}
-                            onChange={(e) =>
-                              change(f.key, Number(e.target.value))
-                            }
+                            value={emptyFinancialFields.includes(f.key) ? "" : profile[f.key]}
+                            onChange={(e) => {
+                              setEmptyFinancialFields((fields) => e.target.value === ""
+                                ? [...new Set([...fields, f.key])]
+                                : fields.filter((key) => key !== f.key));
+                              change(f.key, Number(e.target.value));
+                            }}
                           />
                         </div>
                       </label>
@@ -1514,7 +1259,6 @@ export default function InmoScoreApp({
                     <span>04</span>
                     <div>
                       <h2>¿Qué pesa más para ti?</h2>
-                      <p>Son prioridades relativas; no necesitan sumar 100.</p>
                     </div>
                   </div>
                   {weightsUI()}
@@ -1600,22 +1344,10 @@ export default function InmoScoreApp({
                   <div className="summary-bottom">
                     <ShieldCheck size={20} />
                     <p>
-                      Tu perfil se guarda solo cuando eliges hacerlo. La
-                      búsqueda también funciona sin cuenta.
+                      Puedes actualizar tus preferencias cuando quieras.
                     </p>
                   </div>
                 </div>
-                {MARIA && (
-                  <div className="demo-shortcut">
-                    <span>¿Quieres conocer el producto?</span>
-                    <button
-                      type="button"
-                      onClick={() => applyExampleProfile()}
-                    >
-                      Usar perfil de ejemplo: María <ArrowUpRight size={14} />
-                    </button>
-                  </div>
-                )}
               </aside>
             </form>
           </section>
@@ -1641,7 +1373,6 @@ export default function InmoScoreApp({
                   Editar mi perfil
                 </Link>
               </div>
-              <Notice />
               <div className="explore-layout">
                 <aside
                   ref={filterPanel}
@@ -1971,16 +1702,28 @@ export default function InmoScoreApp({
                     </div>
                   )}
                   {!rankingBusy && result?.total === 0 && (
-                    <div className="empty-state">
-                      <Search size={34} />
-                      <h2>Ampliemos un poco la búsqueda.</h2>
-                      <p>
-                        Prueba otro distrito, menos dormitorios o revisa tu
-                        presupuesto e ingreso.
-                      </p>
-                      <button className="button button-dark" onClick={reset}>
-                        Restablecer búsqueda <ArrowRight size={16} />
-                      </button>
+                    <div className="empty-state search-empty">
+                      <span className="search-empty-icon"><Search size={27} /></span>
+                      <h2>No encontramos viviendas con estos filtros.</h2>
+                      <p>Prueba ajustar tu búsqueda para ver más opciones.</p>
+                      <div className="search-empty-actions">
+                        {profile.districts.length > 0 && (
+                          <button className="button button-white" onClick={() => change("districts", [])}>
+                            Ver todos los distritos
+                          </button>
+                        )}
+                        {profile.minRooms > 1 && (
+                          <button className="button button-white" onClick={() => change("minRooms", profile.minRooms - 1)}>
+                            Reducir dormitorios a {profile.minRooms - 1}+
+                          </button>
+                        )}
+                        {onlyLocated && (
+                          <button className="button button-white" onClick={() => { setOnlyLocated(false); setView("grid"); setPage(0); }}>
+                            Incluir viviendas sin ubicación
+                          </button>
+                        )}
+                        <Link href="/perfil" className="button button-dark">Revisar mi presupuesto <ArrowRight size={16} /></Link>
+                      </div>
                     </div>
                   )}
                   {result && result.total > 12 && (
@@ -2337,7 +2080,6 @@ export default function InmoScoreApp({
                 Seguir explorando <ArrowUpRight size={16} />
               </Link>
             </div>
-            <Notice />
             {!me.user ? (
               <div className="empty-state">
                 <Heart size={36} />
@@ -2475,7 +2217,7 @@ export default function InmoScoreApp({
       <footer className="footer">
         <div className="wrap footer-main">
           <div className="footer-brand">
-            <Link href="/" className="brand">
+            <Link href={me.user ? (me.profile ? "/explorar" : "/registro") : "/"} className="brand">
               <img
                 src="/logo.png"
                 alt="InmoScore Logo"
@@ -2492,7 +2234,7 @@ export default function InmoScoreApp({
           <nav className="footer-links" aria-label="Explora InmoScore">
             <strong>Encuentra tu hogar</strong>
             <Link href="/explorar">Explorar viviendas</Link>
-            <Link href="/#como-funciona">Cómo funciona</Link>
+            {!me.user && <Link href="/#como-funciona">Cómo funciona</Link>}
           </nav>
           <nav className="footer-links" aria-label="Tu espacio en InmoScore">
             <strong>Tu espacio</strong>
@@ -2542,9 +2284,10 @@ export default function InmoScoreApp({
           close={() => setCompareOpen(false)}
           wide
         >
-          <p className="muted">
-            El mismo contexto para decidir con más claridad.
+          <p className="comparison-intro">
+            Revisa las características de cada vivienda lado a lado.
           </p>
+          <p className="comparison-hint">Desliza horizontalmente para ver todas las opciones.</p>
           <div className="comparison-scroll">
             <table className="comparison-table">
               <thead>
@@ -2554,7 +2297,8 @@ export default function InmoScoreApp({
                     <th key={x.id}>
                       <img src={photo(x.id)} alt="Imagen referencial" />
                       <span>{x.district}</span>
-                      <small>{x.address}</small>
+                      <small>{x.address || `Vivienda en ${x.district}`}</small>
+                      <button type="button" className="comparison-detail" onClick={() => { setCompareOpen(false); go(`/inmueble/${x.id}`); }}>Ver detalle <ArrowUpRight size={13} /></button>
                     </th>
                   ))}
                 </tr>
@@ -2597,16 +2341,16 @@ export default function InmoScoreApp({
                   { label: "Disponibilidad", fn: () => "No verificada" },
                 ].map((row) => (
                   <tr key={row.label}>
-                    <th>{row.label}</th>
-                    {compare.map((x) => (
-                      <td key={x.id}>{row.fn(x)}</td>
-                    ))}
+                    <th scope="row">{row.label}</th>
+                    {compare.map((x) => {
+                      const value = row.fn(x);
+                      return <td key={x.id} className={value === "Sin datos" || value === "Por confirmar" || value === "No verificada" || value === "Sin referencia" ? "comparison-missing" : ""}>{value}</td>;
+                    })}
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <Notice />
         </Modal>
       )}
       {authPrompt && (

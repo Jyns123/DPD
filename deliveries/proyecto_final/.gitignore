@@ -28,3 +28,7 @@ presentation/.build/*.json
 data/urbania/*.lock
 /captures/
 urbania/captures/
+
+# Catálogo validado publicado localmente por data:refresh.
+/data/catalog-published.json
+/data/catalog-published.json.tmp

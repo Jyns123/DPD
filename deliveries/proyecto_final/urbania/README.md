@@ -46,6 +46,17 @@ python urbania/update.py --db data/urbania/urbania.sqlite --out data/urbania/urb
 python analytics/prepare_data.py   # regenera data/catalog.json para la web
 ```
 
+Para ejecutar el flujo completo desde `proyecto_final`, instalen las dependencias de
+`urbania/requirements.txt` y `analytics/requirements.txt` en `.venv` y ejecuten
+`npm run data:refresh`. El comando captura, prepara y valida en ese orden; se
+detiene si falla un paso. También admite `PYTHON_EXECUTABLE` para elegir Python.
+Una base nueva se inicializa con el CSV existente conservando sus fechas; un
+bloqueo o error de captura no reemplaza ese CSV. Las observaciones parciales
+quedan en SQLite y pueden incorporarse en una ejecución posterior exitosa.
+Tras validar, el comando publica una copia atómica que el backend recarga en
+tiempo de ejecución. El comando no crea una tarea programada: las plantillas
+para un servidor Linux están en `deploy/systemd/`.
+
 `capture.py` también puede recorrer un solo distrito o una consulta filtrada (`python urbania/capture.py --district san-juan-de-lurigancho --db data/urbania/urbania.sqlite --max-pages 3`), y `urbania_phase1.py export` vuelve a escribir el CSV desde la base.
 
 `capture.py` es una captura HTTP normal. Identifica el cliente, consulta robots, espera al menos 10 segundos entre solicitudes y se detiene ante 403/429/verificación; no incorpora bypass. El navegador de esta sesión sí cargó las páginas, mientras que la prueba HTTP directa anterior devolvió 403. El 20-10-2026 se repitió la prueba con el user-agent del cliente: `robots.txt` respondió 200, pero el listado y el sitemap respondieron 403 con `cf-mitigated: challenge` (desafío de Cloudflare); `update.py`, ejecutado contra el sitio, se detuvo en el primer listado. **No se ha validado el adaptador HTTP contra una descarga actual exitosa**; puede detenerse antes del listado. El mapeo y las muestras de esta entrega se verificaron mediante navegador.
@@ -95,7 +106,7 @@ Para la ejecución periódica (sección siguiente), la base se conserva versiona
 
 - Ante 403/429 o una página de verificación, la ejecución se detiene. Los distritos restantes se omiten sin consultarse.
 - Un candado (`urbania.sqlite.lock`) garantiza un único proceso por base: una segunda ejecución simultánea termina sin hacer nada.
-- Cada ejecución imprime un resumen y lo guarda en `<evidence-dir>/updates/<fecha UTC>.json`, con altas, cambios y avisos sin cambios por distrito. Código de salida: 0 correcto u omitido; 1 algún distrito con error (red, HTML no reconocido, robots); 2 bloqueo del sitio.
+- Cada ejecución imprime un resumen y lo guarda en `<evidence-dir>/updates/<fecha UTC>.json`, con altas, cambios y avisos sin cambios por distrito. Código de salida: 0 correcto; 1 algún distrito con error (red, HTML no reconocido, robots); 2 bloqueo del sitio; 3 ejecución omitida por otra actualización en curso. El comando completo `data:refresh` mantiene además un candado durante la preparación y validación; usen ese comando en todas las tareas programadas.
 - `--max-pages` vale 5 por el límite de robots. Un distrito con más de cinco páginas queda parcial: se actualizan sus primeras páginas, pero no se marcan ausencias. Cubrirlo entero exigiría particionar por precio sin superar cinco páginas por consulta; no está implementado.
 - El directorio de evidencias guarda el HTML de cada página consultada (hasta 100 por ejecución con el catálogo actual). No se versiona.
 

@@ -1,0 +1,10 @@
+[Unit]
+Description=Actualización diaria del catálogo de InmoScore
+
+[Timer]
+OnCalendar=*-*-* 06:30:00 America/Lima
+Persistent=true
+Unit=inmoscore-refresh.service
+
+[Install]
+WantedBy=timers.target
