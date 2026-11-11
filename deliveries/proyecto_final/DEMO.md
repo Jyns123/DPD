@@ -65,3 +65,19 @@ Cada integrante debe poder explicar una parte del recorrido. Terminen con lo que
 ## Evidencia que entrega el equipo
 
 Dos capturas (antes y después de los pesos), la tabla de CIERRE_DEL_EQUIPO.md completada, presentación ajustada y enlace al video. La grabación debe mostrar su aplicación, no solo diapositivas.
+
+---
+
+## Cómo grabar el video
+
+1. Practiquen el recorrido completo al menos una vez antes de grabar.
+2. Usen la herramienta que ya tienen:
+   - **macOS:** QuickTime Player → Archivo → Nueva grabación de pantalla
+   - **Windows:** `Win+G` (Xbox Game Bar) → Grabar
+   - **Zoom / Meet:** compartir pantalla y grabar localmente
+3. Muestren la **app funcionando**, no solo diapositivas.
+4. No graben contraseñas ni datos financieros personales — usen cuenta de demostración.
+5. No presenten a María como persona entrevistada — es un perfil ficticio de diseño.
+6. Usen los **números que realmente vieron** al ejecutar, no los de esta guía.
+7. Duración: **5 a 7 minutos**. No más.
+8. Cuando tengan el enlace, agréguenlo al `README.md` del proyecto.

@@ -138,15 +138,50 @@ Las pruebas API usan cuentas temporales locales. Los archivos recibidos en **tes
 - **Error de base de datos:** detengan el servidor, conserven una copia de **storage/** y revisen el mensaje. No borren la base para resolverlo: contiene los perfiles que hayan creado.
 - **Búsqueda sin resultados:** revisen distrito, área, dormitorios y tope financiero. Una búsqueda sin coincidencias es un resultado válido.
 
-## Lo que falta completar al equipo
+## Documentos del proyecto
 
-Sigan [CIERRE_DEL_EQUIPO.md](CIERRE_DEL_EQUIPO.md): ejecutar dos escenarios, explicar una diferencia del ranking, actualizar tres diapositivas y grabar una demostración propia. No necesitan añadir servicios de nube ni cambiar de tecnología.
+| Documento | Contenido |
+|---|---|
+| [CIERRE_DEL_EQUIPO.md](CIERRE_DEL_EQUIPO.md) | Tareas pendientes del equipo para la entrega final |
+| [DEMO.md](DEMO.md) | Guion de demostración y cómo grabar el video |
+| [FinalReport.md](FinalReport.md) | Informe completo del proyecto |
+| [EvaluationReport.md](EvaluationReport.md) | Evaluación del modelo y alcance |
+| [Requirements.md](Requirements.md) | Especificación de requisitos |
+| [DataProductCanvas.md](DataProductCanvas.md) | Canvas del producto de datos |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Aportes por integrante |
+| [REFLECTION.md](REFLECTION.md) | Reflexión del equipo |
+| [IMPROVEMENTS.md](IMPROVEMENTS.md) | Mejoras técnicas identificadas para la siguiente versión |
 
-- [Informe del proyecto](FinalReport.md)
-- [Evaluación y alcance](EvaluationReport.md)
-- [Requisitos](Requirements.md)
-- [Lista de entrega](CHECKLIST.md)
-- [Guion de demostración](DEMO.md)
-- [Plan futuro de despliegue](AWS_DEPLOYMENT_GUIDE.md)
+El repositorio del equipo: [Jyns123/DPD](https://github.com/Jyns123/DPD/tree/main/deliveries/final_week). Esta copia no acredita que los cambios estén publicados allí.
 
-El repositorio informado por el equipo es [Jyns123/DPD](https://github.com/Jyns123/DPD/tree/main/deliveries/final_week). Esta copia no acredita que los cambios estén publicados allí.
+## Video de demostración
+
+> **Pendiente.** Agregar el enlace aquí una vez grabado y subido:
+> ```
+> [Ver demostración en video](URL_DEL_VIDEO)
+> ```
+> Ver [DEMO.md](DEMO.md) para el guion y las instrucciones de grabación.
+
+## Docker (ejecución con contenedor)
+
+Desde esta carpeta, con Docker y el plugin Compose instalados:
+
+```sh
+docker compose up -d --build
+```
+
+Abrir `http://localhost:8080`. Dos contenedores: `frontend` (Nginx) y `backend` (Next.js + programador de actualización de datos). No hay PostgreSQL — SQLite sigue siendo la fuente de persistencia.
+
+La actualización de datos se programa cada día a las 06:30 hora Lima. Para desactivarla o cambiar el puerto, crear un `.env` en esta carpeta:
+
+```dotenv
+APP_PORT=8080
+REFRESH_ENABLED=false
+SESSION_COOKIE_SECURE=false
+```
+
+Ver [DOCKER.md](DOCKER.md) para detalles de volúmenes, logs y configuración completa.
+
+## Despliegue futuro (AWS u otro servicio)
+
+El prototipo no tiene URL pública. Para publicarlo habría que resolver: adaptador de DB para RDS (`db/repository.ts` define el contrato), verificación de email, HTTPS, secretos de producción y una fuente de datos autorizada y vigente. Los servicios ECS/RDS mencionados en documentos anteriores son trabajo futuro sin configuración actual.

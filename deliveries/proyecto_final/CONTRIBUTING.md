@@ -1,273 +1,258 @@
-# Team Contribution Statement
+# Declaración de aportes del equipo
 
 **DS3022 · Desarrollo de Producto de Datos · UTEC · 2026-2**  
-**InmoScore Project**  
-**Hito previsto en el documento del equipo:** November 18, 2026. **Revisión de esta copia:** November 8, 2026.
+**InmoScore**  
+**Hito previsto:** 18 de noviembre de 2026. **Revisión de esta copia:** 8 de noviembre de 2026.
 
 > Se conserva la declaración del equipo para respetar sus aportes y su voz. Cada integrante debe confirmar su contenido antes de entregar. Las reuniones, experiencias, permisos y tareas personales descritas no pueden verificarse solo con los archivos. La captura fechada sí está integrada en el catálogo; lo que no está operativo es un refresco actual verificado. Las métricas del modelo corresponden a la evaluación histórica, no a un estudio con compradores.
 
 ---
 
-## Team Members
+## Integrantes
 
-This project was developed by the following team:
-
-- **Denzel** - Cloud & DevOps Engineer
-- **Jyns** - Machine Learning Engineer
-- **Lisseth** - Data Analyst
-- **Mafer** - Full-Stack Developer & UX/UI Designer
+- **Denzel** — Cloud & DevOps Engineer
+- **Jyns** — Machine Learning Engineer
+- **Lisseth** — Data Analyst
+- **Mafer** — Full-Stack Developer & UX/UI Designer
 
 ---
 
-## Contribution Breakdown
+## Aportes por área
 
-### 1. Data Acquisition and Preparation
+### 1. Adquisición y preparación de datos
 
-**Contributors:** Lisseth, Jyns
+**Responsables:** Lisseth, Jyns
 
-**Tasks:**
-- Identified and obtained the Urbania Lima Real Estate dataset from GitHub
-- Created data dictionary and data quality notes
-- Performed exploratory data analysis (EDA)
-- Implemented data preprocessing pipeline in `analytics/prepare_data.py`
-- Created data validation scripts in `analytics/validate_data.py`
-- Processed 3,896 listings across 20 districts
-- Integrated district-level indicators (crime index, urban convenience, poverty rates)
+**Tareas:**
+- Identificación y obtención del dataset de Urbania Lima desde GitHub
+- Creación del diccionario de datos y notas de calidad
+- Análisis exploratorio de datos (EDA)
+- Implementación del pipeline de preprocesamiento en `analytics/prepare_data.py`
+- Creación de scripts de validación en `analytics/validate_data.py`
+- Procesamiento de 3,896 avisos en 20 distritos
+- Integración de indicadores distritales (índice de criminalidad, conveniencia urbana, pobreza)
 
-**Deliverables:**
+**Entregables:**
 - `data/listings_clean.csv`
 - `data/catalog.json`
-- `data/sources/` (district context files)
+- `data/sources/` (archivos de contexto distrital)
 - `analytics/prepare_data.py`
 - `analytics/validate_data.py`
 
 ---
 
-### 2. Model Development and Evaluation
+### 2. Desarrollo y evaluación del modelo
 
-**Contributors:** Jyns, Denzel
+**Responsables:** Jyns, Denzel
 
-**Tasks:**
-- Evaluated multiple model candidates (median baseline, log-linear, Ridge, Gradient Boosting)
-- Implemented cross-validation with 5-fold CV
-- Selected HistGradientBoosting using development results; final historical evaluation showed 22% MAE reduction vs. baseline
-- Used 3,117 development listings; final training kept 3,098 after training-only IQR filtering
-- Evaluated on test set (779 listings)
-- Analyzed performance by price segments
-- Documented evaluation results in `models/evaluation/evaluation_report.md`
+**Tareas:**
+- Evaluación de múltiples candidatos (mediana distrital, regresión log-lineal, Ridge, Gradient Boosting)
+- Implementación de validación cruzada con 5 pliegues
+- Selección de HistGradientBoosting con resultados de desarrollo; la evaluación histórica final mostró una reducción de MAE del 22% frente a la línea base
+- Uso de 3,117 registros de desarrollo; el entrenamiento final conservó 3,098 tras el filtro IQR del conjunto de entrenamiento
+- Evaluación en el conjunto de prueba (779 registros)
+- Análisis de desempeño por segmentos de precio
+- Documentación de resultados en `models/evaluation/evaluation_report.md`
 
-**Deliverables:**
+**Entregables:**
 - `models/valuation_model.joblib`
 - `models/source_model.joblib`
-- `models/evaluation/` (metrics, comparisons, segments)
+- `models/evaluation/` (métricas, comparaciones, segmentos)
 
 ---
 
-### 3. Product Design and Requirements
+### 3. Diseño del producto y requisitos
 
-**Contributors:** Lisseth, Mafer
+**Responsables:** Lisseth, Mafer
 
-**Tasks:**
-- Conducted requirements elicitation based on Guía 3 concepts
-- Created Data Product Canvas
-- Defined functional and non-functional requirements
-- Designed user personas (María, Carlos)
-- Created wireframes and UI sketches
-- Defined user flows and interaction patterns
-- Wrote Requirements.md specification
+**Tareas:**
+- Levantamiento de requisitos basado en conceptos de la Guía 3
+- Creación del Data Product Canvas
+- Definición de requisitos funcionales y no funcionales
+- Diseño de personas de usuario (María, Carlos)
+- Creación de wireframes y bocetos de interfaz
+- Definición de flujos de usuario e interacción
+- Redacción de la especificación `Requirements.md`
 
-**Deliverables:**
+**Entregables:**
 - `Requirements.md`
 - `DataProductCanvas.md`
-- Wireframes and UI sketches (Week 7 delivery)
+- Wireframes y bocetos (entrega Semana 7)
 
 ---
 
-### 4. Frontend Implementation
+### 4. Implementación del frontend
 
-**Contributors:** Mafer, Denzel
+**Responsables:** Mafer, Denzel
 
-**Tasks:**
-- Set up Next.js 16.3.4 project with TypeScript
-- Implemented React components using shadcn/ui
-- Created landing page with product value proposition
-- Implemented user registration and login forms
-- Built profile creation and editing interface
-- Developed property ranking UI with cards and filters
-- Implemented property detail page with price reference
-- Created favorites management interface
-- Built property comparison tool
-- Implemented responsive design for mobile, tablet, desktop
-- Added error handling and loading states
+**Tareas:**
+- Configuración del proyecto Next.js 16.3.4 con TypeScript
+- Implementación de componentes React con shadcn/ui
+- Creación de la landing page con la propuesta de valor
+- Implementación de formularios de registro e inicio de sesión
+- Desarrollo de la interfaz de creación y edición de perfil
+- Desarrollo de la UI de ranking con tarjetas y filtros
+- Implementación de la página de detalle con referencia de precio
+- Creación de la interfaz de gestión de favoritos
+- Desarrollo de la herramienta de comparación de viviendas
+- Implementación del diseño adaptable para móvil, tablet y escritorio
+- Manejo de errores y estados de carga
 
-**Deliverables:**
-- `app/` (Next.js pages and API routes)
-- `components/` (React components)
-- `components/ui/` (shadcn/ui components)
-- `app/globals.css` (styling)
-
----
-
-### 5. Backend Implementation
-
-**Contributors:** Denzel, Mafer
-
-**Tasks:**
-- Implemented SQLite database with `node:sqlite`
-- Created database migrations in `db/migrations/sqlite/`
-- Implemented repository pattern in `db/repository.ts`
-- Built API routes for authentication (`/api/auth/`)
-- Implemented ranking API endpoint (`/api/ranking`)
-- Created favorites API (`/api/favorites`)
-- Built account management API (`/api/account`, `/api/me`)
-- Implemented password hashing with scrypt
-- Created session management with HttpOnly cookies
-- Implemented account deletion with confirmation
-
-**Deliverables:**
-- `db/` (database layer)
-- `app/api/` (API routes)
-- `lib/auth/` (authentication logic)
+**Entregables:**
+- `app/` (páginas y rutas de API de Next.js)
+- `components/` (componentes React)
+- `components/ui/` (componentes shadcn/ui)
+- `app/globals.css`, `app/editorial.css`, `app/luminous.css` (estilos)
 
 ---
 
-### 6. Core Logic and Algorithms
+### 5. Implementación del backend
 
-**Contributors:** Jyns, Denzel
+**Responsables:** Denzel, Mafer
 
-**Tasks:**
-- Implemented recommendation algorithm in `lib/recommendation.ts`
-- Created scoring function based on weighted preferences
-- Implemented affordability calculation (`affordableCap()`)
-- Built ranking function with filtering and sorting
-- Created opportunity calculation (price vs. model estimate)
-- Implemented validation logic for user profiles
-- Created catalog loading logic in `lib/catalog.ts`
+**Tareas:**
+- Implementación de la base de datos SQLite con `node:sqlite`
+- Creación de migraciones en `db/migrations/sqlite/`
+- Implementación del patrón repositorio en `db/repository.ts`
+- Construcción de rutas de API para autenticación (`/api/auth/`)
+- Implementación del endpoint de ranking (`/api/ranking`)
+- Creación de la API de favoritos (`/api/favorites`)
+- Construcción de la API de gestión de cuenta (`/api/account`, `/api/me`)
+- Implementación del hash de contraseñas con scrypt
+- Gestión de sesiones con cookies HttpOnly
+- Implementación de eliminación de cuenta con confirmación
 
-**Deliverables:**
+**Entregables:**
+- `db/` (capa de base de datos)
+- `app/api/` (rutas de API)
+- `lib/auth/` (lógica de autenticación)
+
+---
+
+### 6. Lógica central y algoritmos
+
+**Responsables:** Jyns, Denzel
+
+**Tareas:**
+- Implementación del algoritmo de recomendación en `lib/recommendation.ts`
+- Creación de la función de puntaje basada en preferencias ponderadas
+- Implementación del cálculo de capacidad de compra (`affordableCap()`)
+- Construcción de la función de ranking con filtros y ordenamiento
+- Cálculo de oportunidad de precio (precio anunciado vs. estimación del modelo)
+- Implementación de la validación de perfiles de usuario
+- Lógica de carga del catálogo en `lib/catalog.ts`, incluyendo `toPublicListing()` para ocultar referencias no confiables
+
+**Entregables:**
 - `lib/recommendation.ts`
 - `lib/catalog.ts`
 
 ---
 
-### 7. Testing and Quality Assurance
+### 7. Pruebas y control de calidad
 
-**Contributors:** Lisseth, Mafer
+**Responsables:** Lisseth, Mafer
 
-**Tasks:**
-- Wrote unit tests for ranking logic (9 tests)
-- Implemented authentication tests (4 tests)
-- Created database tests (5 tests)
-- Built API smoke tests (33 tests)
-- Implemented data validation tests
-- Performed responsive design testing (6 screen sizes)
-- Created test evidence in `tests/results/`
+**Tareas:**
+- Escritura de pruebas unitarias para la lógica de ranking (11 pruebas)
+- Implementación de pruebas de autenticación (4 pruebas)
+- Creación de pruebas de base de datos (5 pruebas)
+- Construcción de pruebas de humo de API (38 comprobaciones)
+- Implementación de pruebas de validación de datos
+- Pruebas de diseño adaptable en 6 tamaños de pantalla
+- Generación de evidencia en `tests/results/`
 
-**Deliverables:**
-- `tests/` (test suites)
-- `tests/results/` (test outputs)
-
----
-
-### 8. Documentation
-
-**Contributors:** Lisseth, Mafer
-
-**Tasks:**
-- Wrote README.md with setup and execution instructions
-- Created DEMO.md with demonstration guide
-- Wrote EvaluationReport.md with metrics and analysis
-- Created FinalReport.md (comprehensive project report)
-- Updated TASK_PLAN.md with final timeline
-- Created AWS_DEPLOYMENT_GUIDE.md
-- Wrote Requirements.md specification
-- Created CONTRIBUTING.md (this document)
-- Created REFLECTION.md (team reflection)
-
-**Deliverables:**
-- `README.md`
-- `DEMO.md`
-- `EvaluationReport.md`
-- `FinalReport.md`
-- `TASK_PLAN.md`
-- `AWS_DEPLOYMENT_GUIDE.md`
-- `Requirements.md`
-- `CONTRIBUTING.md`
-- `REFLECTION.md`
+**Entregables:**
+- `tests/` (suites de prueba)
+- `tests/results/` (resultados de pruebas)
 
 ---
 
-### 9. Presentation
+### 8. Documentación
 
-**Contributors:** All Team Members (Denzel, Jyns, Lisseth, Mafer)
+**Responsables:** Lisseth, Mafer
 
-**Tasks:**
-- Created Week 7 presentation (Delivery 1)
-- Updated Week 10 presentation (functional prototype)
-- Refined Week 12 presentation (evaluation and case studies)
-- Created Week 15 final presentation (PresentationFinal.pptx)
-- Practiced presentation delivery
-- Prepared for jury questions
+**Tareas:**
+- Redacción de `README.md` con instrucciones de instalación y ejecución
+- Creación de `DEMO.md` con el guion de demostración
+- Redacción de `EvaluationReport.md` con métricas y análisis
+- Creación de `FinalReport.md` (informe completo del proyecto)
+- Redacción de `Requirements.md`
+- Creación de `CONTRIBUTING.md` (este documento)
+- Creación de `REFLECTION.md` (reflexión del equipo)
+- Creación de `IMPROVEMENTS.md` con mejoras técnicas identificadas
 
-**Deliverables:**
+**Entregables:**
+- `README.md`, `DEMO.md`, `EvaluationReport.md`, `FinalReport.md`
+- `Requirements.md`, `CONTRIBUTING.md`, `REFLECTION.md`, `IMPROVEMENTS.md`
+
+---
+
+### 9. Presentación
+
+**Responsables:** Todos (Denzel, Jyns, Lisseth, Mafer)
+
+**Tareas:**
+- Creación de la presentación de la Semana 7 (Entrega 1)
+- Actualización de la presentación de la Semana 10 (prototipo funcional)
+- Refinamiento de la presentación de la Semana 12 (evaluación y casos de estudio)
+- Creación de la presentación final de la Semana 15 (`PresentationFinal.pptx`)
+- Práctica de la presentación
+- Preparación para preguntas del jurado
+
+**Entregables:**
 - `PresentationFinal.pptx`
 
 ---
 
-### 10. Urbania Integration (Exploratory)
+### 10. Integración con Urbania (exploratoria)
 
-**Contributors:** Jyns
+**Responsable:** Jyns
 
-**Tasks:**
-- Investigated Urbania website structure
-- Created scraper for live data capture
-- Implemented GitHub Actions for automated scraping
-- Documented 403/Cloudflare limitations
-- Created historical sample in `data/urbania/`
+**Tareas:**
+- Investigación de la estructura del sitio de Urbania
+- Creación del scraper para captura de datos en vivo
+- Implementación de GitHub Actions para scraping automatizado
+- Documentación de las limitaciones por 403/Cloudflare
+- Creación de la muestra histórica en `data/urbania/`
 
-**Deliverables:**
-- `urbania/` (scraper scripts)
-- `data/urbania/urbania_actual.csv` (historical sample)
+**Entregables:**
+- `urbania/` (scripts del scraper)
+- `data/urbania/urbania_actual.csv` (muestra histórica)
 
-**Note:** The dated capture is integrated into the catalog. An ongoing current refresh was not demonstrated; the capture tools remain exploratory and can stop on 403 responses.
-
----
-
-## Collaboration Approach
-
-### Meetings and Communication
-
-- **Weekly team meetings** to discuss progress and blockers
-- **Shared GitHub repository** for code collaboration
-- **Asynchronous communication** via team chat for quick questions
-- **Code reviews** before merging to main branch
-
-### Decision-Making Process
-
-- **Consensus-based** for major decisions (model selection, architecture)
-- **Individual ownership** for specific components (each member led their areas)
-- **Peer review** for critical decisions (requirements, evaluation)
-
-### Tools Used
-
-- **GitHub**: Version control and collaboration
-- **VS Code**: Code editing
-- **Next.js**: Framework
-- **scikit-learn**: Machine learning
-- **SQLite**: Database (prototype)
-- **PowerPoint**: Presentation creation
+**Nota:** La captura fechada está integrada en el catálogo. No se demostró un refresco actual verificado; las herramientas de captura son exploratorias y pueden detenerse ante respuestas 403.
 
 ---
 
-## Acknowledgments
+## Forma de trabajo
 
-We would like to thank:
-- **Professor Germain Garcia-Zanabria** for guidance and feedback throughout the project
-- **UTEC Data Science Program** for providing the opportunity to work on this project
-- **Urbania** as the source platform named in the dataset; no academic permission document is included in this package
-- **shadcn/ui** for the React component library
-- **The open-source community** for the tools and libraries that made this project possible
+### Comunicación y reuniones
+
+- Reuniones semanales del equipo para revisar avances y bloqueos
+- Repositorio compartido en GitHub para colaboración en código
+- Comunicación asíncrona por chat del equipo para consultas rápidas
+- Revisiones de código antes de fusionar a la rama principal
+
+### Toma de decisiones
+
+- Por consenso en decisiones importantes (selección del modelo, arquitectura)
+- Responsabilidad individual por componentes específicos (cada integrante lideró sus áreas)
+- Revisión entre pares en decisiones críticas (requisitos, evaluación)
+
+### Herramientas utilizadas
+
+- **GitHub:** control de versiones y colaboración
+- **VS Code:** editor de código
+- **Next.js:** framework web
+- **scikit-learn:** machine learning
+- **SQLite:** base de datos del prototipo
+- **PowerPoint:** creación de presentaciones
 
 ---
 
-**End of Contribution Statement**
+## Agradecimientos
+
+- **Profesor Germain Garcia-Zanabria** por la guía y retroalimentación durante el proyecto
+- **Programa de Ciencia de Datos de UTEC** por la oportunidad de desarrollar este producto
+- **Urbania** como plataforma fuente mencionada en el dataset; no se incluye un documento de permiso académico en este paquete
+- **shadcn/ui** por la biblioteca de componentes React
+- **La comunidad open source** por las herramientas y bibliotecas que hicieron posible este proyecto

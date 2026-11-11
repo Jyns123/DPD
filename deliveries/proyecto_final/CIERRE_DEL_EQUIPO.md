@@ -75,3 +75,63 @@ No hace falta comprar servicios, desplegar en AWS, desarrollar una app móvil ni
 En **analytics/LEEME.md** se explica el diagnóstico nuevo. Como complemento, pueden revisar cinco filas de **models/capture_diagnostic/area_review.csv** o **largest_differences.csv** y anotar qué dato requiere confirmación. Si no pueden confirmarlo, basta con escribir “pendiente de verificar”. No deben modificar precios o áreas para conseguir una predicción más bonita.
 
 Esta lectura no requiere entrenar de nuevo ni obtener más datos para completar la demostración.
+
+---
+
+## Tarea 3 — Tabla de 5 avisos con advertencia
+
+Los archivos de diagnóstico están en `models/capture_diagnostic/` y `data/district_conflicts.csv`. La siguiente tabla corresponde a 5 filas seleccionadas de esos archivos con los valores originales, sin modificar precios ni áreas.
+
+| ID del aviso | Dato observado | Qué falta confirmar | Conclusión |
+|---|---|---|---|
+| `150018757` | Área de 84,580 m² en Magdalena del Mar — fuera del rango histórico (21–827 m²). Precio S/540,000. | Confirmar si es un error de digitación (posiblemente 84.58 m² → 85 m²) o si el aviso incluye una superficie diferente a la del departamento. | pendiente de verificar |
+| `151302801` | Precio de S/948,200,000 en Miraflores; el texto original dice "S/ 948,200,000 · USD 275,000". Error absoluto vs. modelo: S/947,463,089. | La cifra en soles parece errónea — USD 275,000 ≈ S/1,045,000, no S/948M. Posible conversión mal cargada o factor de escala incorrecto. Confirmar la moneda y el precio real del aviso. | pendiente de verificar |
+| `149232937` | Mismo ID figura en La Molina (histórico, dirección "MAYORAZGO", precio ~USD 95k) y en Ate (captura 24/10/2026, misma dirección con "85 MIL $"). Precio cambió de USD 95k a USD 85k. | Confirmar el distrito real del inmueble con el aviso original. La dirección "Mayorazgo" puede pertenecer a ambos límites distritales, pero precio y distrito distintos en dos fuentes exigen verificación. | pendiente de verificar |
+| `151239348` | Área de 20 m² en Los Olivos — por debajo del mínimo histórico (21 m²). Precio S/96,040. | Confirmar si el área corresponde al departamento completo o a un espacio de uso parcial. Con 20 m² declarados, la predicción queda fuera del rango entrenado y la app no muestra referencia de precio. | pendiente de verificar |
+| `149276762` | Precio de S/46,634,672 en La Molina; el texto original dice "S/ 46,634,672 · USD 1,371,608". Error absoluto vs. modelo: S/45,944,630. | El precio en USD (≈ S/5.2M al tipo ~3.8) no coincide con la cifra en soles. Puede ser una mezcla de divisas o un error de escala al cargar el portal. Confirmar moneda y precio publicado. | pendiente de verificar |
+
+> **Por qué estos avisos no aparecen en el ranking o no tienen referencia de precio:**
+> - `150018757` y `151239348`: marcados con `model_outside_area_range`. El área está fuera del rango en que se entrenó el modelo (21–827 m²); la app no les asigna referencia de precio y los excluye del ranking.
+> - `149232937`: marcado con `capture_district_conflict`. El mismo ID tiene distritos contradictorios en las dos fuentes; sin un distrito confiable no es posible calcular los índices de seguridad ni conveniencia, y la app anula todos los scores.
+> - `151302801` y `149276762`: están en el catálogo pero con una diferencia extrema entre precio anunciado y estimación del modelo, lo que señala un dato de entrada dudoso. No se modificaron: se conservan tal como llegaron del portal.
+
+---
+
+## Notas para la presentación — números clave
+
+| Dato | Valor exacto |
+|---|---|
+| Avisos en el catálogo de la app | 6,332 |
+| Avisos históricos para evaluación | 3,896 |
+| Avisos en prueba final del modelo | 779 |
+| Captura integrada (fecha) | 24/10/2026 |
+| IDs nuevos de la captura | 2,436 |
+| Actualizaciones de la captura | 564 |
+| Conflictos de distrito pendientes | 2 |
+| Avisos con área fuera de rango | 17 |
+| Avisos con coordenadas precisas | 133 |
+| Avisos sin mantenimiento informado (catálogo) | 4,445 |
+| MAE línea base (mediana distrital) | S/153,665 |
+| MAE del modelo (HistGradientBoosting) | S/119,801 |
+| Reducción de MAE | 22.0% |
+| MdAPE (error porcentual mediano) | 12.2% |
+| Distritos en el catálogo | 20 |
+| TEA simulada en la calculadora de tope | 9% |
+| Plazo simulado | 20 años |
+| Cuota máxima del ingreso (simulada) | 30% |
+| Inicial mínima (simulada) | 10% |
+
+---
+
+## Checklist de entrega final
+
+- [ ] **Tabla de evidencia (sección 2)** — completar las celdas "Completar al ejecutar" corriendo la app con el perfil de María (pesos 55/20/25)
+- [ ] **Captura 1** — ranking con los pesos originales de María (55/20/25); guardar en `screenshots/`
+- [ ] **Captura 2** — ranking con los pesos cambiados (20/55/25); guardar en `screenshots/`
+- [ ] **Respuestas a las 3 preguntas** de comparación de pesos (sección 3)
+- [x] **Tabla de 5 avisos** con dato dudoso y conclusión — completada en la sección "Tarea 3" de este archivo
+- [ ] **PresentationFinal.pptx** con las 3 diapositivas corregidas (diaps. 3, 10 y 17 según sección 4)
+- [ ] **Video de demostración** (5–7 min); agregar el enlace en `README.md`
+- [ ] **5 líneas de observaciones propias** del equipo
+- [ ] **CONTRIBUTING.md** — confirmado por cada integrante
+- [ ] **REFLECTION.md** — confirmado por cada integrante
