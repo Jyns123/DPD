@@ -1,0 +1,17 @@
+# Fotografías de contexto de Lima
+
+Estas fotografías dan contexto visual a espacios públicos y edificios de Lima. **No corresponden a inmuebles del catálogo**. Las escenas no describen el estado actual de un aviso o de una zona. La web conserva las miniaturas descargadas y usa un encuadre mediante CSS para ajustarlas a cada espacio. En la foto de Pueblo Libre solo se conoce la fecha de publicación del archivo original, no la fecha exacta de la toma.
+
+| Archivo local | Lugar y fecha | Autor | Fuente | Licencia |
+| --- | --- | --- | --- | --- |
+| `public/imagenes/barranco-puente.jpg` | Puente de los Suspiros, Barranco (2007) | Manuel González Olaechea y Franco | [Ficha de la fotografía](https://commons.wikimedia.org/wiki/File:Puente_de_los_Suspiros.JPG) | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) |
+| `public/imagenes/miraflores-kennedy.jpg` | Parque Kennedy, Miraflores (2011) | Municipalidad de Miraflores | [Ficha de la fotografía](https://commons.wikimedia.org/wiki/File:Parque_Kennedy.jpg) | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) |
+| `public/imagenes/cercado-plaza.jpg` | Plaza San Martín, Cercado de Lima (2020) | Ministerio de Defensa del Perú | [Ficha de la fotografía](https://commons.wikimedia.org/wiki/File:Plaza_San_Mart%C3%ADn%2C_Lima_Peru.jpg) | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) |
+| `public/imagenes/miraflores-costa.jpg` | Acantilados de Miraflores, Costa Verde (2013) | David Bush | [Ficha de la fotografía](https://commons.wikimedia.org/wiki/File:Cliffs_at_Miraflores%2C_Lima.jpg) | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) |
+| `public/imagenes/san-borja-sur.jpg` | Bulevar central de la avenida San Borja Sur, San Borja (2023) | Daniell Veramendi | [Ficha de la fotografía](https://commons.wikimedia.org/wiki/File:Avenida_San_Borja_Sur,_Lima,_2023.jpg) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
+| `public/imagenes/pueblo-libre-plaza.jpg` | Plaza Bolívar, Pueblo Libre (archivo original publicado en 2007; toma sin fecha confirmada) | Rafajs77 | [Ficha de la fotografía](https://commons.wikimedia.org/wiki/File:Plaza_Principal_de_Pueblo_Libre.JPG) | [Dominio público, declaración del autor](https://commons.wikimedia.org/wiki/File:Plaza_Principal_de_Pueblo_Libre.JPG#Licensing) |
+| `public/imagenes/magdalena-atardecer.jpg` | Panorama de Magdalena del Mar al atardecer (2008) | Miguel A. Vera León | [Ficha de la fotografía](https://commons.wikimedia.org/wiki/File:Atardecer_en_Magdalena_del_Mar_%28Lima%2C_Per%C3%BA%29.jpg) | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) |
+| `public/imagenes/miraflores-apartamentos.jpg` | Edificios residenciales frente al acantilado de Miraflores (2013) | Christian Córdova | [Ficha de la fotografía](https://commons.wikimedia.org/wiki/File:Lima,_Peru_Miraflores_Apartments.jpg) | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) |
+| `public/imagenes/hero-lima-parque-edificios.jpg` | Edificios y parque urbano de Lima, en el entorno de Miraflores (2013) | Tremoro0 | [Ficha de la fotografía](https://commons.wikimedia.org/wiki/File:Buildings_and_parks_in_Lima,_Peru_-_skyline.jpg) | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) |
+
+Las licencias permiten usar las imágenes con atribución. Si el equipo sustituye una foto, debe comprobar su fuente y licencia y actualizar tanto este archivo como el pie de foto. No se deben usar estas imágenes para representar una vivienda específica.

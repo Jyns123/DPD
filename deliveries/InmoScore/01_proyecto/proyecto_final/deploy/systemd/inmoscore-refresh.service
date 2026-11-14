@@ -1,0 +1,13 @@
+[Unit]
+Description=Actualizar y validar el catálogo de InmoScore
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=inmoscore
+Group=inmoscore
+WorkingDirectory=/opt/inmoscore
+ExecStart=/opt/inmoscore/.venv/bin/python /opt/inmoscore/scripts/refresh_data.py
+StandardOutput=journal
+StandardError=journal

@@ -1,0 +1,23 @@
+{
+  "input_rows": 3896,
+  "clean_rows": 3896,
+  "quarantine_rows": 0,
+  "removed_exact_rows": 0,
+  "possible_duplicate_rows": 24,
+  "possible_duplicate_groups": 12,
+  "maintenance_status": {
+    "known": 1887,
+    "suspicious_high": 3,
+    "unknown_zero": 2006
+  },
+  "issues_by_rule": {
+    "exceeds_10000_suspicious_fee": 3,
+    "zero_ambiguous_requires_verification": 2006
+  },
+  "input_file": "deliveries/week07/data/processed/listings_feature_store.csv",
+  "input_sha256": "3ce796c03cbf107214b13692cb6f45c13e69cf8730dfa7583b31904a7c216514",
+  "input_scope": "processed_snapshot",
+  "rules_version": "1.0",
+  "maintenance_review_threshold": 10000,
+  "historical_model_retrained": false
+}

@@ -1,0 +1,23 @@
+INMOSCORE | WEB, TABLERO Y GUÍA FINAL
+
+1. Abre 03_guia/Informe_para_Mafer_InmoScore.docx para ver qué se terminó.
+   La Guía_final_InmoScore.docx trae los pasos de ejecución y capturas.
+2. Extrae el ZIP completo. Entra a 01_proyecto/proyecto_final.
+3. Instala Node.js 22.13 o superior; para los gráficos Python, Python 3.10 o superior.
+4. En esa carpeta ejecuta npm ci y luego npm run dev.
+5. Abre http://127.0.0.1:5173 para la web y http://127.0.0.1:5173/tablero para el panel.
+
+La portada muestra prioridades del perfil y fotografías reales de Lima con
+autores y licencias. El asistente consulta el ranking existente y ofrece
+viviendas concretas según los filtros escritos. El panel contiene nueve vistas
+de negocio, seis gráficos combinados y 30 gráficos de indicadores.
+
+La simulación trae 300 visitantes ficticios. La actividad registrada se actualiza
+cuando hay eventos nuevos y se aceptó participar en las métricas. Las cifras
+financieras son supuestos: no hay ventas ni pagos registrados. Los anuncios
+son históricos y no se confirma su disponibilidad.
+
+La presentación revisada está en 01_proyecto/proyecto_final/
+Presentacion_InmoScore_actualizada.pptx. La entrega original del equipo
+permanece intacta fuera de este ZIP. Lee CAMBIOS_12_NOVIEMBRE.md para ver
+exactamente qué se revisó y qué alcance tiene esta copia.

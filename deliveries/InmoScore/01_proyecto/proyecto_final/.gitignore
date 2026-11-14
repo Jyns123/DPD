@@ -1,0 +1,34 @@
+# Dependencies and build outputs
+/node_modules/
+**/node_modules/
+/.next/
+/out/
+/coverage/
+/tsconfig.tsbuildinfo
+/next-env.d.ts
+*.log
+.DS_Store
+# Every local installation creates its own database and sessions.
+/storage/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+.env*
+!.env.example
+/.venv/
+# Presentation generation intermediates
+presentation/.validation/
+presentation/.build/*.pptx
+presentation/.build/*.ndjson
+presentation/.build/*.json
+/.npm-cache/
+# Urbania capture: the database and CSV are versioned; its lock and HTML evidence are not.
+# NOTE: Urbania scraper is currently disabled due to Cloudflare 403 responses.
+!data/urbania/urbania.sqlite
+data/urbania/*.lock
+/captures/
+urbania/captures/
+
+# Catálogo validado publicado localmente por data:refresh.
+/data/catalog-published.json
+/data/catalog-published.json.tmp

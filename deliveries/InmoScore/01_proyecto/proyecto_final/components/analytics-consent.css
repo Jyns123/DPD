@@ -1,0 +1,6 @@
+.analytics-consent{max-width:1440px;margin:24px auto 0;padding:16px 7%;font:inherit;font-size:.82rem;color:var(--muted,#55675c);border-top:1px solid #d9e0d7;background:var(--paper,#fafaf4)}
+.analytics-consent summary{cursor:pointer;font-weight:600;min-height:32px}
+.analytics-consent p{max-width:80ch;line-height:1.6;margin:12px 0}
+.analytics-consent label{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--forest,#173d31);padding:10px 0}
+.analytics-consent input{width:20px;height:20px;accent-color:var(--forest,#173d31)}
+.analytics-consent summary:focus-visible,.analytics-consent input:focus-visible{outline:3px solid #c2a04e;outline-offset:4px}

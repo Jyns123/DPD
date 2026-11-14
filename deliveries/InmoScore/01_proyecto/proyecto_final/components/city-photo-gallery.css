@@ -1,0 +1,130 @@
+.city-gallery {
+  margin: 0 auto 86px;
+}
+
+.city-gallery-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 28px;
+  margin-bottom: 24px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.city-gallery-heading span {
+  color: #55715d;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+}
+
+.city-gallery-heading h2 {
+  margin: 9px 0 0;
+  color: var(--forest);
+  font: 400 clamp(2rem, 3vw, 3.1rem)/1.08 Georgia, "Times New Roman", serif;
+  letter-spacing: -.045em;
+}
+
+.city-gallery-heading p {
+  max-width: 32rem;
+  margin: 0;
+  color: #53665a;
+  font-size: .91rem;
+  line-height: 1.55;
+}
+
+.city-gallery-swipe-hint { display: none; }
+
+.city-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.city-gallery-card {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid #dfe7dd;
+  border-radius: 14px;
+  background: #fffefa;
+  box-shadow: 0 13px 30px #173d3110;
+}
+
+.city-gallery-image {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: #e4ebe4;
+}
+
+.city-gallery-image img {
+  object-fit: cover;
+  transition: transform .4s ease;
+}
+
+.city-gallery-card:hover .city-gallery-image img {
+  transform: scale(1.035);
+}
+
+.city-gallery-card figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 17px 17px 19px;
+}
+
+.city-gallery-card figcaption > span {
+  color: #57735d;
+  font-size: .71rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.city-gallery-card figcaption strong {
+  color: var(--forest);
+  font: 400 1.35rem/1.2 Georgia, "Times New Roman", serif;
+}
+
+.city-gallery-card figcaption small {
+  color: #647467;
+  font-size: .7rem;
+  line-height: 1.5;
+}
+
+.city-gallery-card figcaption a {
+  color: inherit;
+  text-underline-offset: 2px;
+}
+
+.city-gallery-card figcaption a:hover,
+.city-gallery-card figcaption a:focus-visible {
+  color: var(--forest);
+}
+
+@media (max-width: 1100px) {
+  .city-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .city-gallery { margin-bottom: 58px; }
+  .city-gallery-heading { display: block; margin-bottom: 18px; }
+  .city-gallery-heading p { margin-top: 12px; }
+  .city-gallery-swipe-hint { display: block; margin: -3px 0 12px; color: #55715d; font-size: .75rem; font-weight: 700; }
+  .city-gallery-grid {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(250px, 82vw);
+    grid-template-columns: none;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 0 2px 12px;
+    scroll-snap-type: x mandatory;
+  }
+  .city-gallery-card { scroll-snap-align: start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .city-gallery-image img { transition: none; }
+}

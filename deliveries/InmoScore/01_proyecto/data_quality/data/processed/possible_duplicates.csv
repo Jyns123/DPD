@@ -1,0 +1,25 @@
+duplicate_group_id,listing_id,district,address,price_soles,area_m2,rooms,bathrooms,parking,maintenance_fee_original,maintenance_fee_status
+ae722bca0971717a,149532018,BARRANCO,Av. San Martín,437500.0,51.0,2,1,1,0.0,unknown_zero
+ae722bca0971717a,149266063,BARRANCO,Av. San Martín,437500.0,51.0,1,1,0,0.0,unknown_zero
+c75fe91e5145ad4c,149842523,BARRANCO,Jr. Carlos Arrieta,554500.0,59.0,2,2,0,0.0,unknown_zero
+c75fe91e5145ad4c,149472091,BARRANCO,Jr. Carlos Arrieta,554500.0,59.0,2,2,0,3.0,known
+8302bc98bc3c00cc,149653350,BARRANCO,Pedro de Osma,566000.0,56.0,2,2,1,350.0,known
+8302bc98bc3c00cc,149612578,BARRANCO,Pedro de Osma,566000.0,56.0,2,2,1,350.0,known
+f0726fa6c82ab601,149642873,BARRANCO,Puente de la Paz,5300000.0,560.0,3,4,0,720.0,known
+f0726fa6c82ab601,149634972,BARRANCO,Puente de la Paz,5300000.0,560.0,3,4,2,720.0,known
+802abe4cfea38d0a,146767071,BREÑA,Pedro Ruiz Gallo 2,387811.0,76.0,3,2,0,1.0,known
+802abe4cfea38d0a,146767072,BREÑA,Pedro Ruiz Gallo 2,387811.0,76.0,3,2,0,0.0,unknown_zero
+85b58ac898aafa43,149121128,COMAS,Jose Olaya,299040.0,124.0,3,2,0,0.0,unknown_zero
+85b58ac898aafa43,149123442,COMAS,Jose Olaya,299040.0,124.0,3,2,0,0.0,unknown_zero
+fb38a603f7baee16,148712304,JESUS MARIA,Av. Gregorio Escobedo,1145000.0,162.0,4,4,1,550.0,known
+fb38a603f7baee16,149392655,JESUS MARIA,Av. Gregorio Escobedo,1145000.0,162.0,4,3,1,400.0,known
+84635f15cb7182f5,149517554,JESUS MARIA,Av. San Felipe 1079,1750000.0,300.0,4,6,1,700.0,known
+84635f15cb7182f5,149793231,JESUS MARIA,Av. San Felipe 1079,1750000.0,300.0,4,6,1,700.0,known
+f0cdc4b373298580,149874546,LOS OLIVOS,Manuel DE Lara 364,390500.0,91.0,3,2,0,0.0,unknown_zero
+f0cdc4b373298580,149874536,LOS OLIVOS,Manuel DE Lara 364,390500.0,91.0,3,2,0,0.0,unknown_zero
+f4fbf5d5cf4f2412,149874524,LOS OLIVOS,Manuel DE Lara 364,443750.0,91.0,2,1,1,0.0,unknown_zero
+f4fbf5d5cf4f2412,149874549,LOS OLIVOS,Manuel DE Lara 364,443750.0,91.0,3,2,0,0.0,unknown_zero
+4eaaea7bbf5f77d0,148906747,SAN MARTIN DE PORRES,Pasaje Huari,293000.0,123.0,4,2,0,0.0,unknown_zero
+4eaaea7bbf5f77d0,148906768,SAN MARTIN DE PORRES,Pasaje Huari,293000.0,123.0,4,2,0,0.0,unknown_zero
+f5809caefd9bc054,149828836,SAN MIGUEL,Av. Costanera al 300,714000.0,115.0,3,3,1,370.0,known
+f5809caefd9bc054,149507939,SAN MIGUEL,Av. Costanera al 300,714000.0,115.0,3,3,1,370.0,known

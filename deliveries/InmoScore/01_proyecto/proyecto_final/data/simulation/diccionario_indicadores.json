@@ -1,0 +1,299 @@
+{
+  "metadata": {
+    "source": "simulacion",
+    "seed": 20261111,
+    "fictionalVisitors": 300,
+    "sessionsPerVisitor": 1,
+    "startDateLima": "2026-10-13",
+    "endDateLima": "2026-11-11",
+    "timezone": "America/Lima",
+    "eventCount": 1914,
+    "note": "Datos ficticios para aprender a usar el tablero. No representan personas, compras, pagos ni ingresos reales. El catálogo de viviendas se conserva separado y procede del proyecto recibido."
+  },
+  "assumptions": {
+    "referralValue": 25,
+    "marketingCost": 300,
+    "fixedCost": 150,
+    "costPerSession": 0.2
+  },
+  "catalogScope": "Catálogo global real del proyecto, independiente de la simulación y sus filtros",
+  "catalog": {
+    "total": 6332,
+    "withModel": 6313,
+    "preciseLocation": 133,
+    "withWarnings": 6278,
+    "districts": 20
+  },
+  "indicators": [
+    {
+      "id": "sessions",
+      "title": "Sesiones observadas",
+      "value": 300,
+      "unit": "count",
+      "group": "Negocio",
+      "formula": "IDs de sesión distintos en la selección",
+      "note": "Una persona puede abrir más de una sesión. No es un conteo de personas identificadas."
+    },
+    {
+      "id": "searchers",
+      "title": "Sesiones que buscan",
+      "value": 242,
+      "unit": "count",
+      "group": "Negocio",
+      "formula": "Sesiones con al menos una búsqueda",
+      "note": "Incluye búsquedas fallidas para medir intención de uso."
+    },
+    {
+      "id": "activation",
+      "title": "Activación de búsqueda",
+      "value": 80.66666666666667,
+      "unit": "percent",
+      "group": "Negocio",
+      "formula": "Sesiones que buscan / sesiones observadas × 100",
+      "note": "Mide uso del recomendador, no ventas."
+    },
+    {
+      "id": "searches",
+      "title": "Búsquedas realizadas",
+      "value": 473,
+      "unit": "count",
+      "group": "Negocio",
+      "formula": "Eventos search",
+      "note": "Cada consulta completada o fallida cuenta una vez."
+    },
+    {
+      "id": "details",
+      "title": "Fichas consultadas",
+      "value": 495,
+      "unit": "count",
+      "group": "Negocio",
+      "formula": "Eventos detail",
+      "note": "Una misma ficha puede consultarse varias veces."
+    },
+    {
+      "id": "favorites",
+      "title": "Sesiones que guardan",
+      "value": 102,
+      "unit": "count",
+      "group": "Negocio",
+      "formula": "Sesiones con una adición a favoritos",
+      "note": "Mide intención histórica; no es el inventario actual de favoritos."
+    },
+    {
+      "id": "comparers",
+      "title": "Sesiones que comparan",
+      "value": 86,
+      "unit": "count",
+      "group": "Negocio",
+      "formula": "Sesiones con evento compare",
+      "note": "Usar el comparador ayuda a explorar alternativas."
+    },
+    {
+      "id": "referrals",
+      "title": "Salidas al anuncio",
+      "value": 84,
+      "unit": "count",
+      "group": "Negocio",
+      "formula": "Sesiones con evento outbound",
+      "note": "Abrir el portal original no confirma un contacto ni una compra."
+    },
+    {
+      "id": "conversion",
+      "title": "Tasa de salida al anuncio",
+      "value": 28,
+      "unit": "percent",
+      "group": "Negocio",
+      "formula": "Sesiones con salida / sesiones observadas × 100",
+      "note": "Conversión de navegación. No se registran ventas inmobiliarias."
+    },
+    {
+      "id": "income",
+      "title": "Ingreso hipotético",
+      "value": 2100,
+      "unit": "money",
+      "group": "Finanzas",
+      "formula": "Sesiones con salida × valor supuesto por referido",
+      "note": "Escenario académico. No existe facturación ni comisión contratada."
+    },
+    {
+      "id": "marketing",
+      "title": "Gasto de captación supuesto",
+      "value": 300,
+      "unit": "money",
+      "group": "Finanzas",
+      "formula": "Presupuesto de marketing ingresado",
+      "note": "Costo total asignado manualmente al segmento filtrado; no se prorratea."
+    },
+    {
+      "id": "operating",
+      "title": "Costo operativo supuesto",
+      "value": 210,
+      "unit": "money",
+      "group": "Finanzas",
+      "formula": "Costo fijo + sesiones × costo unitario supuesto",
+      "note": "No proviene de una factura de infraestructura."
+    },
+    {
+      "id": "balance",
+      "title": "Saldo del escenario",
+      "value": 1590,
+      "unit": "money",
+      "group": "Finanzas",
+      "formula": "Ingreso hipotético − captación − operación",
+      "note": "Saldo antes de impuestos y otros costos no modelados. No es utilidad real."
+    },
+    {
+      "id": "roi",
+      "title": "Retorno del escenario",
+      "value": 311.7647058823529,
+      "unit": "percent",
+      "group": "Finanzas",
+      "formula": "Saldo del escenario / costo total × 100",
+      "note": "Sin dato si el costo total es cero. Es una hipótesis, no una predicción."
+    },
+    {
+      "id": "results",
+      "title": "Búsquedas con resultados",
+      "value": 80.2247191011236,
+      "unit": "percent",
+      "group": "Calidad",
+      "formula": "Búsquedas con ≥1 resultado / búsquedas completadas × 100",
+      "note": "No incluye errores técnicos en el denominador."
+    },
+    {
+      "id": "empty",
+      "title": "Búsquedas sin coincidencias",
+      "value": 19.775280898876403,
+      "unit": "percent",
+      "group": "Calidad",
+      "formula": "Búsquedas con 0 resultados / búsquedas completadas × 100",
+      "note": "Cero coincidencias puede ser correcto por presupuesto y filtros; no equivale a error."
+    },
+    {
+      "id": "mean-results",
+      "title": "Coincidencias por búsqueda",
+      "value": 23.642696629213482,
+      "unit": "decimal",
+      "group": "Calidad",
+      "formula": "Suma de coincidencias / búsquedas completadas",
+      "note": "Se refiere al total comunicado por el motor, no al tamaño de la página."
+    },
+    {
+      "id": "model-coverage",
+      "title": "Avisos con referencia de precio",
+      "value": 99.69993682880606,
+      "unit": "percent",
+      "group": "Calidad",
+      "formula": "Avisos con predicción utilizable / catálogo completo × 100",
+      "note": "Catálogo global, independiente de filtros de actividad. Cobertura no equivale a precisión."
+    },
+    {
+      "id": "location-coverage",
+      "title": "Ubicación precisa disponible",
+      "value": 2.1004421983575488,
+      "unit": "percent",
+      "group": "Calidad",
+      "formula": "Avisos con coordenadas precisas / catálogo completo × 100",
+      "note": "No convierte los índices distritales en seguridad específica de la vivienda."
+    },
+    {
+      "id": "warning-rate",
+      "title": "Avisos con advertencias",
+      "value": 99.14718888186987,
+      "unit": "percent",
+      "group": "Calidad",
+      "formula": "Avisos con ≥1 bandera de calidad / catálogo completo × 100",
+      "note": "Incluye faltantes y limitaciones conocidas; no significa que todos sean anuncios inválidos."
+    },
+    {
+      "id": "chat-sessions",
+      "title": "Sesiones con consultas",
+      "value": 124,
+      "unit": "count",
+      "group": "Soporte",
+      "formula": "Sesiones con evento chat_question",
+      "note": "Consultas al asistente guiado de la web."
+    },
+    {
+      "id": "questions",
+      "title": "Consultas recibidas",
+      "value": 243,
+      "unit": "count",
+      "group": "Soporte",
+      "formula": "Eventos chat_question",
+      "note": "Se guarda la categoría, nunca el texto libre en analítica."
+    },
+    {
+      "id": "helpful",
+      "title": "Respuestas valoradas útiles",
+      "value": 72.95081967213115,
+      "unit": "percent",
+      "group": "Soporte",
+      "formula": "Valoraciones positivas / valoraciones recibidas × 100",
+      "note": "Respuesta voluntaria; puede tener sesgo y no mide resolución de tickets."
+    },
+    {
+      "id": "feedback",
+      "title": "Valoraciones recibidas",
+      "value": 122,
+      "unit": "count",
+      "group": "Soporte",
+      "formula": "Eventos chat_feedback con respuesta válida",
+      "note": "El tamaño de esta muestra ayuda a interpretar la proporción de respuestas útiles."
+    },
+    {
+      "id": "unanswered",
+      "title": "Consultas no cubiertas",
+      "value": 14.814814814814815,
+      "unit": "percent",
+      "group": "Soporte",
+      "formula": "Consultas sin respuesta de la guía / consultas × 100",
+      "note": "Permite priorizar nuevos temas, sin inventar respuestas."
+    },
+    {
+      "id": "errors",
+      "title": "Errores registrados",
+      "value": 37,
+      "unit": "count",
+      "group": "TI",
+      "formula": "Búsquedas fallidas + errores de otras operaciones registrados",
+      "note": "No cubre fallas que impiden enviar el evento ni reemplaza monitoreo de servidor."
+    },
+    {
+      "id": "success",
+      "title": "Búsquedas sin error",
+      "value": 94.08033826638477,
+      "unit": "percent",
+      "group": "TI",
+      "formula": "Búsquedas sin error / búsquedas registradas × 100",
+      "note": "Incluye consultas con cero coincidencias. No es disponibilidad global del servicio."
+    },
+    {
+      "id": "latency",
+      "title": "Tiempo de búsqueda P95",
+      "value": 1582,
+      "unit": "ms",
+      "group": "TI",
+      "formula": "Percentil 95 por rango más cercano de durationMs",
+      "note": "Tiempo observado en el cliente. Con pocas consultas es poco representativo."
+    },
+    {
+      "id": "events",
+      "title": "Eventos disponibles",
+      "value": 1914,
+      "unit": "count",
+      "group": "TI",
+      "formula": "IDs de evento distintos en la selección",
+      "note": "Solo eventos consentidos y dentro de la retención; no todos los visitantes de la web."
+    },
+    {
+      "id": "freshness",
+      "title": "Edad del último evento",
+      "value": 296.98333333333335,
+      "unit": "minutes",
+      "group": "TI",
+      "formula": "Hora de referencia − último evento seleccionado",
+      "note": "Se usa el cierre del escenario ficticio, no la hora actual."
+    }
+  ]
+}
